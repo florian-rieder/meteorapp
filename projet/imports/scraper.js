@@ -1,12 +1,20 @@
 import puppeteer from 'puppeteer';
 
-(async () => {
+puppeteerTest()
+.then((val) => console.log('then', val))
+.catch((err) => console.log('catch', err))
+
+async function puppeteerTest(){
+	console.log('start puppeteer')
   const browser = await puppeteer.launch();
-  const page = await browser.newPage();
+	const page = await browser.newPage();
 	await page.goto('https://compendium.ch/prod/co-dafalgan-cpr-eff-500-30mg/fr');
-	const compounds = await page.evaluate(
-		() => document.querySelector('#compEverything > table').innerHTML
+	await page.waitForSelector('#ctl00_MainContent_ucProductDetail1_dvProduct_lblProductDescr');
+	let compounds = await page.evaluate(
+		() => document.querySelector('#ctl00_MainContent_ucProductDetail1_dvProduct_lblProductDescr').textContent
 	);
+	await browser.close();
+	
 	console.log('compounds', compounds);
-  await browser.close();
-})();
+  
+}

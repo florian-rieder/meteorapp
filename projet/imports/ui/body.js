@@ -1,2 +1,3 @@
+// Importer tous les fichers .js externes
 import './body.html';
-import './scripts/scraper_display.js';
+import './scripts/drugData.js';

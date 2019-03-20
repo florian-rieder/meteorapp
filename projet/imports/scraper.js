@@ -1,11 +1,11 @@
 import puppeteer from 'puppeteer';
 
 /* for test purposes */
-scrapeDrug('https://compendium.ch/prod/co-dafalgan-cpr-eff-500-30mg/fr')
+/* scrapeDrug('https://compendium.ch/prod/co-dafalgan-cpr-eff-500-30mg/fr')
 .then((result) => {
 	console.log(result);
 })
-.catch((err) => console.log(err));
+.catch((err) => console.log(err)); */
 
 async function scrapeDrug(compendiumURL){
 	const titleSelector = '#ctl00_MainContent_ucProductDetail1_dvProduct_lblProductDescr';
@@ -55,3 +55,4 @@ async function scrapeDrug(compendiumURL){
 
   return drugData;
 }
+

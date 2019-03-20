@@ -1,11 +1,11 @@
 import puppeteer from 'puppeteer';
 
 /* for test purposes */
-/* scrapeDrug('https://compendium.ch/prod/co-dafalgan-cpr-eff-500-30mg/fr')
+scrapeDrug('https://compendium.ch/prod/co-dafalgan-cpr-eff-500-30mg/fr')
 .then((result) => {
 	console.log(result);
 })
-.catch((err) => console.log(err)); */
+.catch((err) => console.log(err));
 
 async function scrapeDrug(compendiumURL){
 	const titleSelector = '#ctl00_MainContent_ucProductDetail1_dvProduct_lblProductDescr';
@@ -35,13 +35,12 @@ async function scrapeDrug(compendiumURL){
 	]);
 
 	//get the notice of the drug
-	let tab_paragraph = await page.evaluate((selector) => {
+	let notice = await page.evaluate((selector) => {
 		return Array.from(document.querySelectorAll(selector))
-		.map((test) => {
-			return Array.from(test).map((t) => t.textContent);
-		})
+		.map((paragraphe) => Array.from(paragraphe.childNodes)
+		.map(e => e.textContent));
+	
 	}, '.monographie > .paragraph');
-	console.log(tab_paragraph)
 	
 
 	await browser.close();
@@ -50,6 +49,7 @@ async function scrapeDrug(compendiumURL){
 	const drugData = {
 		title: title,
 		composition: composition,
+		notice: notice,
 	}
 
   return drugData;

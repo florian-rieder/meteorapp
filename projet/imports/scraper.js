@@ -37,9 +37,10 @@ async function scrapeDrug(compendiumURL){
 	//get the notice of the drug
 	let notice = await page.evaluate((selector) => {
 		return Array.from(document.querySelectorAll(selector))
+		/* get the childnodes of each paragraphs */
 		.map((paragraphe) => Array.from(paragraphe.childNodes)
-		.map(e => e.textContent));
-	
+		/* get the text content of each element inside a paragraph */
+		.map(element => element.textContent));
 	}, '.monographie > .paragraph');
 	
 

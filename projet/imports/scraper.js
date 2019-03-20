@@ -35,14 +35,14 @@ async function scrapeDrug(compendiumURL){
 	]);
 
 	//get the notice of the drug
-	let noticeHTML = await page.evaluate((selector) => {
-		return document.querySelectorAll(selector);
+	let tab_paragraph = await page.evaluate((selector) => {
+		return Array.from(document.querySelectorAll(selector))
+		.map((test) => {
+			return Array.from(test).map((t) => t.textContent);
+		})
 	}, '.monographie > .paragraph');
-
-	let notice = Array.from(noticeHTML)
-		.map(paragraph => paragraph.innerText);
-
-	console.log(notice[0]);
+	console.log(tab_paragraph)
+	
 
 	await browser.close();
 
@@ -50,7 +50,6 @@ async function scrapeDrug(compendiumURL){
 	const drugData = {
 		title: title,
 		composition: composition,
-		notice: noticeHTML
 	}
 
   return drugData;

@@ -1,4 +1,24 @@
 <template name="drugData">
-  <input type='button' id='launchScraping' value='Launch scraping'>
-  <p>This is the title: {{title}}</p>
+	<p>Récupérer les données d'un médicament (hardcoded pour le moment)</p>
+	<p>https://compendium.ch/prod/dafalgan-cpr-500-mg/fr <button id='launchScraping'>Go</button></p>
+	<p>Rechercher un médicament dans la base de données de compendium</p>
+	<input type="text" id='searchInput'><button id='launchSearch'>search</button>
+	<p>Les résultats s'affichent dans la console, après une erreur.</p>
+	<!-- <div>
+		<h1>{{title}}</h1>
+
+		<div>
+			Composition: <br>
+			<ul>
+				{{#each composition}}
+					{{component}}
+				{{/each}}
+			</ul>
+
+			<div class='noticeContainer'>
+				{{notice}}
+			</div>
+
+		</div>
+	</div> -->
 </template>

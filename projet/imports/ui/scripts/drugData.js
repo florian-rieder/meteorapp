@@ -1,24 +1,41 @@
 import { Template } from 'meteor/templating';
+import { Mongo } from 'meteor/mongo';
 
-import '../../scraper.js'
+import '../../api/scraper.js';
 import '../templates/drugData.html';
- 
-Template.drugData.helpers({
-	title: () => "Hello World!"
+
+/* Template.drugData.onCreated(() => {
   
 });
+ 
+Template.drugData.helpers({
+	title() {
+		return 'title';
+	},
+	composition() {
+		return [
+			'component 1',
+			'component 2',
+		];
+	},
+	notice() {
+		return 'lorem ipsum dolor sit amet';
+	}
+  
+}); */
 
-Template.drugData.events({//not working: says 'scrapeDrug is not defined'
+Template.drugData.events({
 	'click #launchScraping' (e) {
 		e.preventDefault();
-		Meteor.call('scrapeDrug', 'https://compendium.ch/prod/co-dafalgan-cpr-eff-500-30mg/fr', (error, response) => {
-			console.log(response);
-		})
-		/* Meteor.methods.scrapeDrug('https://compendium.ch/prod/co-dafalgan-cpr-eff-500-30mg/fr')
-			.then(result => console.log(result))
-			.catch(error => console.log(error));
-		
-		console.log(data);
-		this.drugData = data; */
+		Meteor.call('createDrug', 'https://compendium.ch/prod/dafalgan-cpr-500-mg/fr', (error, result) => {
+			console.log(result);
+		});
+
+	},
+	'click #launchSearch' (e) {
+		e.preventDefault();
+		Meteor.call('searchDrug', document.getElementById('searchInput').value, (error, result) => {
+			console.log(result);
+		});
 	}
 })

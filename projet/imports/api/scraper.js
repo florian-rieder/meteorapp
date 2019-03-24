@@ -1,25 +1,11 @@
 import { Meteor } from 'meteor/meteor';
-import { Mongo } from 'meteor/mongo';
-import { check } from 'meteor/check';
 import puppeteer from 'puppeteer';
 
-export const Drugs = new Mongo.Collection('drugs');
-
-if (Meteor.isServer) {
-	Meteor.publish('drugs', function drugsPublisher() {
-		return Drugs.find({});
-	})
-}
-
+/* we wrap functions that use puppeteer inside Meteor.methods to be able to access
+	 them from the client */
 Meteor.methods({
-	'createDrug': async function (compendiumURL) {
-		check(compendiumURL, String);
+	'scrapeDrug': async function (compendiumURL) {
 		let result = await scrapeDrug(compendiumURL)
-		let entry = Drugs.insert({
-			title: result.title,
-			composition: result.composition,
-			notice: result.notice
-		});
 		return result;
 	},
 	'searchDrug': async function (searchString){

@@ -1,39 +1,23 @@
 import { Template } from 'meteor/templating';
-import { Mongo } from 'meteor/mongo';
+import { Meteor } from 'meteor/meteor';
 
-import '../../api/scraper.js';
 import '../templates/drugData.html';
-
-/* Template.drugData.onCreated(() => {
-  
-});
- 
-Template.drugData.helpers({
-	title() {
-		return 'title';
-	},
-	composition() {
-		return [
-			'component 1',
-			'component 2',
-		];
-	},
-	notice() {
-		return 'lorem ipsum dolor sit amet';
-	}
-  
-}); */
+import '../../api/scraper.js';
+import '../../api/collections.js';
 
 Template.drugData.events({
 	'click #launchScraping' (e) {
 		e.preventDefault();
-		Meteor.call('createDrug', 'https://compendium.ch/prod/dafalgan-cpr-500-mg/fr', (error, result) => {
-			console.log(result);
+		/* call scrapedrug on a fixed URL (at the moment) and insert the result in the Drugs collection */
+		Meteor.call('scrapeDrug', 'https://compendium.ch/prod/dafalgan-cpr-500-mg/fr', (error, result) => {
+		console.log(result);
+			Meteor.call('drugs.insert', result);
 		});
 
 	},
 	'click #launchSearch' (e) {
 		e.preventDefault();
+		/* call searchDrug with the value of the text input, log the result */
 		Meteor.call('searchDrug', document.getElementById('searchInput').value, (error, result) => {
 			console.log(result);
 		});

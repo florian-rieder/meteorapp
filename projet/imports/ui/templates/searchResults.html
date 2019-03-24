@@ -1,0 +1,18 @@
+<template name='searchResults'>
+	<div class='searchResults_container'>
+		<ul>
+			{{#each results}}
+				{{> result}}
+			{{/each}}
+		</ul>
+	</div>
+</template>
+
+<template name='result'>
+	<li>
+		<div class='result_container'>
+			<h3 class='result_title'>{{title}}</h3>
+			<p class='result_subtitle'>{{subtitle}}</p>
+		</div>
+	</li>
+</template>

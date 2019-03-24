@@ -19,7 +19,11 @@ Template.drugData.events({
 		e.preventDefault();
 		/* call searchDrug with the value of the text input, log the result */
 		Meteor.call('searchDrug', document.getElementById('searchInput').value, (error, result) => {
+			Meteor.call('search_results.removeAll');
 			console.log(result);
+			result.forEach((resultEntry) => {
+				Meteor.call('search_results.insert', resultEntry);
+			})
 		});
 	}
 })

@@ -5,6 +5,27 @@ body {
 
 .noticeContainer{
 	height: 300px;
-	overflow-y: scroll;
+	overflow-y: auto;
 	border: 1px solid rgb(63, 63, 63);
+}
+
+.searchResults_container{
+	height: 300px;
+	overflow-y: auto;
+	border: 1px solid rgb(63, 63, 63);
+}
+
+.result_title{
+	font-size: 15px;
+	font-weight: bold;
+	margin: 0px;
+}
+.result_subtitle{
+	color: grey;
+	font-size: 12px;
+	margin: 0px;
+}
+.result_container{
+	border: 1px solid black;
+	margin: 3px;
 }

@@ -1,9 +1,11 @@
 import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 
+// export all the collections so that they are accessible from other files
 export const Drugs = new Mongo.Collection('drugs');
 export const SearchResults = new Mongo.Collection('search_results');
 
+// wrap db methods in meteor methods to call them from the client
 Meteor.methods({
 	'drugs.insert' (drugData) {
 		Drugs.insert(drugData);

@@ -29,3 +29,6 @@ body {
 	border: 1px solid black;
 	margin: 3px;
 }
+.result_li{
+	list-style-type: none; 
+}

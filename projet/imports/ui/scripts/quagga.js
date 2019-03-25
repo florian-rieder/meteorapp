@@ -1,20 +1,20 @@
 import Quagga from "quagga"
-import '../templates/quag_scan.html'
+import '../templates/quagScan.html'
 
 //Flag for scanner status
-let _scannerIsRunning = false;
+let scannerIsRunning = false;
 
 function startScanner() {
-	let devices = getDevices().then((r) => r);
 	//initialization of scanner config
 	Quagga.init({
 		inputStream: {
 			name: "Live",
 			type: "LiveStream",
-			target: document.querySelector('#scanner-container'),
+			target: document.querySelector('#scannerContainer'),
 			constraints: {
 				width: 480,
 				height: 320,
+				
 			},
 		},
 		//Sets types of barcodes supported
@@ -41,7 +41,7 @@ function startScanner() {
 			Quagga.start();
 
 			// Set flag to is running
-			_scannerIsRunning = true;
+		scannerIsRunning = true;
 		});
 
 	Quagga.onDetected(function (result) {
@@ -49,36 +49,17 @@ function startScanner() {
 	});
 }
 
-function getDevices() {
-	if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
-		console.log("enumerateDevices() not supported.");
-		return;
-	}
-
-	// List cameras and microphones.
-
-	return navigator.mediaDevices.enumerateDevices()
-		.then(function (devices) {
-			devices.forEach(function (device) {
-				console.log(device);
-				return device.deviceId;
-			});
-		})
-		.catch(function (err) {
-			console.log(err.name + ": " + err.message);
-		});
-}
-
-
 // Start/stop scanner
 
-Template.quag_scan.events({
+Template.quagScan.events({
 	'click #scan_btn'() {
-		if (_scannerIsRunning) {
+		if (scannerIsRunning) {
 			Quagga.stop();
+			scannerIsRunning = false;
+			document.getElementById("scannerContainer").outerHTML = ""; //removes frozen video window
 		} else {
 			startScanner();
 		}
-		console.log('quagga running: ' + _scannerIsRunning);
+		console.log('quagga running: ' +scannerIsRunning);
 	}
 })

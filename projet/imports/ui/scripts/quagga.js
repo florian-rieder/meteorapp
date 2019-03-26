@@ -30,19 +30,19 @@ function startScanner() {
 				"i2of5_reader",
 			],
 		},
-	}, 
-	function (err) {
-		if (err) {
-			console.error(err);
-			return
-		}
+	},
+		function (err) {
+			if (err) {
+				console.error(err);
+				return
+			}
 
-		console.log("Initialization finished. Ready to start");
-		Quagga.start();
+			console.log("Initialization finished. Ready to start");
+			Quagga.start();
 
-		// Set flag to is running
-		scannerIsRunning = true;
-	});
+			// Set flag to is running
+			scannerIsRunning = true;
+		});
 
 	Quagga.onProcessed(function (result) {
 		//sets context and canvas for quagga overlay
@@ -70,10 +70,60 @@ function startScanner() {
 			}
 		}
 	});
-		
+
+	let results = [];
+	let detectedBarCodes = 0;
+	const samples = 25;
+
 	Quagga.onDetected(function (result) {
 		console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
+
+		results.push(result.codeResult.code);
+		if (detectedBarCodes >= samples) {
+			//if we scanned $samples bar codes, stop the scanner
+			stopScanner();
+			// get the most occuring result in the array (get its mode)
+			const mostOccurringBarcode = mode(results);
+			// use the most occurring barcode for stuff
+			// ...
+		} else {
+			detectedBarCodes++;
+		}
+
+		function mode(array) {
+			let processed = {};
+			// for each result, we count the number of occurrences
+			results.forEach(result => {
+				// we use an object whose properties are the value of the result, that way we
+				// can create a new property called `_${result}` (because we can't use numbers as variable names)
+				// and we then count the number of occurrences of all results.
+				if (processed[`_${result}`] === undefined) { // strict equality
+					processed[`_${result}`] = 1;
+				} else {
+					processed[`_${result}`]++;
+				}
+			});
+			//get the property name with the highest count
+			const mode = Object.getOwnPropertyNames(processed).reduce((mode, code) => {
+				//mode is the barcode that has (will have) the highest occurrence
+				//code is the different barcodes quagga has found
+
+				//if the value of processed.mode is inferior to the value of processed.code
+				if (processed[mode] < processed[code]) {
+					return code; // assign code to mode
+				} else {
+					return mode; // do nothing
+				}
+			});
+			return mode;
+		}
 	});
+}
+
+function stopScanner() {
+	Quagga.stop();
+	scannerIsRunning = false;
+	document.getElementById("scannerContainer").innerHTML = ""; //removes frozen video window
 }
 
 // Start/stop scanner
@@ -81,12 +131,10 @@ function startScanner() {
 Template.quagScan.events({
 	'click #scan_btn'() {
 		if (scannerIsRunning) {
-			Quagga.stop();
-			scannerIsRunning = false;
-			document.getElementById("scannerContainer").innerHTML = ""; //removes frozen video window
+			stopScanner();
 		} else {
 			startScanner();
 		}
-		console.log('quagga running: ' +scannerIsRunning);
+		console.log('quagga running: ' + scannerIsRunning);
 	}
 })

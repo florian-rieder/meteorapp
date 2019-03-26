@@ -12,7 +12,7 @@ Meteor.methods({
 		let result = await searchByString(searchString);
 		return result;
 	}
-})
+});
 
 // fetches the name, composition and notice from a drug's page on compendium URL
 async function scrapeDrug(compendiumURL) {

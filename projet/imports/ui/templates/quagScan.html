@@ -1,5 +1,11 @@
 <template name='quagScan'>
   <h1>Barcode Scanner</h1>
-  <div id="scannerContainer"></div>
+
+  <div id="scannerContainer">
+    <video class="videoCamera" autoplay="true" preload="auto" src="" muted="true"
+      playsinline="true"></video>
+    <canvas class="drawingBuffer"></canvas>
+  </div>
+  
   <button id='scan_btn'>Démarrer/Stopper Scanner</button> 
 </template>

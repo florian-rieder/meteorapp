@@ -16,6 +16,7 @@ function startScanner() {
 				height: 320,
 				
 			},
+
 		},
 		//Sets types of barcodes supported
 		decoder: {
@@ -31,32 +32,29 @@ function startScanner() {
 				"i2of5_reader",
 			],
 		},
-	}, function (err) {
-			if (err) {
-				console.error(err);
-				return
-			}
+	}, 
+	function (err) {
+		if (err) {
+			console.error(err);
+			return
+		}
 
-			console.log("Initialization finished. Ready to start");
-			Quagga.start();
+		console.log("Initialization finished. Ready to start");
+		Quagga.start();
 
-			// Set flag to is running
+		// Set flag to is running
 		scannerIsRunning = true;
-		});
+	});
 
 	
 	Quagga.onProcessed(function (result) {
-		//Determines context and canvas from quagga overlay
 		var drawingCtx = Quagga.canvas.ctx.overlay,
 			drawingCanvas = Quagga.canvas.dom.overlay;
-		
 
-		//If scanner detects result then draw box around barcode
+
 		if (result) {
-			
 			if (result.boxes) {
-				drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), 
-					parseInt(drawingCanvas.getAttribute("height")));
+				drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
 				result.boxes.filter(function (box) {
 					return box !== result.box;
 				}).forEach(function (box) {

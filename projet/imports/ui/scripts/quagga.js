@@ -51,10 +51,12 @@ function startScanner() {
 			drawingCanvas = Quagga.canvas.dom.overlay;
 		
 
-		
+		//If scanner detects result then draw box around barcode
 		if (result) {
+			
 			if (result.boxes) {
-				drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
+				drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), 
+					parseInt(drawingCanvas.getAttribute("height")));
 				result.boxes.filter(function (box) {
 					return box !== result.box;
 				}).forEach(function (box) {

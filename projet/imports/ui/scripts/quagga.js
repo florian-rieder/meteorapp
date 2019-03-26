@@ -115,7 +115,7 @@ function startScanner() {
 					return mode; // do nothing
 				}
 			});
-			return mode;
+			return mode.slice(1);
 		}
 	});
 }

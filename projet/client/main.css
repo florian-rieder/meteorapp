@@ -32,3 +32,11 @@ body {
 .result_li{
 	list-style-type: none; 
 }
+.drawingBuffer {
+	position: absolute;
+	top: 0;
+	left: 0;
+  }
+#scannerContainer {
+	position : relative;
+}

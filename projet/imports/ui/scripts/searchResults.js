@@ -9,3 +9,10 @@ Template.searchResults.helpers({
 		return SearchResults.find({});
 	}
 })
+
+Template.result.events({
+	//remove a search result when user clicks on it (test)
+	'click .result_container' () {
+		SearchResults.remove(this._id);
+	}
+})

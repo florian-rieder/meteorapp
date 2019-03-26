@@ -19,15 +19,9 @@ function startScanner() {
 		//Sets types of barcodes supported
 		decoder: {
 			readers: [
-				"code_128_reader",
+				// order matters, and do not add unnecessary readers
 				"ean_reader",
 				"ean_8_reader",
-				"code_39_reader",
-				"code_39_vin_reader",
-				"codabar_reader",
-				"upc_reader",
-				"upc_e_reader",
-				"i2of5_reader",
 			],
 		},
 	},
@@ -73,10 +67,10 @@ function startScanner() {
 
 	let results = [];
 	let detectedBarCodes = 0;
-	const samples = 25;
+	const samples = 15;
 
 	Quagga.onDetected(function (result) {
-		console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result);
+		console.log("Barcode detected and processed : [" + result.codeResult.code + "]");
 
 		results.push(result.codeResult.code);
 		if (detectedBarCodes >= samples) {
@@ -85,6 +79,7 @@ function startScanner() {
 			// get the most occuring result in the array (get its mode)
 			const mostOccurringBarcode = mode(results);
 			// use the most occurring barcode for stuff
+			console.log('most occurring barcode: ' + mostOccurringBarcode);
 			// ...
 		} else {
 			detectedBarCodes++;

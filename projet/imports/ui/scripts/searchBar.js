@@ -1,6 +1,6 @@
 import { Template } from "meteor/templating";
 import '../../api/collections.js';
-import '../templates/searchBar.html'
+import '../templates/searchBar.html';
 
 Template.searchBar.events({
     'click #searchBar_searchButton' (e) {

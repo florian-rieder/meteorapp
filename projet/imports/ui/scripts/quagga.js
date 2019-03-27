@@ -14,9 +14,10 @@ function startScanner() {
 			constraints: {
 				width: 480,
 				height: 320,
+				facingMode: "user"
 			},
 		},
-		frequency: 15,
+		frequency: 30,
 		singleChannel : true,
 		locator: {
 			halfSample: false,
@@ -25,7 +26,7 @@ function startScanner() {
     			showCanvas: false,
     			showPatches: false,
    				showFoundPatches: false,
-    			showSkeleton: false,
+    			showSkeleton: true,
     			showLabels: false,
     			showPatchLabels: false,
     			showRemainingPatchLabels: false,

@@ -14,18 +14,19 @@ function startScanner() {
 			constraints: {
 				width: 480,
 				height: 320,
+				facingMode: "user"
 			},
 		},
-		frequency: 15,
+		frequency: 30,
 		singleChannel : true,
 		locator: {
 			halfSample: false,
-  			patchSize: "large", // x-small, small, medium, large, x-large
+  			patchSize: "medium", // x-small, small, medium, large, x-large
   			debug: {
     			showCanvas: false,
     			showPatches: false,
    				showFoundPatches: false,
-    			showSkeleton: false,
+    			showSkeleton: true,
     			showLabels: false,
     			showPatchLabels: false,
     			showRemainingPatchLabels: false,
@@ -64,7 +65,7 @@ function startScanner() {
 			// Set flag to is running
 			scannerIsRunning = true;
 		});
-
+/*
 	Quagga.onProcessed(function (result) {
 		//sets context and canvas for quagga overlay
 		var drawingCtx = Quagga.canvas.ctx.overlay,
@@ -90,7 +91,7 @@ function startScanner() {
 				Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
 			}
 		}
-	});
+	}); */
 
 	let results = [];
 	let detectedBarCodes = 0;

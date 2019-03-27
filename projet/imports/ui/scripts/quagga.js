@@ -16,15 +16,21 @@ function startScanner() {
 				height: 320,
 			},
 		},
-		frequency: 30,
-		numOfWorkers: 0,
+		frequency: 15,
+		singleChannel : true,
+		numOfWorkers: window.navigator.hardwareConcurrency,
+		/* area: { // defines rectangle of the detection/localization area
+			top: "10%",    // top offset
+			right: "15%",  // right offset
+			left: "15%",   // left offset
+			bottom: "10%"  // bottom offset
+		  }, */
 		//Sets types of barcodes supported
 		decoder: {
 			readers: [
 				// order matters, and do not add unnecessary readers
 				"ean_reader",
 				"ean_8_reader",
-				"code_128_reader"
 			],
 		},
 	},

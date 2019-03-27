@@ -20,7 +20,7 @@ function startScanner() {
 		singleChannel : true,
 		locator: {
 			halfSample: false,
-  			patchSize: "medium", // x-small, small, medium, large, x-large
+  			patchSize: "x-small", // x-small, small, medium, large, x-large
   			debug: {
     			showCanvas: false,
     			showPatches: false,
@@ -48,7 +48,7 @@ function startScanner() {
 			readers: [
 				// order matters, and do not add unnecessary readers
 				"ean_reader",
-				"ean_8_reader",
+				//"ean_8_reader",
 			],
 		},
 	},

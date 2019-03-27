@@ -1,0 +1,17 @@
+<template name='profile'>
+    <div id='profile_container'>
+        <ul>
+            {{#each fields}}
+                {{> field}}
+            {{/each}}
+        </ul>
+    </div>
+</template>
+
+<template name='field'>
+<li>
+    {{fieldName}} 
+    <input type="text" class='field_textInput'>
+    <button>Valider</button>
+</li>
+</template>

@@ -33,7 +33,9 @@ async function scrapeDrug(compendiumURL) {
 	//get the list of components to the drug
 	const composition = await page.evaluate((selector) => {
 		return Array.from(document.querySelectorAll(selector))
-			.map((tr) => tr.textContent);
+			.map((tr) => {
+				return {component: tr.textContent}
+			});
 	}, '#compEverything > table > tbody > tr');
 
 	//move to the patient information page of this drug and await page loading

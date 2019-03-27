@@ -1,22 +1,32 @@
 <template name="drugData">
-	<p>Récupérer les données d'un médicament (hardcoded pour le moment)</p>
-	<p>https://compendium.ch/prod/dafalgan-cpr-500-mg/fr <button id='launchScraping'>Go</button></p>
-	<p>Rechercher un médicament dans la base de données de compendium</p>
-	<!-- <div>
-		<h1>{{title}}</h1>
+	<!-- {{#if hasData}} -->
+	<div>
+		<h1>{{data.title}}</h1>
 
 		<div>
 			Composition: <br>
 			<ul>
-				{{#each composition}}
-					{{component}}
+				{{#each data.composition}}
+				{{> component}}
 				{{/each}}
 			</ul>
 
 			<div class='noticeContainer'>
-				{{notice}}
+				{{#each subarray in data.notice}}
+				<p>
+					{{#each text in subarray}}
+						{{text}}<br>
+					{{/each}}
+				</p>
+				{{/each}}
 			</div>
 
+
 		</div>
-	</div> -->
+	</div>
+	<!-- {{/if}} -->
+</template>
+
+<template name='component'>
+	<li>{{component}}</li>
 </template>

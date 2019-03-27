@@ -16,12 +16,15 @@ function startScanner() {
 				height: 320,
 			},
 		},
+		frequency: 30,
+		numOfWorkers: 0,
 		//Sets types of barcodes supported
 		decoder: {
 			readers: [
 				// order matters, and do not add unnecessary readers
 				"ean_reader",
 				"ean_8_reader",
+				"code_128_reader"
 			],
 		},
 	},
@@ -70,9 +73,9 @@ function startScanner() {
 	const samples = 15;
 
 	Quagga.onDetected(function (result) {
-		console.log("Barcode detected and processed : [" + result.codeResult.code + "]");
+		console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result.codeResult);
 
-		results.push(result.codeResult.code);
+		results.push(result.codeResult);
 		if (detectedBarCodes >= samples) {
 			//if we scanned $samples bar codes, stop the scanner
 			stopScanner();
@@ -88,7 +91,7 @@ function startScanner() {
 		function mode(array) {
 			let processed = {};
 			// for each result, we count the number of occurrences
-			results.forEach(result => {
+			array.forEach(result => {
 				// we use an object whose properties are the value of the result, that way we
 				// can create a new property called `_${result}` (because we can't use numbers as variable names)
 				// and we then count the number of occurrences of all results.
@@ -98,6 +101,22 @@ function startScanner() {
 					processed[`_${result}`]++;
 				}
 			});
+
+			/* //https://github.com/serratus/quaggaJS/issues/237
+			var countDecodedCodes = 0, err = 0;
+			$.each(result.codeResult.decodedCodes, function (id, error) {
+				if (error.error != undefined) {
+					countDecodedCodes++;
+					err += parseFloat(error.error);
+				}
+			});
+			if (err / countDecodedCodes < 0.1) {
+				// correct code detected
+			} else {
+				// probably wrong code
+			}
+			//end  */
+
 			//get the property name with the highest count
 			const mode = Object.getOwnPropertyNames(processed).reduce((mode, code) => {
 				//mode is the barcode that has (will have) the highest occurrence

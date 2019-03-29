@@ -1,18 +1,18 @@
 <template name="drugData">
 	<!-- {{#if hasData}} -->
 	<div>
-		<h1>{{data.title}}</h1>
+		<h1>{{drugData.title}}</h1>
 
 		<div>
 			Composition: <br>
 			<ul>
-				{{#each data.composition}}
+				{{#each drugData.composition}}
 				{{> component}}
 				{{/each}}
 			</ul>
 
 			<div class='noticeContainer'>
-				{{#each subarray in data.notice}}
+				{{#each subarray in drugData.notice}}
 				<p>
 					{{#each text in subarray}}
 						{{text}}<br>
@@ -20,7 +20,6 @@
 				</p>
 				{{/each}}
 			</div>
-
 
 		</div>
 	</div>

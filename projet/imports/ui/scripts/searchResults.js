@@ -12,15 +12,22 @@ Template.searchResults.helpers({
 })
 
 Template.result.events({
-	//remove a search result when user clicks on it (test)
-	'click .result_container'() {
+	'click .result_add'(e) {
+		e.preventDefault();
 		const accessURL = `https://compendium.ch${this.path}`;
-		console.log(accessURL);
-		
-		Template.drugData.data = Meteor.call('scrapeDrug', accessURL, (error, result) => {
+		//scrape data at the path specified in the entry
+		Meteor.call('scrapeDrug', accessURL, (error, result) => {
 			console.log(result);
 			Meteor.call('drugs.insert', result);
-			return result;
+		});
+	},
+	'click .result_inspect'(e) {
+		e.preventDefault();
+		const accessURL = `https://compendium.ch${this.path}`;
+		Meteor.call('scrapeDrug', accessURL, (error, result) => {
+			console.log(result);
+			Meteor.call('inspected_drug.removeAll');
+			Meteor.call('inspected_drug.insert', result);
 		});
 	}
 })

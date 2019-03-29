@@ -28,9 +28,15 @@ body {
 .result_container{
 	border: 1px solid black;
 	margin: 3px;
+	position: relative;
 }
 .result_li{
 	list-style-type: none; 
+}
+.result_buttonsContainer{
+	position: absolute;
+	right: 5px;
+	top: 10%;
 }
 .drawingBuffer {
 	position: absolute;

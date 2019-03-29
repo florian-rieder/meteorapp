@@ -14,28 +14,28 @@ function startScanner() {
 			constraints: {
 				width: 480,
 				height: 320,
-				facingMode: "user"
+				facingMode: "user",
 			},
 		},
-		frequency: 30,
-		singleChannel : true,
+		frequency: 20,
+		singleChannel: true,
 		locator: {
 			halfSample: false,
-  			patchSize: "medium", // x-small, small, medium, large, x-large
-  			debug: {
-    			showCanvas: false,
-    			showPatches: false,
-   				showFoundPatches: false,
-    			showSkeleton: true,
-    			showLabels: false,
-    			showPatchLabels: false,
-    			showRemainingPatchLabels: false,
-    			boxFromPatches: {
-      				showTransformed: false,
-      				showTransformedBox: false,
-      				showBB: false
-    			}
-  			}
+			patchSize: "medium", // x-small, small, medium, large, x-large
+			debug: {
+				showCanvas: false,
+				showPatches: false,
+				showFoundPatches: false,
+				showSkeleton: true,
+				showLabels: false,
+				showPatchLabels: false,
+				showRemainingPatchLabels: false,
+				boxFromPatches: {
+					showTransformed: false,
+					showTransformedBox: false,
+					showBB: false
+				}
+			}
 		},
 		numOfWorkers: window.navigator.hardwareConcurrency,
 		/* area: { // defines rectangle of the detection/localization area
@@ -65,42 +65,42 @@ function startScanner() {
 			// Set flag to is running
 			scannerIsRunning = true;
 		});
-/*
-	Quagga.onProcessed(function (result) {
-		//sets context and canvas for quagga overlay
-		var drawingCtx = Quagga.canvas.ctx.overlay,
-			drawingCanvas = Quagga.canvas.dom.overlay;
-
-		//Draws box around codebar for visual feedback of scanner, different visual feedback depending on result type
-		if (result) {
-			//General detection of barcode
-			if (result.boxes) {
-				drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
-				result.boxes.filter(function (box) {
-					return box !== result.box;
-				}).forEach(function (box) {
-					Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "green", lineWidth: 2 });
-				});
+	/*
+		Quagga.onProcessed(function (result) {
+			//sets context and canvas for quagga overlay
+			var drawingCtx = Quagga.canvas.ctx.overlay,
+				drawingCanvas = Quagga.canvas.dom.overlay;
+	
+			//Draws box around codebar for visual feedback of scanner, different visual feedback depending on result type
+			if (result) {
+				//General detection of barcode
+				if (result.boxes) {
+					drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
+					result.boxes.filter(function (box) {
+						return box !== result.box;
+					}).forEach(function (box) {
+						Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "green", lineWidth: 2 });
+					});
+				}
+				//precise detection of barcode
+				if (result.box) {
+					Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "#00F", lineWidth: 2 });
+				}
+				//Red line indicating full detection process
+				if (result.codeResult && result.codeResult.code) {
+					Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
+				}
 			}
-			//precise detection of barcode
-			if (result.box) {
-				Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "#00F", lineWidth: 2 });
-			}
-			//Red line indicating full detection process
-			if (result.codeResult && result.codeResult.code) {
-				Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
-			}
-		}
-	}); */
+		}); */
 
 	let results = [];
 	let detectedBarCodes = 0;
-	const samples = 15;
+	const samples = 5;
 
 	Quagga.onDetected(function (result) {
 		console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result.codeResult);
 
-		results.push(result.codeResult);
+		results.push(result.codeResult.code);
 		if (detectedBarCodes >= samples) {
 			//if we scanned $samples bar codes, stop the scanner
 			stopScanner();

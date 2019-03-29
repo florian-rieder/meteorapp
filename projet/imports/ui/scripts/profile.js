@@ -3,12 +3,20 @@ import {Template} from 'meteor/templating'
 import '../templates/profile.html';
 
 Template.profile.helpers({
-    fields: [
+    /* fields: [
         {fieldName: 'sexe'},
         {fieldName: 'prénom'},
         {fieldName: 'nom'},
         {fieldName: 'age'},
-    ]
+    ] */
+    fields() {
+        return [
+        {fieldName: 'sexe'},
+        {fieldName: 'prénom'},
+        {fieldName: 'nom'},
+        {fieldName: 'age'},
+        ]
+    }
 });
 
 Template.field.events({

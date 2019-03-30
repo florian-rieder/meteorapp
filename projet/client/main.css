@@ -14,7 +14,10 @@ body {
 	overflow-y: auto;
 	border: 1px solid rgb(63, 63, 63);
 }
-
+.searchResults_numberDisplay{
+	font-size: 12px;
+	color: grey;
+}
 .result_title{
 	font-size: 15px;
 	font-weight: bold;

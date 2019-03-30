@@ -25,9 +25,6 @@ Template.drugsList.helpers({
 });
 
 Template.drugsList.events({
-	'click #addDrug' () {
-		Meteor.call('drugs.insert', {title: 'placeholder drug'});
-	},
 	'click #clearDrugs' () {
 		Meteor.call('drugs.removeAll');
 	}

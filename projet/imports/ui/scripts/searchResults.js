@@ -8,8 +8,11 @@ Template.searchResults.helpers({
 	results() {
 		// get all items in collection SearchResults
 		return SearchResults.find({});
-	}
-})
+	},
+	numberOfResults() {
+		return SearchResults.find().count();
+	},
+});
 
 Template.result.events({
 	'click .result_add'(e) {
@@ -21,6 +24,8 @@ Template.result.events({
 			Meteor.call('drugs.insert', result);
 		});
 	},
+	// if the user clicks the inspect button on a search result, we scrape
+	// the data at seach result path and add it to TempDrugInspected to display it in drugData
 	'click .result_inspect'(e) {
 		e.preventDefault();
 		const accessURL = `https://compendium.ch${this.path}`;

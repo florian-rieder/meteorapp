@@ -1,0 +1,14 @@
+<template name='footerBar'>
+	<div class='footerBar_container'>
+		{{#each buttons}}
+		{{> navButton}}
+		{{/each}}
+	</div>
+</template>
+
+<template name='navButton'>
+	<div class='navButton_container'>
+		{{name}}
+	</div>
+
+</template>

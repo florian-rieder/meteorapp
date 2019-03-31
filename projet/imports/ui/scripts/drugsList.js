@@ -4,20 +4,6 @@ import { Drugs } from '../../api/collections.js';
 
 import '../templates/drugsList.html';
 
-export let selectedDrugData = {
-	title: 'title',
-	composition: [
-		{component: 'comp 1'},
-		{component: 'comp 2'},
-		{component: 'comp 3'},
-	],
-	notice: [
-		['11', '12', '13'],
-		['21', '22', '23'],
-		['31', '32', '33']
-	]
-};
-
 Template.drugsList.helpers({
 	drugs(){
 		return Drugs.find({});

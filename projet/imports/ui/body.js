@@ -7,3 +7,4 @@ import './scripts/drugsList.js';
 import './scripts/searchResults.js';
 import './scripts/quagga.js';
 import './scripts/profile.js';
+import './scripts/footerBar.js';

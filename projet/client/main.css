@@ -10,11 +10,12 @@ body {
 header{
 	height: 40px;
 	width: 100%;
-	font-size: 32px;
+	font-size: 28px;
 	color: white;
 	background-color: rgb(103, 192, 143);
 	z-index: 2;
 	padding: 10px;
+	border-bottom: 1px solid rgb(36, 124, 83);
 }
 footer{
 	height: 60px;
@@ -22,6 +23,7 @@ footer{
 	background-color: rgb(103, 192, 143);
 	z-index: 2;
 	padding: 10px;
+	border-top: 1px solid rgb(36, 124, 83);
 }
 
 .body_content{
@@ -90,13 +92,30 @@ footer{
 	margin-right: auto;
 }
 
-.navButton_container{
+.navButton_button{
 	line-height: 40px;
 	text-align: center;
 	color: white;
+	font-size: 16px;
+	padding: 0;
 	border: 1px solid rgb(24, 78, 53);
 	height: 40px;
 	width: 80px;
 	background-color: rgb(36, 124, 83);
 	flex: 0 1 auto; /* Default */
+	/* add a transition effect between normal and hover colors */
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+}
+
+.navButton_button:hover{
+	color: white;
+	border: 1px solid rgb(34, 112, 76);
+	background-color: rgb(51, 155, 107);
+}
+
+.navButton_button:active{
+	color: rgb(182, 182, 182);
+	border: 1px solid rgb(220, 255, 238);
+	background-color: rgb(147, 243, 198);
 }

@@ -7,4 +7,7 @@ Template.drugData.helpers({
 	drugData() {
 		return TempDrugInspected.findOne({});
 	},
+	isTitleFromIndex(index){
+		return index == 0;
+	}
 });

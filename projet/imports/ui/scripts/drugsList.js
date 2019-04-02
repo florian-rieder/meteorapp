@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Drugs } from '../../api/collections.js';
+import { changeWindow } from '../../api/utilities.js';
 
 import '../templates/drugsList.html';
-import { changeWindow } from '../../api/utilities.js';
 
 Template.drugsList.helpers({
 	drugs() {

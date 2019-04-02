@@ -15,7 +15,11 @@
 				{{#each subarray in drugData.notice}}
 				<p>
 					{{#each text in subarray}}
-						{{text}}<br>
+						{{#if isTitleFromIndex @index }}
+							<h2>{{text}}</h2>
+						{{else}}
+							<p>{{text}}</p>
+						{{/if}}
 					{{/each}}
 				</p>
 				{{/each}}

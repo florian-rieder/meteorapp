@@ -3,14 +3,22 @@
 		Medintake
 	</header>
 	<div class='body_content'>
-		<div id='searchPage' class='navWindow'>
-		{{> searchBar}}
-		{{> searchResults}}
+		<div id='windowRecherche' class='navWindow hidden'>
+			{{> searchBar}}
+			{{> searchResults}}
 		</div>
-		<div id='drugDataWindow' class='navWindow'>{{> drugData}}</div>
-		<div id='myPharmacy' class='navWindow'>{{> drugsList}}</div>
-		<div id='myProfile' class='navWindow'>{{> profile}}</div>
-		<div id='scannerWindow' class='navWindow'>{{> quagScan}}</div>
+		<div id='windowNotice' class='navWindow hidden'>
+			{{> drugData}}
+		</div>
+		<div id='windowPharmacie' class='navWindow'>
+			{{> drugsList}}
+		</div>
+		<div id='windowProfil' class='navWindow hidden'>
+			{{> profile}}
+		</div>
+		<div id='windowScan' class='navWindow hidden'>
+			{{> quagScan}}
+		</div>
 	</div>
 	<footer>
 		{{> footerBar}}

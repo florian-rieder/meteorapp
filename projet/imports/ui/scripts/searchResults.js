@@ -3,6 +3,7 @@ import { SearchResults } from '../../api/collections';
 
 import '../templates/searchResults.html';
 import './drugData.js';
+import { changeWindow } from '../../api/utilities';
 
 Template.searchResults.helpers({
 	results() {
@@ -33,6 +34,7 @@ Template.result.events({
 			console.log(result);
 			Meteor.call('inspected_drug.removeAll');
 			Meteor.call('inspected_drug.insert', result);
+			changeWindow('windowNotice');
 		});
 	}
 })

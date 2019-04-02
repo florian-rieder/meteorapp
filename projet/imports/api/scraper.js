@@ -38,13 +38,13 @@ async function scrapeDrug(compendiumURL) {
 			});
 	}, '#compEverything > table > tbody > tr');
 
-	//move to the patient information page of this drug and await page loading
+	// move to the patient information page of this drug and await page loading
 	await Promise.all([
 		page.waitForNavigation(),
 		page.click('#ctl00_MainContent_ucProductDetail1_tblLinkMoreInfosFIPIPhoto > tbody > tr > td:nth-child(2) > a:nth-child(1)')
 	]);
 
-	//get the notice of the drug
+	// get the notice of the drug
 	let notice = await page.evaluate((selector) => {
 		return Array.from(document.querySelectorAll(selector))
 			/* get the childnodes of each paragraphs */
@@ -52,8 +52,9 @@ async function scrapeDrug(compendiumURL) {
 				/* get the text content of each element inside a paragraph */
 				.map(element => element.textContent));
 	}, '.monographie > .paragraph');
-
-	//close the headless browser
+	// remove first element of notice (OEMéd), because we don't care about that
+	notice.splice(0, 1);
+	// close the headless browser
 	await browser.close();
 
 	//create return object

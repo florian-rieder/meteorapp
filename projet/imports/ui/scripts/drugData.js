@@ -9,5 +9,8 @@ Template.drugData.helpers({
 	},
 	isTitleFromIndex(index){
 		return index == 0;
+	},
+	isOfTwoLastFromIndex(index){
+		return index > TempDrugInspected.findOne({}).notice.length-3; 
 	}
 });

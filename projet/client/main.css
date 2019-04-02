@@ -33,10 +33,17 @@ footer{
 	z-index: 1;
 }
 
-.noticeContainer{
-	height: 300px;
+.drugData_noticeContainer{
+	/* height: 300px; */
 	overflow-y: auto;
 	border: 1px solid rgb(63, 63, 63);
+	padding: 10px;
+}
+
+.drugData_noticeTwoLast{
+	color: grey;
+	font-size: 12px;
+	text-align: right;
 }
 
 .searchResults_container{

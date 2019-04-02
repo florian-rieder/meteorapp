@@ -1,5 +1,4 @@
 <template name="drugData">
-	<!-- {{#if hasData}} -->
 	<div>
 		<h1>{{drugData.title}}</h1>
 
@@ -10,24 +9,29 @@
 				{{> component}}
 				{{/each}}
 			</ul>
-
-			<div class='noticeContainer'>
+			<!-- notice formatting using spacebars -->
+			<div class='drugData_noticeContainer'>
 				{{#each subarray in drugData.notice}}
-				<p>
-					{{#each text in subarray}}
-						{{#if isTitleFromIndex @index }}
-							<h2>{{text}}</h2>
-						{{else}}
-							<p>{{text}}</p>
-						{{/if}}
-					{{/each}}
-				</p>
+					{{#if isOfTwoLastFromIndex @index}}
+						{{#each text in subarray}}
+							<p class='drugData_noticeTwoLast'>{{text}}</p>
+						{{/each}}
+					{{else}}
+						<div>
+							{{#each text in subarray}}
+								{{#if isTitleFromIndex @index }}
+									<h2>{{text}}</h2>
+								{{else}}
+									<p>{{text}}</p>
+								{{/if}}
+							{{/each}}
+						</div>
+					{{/if}}
 				{{/each}}
 			</div>
 
 		</div>
 	</div>
-	<!-- {{/if}} -->
 </template>
 
 <template name='component'>

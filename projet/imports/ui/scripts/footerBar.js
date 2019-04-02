@@ -10,7 +10,7 @@ Template.footerBar.helpers({
 		{name: 'Notice'},
 	]
 })
-
+//Changes to corresponding window after footer button press
 Template.navButton.events({
 	'click .navButton_button' () {
 		switch(this.name) {
@@ -31,7 +31,7 @@ Template.navButton.events({
 		}
 	} 
 })
-
+//Pages are contained in divs, function hides all pages and displays the correct one with ID of div
 function changeWindow(buttonID){
 	let windowsArray = Array.from(document.querySelectorAll('.navWindow'));
 	console.log('Got here', windowsArray);

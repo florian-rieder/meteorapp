@@ -3,12 +3,14 @@
 		Medintake
 	</header>
 	<div class='body_content'>
-		{{> drugsList}}
+		<div id='searchPage' class='navWindow'>
 		{{> searchBar}}
 		{{> searchResults}}
-		{{> drugData}}
-		{{> quagScan}}
-		{{> profile}}
+		</div>
+		<div id='drugDataWindow' class='navWindow'>{{> drugData}}</div>
+		<div id='myPharmacy' class='navWindow'>{{> drugsList}}</div>
+		<div id='myProfile' class='navWindow'>{{> profile}}</div>
+		<div id='scannerWindow' class='navWindow'>{{> quagScan}}</div>
 	</div>
 	<footer>
 		{{> footerBar}}

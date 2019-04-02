@@ -119,3 +119,6 @@ footer{
 	border: 1px solid rgb(220, 255, 238);
 	background-color: rgb(147, 243, 198);
 }
+.hidden{
+	display: none;
+}

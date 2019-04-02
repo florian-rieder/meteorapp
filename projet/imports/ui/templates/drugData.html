@@ -13,8 +13,10 @@
 
 			<div class='noticeContainer'>
 				{{#each subarray in drugData.notice}}
+				<h2>{{subarray.[0]}}</h2>
 				<p>
 					{{#each text in subarray}}
+						
 						{{text}}<br>
 					{{/each}}
 				</p>

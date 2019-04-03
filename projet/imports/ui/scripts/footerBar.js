@@ -8,7 +8,7 @@ Template.footerBar.helpers({
 		{ name: 'Pharmacie' },
 		{ name: 'Recherche' },
 		{ name: 'Scan' },
-		{ name: 'Notice' },
+		{ name: 'Help' },
 	]
 })
 //Changes to corresponding window after footer button press

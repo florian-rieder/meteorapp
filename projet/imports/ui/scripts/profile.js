@@ -11,10 +11,13 @@ Template.profile.helpers({
     ] */
     fields() {
         return [
-        {fieldName: 'sexe'},
-        {fieldName: 'prénom'},
-        {fieldName: 'nom'},
-        {fieldName: 'age'},
+        {fieldName: 'Sexe'},
+        {fieldName: 'Prénom'},
+        {fieldName: 'Nom'},
+        {fieldName: 'Age'},
+        {fieldName: 'Taille'},
+        {fieldName: 'Poids'},
+        {fieldName: 'Numéro AVS'},
         ]
     }
 });

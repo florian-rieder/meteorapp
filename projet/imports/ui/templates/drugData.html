@@ -1,5 +1,8 @@
 <template name="drugData">
 	<button id='backButton'>Back</button>
+	{{#if originIsSearchInspect}}
+		<button id='addDrugToPharmacyButton'>Ajouter à ma pharmacie</button>
+	{{/if}}
 	<div>
 		<h1>{{drugData.title}}</h1>
 

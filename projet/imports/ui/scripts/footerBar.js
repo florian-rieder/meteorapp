@@ -15,7 +15,7 @@ Template.footerBar.helpers({
 Template.navButton.events({
 	'click .navButton_button'() {
 		changeWindow(`window${this.name}`);
-		lastActivePage = `window${this.name}`;
+		lastActivePage.set(`window${this.name}`);
 	}
 });
 

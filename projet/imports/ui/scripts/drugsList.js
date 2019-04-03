@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
 import { Drugs } from '../../api/collections.js';
 import { changeWindow, inspectDrugData } from '../../api/utilities.js';
 

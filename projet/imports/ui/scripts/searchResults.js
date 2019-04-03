@@ -1,9 +1,9 @@
 import { Template } from 'meteor/templating';
 import { SearchResults } from '../../api/collections';
+import { changeWindow, inspectDrugData } from '../../api/utilities';
 
 import '../templates/searchResults.html';
 import './drugData.js';
-import { changeWindow, inspectDrugData } from '../../api/utilities';
 
 Template.searchResults.helpers({
 	results() {

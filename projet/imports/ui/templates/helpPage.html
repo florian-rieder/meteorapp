@@ -1,3 +1,7 @@
 <template name='helpPage'>
-    <h1>THIS IS THE HELP PAGE</h1>
+    <div class='helpPage_buttons'>
+        {{#each buttons}}
+        {{> navButton}}
+        {{/each}}  
+    </div>
 </template>

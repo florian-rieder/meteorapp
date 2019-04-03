@@ -109,7 +109,7 @@ footer{
 	padding: 0;
 	border: 1px solid rgb(24, 78, 53);
 	height: 40px;
-	width: 80px;
+	width: 90px;
 	background-color: rgb(36, 124, 83);
 	flex: 0 1 auto; /* Default */
 	/* add a transition effect between normal and hover colors */

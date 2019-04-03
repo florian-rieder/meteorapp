@@ -1,6 +1,51 @@
 //ligne qui permet de gérer des templates
 import {Template} from 'meteor/templating'
 import '../templates/profile.html';
+import { Meteor } from 'meteor/meteor';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { Images } from '../../api/files.js'
+
+Template.uploadForm.onCreated(function () {
+  this.currentUpload = new ReactiveVar(false);
+});
+
+Template.uploadForm.helpers({
+  currentUpload() {
+    return Template.instance().currentUpload.get();
+  }
+});
+Meteor.subscribe('files.images.all');
+Template.uploadForm.events({
+  'change #fileInput'(e, template) {
+    if (e.currentTarget.files && e.currentTarget.files[0]) {
+      // We upload only one file, in case
+      // multiple files were selected
+      const upload = Meteor.call(Images.insert({
+        file: e.currentTarget.files[0],
+        streams: 'dynamic',
+        chunkSize: 'dynamic'
+      }, false));
+      upload.on('start', function () {
+        template.currentUpload.set(this);
+      });
+
+      upload.on('end', function (error, fileObj) {
+        if (error) {
+          alert('Error during upload: ' + error);
+        } else {
+          alert('File "' + fileObj.name + '" successfully uploaded');
+        }
+        template.currentUpload.set(false);
+      });
+
+      upload.start();
+    }
+  }
+});
+
+
+
+
 
 Template.profile.helpers({
     /* fields: [

@@ -12,8 +12,4 @@ Template.helpPage.helpers({
     }
 });
 
-Template.helpButton.events({
 
-    
-
-})

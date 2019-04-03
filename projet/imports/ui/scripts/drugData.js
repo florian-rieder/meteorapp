@@ -7,10 +7,11 @@ Template.drugData.helpers({
 	drugData() {
 		return TempDrugInspected.findOne({});
 	},
+	//notice formatting
 	isTitleFromIndex(index){
 		return index == 0;
 	},
 	isOfTwoLastFromIndex(index){
-		return index > TempDrugInspected.findOne({}).notice.length-3; 
+		return index > TempDrugInspected.findOne({}).notice.length-3;
 	}
 });

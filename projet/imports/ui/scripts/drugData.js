@@ -11,7 +11,7 @@ Template.drugData.helpers({
 		return index == 0;
 	},
 	isOfTwoLastFromIndex(index){
-		return index > inspectDrugData.notice.length-3;
+		return index > inspectDrugData.get().notice.length-3;
 	}
 });
 

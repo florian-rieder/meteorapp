@@ -1,7 +1,13 @@
 <template name='helpPage'>
     <div class='helpPage_buttons'>
         {{#each buttons}}
-        {{> navButton}}
+        {{> helpButton}}
         {{/each}}  
     </div>
 </template>
+
+<template name='helpButton'>
+        <button class='helpButton_button'>
+            {{name}}
+        </button>
+    </template>

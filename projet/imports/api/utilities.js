@@ -1,3 +1,5 @@
+import { ReactiveVar } from 'meteor/reactive-var';
+
 // This file contains js functions that we want to call from anywhere in the project
 // We need to export a function variable here (export const funcName = function(){...}), 
 // and we can then import it in any file with:
@@ -10,3 +12,5 @@ export const changeWindow = function (windowID){
 	windowsArray.forEach((e)=>e.classList.add('hidden'));
 	document.getElementById(windowID).classList.remove('hidden');
 }
+
+export let inspectDrugData = new ReactiveVar('test');

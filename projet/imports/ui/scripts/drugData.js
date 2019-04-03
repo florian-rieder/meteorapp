@@ -1,12 +1,12 @@
 import { Template } from 'meteor/templating';
 import { TempDrugInspected } from '../../api/collections.js';
 import '../templates/drugData.html';
-import { changeWindow } from '../../api/utilities.js';
+import { changeWindow, inspectDrugData } from '../../api/utilities.js';
 
 
 Template.drugData.helpers({
 	drugData() {
-		return TempDrugInspected.findOne({});
+		return inspectDrugData.get();
 	},
 	//notice formatting
 	isTitleFromIndex(index){

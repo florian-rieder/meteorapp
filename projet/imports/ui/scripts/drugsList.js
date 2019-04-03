@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { Drugs } from '../../api/collections.js';
-import { changeWindow } from '../../api/utilities.js';
+import { changeWindow, inspectDrugData } from '../../api/utilities.js';
 
 import '../templates/drugsList.html';
 
@@ -21,9 +22,9 @@ Template.drugsList.events({
 Template.drug.events({
 	'click .drug_inspect'(e) {
 		e.preventDefault();
-		let data = Drugs.findOne(this._id);
-		Meteor.call('inspected_drug.removeAll');
-		Meteor.call('inspected_drug.insert', data);
+		inspectDrugData.set(Drugs.findOne(this._id));
+		/* Meteor.call('inspected_drug.removeAll');
+		Meteor.call('inspected_drug.insert', data); */
 		changeWindow('windowNotice');
 	},
 	'click .drug_remove' (e) {

@@ -3,7 +3,7 @@ import { SearchResults } from '../../api/collections';
 
 import '../templates/searchResults.html';
 import './drugData.js';
-import { changeWindow } from '../../api/utilities';
+import { changeWindow, inspectDrugData } from '../../api/utilities';
 
 Template.searchResults.helpers({
 	results() {
@@ -32,8 +32,7 @@ Template.result.events({
 		const accessURL = `https://compendium.ch${this.path}`;
 		Meteor.call('scrapeDrug', accessURL, (error, result) => {
 			console.log(result);
-			Meteor.call('inspected_drug.removeAll');
-			Meteor.call('inspected_drug.insert', result);
+			inspectDrugData.set(result);
 			changeWindow('windowNotice');
 		});
 	}

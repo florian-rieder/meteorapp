@@ -13,4 +13,4 @@ export const changeWindow = function (windowID){
 	document.getElementById(windowID).classList.remove('hidden');
 }
 
-export let inspectDrugData = new ReactiveVar('test');
+export let inspectDrugData = new ReactiveVar(undefined);

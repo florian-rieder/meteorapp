@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { TempDrugInspected } from '../../api/collections.js';
 import '../templates/drugData.html';
 import { changeWindow, inspectDrugData } from '../../api/utilities.js';
 
@@ -13,7 +12,7 @@ Template.drugData.helpers({
 		return index == 0;
 	},
 	isOfTwoLastFromIndex(index){
-		return index > TempDrugInspected.findOne({}).notice.length-3;
+		return index > inspectDrugData.notice.length-3;
 	}
 });
 

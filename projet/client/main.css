@@ -87,9 +87,10 @@ footer{
 	position : relative;
 }
 #searchBar_searchSquare{
-	width: 200px;
+	width: 400px;
 	height: 30px;
 	border-radius: 15px;
+	font-size: 24px;
 }
 .footerBar_container{
 	height: 100%;

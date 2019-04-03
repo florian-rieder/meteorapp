@@ -1,8 +1,7 @@
 import { Template } from 'meteor/templating';
 import { TempDrugInspected } from '../../api/collections.js';
 import '../templates/drugData.html';
-import { changeWindow, inspectDrugData } from '../../api/utilities.js';
-
+import { changeWindow, inspectDrugData, lastActivePage } from '../../api/utilities.js';
 
 Template.drugData.helpers({
 	drugData() {
@@ -19,6 +18,6 @@ Template.drugData.helpers({
 
 Template.drugData.events({
 	'click #backButton' (){
-		changeWindow('windowRecherche');
+		changeWindow(lastActivePage.get());
 	}
 })

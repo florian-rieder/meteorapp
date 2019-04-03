@@ -14,3 +14,4 @@ export const changeWindow = function (windowID){
 }
 
 export let inspectDrugData = new ReactiveVar('test');
+export let lastActivePage = new ReactiveVar('windowPharmacie');

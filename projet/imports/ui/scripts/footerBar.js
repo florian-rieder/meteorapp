@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import '../templates/footerBar.html';
-import { changeWindow } from '../../api/utilities.js';
+import { changeWindow, lastActivePage } from '../../api/utilities.js';
 
 Template.footerBar.helpers({
 	buttons: [
@@ -15,6 +15,7 @@ Template.footerBar.helpers({
 Template.navButton.events({
 	'click .navButton_button'() {
 		changeWindow(`window${this.name}`);
+		lastActivePage = `window${this.name}`;
 	}
 });
 

@@ -1,8 +1,8 @@
 <template name='helpPage'>
-    <div class='helpPage_buttons'>
-        {{#each buttons}}
-        {{> navButton}}
-        {{/each}}  
+	<div class='helpPage_buttons'>
+		{{#each buttons}}
+		{{> helpButton}}
+		{{/each}}
 	</div>
 	<div class='helpPage_content'>
 		<div class='helpContact'>
@@ -14,4 +14,10 @@
 
 <template name='contactList'>
 	contact list
+</template>
+
+<template name='helpButton'>
+	<button class='helpButton_button'>
+		{{name}}
+	</button>
 </template>

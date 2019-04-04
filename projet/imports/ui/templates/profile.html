@@ -1,7 +1,7 @@
 <template name='profile'>
     <div id='profile_container'>
-            <input type="file" style="visibility:hidden;width:1px" accept="image/gif, image/jpeg, image/png" class="profilePhotoFile">
-            <input type="button" id="btnEditPhoto" value="Edit Photo" class="btn btn-primary" style="width:160px"/>
+            <!-- <input type="file" style="visibility:hidden;width:1px" accept="image/gif, image/jpeg, image/png" class="profilePhotoFile">
+            <input type="button" id="btnEditPhoto" value="Edit Photo" class="btn btn-primary" style="width:160px"/> -->
             
             <div class="modal fade" id="cropper-modal">
               <div class="modal-dialog">
@@ -25,6 +25,16 @@
         </ul>
     </div>
 </template>
+
+<template name="uploadForm">
+  {{#with currentUpload}}
+    Uploading <b>{{file.name}}</b>:
+    <span id="progress">{{progress.get}}%</span>
+  {{else}}
+    <input id="fileInput" type="file" />
+  {{/with}}
+</template>
+
 
 <template name='field'>
 <li>

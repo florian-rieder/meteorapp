@@ -21,12 +21,37 @@ Template.searchResults.helpers({
 Template.result.events({
 	'click .result_add'(e) {
 		e.preventDefault();
-		const accessURL = `https://compendium.ch${this.path}`;
-		//scrape data at the path specified in the entry
-		Meteor.call('scrapeDrug', accessURL, (error, result) => {
-			console.log(result);
-			Meteor.call('drugs.insert', result);
-		});
+		swal({
+			title: this.title,
+			text: "Voulez vous ajouter ce médicament à votre pharmacie ?",
+			buttons: {
+				confirm: {
+					text: "Confirmer",
+					value: 'confirm',
+				},
+				cancel: {
+					text: "Annuler",
+					value: 'cancel',
+					visible: 'true',
+				}
+			}
+		})
+			.then(result => {
+				if (result == 'confirm') {
+					const accessURL = `https://compendium.ch${this.path}`;
+
+					//scrape data at the path specified in the entry
+					Meteor.call('scrapeDrug', accessURL, (error, result) => {
+						console.log(result);
+						Meteor.call('drugs.insert', result);
+						swal({
+							title: "C'est fait !",
+							icon: 'success',
+						})
+					});
+				}
+			})
+
 	},
 	// if the user clicks the inspect button on a search result, we scrape
 	// the data at seach result path and add it to TempDrugInspected to display it in drugData

@@ -1,9 +1,10 @@
+import '../templates/drugsList.html';
+
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Drugs } from '../../api/collections.js';
 import { changeWindow, inspectDrugData } from '../../api/utilities.js';
-
-import '../templates/drugsList.html';
+import swal from 'sweetalert';
 
 Template.drugsList.helpers({
 	drugs() {
@@ -22,15 +23,14 @@ Template.drug.events({
 	'click .drug_inspect'(e) {
 		e.preventDefault();
 		inspectDrugData.set(Drugs.findOne(this._id));
-		/* Meteor.call('inspected_drug.removeAll');
-		Meteor.call('inspected_drug.insert', data); */
 		changeWindow('windowNotice');
 	},
-	'click .drug_remove' (e) {
+	'click .drug_remove'(e) {
 		e.preventDefault();
 		swal({
 			title: this.title,
 			text: "Êtes vous sûr de vouloir supprimer ce médicament de votre pharmacie ?",
+			//closeOnClickOutside: false,
 			buttons: {
 				cancel: {
 					text: "Annuler",
@@ -43,11 +43,11 @@ Template.drug.events({
 				}
 			},
 		})
-		.then(result => {
-			console.log(result);
-			if(result == 'confirm'){
-				Meteor.call('drugs.remove', this);
-			}
-		});
+			.then(result => {
+				console.log(result);
+				if (result == 'confirm') {
+					Meteor.call('drugs.remove', this);
+				}
+			});
 	}
 });

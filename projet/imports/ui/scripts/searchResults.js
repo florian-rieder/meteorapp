@@ -1,6 +1,5 @@
 import { Template } from 'meteor/templating';
-import { SearchResults } from '../../api/collections';
-import { changeWindow, inspectDrugData } from '../../api/utilities';
+import { changeWindow, inspectDrugData, searchResults } from '../../api/utilities';
 
 import '../templates/searchResults.html';
 import './drugData.js';
@@ -8,11 +7,14 @@ import './drugData.js';
 Template.searchResults.helpers({
 	results() {
 		// get all items in collection SearchResults
-		return SearchResults.find({});
+		return searchResults.get();
 	},
 	numberOfResults() {
-		return SearchResults.find().count();
+		return searchResults.get().length;
 	},
+	hasResults() {
+		return searchResults.get() != undefined;
+	}
 });
 
 Template.result.events({

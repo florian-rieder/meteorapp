@@ -10,3 +10,13 @@ import './scripts/profile.js';
 import './scripts/cropper.js';
 import './scripts/helpPage.js';
 import './scripts/footerBar.js';
+
+import { Template } from 'meteor/templating';
+import { changeWindow } from '../api/utilities';
+
+Template.body.events({
+	'click #body_headerLogo'(e){
+		e.preventDefault();
+		changeWindow('windowPharmacie');
+	}
+});

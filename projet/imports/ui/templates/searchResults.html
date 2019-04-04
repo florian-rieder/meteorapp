@@ -6,7 +6,9 @@
 			{{/each}}
 		</ul>
 	</div>
-	<div class='searchResults_numberDisplay'>Nous avons trouvé {{numberOfResults}} resultats.</div>
+	{{#if hasResults}}
+		<div class='searchResults_numberDisplay'>Nous avons trouvé {{numberOfResults}} resultats.</div>
+	{{/if}}
 	<div></div>
 </template>
 

@@ -121,6 +121,7 @@ footer{
 	font-size: 16px;
 	padding: 0;
 	border: 1px solid rgb(24, 78, 53);
+	border-radius: 8px;
 	height: 40px;
 	width: 90px;
 	background-color: rgb(36, 124, 83);

@@ -25,29 +25,37 @@ Template.result.events({
 			title: this.title,
 			text: "Voulez vous ajouter ce médicament à votre pharmacie ?",
 			buttons: {
-				confirm: {
-					text: "Confirmer",
-					value: 'confirm',
-				},
 				cancel: {
 					text: "Annuler",
 					value: 'cancel',
 					visible: 'true',
-				}
+				},
+				confirm: {
+					text: "Confirmer",
+					value: 'confirm',
+				},
 			}
 		})
 			.then(result => {
 				if (result == 'confirm') {
 					const accessURL = `https://compendium.ch${this.path}`;
-
 					//scrape data at the path specified in the entry
 					Meteor.call('scrapeDrug', accessURL, (error, result) => {
-						console.log(result);
-						Meteor.call('drugs.insert', result);
-						swal({
-							title: "C'est fait !",
-							icon: 'success',
-						})
+						if(result){
+							console.log(result);
+							Meteor.call('drugs.insert', result);
+							swal({
+								title: "C'est fait !",
+								icon: 'success',
+							});
+						}
+						if (error){
+							swal({
+								title: "Une erreur s'est produite",
+								icon: 'error',
+							});
+						}
+						
 					});
 				}
 			})

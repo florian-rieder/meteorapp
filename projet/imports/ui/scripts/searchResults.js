@@ -2,7 +2,7 @@ import '../templates/searchResults.html';
 import './drugData.js';
 
 import { Template } from 'meteor/templating';
-import { changeWindow, inspectDrugData, searchResults } from '../../api/utilities';
+import { changeWindow, inspectDrugData, searchResults, LoadingWheel } from '../../api/utilities';
 import swal from 'sweetalert';
 
 Template.searchResults.helpers({
@@ -38,9 +38,13 @@ Template.result.events({
 		})
 			.then(result => {
 				if (result == 'confirm') {
+					// show loading wheel
+					LoadingWheel.show();
 					const accessURL = `https://compendium.ch${this.path}`;
 					//scrape data at the path specified in the entry
 					Meteor.call('scrapeDrug', accessURL, (error, result) => {
+						// hide loading wheel (pretty self explanatory huh ?)
+						LoadingWheel.hide();
 						if(result){
 							console.log(result);
 							Meteor.call('drugs.insert', result);
@@ -65,9 +69,10 @@ Template.result.events({
 	// the data at seach result path and add it to TempDrugInspected to display it in drugData
 	'click .result_inspect'(e) {
 		e.preventDefault();
+		LoadingWheel.show();
 		const accessURL = `https://compendium.ch${this.path}`;
 		Meteor.call('scrapeDrug', accessURL, (error, result) => {
-			console.log(result);
+			LoadingWheel.hide();
 			inspectDrugData.set(result);
 			changeWindow('windowNotice');
 		});

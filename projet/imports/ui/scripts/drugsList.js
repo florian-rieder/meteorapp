@@ -31,6 +31,8 @@ Template.drug.events({
 			title: this.title,
 			text: "Êtes vous sûr de vouloir supprimer ce médicament de votre pharmacie ?",
 			//closeOnClickOutside: false,
+			icon: 'warning',
+			dangerMode: true,
 			buttons: {
 				cancel: {
 					text: "Annuler",

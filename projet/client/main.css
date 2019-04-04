@@ -58,7 +58,7 @@ footer{
 }
 
 .searchResults_container{
-	height: 300px;
+	height: calc(100vh - 110px - 70px);
 	overflow-y: auto;
 	border: 1px solid rgb(63, 63, 63);
 }
@@ -97,7 +97,12 @@ footer{
 #scannerContainer {
 	position : relative;
 }
-#searchBar_searchSquare{
+.searchBar_container{
+	height: 40px;
+	display: flex;
+	align-items: center;
+}
+.searchBar_searchSquare{
 	width: 400px;
 	height: 30px;
 	border-radius: 15px;
@@ -144,4 +149,10 @@ footer{
 }
 .hidden{
 	display: none;
+}
+#loadingWheel{
+	/* put it in the middle of the screen */
+	position: absolute;
+	top: calc(50vh - 40px); /* value in px is half of the image height */
+	left: calc(50vw - 40px); /* value in px is half of the image width */
 }

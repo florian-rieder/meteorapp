@@ -28,6 +28,26 @@ Template.drug.events({
 	},
 	'click .drug_remove' (e) {
 		e.preventDefault();
-		Meteor.call('drugs.remove', this);
+		swal({
+			title: this.title,
+			text: "Êtes vous sûr de vouloir supprimer ce médicament de votre pharmacie ?",
+			buttons: {
+				cancel: {
+					text: "Annuler",
+					value: 'cancel',
+					visible: true,
+				},
+				confirm: {
+					text: "Supprimer",
+					value: 'confirm',
+				}
+			},
+		})
+		.then(result => {
+			console.log(result);
+			if(result == 'confirm'){
+				Meteor.call('drugs.remove', this);
+			}
+		});
 	}
 });

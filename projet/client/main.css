@@ -106,7 +106,7 @@ footer{
 }
 .footerBar_container{
 	height: 100%;
-	width: calc((5 * 90px) + 5 * 20px);
+	width: calc(5 * (90px + 20px));
 	display: flex;
 	align-items: center;
     justify-content: space-between;

@@ -13,7 +13,8 @@
     "jquery": "^3.3.1",
     "meteor-node-stubs": "^0.4.1",
     "puppeteer": "^1.13.0",
-    "quagga": "^0.12.1"
+    "quagga": "^0.12.1",
+    "sweetalert": "^2.1.2"
   },
   "meteor": {
     "mainModule": {

@@ -1,8 +1,9 @@
-import { Template } from 'meteor/templating';
-import { changeWindow, inspectDrugData, searchResults } from '../../api/utilities';
-
 import '../templates/searchResults.html';
 import './drugData.js';
+
+import { Template } from 'meteor/templating';
+import { changeWindow, inspectDrugData, searchResults } from '../../api/utilities';
+import swal from 'sweetalert';
 
 Template.searchResults.helpers({
 	results() {

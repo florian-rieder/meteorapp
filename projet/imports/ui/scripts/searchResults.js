@@ -47,7 +47,17 @@ Template.result.events({
 						LoadingWheel.hide();
 						if(result){
 							console.log(result);
-							Meteor.call('drugs.insert', result);
+
+							// create a new object from the result object for db entry
+							resultForEntry = {
+								title: result.title,
+								composition: result.composition,
+								notice: result.notice,
+								createdAt: new Date(),
+							}
+
+							Meteor.call('drugs.insert', resultForEntry);
+
 							swal({
 								title: "C'est fait !",
 								icon: 'success',

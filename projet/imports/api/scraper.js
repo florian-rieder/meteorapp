@@ -62,7 +62,6 @@ async function scrapeDrug(compendiumURL) {
 		title: title,
 		composition: composition,
 		notice: notice,
-		createdAt: new Date(),
 	}
 
 	return drugData;

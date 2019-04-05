@@ -15,23 +15,29 @@
 			</ul>
 			<!-- notice formatting using spacebars -->
 			<div class='drugData_noticeContainer'>
-				{{#each subarray in drugData.notice}}
-					{{#if isOfTwoLastFromIndex @index}}
-						{{#each text in subarray}}
-							<p class='drugData_noticeTwoLast'>{{text}}</p>
-						{{/each}}
-					{{else}}
-						<div>
+				{{#if hasNotice}}
+
+					{{#each subarray in drugData.notice}}
+						{{#if isOfTwoLastFromIndex @index}}
 							{{#each text in subarray}}
-								{{#if isTitleFromIndex @index }}
-									<h2>{{text}}</h2>
-								{{else}}
-									<p>{{text}}</p>
-								{{/if}}
+								<p class='drugData_noticeTwoLast'>{{text}}</p>
 							{{/each}}
-						</div>
-					{{/if}}
-				{{/each}}
+						{{else}}
+							<div>
+								{{#each text in subarray}}
+									{{#if isTitleFromIndex @index }}
+										<h2>{{text}}</h2>
+									{{else}}
+										<p>{{text}}</p>
+									{{/if}}
+								{{/each}}
+							</div>
+						{{/if}}
+					{{/each}}
+
+				{{else}}
+					<p>Nous n'avons pas trouvé de notice d'emballage pour ce médicament.</p>
+				{{/if}}
 			</div>
 
 		</div>

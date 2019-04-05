@@ -1,7 +1,6 @@
 import { Template } from 'meteor/templating';
 import '../templates/drugData.html';
 import { changeWindow, inspectDrugData, lastActivePage } from '../../api/utilities.js';
-import { Drugs } from '../../api/collections';
 import swal from 'sweetalert';
 
 Template.drugData.helpers({
@@ -17,6 +16,11 @@ Template.drugData.helpers({
 	},
 	isOfTwoLastFromIndex(index) {
 		return index > inspectDrugData.get().notice.length - 3;
+	},
+	hasNotice(){
+		if(inspectDrugData.get() != undefined){
+			return inspectDrugData.get().notice[0] != undefined;
+		}
 	}
 });
 

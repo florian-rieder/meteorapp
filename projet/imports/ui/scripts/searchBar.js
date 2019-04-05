@@ -29,6 +29,14 @@ function search() {
 		LoadingWheel.hide();
 		if (result) {
 			console.log(result.length + ' results');
+			if(result[0] == undefined){
+				swal({
+					title: "Nous n'avons trouvé aucun résultat",
+				});
+				// prevents the "Nous avons trouvé 0 resultats." from showing up, since
+				// we have an alert for that
+				result = undefined;
+			}
 			/* add all the results of the search to SearchResults */
 			searchResults.set(result);
 		}

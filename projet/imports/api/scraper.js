@@ -38,6 +38,11 @@ async function scrapeDrug(compendiumURL) {
 			});
 	}, '#compEverything > table > tbody > tr');
 
+	// get the link to this drugs images, for later use
+	const imagesPath = await page.evaluate(selector => {
+		return document.querySelector(selector).pathname;
+	}, '#ctl00_MainContent_ucProductDetail1_tblLinkMoreInfosFIPIPhoto > tbody > tr > td:nth-child(3) > a');
+
 	// move to the patient information page of this drug and await page loading
 	await Promise.all([
 		page.waitForNavigation(),
@@ -52,8 +57,10 @@ async function scrapeDrug(compendiumURL) {
 				/* get the text content of each element inside a paragraph */
 				.map(element => element.textContent));
 	}, '.monographie > .paragraph');
+
 	// remove first element of notice (OEMéd), because we don't care about that
 	notice.splice(0, 1);
+	
 	// close the headless browser
 	await browser.close();
 
@@ -62,6 +69,7 @@ async function scrapeDrug(compendiumURL) {
 		title: title,
 		composition: composition,
 		notice: notice,
+		imgpath: imagesPath,
 	}
 
 	return drugData;
@@ -139,4 +147,17 @@ async function searchByString(searchString) {
 	return searchResults;
 }
 
+/* async function scrapeDrugImages(imgpath) {
+	const photosPageURL = `https://compendium.ch${imgpath}`;
+	const browser = await puppeteer.launch();
+	const page = await browser.newPage();
+	await page.goto(photosPageURL);
 
+	// await page load
+	await page.waitForNavigation();
+
+	const images = await page.evaluate(() => {
+
+	})
+
+} */

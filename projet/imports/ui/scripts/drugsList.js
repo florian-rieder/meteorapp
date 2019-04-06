@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Drugs } from '../../api/collections.js';
 import { changeWindow, inspectDrugData } from '../../api/utilities.js';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 Template.drugsList.helpers({
 	drugs() {
@@ -27,29 +27,21 @@ Template.drug.events({
 	},
 	'click .drug_remove'(e) {
 		e.preventDefault();
-		swal({
+		Swal.fire({
+			type: 'warning',
 			title: this.title,
 			text: "Êtes vous sûr de vouloir supprimer ce médicament de votre pharmacie ?",
-			//closeOnClickOutside: false,
-			icon: 'warning',
-			dangerMode: true,
-			buttons: {
-				cancel: {
-					text: "Annuler",
-					value: 'cancel',
-					visible: true,
-				},
-				confirm: {
-					text: "Supprimer",
-					value: 'confirm',
-				}
-			},
-		})
-			.then(result => {
-				console.log(result);
-				if (result == 'confirm') {
-					Meteor.call('drugs.remove', this);
-				}
-			});
+			// cancel button
+			showCancelButton: true,
+			cancelButtonText: 'Annuler',
+			// confirm button
+			confirmButtonText: 'Supprimer',
+			confirmButtonColor: 'red',
+		}).then(result => {
+			// If the confirm button was pressed
+			if(result.value) {
+				Meteor.call('drugs.remove', this);
+			}
+		});
 	}
 });

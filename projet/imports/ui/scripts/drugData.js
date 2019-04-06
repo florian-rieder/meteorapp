@@ -1,7 +1,7 @@
 import { Template } from 'meteor/templating';
 import '../templates/drugData.html';
-import { changeWindow, inspectDrugData, lastActivePage } from '../../api/utilities.js';
-import swal from 'sweetalert';
+import { changeWindow, inspectDrugData, lastActivePage, fireDrugAddDialog } from '../../api/utilities.js';
+import Swal from 'sweetalert2';
 
 Template.drugData.helpers({
 	drugData() {
@@ -29,11 +29,21 @@ Template.drugData.events({
 		changeWindow(lastActivePage.get());
 	},
 	'click #addDrugToPharmacyButton'() {
-		Meteor.call('drugs.insert', inspectDrugData.get(), () => {
-			swal({
-				title: "C'est fait !",
-				icon: 'success',
-			});
+		fireDrugAddDialog(inspectDrugData.get().title).then(swalResult => {
+			if(swalResult.value){
+				resultForEntry = {
+					title: inspectDrugData.get().title,
+					composition: inspectDrugData.get().composition,
+					notice: inspectDrugData.get().notice,
+					createdAt: new Date(),
+					exp: swalResult.value,
+				}
+				Meteor.call('drugs.insert', resultForEntry);
+				Swal.fire({
+					type: 'success',
+					title: "C'est fait !",
+				});
+			}
 		});
 	}
 });

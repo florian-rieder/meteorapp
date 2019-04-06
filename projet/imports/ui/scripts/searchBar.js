@@ -1,7 +1,9 @@
-import { Template } from "meteor/templating";
-import '../../api/collections.js';
 import '../templates/searchBar.html';
+
+import '../../api/collections.js';
+import { Template } from "meteor/templating";
 import { searchResults, LoadingWheel } from "../../api/utilities.js";
+import Swal from 'sweetalert2';
 
 Template.searchBar.events({
 	'click .searchBar_searchButton'(e) {
@@ -17,7 +19,6 @@ Template.searchBar.events({
 	}
 });
 
-
 function search() {
 	// empty searchResults (to hide results from page)
 	searchResults.set(undefined);
@@ -30,7 +31,7 @@ function search() {
 		if (result) {
 			console.log(result.length + ' results');
 			if(result[0] == undefined){
-				swal({
+				Swal.fire({
 					title: "Nous n'avons trouvé aucun résultat",
 				});
 				// prevents the "Nous avons trouvé 0 resultats." from showing up, since
@@ -41,9 +42,10 @@ function search() {
 			searchResults.set(result);
 		}
 		if (error) {
-			swal({
+			Swal.fire({
 				title: "Une erreur s'est produite",
-				icon: 'error',
+				text: error.message,
+				type: 'error',
 			});
 		}
 	});

@@ -14,7 +14,7 @@ function startScanner() {
 			constraints: {
 				width: 480,
 				height: 320,
-				facingMode: "user",
+				facingMode: "environment",
 			},
 		},
 		frequency: 20,

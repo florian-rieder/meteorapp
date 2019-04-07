@@ -81,8 +81,13 @@ footer{
 	margin: 3px;
 	position: relative;
 }
-.result_li{
+.searchResults_ul{
 	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.result_li{
+
 }
 .result_buttonsContainer{
 	position: absolute;
@@ -111,7 +116,7 @@ footer{
 }
 .footerBar_container{
 	height: 100%;
-	width: calc(5 * (90px + 20px));
+	width: 100%;
 	display: flex;
 	align-items: center;
     justify-content: space-between;
@@ -128,11 +133,10 @@ footer{
 	border: 1px solid rgb(24, 78, 53);
 	border-radius: 8px;
 	height: 40px;
-	width: 90px;
+	width: 20vw;
 	background-color: rgb(36, 124, 83);
 	flex: 0 1 auto; /* Default */
 	/* add a transition effect between normal and hover colors */
-	-webkit-transition-duration: 0.4s; /* Safari */
 	transition-duration: 0.4s;
 }
 

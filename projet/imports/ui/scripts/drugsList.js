@@ -41,6 +41,10 @@ Template.drug.events({
 			// If the confirm button was pressed
 			if(result.value) {
 				Meteor.call('drugs.remove', this);
+				Swal.fire({
+					type: 'success',
+					title: "C'est fait !",
+				})
 			}
 		});
 	}

@@ -37,10 +37,12 @@ export const fireDrugAddDialog = async function (title){
 			"EXP: <input type='number' id='swal_expInputMonth' placeholder='12' max='12' min='1'>/" +
 			"<input type='number' id='swal_expInputYear' placeholder='2020'>",
 		preConfirm: () => {
-			return {
-				month: document.getElementById('swal_expInputMonth').value,
-				year: document.getElementById('swal_expInputYear').value
-			};
+			const month = Number(document.getElementById('swal_expInputMonth').value);
+			const year = Number(document.getElementById('swal_expInputYear').value);
+
+			const monthStr = `${month > 10 ? '' : '0'}${month}`;
+
+			return new Date(`${monthStr}-01-${year}`);
 		},
 		// cancel button
 		showCancelButton: true,

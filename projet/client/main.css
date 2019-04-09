@@ -30,10 +30,10 @@ footer{
 }
 #body_headerLogo{
 	background-color: rgba(16, 100, 58, 0.322);
-	padding-left: 5px;
-	padding-right: 5px;
-	border: 2px solid white;
-	border-radius: 10px;
+	border-radius: 25px;
+	width: 150px;
+	padding-left: 10px;
+	padding-right: 10px;
 	/* obv. only for the pc version */
 	cursor: pointer;
 }
@@ -128,13 +128,14 @@ footer{
 	width: calc(20vw - 10px);
 	flex: 0 1 auto; /* Default */
 	/* add a transition effect between normal and hover colors */
-	transition-duration: 0.4s;
+	transition-duration: 0.1s;
 	background-color: rgb(41, 122, 89);
-	border: 1px solid white;
+	border: 1px solid rgb(41, 122, 89);
 }
 
 #footerBar_container .btn:active{
-	background-color: rgb(90, 189, 149);
+	background-color: rgb(31, 99, 72);
+	border: 1px solid rgb(31, 99, 72);
 }
 
 .hidden{
@@ -145,4 +146,25 @@ footer{
 	position: absolute;
 	top: calc(50vh - 40px); /* value in px is half of the image height */
 	left: calc(50vw - 40px); /* value in px is half of the image width */
+}
+
+.drug_container{
+	border: 1px solid black;
+	padding: 5px;
+	height: 50px;
+	width: 70vw;
+	display: inline-block;
+}
+
+.drug_container:hover{
+	background-color: rgb(212, 212, 212);
+}
+
+#drugList_ul{
+	list-style-type: none;
+}
+
+#drugList_ul > li{
+	margin-bottom: 5px;
+	margin-top: 5px;
 }

@@ -1,7 +1,7 @@
 <template name='drugsList'>
 	<h1>Médicaments dans ma pharmacie</h1>
 	<button id='clearDrugs'>{{deleteButtonName}}</button>
-	<ul>
+	<ul id='drugList_ul'>
 		{{#each drugs}}
 			{{> drug}}
 		{{/each}}
@@ -10,10 +10,13 @@
 
 <template name='drug'>
 	<li>
-		{{title}} 
-		<button class='drug_inspect'>Inspecter</button>
-		{{#if deleteButtonIsVisible}}
-		<button class='drug_remove btn btn-danger btn-sm'>Supprimer</button>
-		{{/if}}
+		<div>
+			<div class='drug_container' style='background-color: {{bgColor}};'>
+				{{title}}
+			</div>
+			{{#if deleteButtonIsVisible}}
+				<button class='drug_remove btn btn-danger btn-sm' style='display: inline-block;'>Supprimer</button>
+			{{/if}}
+		</div>
 	</li>
 </template>

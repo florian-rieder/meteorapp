@@ -50,6 +50,7 @@ Template.drugsList.events({
 					// confirm button
 					confirmButtonText: 'Supprimer',
 					confirmButtonColor: 'red',
+
 				}).then(result => {
 					// If the confirm button was pressed
 					if (result.value) {
@@ -61,6 +62,7 @@ Template.drugsList.events({
 							title: "C'est fait !",
 						});
 					}
+					// either way, reset drugsToDelete array
 					drugsToDelete = [];
 				});
 			}
@@ -81,10 +83,13 @@ Template.drug.helpers({
 	deleteButtonIsVisible() {
 		return deleteEnabled.get() && !Template.instance().drugIsInDeleteList.get();
 	},
+	bgColor(){
+		return Template.instance().drugIsInDeleteList.get() ? 'red' : 'white';
+	}
 })
 
 Template.drug.events({
-	'click .drug_inspect'(e) {
+	'click .drug_container'(e) {
 		e.preventDefault();
 		inspectDrugData.set(Drugs.findOne(this._id));
 		changeWindow('windowNotice');
@@ -92,6 +97,6 @@ Template.drug.events({
 	'click .drug_remove'(e) {
 		e.preventDefault();
 		drugsToDelete.push(this._id);
-		Template.instance().drugIsInDeleteList.set(true);
+		Template.instance().drugIsInDeleteList.set(true); // this makes delete button not reappear after deletion was aborted
 	}
 });

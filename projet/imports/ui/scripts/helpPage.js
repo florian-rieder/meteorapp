@@ -12,4 +12,12 @@ Template.helpPage.helpers({
     }
 });
 
+Template.contactList.helpers({
+    buttons() {
+        return [
+            {name: 'CHUV'}
+        ]
+    }
+});
+
 

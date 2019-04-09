@@ -10,8 +10,8 @@ Meteor.methods({
 	'drugs.insert' (drugData) {
 		Drugs.insert(drugData);
 	},
-	'drugs.remove' (drug) {
-		Drugs.remove(drug._id);
+	'drugs.remove' (id) {
+		Drugs.remove(id);
 	},
 	'drugs.removeAll' () {
 		Drugs.remove({});

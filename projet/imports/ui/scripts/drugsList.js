@@ -2,22 +2,84 @@ import '../templates/drugsList.html';
 
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 import { Drugs } from '../../api/collections.js';
 import { changeWindow, inspectDrugData } from '../../api/utilities.js';
 import Swal from 'sweetalert2';
+
+let deleteEnabled = new ReactiveVar(false);
+let drugsToDelete = [];
 
 Template.drugsList.helpers({
 	drugs() {
 		return Drugs.find({});
 	},
+	deleteButtonName() {
+		// user is already deleting drugs
+		if(deleteEnabled.get()){
+			return 'Confirmer';
+		} 
+		// user is not already deleting drugs
+		else {
+			return 'Supprimer des médicaments';
+		}
+	}
 });
 
 Template.drugsList.events({
 	'click #clearDrugs'(e) {
 		e.preventDefault();
-		Meteor.call('drugs.removeAll');
+		// user is already deleting drugs
+		if(deleteEnabled.get()){
+			Swal.fire({
+				type: 'warning',
+				title: "Êtes-vous sûr de vouloir supprimer ces médicaments de votre pharmacie ?",
+				html: (() => {
+					let displayText = '';
+					drugsToDelete.forEach(drugId => {
+						displayText += Drugs.findOne(drugId).title;
+						displayText += '<br>';
+					});
+					return displayText;
+				})(),
+				// cancel button
+				showCancelButton: true,
+				cancelButtonText: 'Annuler',
+				// confirm button
+				confirmButtonText: 'Supprimer',
+				confirmButtonColor: 'red',
+			}).then(result => {
+				// If the confirm button was pressed
+				if(result.value) {
+					// delete selected drugs
+					drugsToDelete.forEach(id => Meteor.call('drugs.remove', id));
+					// show complete message
+					Swal.fire({
+						type: 'success',
+						title: "C'est fait !",
+					});
+				}
+				drugsToDelete = [];
+			});
+
+			deleteEnabled.set(false);
+		} 
+		// user is not already deleting drugs
+		else {
+			deleteEnabled.set(true);
+		}
+		
 	}
 });
+Template.drug.onCreated(() => {
+	Template.instance().drugIsInDeleteList = new ReactiveVar(false);
+})
+
+Template.drug.helpers({
+	deleteButtonIsVisible(){
+		return deleteEnabled.get() && !Template.instance().drugIsInDeleteList.get();
+	},
+})
 
 Template.drug.events({
 	'click .drug_inspect'(e) {
@@ -27,25 +89,7 @@ Template.drug.events({
 	},
 	'click .drug_remove'(e) {
 		e.preventDefault();
-		Swal.fire({
-			type: 'warning',
-			title: this.title,
-			text: "Êtes vous sûr de vouloir supprimer ce médicament de votre pharmacie ?",
-			// cancel button
-			showCancelButton: true,
-			cancelButtonText: 'Annuler',
-			// confirm button
-			confirmButtonText: 'Supprimer',
-			confirmButtonColor: 'red',
-		}).then(result => {
-			// If the confirm button was pressed
-			if(result.value) {
-				Meteor.call('drugs.remove', this);
-				Swal.fire({
-					type: 'success',
-					title: "C'est fait !",
-				})
-			}
-		});
+		drugsToDelete.push(this._id);
+		Template.instance().drugIsInDeleteList.set(true);
 	}
 });

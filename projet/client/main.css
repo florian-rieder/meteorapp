@@ -124,33 +124,19 @@ footer{
 	margin-right: auto;
 }
 
-.navButton_button{
-	line-height: 40px;
-	text-align: center;
-	color: white;
-	font-size: 16px;
-	padding: 0;
-	border: 1px solid rgb(24, 78, 53);
-	border-radius: 8px;
-	height: 40px;
-	width: 20vw;
-	background-color: rgb(36, 124, 83);
+#footerBar_container .btn{
+	width: calc(20vw - 10px);
 	flex: 0 1 auto; /* Default */
 	/* add a transition effect between normal and hover colors */
 	transition-duration: 0.4s;
+	background-color: rgb(41, 122, 89);
+	border: 1px solid white;
 }
 
-.navButton_button:hover{
-	color: white;
-	border: 1px solid rgb(34, 112, 76);
-	background-color: rgb(51, 155, 107);
+#footerBar_container .btn:active{
+	background-color: rgb(90, 189, 149);
 }
 
-.navButton_button:active{
-	color: rgb(182, 182, 182);
-	border: 1px solid rgb(220, 255, 238);
-	background-color: rgb(147, 243, 198);
-}
 .hidden{
 	display: none;
 }

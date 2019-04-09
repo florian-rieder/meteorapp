@@ -1,5 +1,5 @@
 <template name='footerBar'>
-	<div class='footerBar_container'>
+	<div id='footerBar_container'>
 		{{#each buttons}}
 		{{> navButton}}
 		{{/each}}
@@ -7,7 +7,7 @@
 </template>
 
 <template name='navButton'>
-	<button class='navButton_button'>
+	<button class='btn btn-primary'>
 		{{name}}
 	</button>
 </template>

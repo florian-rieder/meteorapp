@@ -4,6 +4,9 @@ import '../templates/profile.html';
 import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Images } from '../../api/files.js'
+import { Profile } from '../../api/collections';
+
+
 
 Template.uploadForm.onCreated(function () {
   this.currentUpload = new ReactiveVar(false);
@@ -64,7 +67,8 @@ Template.profile.helpers({
         {fieldName: 'Poids'},
         {fieldName: 'Numéro AVS'},
         ]
-    }
+    },
+
 });
 
 Template.field.events({
@@ -74,7 +78,8 @@ Template.field.events({
 Template.profile.events({
     'click #confirmButton' () {
       console.log(Array.from(document.querySelectorAll('.field_textInput')).map(v => v.value))
-    },    
+      Meteor.call('profile.count');
+    },  
   
   
     'click #btnEditPhoto': function(event, template) {

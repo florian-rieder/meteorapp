@@ -68,12 +68,15 @@ Template.profile.helpers({
 });
 
 Template.field.events({
-    'click button' () {//broken
-        console.log(document.querySelector('.field_textInput').value)
-    }
+  
 })
 
 Template.profile.events({
+    'click #confirmButton' () {
+      console.log(Array.from(document.querySelectorAll('.field_textInput')).map(v => v.value))
+    },    
+  
+  
     'click #btnEditPhoto': function(event, template) {
         $('.profilePhotoFile').click();
     },

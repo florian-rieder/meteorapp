@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import puppeteer from 'puppeteer';
+import { prettifyDrugTitle } from './utilities';
 
 /* we wrap functions that use puppeteer inside Meteor.methods to be able to access
 	 them from the client */
@@ -66,7 +67,7 @@ async function scrapeDrug(compendiumURL) {
 
 	//create return object
 	const drugData = {
-		title: title,
+		title: prettifyDrugTitle(title),
 		composition: composition,
 		notice: notice,
 		imgpath: imagesPath,
@@ -117,12 +118,18 @@ async function searchByString(searchString) {
 						subtitle: informationsContainer[4].textContent,
 						path: tdThatContainsTheInfoWeNeed[1].pathname
 					}
+					
 					return resultObject;
 				});
 		}, trSelector);
 
 		// add page results to total results
-		pageResults.forEach(result => searchResults.push(result));
+		pageResults.forEach(result => {
+			// format the title
+			result.title = prettifyDrugTitle(result.title);
+			// add result to results array
+			searchResults.push(result);
+		});
 
 		// if there are multiple pages, go to the next page
 		if (numberOfPages > 1) {

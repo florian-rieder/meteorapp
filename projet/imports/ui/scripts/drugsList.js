@@ -82,9 +82,6 @@ Template.drug.onCreated(() => {
 Template.drug.helpers({
 	deleteButtonIsVisible() {
 		return deleteEnabled.get() && !Template.instance().drugIsInDeleteList.get();
-	},
-	bgColor(){
-		return Template.instance().drugIsInDeleteList.get() ? 'red' : 'white';
 	}
 })
 

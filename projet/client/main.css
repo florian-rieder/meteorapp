@@ -154,6 +154,7 @@ footer{
 	height: 50px;
 	width: 70vw;
 	display: inline-block;
+	transition-duration: 0.1s;
 }
 
 .drug_container:hover{

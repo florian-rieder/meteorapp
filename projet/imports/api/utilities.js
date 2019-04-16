@@ -12,7 +12,7 @@ class LoadingWheelController {
 	}
 }
 
-//Pages are contained in divs, function hides all pages and displays the correct one with ID of div
+// pages are contained in divs, function hides all pages and displays the correct one with ID of div
 export const changeWindow = function (windowID) {
 	let windowsArray = Array.from(document.querySelectorAll('.navWindow'));
 	windowsArray.forEach((e) => e.classList.add('hidden'));
@@ -51,9 +51,9 @@ export const fireDrugAddDialog = async function (title) {
 		confirmButtonText: 'Confirmer',
 	});
 }
-
+// function to replace abreviations in drug titles with full length word
 export const prettifyDrugTitle = function (str) {
-	// table of abreviations and corresponding full length word
+	// table of abreviations (couples key/values where the key is the abreviation and the value(s) is the full length word
 	const replaceTable = {
 		// we use '/' to indicate that there are more than one
 		// abreviation for that word, we will use it later
@@ -76,8 +76,9 @@ export const prettifyDrugTitle = function (str) {
 	// with abreviations placed at the end of the string)
 	str = str.split(' ');
 	str.forEach((word, i, arr) => {
+		// iterate through the replaceTable properties
 		Object.getOwnPropertyNames(replaceTable).forEach(abrev => {
-			// split by '/' to put abreviations in an array, and separate them if there are many
+			// split by '/' to put abreviations in an array, or separate them if there are many
 			abrevArray = abrev.split('/');
 			abrevArray.forEach((a) => {
 				// only replace in the cases we have the abreviation surrounded by spaces, 

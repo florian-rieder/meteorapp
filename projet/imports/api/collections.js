@@ -27,6 +27,6 @@ Meteor.methods({
 		Profile.remove({});
 	},
 	'profile.count' () {
-		Profile.countDocuments({});
+		return Profile.find().count();
 	}
 })

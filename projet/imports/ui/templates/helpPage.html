@@ -1,4 +1,5 @@
 <template name='helpPage'>
+	{{> helpBar}}
 	<div class='helpPage_buttons'>
 		{{#each buttons}}
 			{{> helpButton}}
@@ -13,11 +14,28 @@
 </template>
 
 <template name='contactList'>
-	contact list
+	<p>Contact List :</p>
+	<div class="helpContatc_Emergency">
+		<p>Emergency Rescue Service (Ambulance) : 144</p>
+	</div>
+	<div class=helpContact_CHIV>
+		<p>
+			<a href="http://www.chuv.ch">CHUV</a>
+		</p>
+	</div>	
 </template>
 
 <template name='helpButton'>
 	<button class='helpButton_button'>
 		{{name}}
 	</button>
+</template>
+
+<template name='helpBar'>
+	<nav class="navbar navbar-light" style="background-color: rgb(212, 212, 212);">
+		<a class="nav-item nav-link" href="#">Paramétres<span class="sr-only">(current)</span></a>
+		<a class="nav-item nav-link" href="#">Contacts</a>
+		<a class="nav-item nav-link" href="#">Pharmacies</a>
+		<a class="nav-item nav-link" href="#">Support techniques</a>
+	</nav>
 </template>

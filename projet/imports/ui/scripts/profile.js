@@ -78,7 +78,15 @@ Template.field.events({
 Template.profile.events({
     'click #confirmButton' () {
       console.log(Array.from(document.querySelectorAll('.field_textInput')).map(v => v.value))
-      Meteor.call('profile.count');
+      Meteor.call('profile.count', (error, result) => {
+          console.log("got here!");
+        if(!error && result === 0){
+          console.log(result)
+        }
+        if(error){
+          console.log(error)
+        }
+      });
     },  
   
   

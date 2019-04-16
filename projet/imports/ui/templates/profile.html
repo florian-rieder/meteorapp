@@ -1,5 +1,5 @@
 <template name='profile'>
-    <div id='profile_container'>
+    <div id='profile_container' class='hidden'>
             <!-- <input type="file" style="visibility:hidden;width:1px" accept="image/gif, image/jpeg, image/png" class="profilePhotoFile">
             <input type="button" id="btnEditPhoto" value="Edit Photo" class="btn btn-primary" style="width:160px"/> -->
             
@@ -23,8 +23,8 @@
                 {{> field}}
             {{/each}}
         </ul>
-        <button id="confirmButton">Valider</button>
     </div>
+  <button id="confirmButton">Valider</button>
 </template>
 
 <template name="uploadForm">

@@ -1,3 +1,6 @@
+import { Meteor } from 'meteor/meteor';
+import Swal from 'sweetalert2';
+import { lastActivePage } from '../../api/utilities.js';
 import '../templates/footerBar.html';
 import '../templates/drugsList.html';
 import '../templates/helpPage.html';
@@ -16,6 +19,35 @@ Router.configure({
 Router.route('/profile', function () {
     this.render('profile');
     this.render('footerBar', {to: 'footer'});
+    Meteor.call('profile.count', (error, count) => {
+        console.log("got here!");
+        if (lastActivePage.get() == "windowProfil") {
+          console.log("got here too");
+          if (!error && count === 0) {
+            Swal.fire({
+              type: 'warning',
+              title: "Aucun profil détecté ! Souhaitez-vous en créer un ?",
+              // cancel button
+              showCancelButton: true,
+              cancelButtonText: 'Annuler',
+              // confirm button
+              confirmButtonText: 'Oui!',
+              confirmButtonColor: 'green',
+      
+            }).then(result => {
+              // If the confirm button was pressed
+              if (result.value) {
+                // delete selected drugs
+                document.getElementById('profile_container').classList.remove('hidden');
+                // ;
+              }
+            })
+            if (error) {
+              console.log(error)
+            }
+          }
+        }
+      });
   });
   
   Router.route('/searching', function(){

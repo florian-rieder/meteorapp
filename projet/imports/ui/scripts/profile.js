@@ -1,43 +1,12 @@
 //ligne qui permet de gérer des templates
 import { Template } from 'meteor/templating'
 import '../templates/profile.html';
-import '..templates/applicationLayout.html';
 import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Images } from '../../api/files.js'
 import { Profile } from '../../api/collections';
 import Swal from 'sweetalert2';
 import { lastActivePage } from '../../api/utilities';
-
-Meteor.call('profile.count', (error, count) => {
-  console.log("got here!");
-  if (lastActivePage.get() == "windowProfil") {
-    console.log("got here too");
-    if (!error && count === 0) {
-      Swal.fire({
-        type: 'warning',
-        title: "Êtes-vous sûr de vouloir supprimer ces médicaments de votre pharmacie ?",
-        // cancel button
-        showCancelButton: true,
-        cancelButtonText: 'Annuler',
-        // confirm button
-        confirmButtonText: 'Supprimer',
-        confirmButtonColor: 'green',
-
-      }).then(result => {
-        // If the confirm button was pressed
-        if (result.value) {
-          // delete selected drugs
-          document.getElementById('profile_container').classList.remove('hidden');
-          // ;
-        }
-      })
-      if (error) {
-        console.log(error)
-      }
-    }
-  }
-});
 
 Template.uploadForm.onCreated(function () {
   this.currentUpload = new ReactiveVar(false);

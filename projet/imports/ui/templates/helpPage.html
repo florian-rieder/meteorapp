@@ -1,10 +1,10 @@
 <template name='helpPage'>
 	{{> helpBar}}
-	<div class='helpPage_buttons'>
+	<!--<div class='helpPage_buttons'>
 		{{#each buttons}}
 			{{> helpButton}}
 		{{/each}}
-	</div>
+	</div>-->
 	<div class='helpPage_content'>
 		<div class='helpContact'>
 			{{> contactList}}
@@ -33,9 +33,10 @@
 
 <template name='helpBar'>
 	<nav class="navbar navbar-light" style="background-color: rgb(212, 212, 212);">
-		<a class="nav-item nav-link" href="#">Paramétres<span class="sr-only">(current)</span></a>
-		<a class="nav-item nav-link" href="#">Contacts</a>
-		<a class="nav-item nav-link" href="#">Pharmacies Proches</a>
-		<a class="nav-item nav-link" href="#">Support techniques</a>
+		<a href="#" class="badge badge-success">Contacts</a>
+		<a href="#" class="badge badge-success">Pharmacies Proches</a>
+		<a href="#" class="badge badge-success">Support Tech</a>
+		<a href="#" class="badge badge-success">Réglages</a>
+		<a href="#" class="badge badge-success">F à Q</a>
 	</nav>
 </template>

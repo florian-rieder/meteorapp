@@ -10,6 +10,10 @@ import Swal from 'sweetalert2';
 let deleteEnabled = new ReactiveVar(false);
 let drugsToDelete = [];
 
+//Router.route('/', function () {
+//	this.render('drugsList');
+//  });
+
 Template.drugsList.helpers({
 	drugs() {
 		return Drugs.find({});

@@ -4,6 +4,11 @@ import '../templates/quagScan.html'
 //Flag for scanner status
 let scannerIsRunning = false;
 
+Router.route('/Scanner', function(){
+	this.render('quagScan');
+});
+
+
 function startScanner() {
 	//initialization of scanner config
 	Quagga.init({

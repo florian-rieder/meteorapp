@@ -8,6 +8,11 @@ import { Profile } from '../../api/collections';
 import Swal from 'sweetalert2';
 import { lastActivePage } from '../../api/utilities';
 
+Router.route('/profile', function () {
+  this.render('profile');
+});
+
+
 
 Meteor.call('profile.count', (error, count) => {
   console.log("got here!");

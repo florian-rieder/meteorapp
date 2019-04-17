@@ -1,5 +1,5 @@
 import '../templates/drugsList.html';
-
+import '../templates/footerBar.html';
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
@@ -10,9 +10,6 @@ import Swal from 'sweetalert2';
 let deleteEnabled = new ReactiveVar(false);
 let drugsToDelete = [];
 
-//Router.route('/', function () {
-//	this.render('drugsList');
-//  });
 
 Template.drugsList.helpers({
 	drugs() {

@@ -1,0 +1,14 @@
+<template name="applicationLayout">
+    <header>
+		<div id='body_headerLogo'>Medintake</div>
+	</header>
+	<div class='body_content'>
+		{{>yield}}
+	</div>
+	<!-- loading wheel gif made using loading.io -->
+	<img id='loadingWheel' class='hidden' src="/images/Rolling-0.8s-80px.gif" alt="loading...">
+
+	<footer>
+		{{> yield "footer"}}
+	</footer>
+</template>

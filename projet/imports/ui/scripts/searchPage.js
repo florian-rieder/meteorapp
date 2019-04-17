@@ -1,9 +1,18 @@
 import '../templates/searchPage.html';
+import '../templates/applicationLayout.html';
 import './drugData.js';
 import '../../api/collections.js';
 import { Template } from 'meteor/templating';
 import { changeWindow, inspectDrugData, searchResults, LoadingWheel, fireDrugAddDialog } from '../../api/utilities';
 import Swal from 'sweetalert2';
+
+Router.route('/search', function(){
+	this.layout('applicationLayout');
+	this.render('searchPage');
+	this.render('footerBar', {to: 'footer'});
+});
+
+
 
 Template.searchPage.helpers({
 	results() {

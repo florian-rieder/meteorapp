@@ -1,6 +1,5 @@
 import {Template} from 'meteor/templating'
 import '../templates/helpPage.html';
-import '../templates/applicationLayout.html';
 
 Template.helpPage.helpers({
     buttons() {

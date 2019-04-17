@@ -1,6 +1,7 @@
-import '../templates/applicationLayout.html';
 import '../templates/footerBar.html';
 import '../templates/drugsList.html';
+import '../templates/helpPage.html';
+import '../templates/searchPage.html';
 import '../scripts/footerBar.js';
 
 Router.configure({

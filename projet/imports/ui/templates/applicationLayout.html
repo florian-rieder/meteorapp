@@ -1,12 +1,17 @@
 <template name="applicationLayout">
-    <header>
-		<div id='body_headerLogo'>Medintake</div>
+	<header>
+		<a href="/">
+			<div id='body_headerLogo'>Medintake</div>
+		</a>
 	</header>
-	<div class='body_content'>
-		{{>yield}}
-	</div>
-	<!-- loading wheel gif made using loading.io -->
-	<img id='loadingWheel' class='hidden' src="/images/Rolling-0.8s-80px.gif" alt="loading...">
+
+	<body>
+		<div class='body_content'>
+			{{>yield}}
+		</div>
+		<!-- loading wheel gif made using loading.io -->
+		<img id='loadingWheel' class='hidden' src="/images/Rolling-0.8s-80px.gif" alt="loading...">
+	</body>
 
 	<footer>
 		{{> yield "footer"}}

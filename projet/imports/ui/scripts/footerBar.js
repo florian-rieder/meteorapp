@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import '../templates/footerBar.html';
-import { changeWindow, lastActivePage } from '../../api/utilities.js';
+import { lastActivePage } from '../../api/utilities.js';
 
 Template.footerBar.helpers({
 	buttons: [

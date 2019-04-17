@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 import '../templates/drugData.html';
-import { changeWindow, inspectDrugData, lastActivePage, fireDrugAddDialog } from '../../api/utilities.js';
+import { inspectDrugData, lastActivePage, fireDrugAddDialog } from '../../api/utilities.js';
 import Swal from 'sweetalert2';
 
 Template.drugData.helpers({

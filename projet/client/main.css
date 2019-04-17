@@ -170,3 +170,9 @@ footer{
 	margin-bottom: 5px;
 	margin-top: 5px;
 }
+
+/* override link styling in header logo text */
+header > a, header > a:active, header > a:hover, header > a:visited {
+	color: white;
+	text-decoration: none;
+}

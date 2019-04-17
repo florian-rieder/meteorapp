@@ -12,16 +12,9 @@ class LoadingWheelController {
 	}
 }
 
-// pages are contained in divs, function hides all pages and displays the correct one with ID of div
-export const changeWindow = function (windowID) {
-	let windowsArray = Array.from(document.querySelectorAll('.navWindow'));
-	windowsArray.forEach((e) => e.classList.add('hidden'));
-	document.getElementById(windowID).classList.remove('hidden');
-}
-
 export const inspectDrugData = new ReactiveVar(undefined);
 export const searchResults = new ReactiveVar(undefined);
-export const lastActivePage = new ReactiveVar('windowPharmacie');
+export const lastActivePage = new ReactiveVar('/');
 
 export const LoadingWheel = new LoadingWheelController();
 
@@ -61,15 +54,26 @@ export const prettifyDrugTitle = function (str) {
 		'caps': 'capsule',
 		'cpr/comp/compr': 'comprimé',
 		'conc': 'concentré',
+		'disp': 'dispersible',
 		'drg/drag': 'dragée',
 		'eff': 'effervescent',
 		'gran': 'granulé',
 		'gtt/Gtt': 'goutte',
+		'inj': 'à injecter',
+		'opht': 'ophtalmologique',
 		'orodisp': 'orodispersible',
+		'p': 'préparation pour',
+		'pdr': 'poudre',
 		'pell': 'pelliculé',
-		'supp': 'suppositoire',
+		'ret': 'à retardement',
+		's': 'sans',
 		'sir': 'sirop',
+		'sol': 'solution',
+		'subling': 'sublingual',
 		'subst': 'substance',
+		'susp': 'suspension',
+		'supp': 'suppositoire',
+		'vag': 'vaginal',
 	}
 	// now we are going to separate the string into an array to be able to check each word
 	// individually (we had problems with the program detecting abreviations inside words,

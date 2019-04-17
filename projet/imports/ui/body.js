@@ -18,6 +18,6 @@ import { changeWindow } from '../api/utilities';
 Template.body.events({
 	'click #body_headerLogo'(e){
 		e.preventDefault();
-		changeWindow('windowPharmacie');
+		Router.go('/');
 	}
 });

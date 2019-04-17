@@ -6,6 +6,7 @@ import '../templates/drugsList.html';
 import '../templates/helpPage.html';
 import '../templates/searchPage.html';
 import '../scripts/footerBar.js';
+import '../templates/drugData.html';
 
 Router.configure({
     layoutTemplate: 'applicationLayout'
@@ -21,7 +22,7 @@ Router.route('/profile', function () {
     this.render('footerBar', {to: 'footer'});
     Meteor.call('profile.count', (error, count) => {
         console.log("got here!");
-        if (lastActivePage.get() == "windowProfil") {
+        if (lastActivePage.get() == "/profile") {
           console.log("got here too");
           if (!error && count === 0) {
             Swal.fire({
@@ -64,3 +65,8 @@ Router.route('/help', function(){
     this.render('helpPage');
     this.render('footerBar', {to: 'footer'});
 });
+
+Router.route('/drugData', function(){
+    this.render('drugData');
+    this.render('footerBar', {to: 'footer'});
+})

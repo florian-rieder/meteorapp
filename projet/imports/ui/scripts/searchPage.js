@@ -6,14 +6,6 @@ import { Template } from 'meteor/templating';
 import { changeWindow, inspectDrugData, searchResults, LoadingWheel, fireDrugAddDialog } from '../../api/utilities';
 import Swal from 'sweetalert2';
 
-Router.route('/search', function(){
-	this.layout('applicationLayout');
-	this.render('searchPage');
-	this.render('footerBar', {to: 'footer'});
-});
-
-
-
 Template.searchPage.helpers({
 	results() {
 		// get all items in collection SearchResults
@@ -82,7 +74,7 @@ Template.result.events({
 		Meteor.call('scrapeDrug', accessURL, (error, result) => {
 			LoadingWheel.hide();
 			inspectDrugData.set(result);
-			changeWindow('windowNotice');
+			Router.go('/drugData');
 		});
 	}
 })

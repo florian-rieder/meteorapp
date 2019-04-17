@@ -8,7 +8,7 @@ Template.drugData.helpers({
 		return inspectDrugData.get();
 	},
 	originIsSearchInspect() {
-		return lastActivePage.get() == 'windowRecherche';
+		return lastActivePage.get() == '/searching';
 	},
 	//notice formatting
 	isTitleFromIndex(index) {
@@ -26,7 +26,7 @@ Template.drugData.helpers({
 
 Template.drugData.events({
 	'click #backButton'() {
-		changeWindow(lastActivePage.get());
+		Router.go(lastActivePage.get());
 	},
 	'click #addDrugToPharmacyButton'() {
 		fireDrugAddDialog(inspectDrugData.get().title).then(swalResult => {

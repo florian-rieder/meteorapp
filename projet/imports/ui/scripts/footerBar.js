@@ -15,7 +15,7 @@ Template.footerBar.helpers({
 Template.navButton.events({
 	'click .navButton_button'() {
 		Router.go(this.path);
-		lastActivePage.set(`window${this.name}`);
+		lastActivePage.set(this.path);
 	}
 });
 

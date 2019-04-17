@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Drugs } from '../../api/collections.js';
-import { changeWindow, inspectDrugData } from '../../api/utilities.js';
+import { inspectDrugData } from '../../api/utilities.js';
 import Swal from 'sweetalert2';
 
 let deleteEnabled = new ReactiveVar(false);
@@ -90,7 +90,7 @@ Template.drug.events({
 	'click .drug_container'(e) {
 		e.preventDefault();
 		inspectDrugData.set(Drugs.findOne(this._id));
-		changeWindow('windowNotice');
+		Router.go('/drugData');
 	},
 	'click .drug_remove'(e) {
 		e.preventDefault();

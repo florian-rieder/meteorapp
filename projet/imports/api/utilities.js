@@ -69,6 +69,7 @@ export const prettifyDrugTitle = function (str) {
 		'pell': 'pelliculé',
 		'supp': 'suppositoire',
 		'sir': 'sirop',
+		'subst': 'substance',
 	}
 	// now we are going to separate the string into an array to be able to check each word
 	// individually (we had problems with the program detecting abreviations inside words,

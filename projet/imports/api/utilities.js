@@ -21,21 +21,29 @@ export const LoadingWheel = new LoadingWheelController();
 // since we need to show this dialog at more than one place in the code, we export it as global
 // to call the same function from different places.
 export const fireDrugAddDialog = async function (title) {
+	// HTML month input placeholder formatting
+	const today = new Date();
+	const year = today.getFullYear();
+	// we add 1 to the month because getMonth() seems to be 1 month late ¯\_(ツ)_/¯
+	let month = (today.getMonth() + 1).toString();
+	if(month.length < 2){
+		// add a zero at the start of month string (to format it for the month input)
+		month = month.padStart(2, '0');
+	}
+
 	return await Swal.fire({
 		title: title,
 		text: "Voulez vous ajouter ce médicament à votre pharmacie ?",
-		// with swal2, we can insert HTML inside the dialog, and recuperate the values
-		// entered in inputs using preConfirm
+		// with swal2, we can insert HTML inside the dialog, and yield the values
+		// entered in inputs using preConfirm()
 		html:
-			"EXP: <input type='number' id='swal_expInputMonth' placeholder='12' max='12' min='1'>/" +
-			"<input type='number' id='swal_expInputYear' placeholder='2020'>",
+			// should we disallow the user to enter an expiration date that's already past ?
+			// or should we let them enter it and then notify them that it's expired ?
+			`EXP: <input type='month' id='swal_expInputMonth' value='${year}-${month}'>`,
 		preConfirm: () => {
-			const month = Number(document.getElementById('swal_expInputMonth').value);
-			const year = Number(document.getElementById('swal_expInputYear').value);
-
-			const monthStr = `${month > 10 ? '' : '0'}${month}`;
-
-			return new Date(`${monthStr}-01-${year}`);
+			// get input data and format it
+			const month = document.getElementById('swal_expInputMonth').value;
+			return new Date(month);
 		},
 		// cancel button
 		showCancelButton: true,
@@ -51,12 +59,14 @@ export const prettifyDrugTitle = function (str) {
 		// we use '/' to indicate that there are more than one
 		// abreviation for that word, we will use it later
 		'amp': 'ampoule',
+		'bucc': 'buccal',
 		'caps': 'capsule',
 		'cpr/comp/compr': 'comprimé',
 		'conc': 'concentré',
 		'disp': 'dispersible',
 		'drg/drag': 'dragée',
 		'eff': 'effervescent',
+		'glob': 'globule',
 		'gran': 'granulé',
 		'gtt/Gtt': 'goutte',
 		'inj': 'à injecter',
@@ -65,6 +75,7 @@ export const prettifyDrugTitle = function (str) {
 		'p': 'préparation pour',
 		'pdr': 'poudre',
 		'pell': 'pelliculé',
+		'refroidissem': 'refroidissements',
 		'ret': 'à retardement',
 		's': 'sans',
 		'sir': 'sirop',
@@ -75,10 +86,7 @@ export const prettifyDrugTitle = function (str) {
 		'supp': 'suppositoire',
 		'vag': 'vaginal',
 	}
-	// now we are going to separate the string into an array to be able to check each word
-	// individually (we had problems with the program detecting abreviations inside words,
-	// so we detected if the abreviation had spaces on each side, but then it did not work
-	// with abreviations placed at the end of the string)
+	// now we are going to separate the string into an array to be able to check each word individually
 	str = str.split(' ');
 	str.forEach((word, i, arr) => {
 		// iterate through the replaceTable properties
@@ -93,6 +101,23 @@ export const prettifyDrugTitle = function (str) {
 				}
 			});
 		});
+
+		// try to optimise it a bit by adding breaks when an abreviation is found for a word in the title
+		// not working atm
+		/* const abreviations = Object.getOwnPropertyNames(replaceTable);
+		for (abrev in abreviations) {
+			// split by '/' to put abreviations in an array, or separate them if there are many
+			const abrevArray = abrev.split('/');
+			for(a in abrevArray) {
+				if (word === a) {
+					arr[i] = replaceTable[abrev];
+					console.log('break', a);
+					break;
+				}
+			}
+			console.log('first loop looping');
+		}
+		console.log('loop finished'); */
 	});
 	return str.join(' ');
 }

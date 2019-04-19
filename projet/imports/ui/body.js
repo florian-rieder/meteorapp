@@ -1,5 +1,5 @@
-// Importer tous les fichers .js externes
 import './body.html';
+// Importer tous les fichers .js externes
 import './scripts/applicationLayout.js';
 import './scripts/drugData.js';
 import './scripts/drugsList.js';

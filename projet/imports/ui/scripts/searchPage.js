@@ -26,33 +26,37 @@ Template.result.events({
 		// display dialog window (we need to pass this.title as an argument to the fireDrugAddDialog to
 		// be able to display the title in the alert)
 		fireDrugAddDialog(this.title).then(swalResult => {
-			console.log(swalResult);
 			// confirm button pressed
 			if (swalResult.value) {
 				// show loading wheel
 				LoadingWheel.show();
 				const accessURL = `https://compendium.ch${this.path}`;
+				// timestamp used to measure the time duration of the scraper
+				const t0 = performance.now();
 				//scrape data at the path specified in the entry
 				Meteor.call('scrapeDrug', accessURL, (error, result) => {
 					// hide loading wheel (pretty self explanatory huh ?)
 					LoadingWheel.hide();
 					if (result) {
-						// create a new object from the result object for db entry
-						resultForEntry = {
-							title: result.title,
-							composition: result.composition,
-							notice: result.notice,
-							createdAt: new Date(),
-							exp: swalResult.value,
-						}
+						// add fields to the result object before addind it to db
+						result.exp = swalResult.value;
+						result.createdAt = new Date();
 
-						console.log(resultForEntry);
+						console.log(result);
 
-						Meteor.call('drugs.insert', resultForEntry);
+						Meteor.call('drugs.insert', result);
 
 						Swal.fire({
 							type: 'success',
 							title: "C'est fait !",
+							confirmButtonText: 'Voir',
+							showCancelButton: true,
+							cancelButtonText: 'Ok',
+						}).then(swalResult => {
+							if(swalResult.value){ // pressed confirm button
+								inspectDrugData.set(result);
+								Router.go('/drugData');
+							}
 						});
 					}
 					if (error) {
@@ -62,6 +66,8 @@ Template.result.events({
 							text: error.message,
 						});
 					}
+					const t1 = performance.now();
+					console.log(`scrape duration: ~${Math.round(t1 - t0)}ms`);
 				});
 			}
 		});
@@ -95,6 +101,8 @@ Template.searchBar.events({
 });
 
 function search() {
+	// timestamp used to measure the time duration of the scraper
+	const t0 = performance.now();
 	// empty searchResults (to hide results from page)
 	searchResults.set(undefined);
 	// show loading wheel
@@ -123,5 +131,7 @@ function search() {
 				type: 'error',
 			});
 		}
+		const t1 = performance.now();
+		console.log(`search duration: ~${Math.round(t1-t0)}ms`);
 	});
 }

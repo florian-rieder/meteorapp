@@ -26,7 +26,7 @@ Template.drugData.helpers({
 
 Template.drugData.events({
 	'click #backButton'() {
-		Router.go(lastActivePage.get());
+		history.back();
 	},
 	'click #addDrugToPharmacyButton'() {
 		fireDrugAddDialog(inspectDrugData.get().title).then(swalResult => {

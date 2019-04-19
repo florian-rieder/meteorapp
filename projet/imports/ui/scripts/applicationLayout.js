@@ -44,6 +44,8 @@ Router.route('/profile', function () {
 	this.render('profile');
 	this.render('footerBar', { to: 'footer' });
 
+	// Show dialog on page enter if user has no profile
+	
 	// verify if the user already has made a profile
 	Meteor.call('profile.count', (error, count) => {
 		if (lastActivePage.get() == "/profile") {

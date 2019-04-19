@@ -6,7 +6,7 @@ import { prettifyDrugTitle } from './utilities';
 	 them from the client */
 Meteor.methods({
 	'scrapeDrug': async function (compendiumURL) {
-		let result = await scrapeDrug(compendiumURL)
+		let result = await scrapeDrug(compendiumURL);
 		return result;
 	},
 	'searchDrug': async function (searchString) {
@@ -50,8 +50,17 @@ async function scrapeDrug(compendiumURL) {
 		page.click('#ctl00_MainContent_ucProductDetail1_tblLinkMoreInfosFIPIPhoto > tbody > tr > td:nth-child(2) > a:nth-child(1)')
 	]);
 
+	const noticePageData = await page.evaluate(() => {
+		const title = document.querySelector('h1').textContent;
+		const firm = document.querySelector('#ctl00_MainContent_ucProductFiPi1_infos > div.monographie > div.ownerCompany').textContent;
+		return {
+			title: title,
+			firm: firm,
+		}
+	});
+
 	// get the notice of the drug
-	let notice = await page.evaluate((selector) => {
+	const notice = await page.evaluate((selector) => {
 		return Array.from(document.querySelectorAll(selector))
 			/* get the childnodes of each paragraphs */
 			.map((paragraphe) => Array.from(paragraphe.childNodes)
@@ -59,15 +68,14 @@ async function scrapeDrug(compendiumURL) {
 				.map(element => element.textContent));
 	}, '.monographie > .paragraph');
 
-	// remove first element of notice (OEMéd), because we don't care about that
-	notice.splice(0, 1);
-	
 	// close the headless browser
 	await browser.close();
 
 	//create return object
 	const drugData = {
-		title: prettifyDrugTitle(title),
+		title: noticePageData.title,
+		firm: noticePageData.firm,
+		showcaseTitle: prettifyDrugTitle(title),
 		composition: composition,
 		notice: notice,
 		imgpath: imagesPath,
@@ -118,7 +126,7 @@ async function searchByString(searchString) {
 						subtitle: informationsContainer[4].textContent,
 						path: tdThatContainsTheInfoWeNeed[1].pathname
 					}
-					
+
 					return resultObject;
 				});
 		}, trSelector);
@@ -153,6 +161,9 @@ async function searchByString(searchString) {
 
 	return searchResults;
 }
+
+// get drug images from imgpath
+// may actually need an image resize tool to change them to fixed dimensions
 
 /* async function scrapeDrugImages(imgpath) {
 	const photosPageURL = `https://compendium.ch${imgpath}`;

@@ -2,13 +2,16 @@ import { Template } from 'meteor/templating';
 import '../templates/drugData.html';
 import { inspectDrugData, lastActivePage, fireDrugAddDialog } from '../../api/utilities.js';
 import Swal from 'sweetalert2';
+import { Drugs } from '../../api/collections';
 
 Template.drugData.helpers({
 	drugData() {
 		return inspectDrugData.get();
 	},
-	originIsSearchInspect() {
-		return lastActivePage.get() == '/searching';
+	// used to determine if we should render an "add to pharmacy" button
+	isNotAlreadyInPharmacy() {
+		// check if there is already an instance of this drug in pharmacy
+		return Drugs.find({'title': inspectDrugData.get().title}).count() == 0;
 	},
 	//notice formatting
 	isTitleFromIndex(index) {
@@ -34,14 +37,11 @@ Template.drugData.events({
 	'click #addDrugToPharmacyButton'() {
 		fireDrugAddDialog(inspectDrugData.get().title).then(swalResult => {
 			if (swalResult.value) {
-				resultForEntry = {
-					title: inspectDrugData.get().title,
-					composition: inspectDrugData.get().composition,
-					notice: inspectDrugData.get().notice,
-					createdAt: new Date(),
-					exp: swalResult.value,
-				}
-				Meteor.call('drugs.insert', resultForEntry);
+				let drugData = inspectDrugData.get();
+				drugData.createdAt = new Date();
+				drugData.exp = swalResult.value;
+
+				Meteor.call('drugs.insert', drugData);
 				Swal.fire({
 					type: 'success',
 					title: "C'est fait !",

@@ -1,13 +1,13 @@
 <template name="drugData">
 	<button id='backButton'>Back</button>
-	{{#if originIsSearchInspect}}
+	{{#if isNotAlreadyInPharmacy}}
 	<button id='addDrugToPharmacyButton'>Ajouter à ma pharmacie</button>
 	{{/if}}
 	<div>
 		<h1>{{drugData.title}}</h1>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm">
+				<div class="col-m">
 					Composition: <br>
 					<ul>
 						{{#each drugData.composition}}
@@ -16,7 +16,7 @@
 					</ul>
 				</div>
 				{{#if hasImage}}
-				<div class="col-sm">
+				<div class="col-m">
 					<img src="{{drugData.imgpath}}" alt="image">
 				</div>
 				{{/if}}

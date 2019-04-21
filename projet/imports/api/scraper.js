@@ -56,7 +56,7 @@ async function scrapeDrug(compendiumURL) {
 		return {
 			title: title,
 			firm: firm,
-		}
+		};
 	});
 
 	// get the notice of the drug

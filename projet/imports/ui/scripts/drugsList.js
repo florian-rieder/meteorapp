@@ -42,7 +42,7 @@ Template.drugsList.events({
 						drugsToDelete.forEach(drugId => {
 							displayText += Drugs.findOne(drugId).title;
 							displayText += '<br>';
-						});
+						})();
 						return displayText;
 					})(),
 					// cancel button

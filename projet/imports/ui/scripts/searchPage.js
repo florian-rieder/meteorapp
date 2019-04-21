@@ -104,7 +104,7 @@ Template.searchBar.events({
 	//trigger the search when the enter key is pressed
 	'keyup .searchBar_searchSquare'(e) {
 		if (e.keyCode == 13) {// ENTER
-			e.currentTarget.click();
+			search();
 		}
 	}
 });

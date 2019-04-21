@@ -11,7 +11,7 @@ Template.drugData.helpers({
 	// used to determine if we should render an "add to pharmacy" button
 	isNotAlreadyInPharmacy() {
 		// check if there is already an instance of this drug in pharmacy
-		return Drugs.find({'title': inspectDrugData.get().title}).count() == 0;
+		return Drugs.find({ 'title': inspectDrugData.get().title }).count() == 0;
 	},
 	//notice formatting
 	isTitleFromIndex(index) {

@@ -53,7 +53,7 @@ Template.result.events({
 							showCancelButton: true,
 							cancelButtonText: 'Ok',
 						}).then(swalResult => {
-							if(swalResult.value){ // pressed confirm button
+							if (swalResult.value) { // pressed confirm button
 								inspectDrugData.set(result);
 								Router.go('/drugData');
 							}
@@ -76,11 +76,12 @@ Template.result.events({
 	// the data at seach result path and add it to TempDrugInspected to display it in drugData
 	'click .result_inspect'(e) {
 		e.preventDefault();
+		const t0 = performance.now();
 		LoadingWheel.show();
 		const accessURL = `https://compendium.ch${this.path}`;
 		Meteor.call('scrapeDrug', accessURL, (error, result) => {
 			LoadingWheel.hide();
-			if(result){
+			if (result) {
 				inspectDrugData.set(result);
 				Router.go('/drugData');
 			}
@@ -91,6 +92,8 @@ Template.result.events({
 					type: 'error',
 				});
 			}
+			const t1 = performance.now();
+			console.log(`scraping duration: ~${Math.round(t1 - t0)}ms`);
 		});
 	}
 })
@@ -122,7 +125,7 @@ function search() {
 		LoadingWheel.hide();
 		if (result) {
 			console.log(result.length + ' results');
-			if(result[0] == undefined){
+			if (result[0] == undefined) {
 				Swal.fire({
 					title: "Nous n'avons trouvé aucun résultat",
 				});
@@ -141,6 +144,6 @@ function search() {
 			});
 		}
 		const t1 = performance.now();
-		console.log(`search duration: ~${Math.round(t1-t0)}ms`);
+		console.log(`search duration: ~${Math.round(t1 - t0)}ms`);
 	});
 }

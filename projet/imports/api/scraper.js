@@ -39,7 +39,7 @@ async function scrapeDrug(compendiumURL) {
 			});
 	}, '#compEverything > table > tbody > tr');
 
-	// get the link to this drugs images, for later use
+	// store the link to this drugs images, for later use
 	const imagesPath = await page.evaluate(selector => {
 		return document.querySelector(selector).pathname;
 	}, '#ctl00_MainContent_ucProductDetail1_tblLinkMoreInfosFIPIPhoto > tbody > tr > td:nth-child(3) > a');
@@ -68,6 +68,32 @@ async function scrapeDrug(compendiumURL) {
 				.map(element => element.textContent));
 	}, '.monographie > .paragraph');
 
+	// go to images page and wait for load
+	await Promise.all([
+		page.waitForNavigation(),
+		page.goto(`https://compendium.ch/${imagesPath}`),
+	]);
+
+	// It seems like I can't use document.querySelector to get the image, since
+	// apparently the page is rendered using some software I don't know.
+	// by taking a look at the source of the page, it seems like the images we are looking for are
+	// on another source server, which is specified in the <iframe> element, that we can access.
+	const pathToSource = await page.evaluate(() => document.querySelector('iframe').src);
+
+	// go to images source page and wait for load
+	await Promise.all([
+		page.waitForNavigation(),
+		page.goto(pathToSource),
+	]);
+
+	// finally, get the url of the image
+	const imgpath = await page.evaluate(() => {
+		// [id*="tabs-"] is used to get the div that uses an id unique for each drug
+		// like "#tabs-1498893-1" for example.
+		const img = document.querySelector('div[id*="tabs-"] > div > ul > li > a > img');
+		return img.src;
+	});
+
 	// close the headless browser
 	await browser.close();
 
@@ -78,7 +104,7 @@ async function scrapeDrug(compendiumURL) {
 		showcaseTitle: prettifyDrugTitle(title),
 		composition: composition,
 		notice: notice,
-		imgpath: imagesPath,
+		imgpath: imgpath,
 	}
 
 	return drugData;
@@ -161,21 +187,3 @@ async function searchByString(searchString) {
 
 	return searchResults;
 }
-
-// get drug images from imgpath
-// may actually need an image resize tool to change them to fixed dimensions
-
-/* async function scrapeDrugImages(imgpath) {
-	const photosPageURL = `https://compendium.ch${imgpath}`;
-	const browser = await puppeteer.launch();
-	const page = await browser.newPage();
-	await page.goto(photosPageURL);
-
-	// await page load
-	await page.waitForNavigation();
-
-	const images = await page.evaluate(() => {
-
-	})
-
-} */

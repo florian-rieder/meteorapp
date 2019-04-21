@@ -17,11 +17,14 @@ Template.drugData.helpers({
 	isOfTwoLastFromIndex(index) {
 		return index > inspectDrugData.get().notice.length - 3;
 	},
-	hasNotice(){
-		if(inspectDrugData.get() != undefined){
+	hasNotice() {
+		if (inspectDrugData.get() != undefined) {
 			return inspectDrugData.get().notice[0] != undefined;
 		}
-	}
+	},
+	hasImage() {
+		return inspectDrugData.get().imgpath != null;
+	},
 });
 
 Template.drugData.events({
@@ -30,7 +33,7 @@ Template.drugData.events({
 	},
 	'click #addDrugToPharmacyButton'() {
 		fireDrugAddDialog(inspectDrugData.get().title).then(swalResult => {
-			if(swalResult.value){
+			if (swalResult.value) {
 				resultForEntry = {
 					title: inspectDrugData.get().title,
 					composition: inspectDrugData.get().composition,

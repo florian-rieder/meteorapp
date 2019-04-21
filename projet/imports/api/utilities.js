@@ -26,10 +26,8 @@ export const fireDrugAddDialog = async function (title) {
 	const year = today.getFullYear();
 	// we add 1 to the month because getMonth() seems to be 1 month late ¯\_(ツ)_/¯
 	let month = (today.getMonth() + 1).toString();
-	if(month.length < 2){
-		// add a zero at the start of month string (to format it for the month input)
-		month = month.padStart(2, '0');
-	}
+	// add zero padding to month so that it's always two characters long (to format it for the month input)
+	month = month.padStart(2, '0');
 
 	return await Swal.fire({
 		title: title,

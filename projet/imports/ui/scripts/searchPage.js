@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 
 Template.searchPage.helpers({
 	results() {
-		// get all items in collection SearchResults
+		// get all items in searchResults array
 		return searchResults.get();
 	},
 	numberOfResults() {
@@ -80,8 +80,17 @@ Template.result.events({
 		const accessURL = `https://compendium.ch${this.path}`;
 		Meteor.call('scrapeDrug', accessURL, (error, result) => {
 			LoadingWheel.hide();
-			inspectDrugData.set(result);
-			Router.go('/drugData');
+			if(result){
+				inspectDrugData.set(result);
+				Router.go('/drugData');
+			}
+			if (error) {
+				Swal.fire({
+					title: "Une erreur s'est produite",
+					text: error.message,
+					type: 'error',
+				});
+			}
 		});
 	}
 })
@@ -95,7 +104,7 @@ Template.searchBar.events({
 	//trigger the search when the enter key is pressed
 	'keyup .searchBar_searchSquare'(e) {
 		if (e.keyCode == 13) {// ENTER
-			search();
+			e.currentTarget.click();
 		}
 	}
 });

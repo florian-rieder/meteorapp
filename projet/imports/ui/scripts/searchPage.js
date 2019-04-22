@@ -43,8 +43,9 @@ Template.result.events({
 						result.createdAt = new Date();
 
 						console.log(result);
-
-						Meteor.call('drugs.insert', result);
+						// this is a way of calling the drugs.insert method like Meteor.call, but that way we can return
+						// the id in the db of the newly inserted drug
+						const id = Meteor.apply('drugs.insert', [result], { returnStubValue: true });
 
 						Swal.fire({
 							type: 'success',
@@ -54,8 +55,8 @@ Template.result.events({
 							cancelButtonText: 'Ok',
 						}).then(swalResult => {
 							if (swalResult.value) { // pressed confirm button
-								inspectDrugData.set(result);
-								Router.go('/drugData');
+								Router.go(`/details/${id}`);
+								lastActivePage.set('/search');
 							}
 						});
 					}
@@ -83,7 +84,8 @@ Template.result.events({
 			LoadingWheel.hide();
 			if (result) {
 				inspectDrugData.set(result);
-				Router.go('/drugData');
+				Router.go('/details');
+				lastActivePage.set('/search');
 			}
 			if (error) {
 				Swal.fire({

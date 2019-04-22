@@ -5,28 +5,26 @@ import Swal from 'sweetalert2';
 import { Drugs } from '../../api/collections';
 
 Template.drugData.helpers({
-	drugData() {
-		return inspectDrugData.get();
-	},
 	// used to determine if we should render an "add to pharmacy" button
 	isNotAlreadyInPharmacy() {
 		// check if there is already an instance of this drug in pharmacy
-		return Drugs.find({ 'showcaseTitle': inspectDrugData.get().showcaseTitle }).count() == 0;
+		return Drugs.find({ 'showcaseTitle': Template.instance().data.showcaseTitle }).count() == 0;
 	},
 	//notice formatting
 	isTitleFromIndex(index) {
 		return index == 0;
 	},
 	isOfTwoLastFromIndex(index) {
-		return index > inspectDrugData.get().notice.length - 3;
+		return index > Template.instance().data.notice.length - 3;
 	},
 	hasNotice() {
-		if (inspectDrugData.get() != undefined) {
-			return inspectDrugData.get().notice[0] != undefined;
+		if (Template.instance().data.notice != undefined) {
+			return Template.instance().data.notice[0] != undefined;
 		}
 	},
 	hasImage() {
-		return inspectDrugData.get().imgpath != null;
+		// check if we got a path to an image
+		return Template.instance().data.imgpath != null;
 	},
 });
 
@@ -40,12 +38,12 @@ Template.drugData.events({
 		} else {
 			history.back();
 		}
-		lastActivePage.set('/drugData');
+		lastActivePage.set('/details');
 	},
 	'click #addDrugToPharmacyButton'() {
-		fireDrugAddDialog(inspectDrugData.get().title).then(swalResult => {
+		fireDrugAddDialog(Template.instance().data.title).then(swalResult => {
 			if (swalResult.value) {
-				let drugData = inspectDrugData.get();
+				let drugData = Template.instance().data;
 				drugData.createdAt = new Date();
 				drugData.exp = swalResult.value;
 

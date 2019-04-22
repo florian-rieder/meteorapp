@@ -39,10 +39,11 @@ Template.drugsList.events({
 					title: "Êtes-vous sûr de vouloir supprimer ces médicaments de votre pharmacie ?",
 					html: (() => {
 						let displayText = '';
+						console.log(drugsToDelete);
 						drugsToDelete.forEach(drugId => {
-							displayText += Drugs.findOne(drugId).title;
+							displayText += Drugs.findOne(drugId).showcaseTitle;
 							displayText += '<br>';
-						})();
+						});
 						return displayText;
 					})(),
 					// cancel button
@@ -89,8 +90,7 @@ Template.drug.helpers({
 Template.drug.events({
 	'click .drug_container'(e) {
 		e.preventDefault();
-		inspectDrugData.set(Drugs.findOne(this._id));
-		Router.go('/drugData');
+		Router.go(`/details/${this._id}`);
 	},
 	'click .drug_remove'(e) {
 		e.preventDefault();

@@ -9,7 +9,7 @@ export const Profile = new Mongo.Collection('profile');
 // note: i'm not sure we event need them to be wrapped like that - florian
 Meteor.methods({
 	'drugs.insert' (drugData) {
-		Drugs.insert(drugData);
+		return Drugs.insert(drugData);
 	},
 	'drugs.remove' (id) {
 		Drugs.remove(id);

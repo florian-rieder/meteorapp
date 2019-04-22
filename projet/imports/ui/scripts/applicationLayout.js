@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import Swal from 'sweetalert2';
-import { lastActivePage, search } from '../../api/utilities.js';
+import { lastActivePage, search, inspectDrugData } from '../../api/utilities.js';
 
 import '../templates/footerBar.html';
 import '../templates/drugsList.html';
@@ -8,6 +8,7 @@ import '../templates/helpPage.html';
 import '../templates/searchPage.html';
 import '../scripts/footerBar.js';
 import '../templates/drugData.html';
+import { Drugs } from '../../api/collections.js';
 
 // routes definition using Iron:router
 
@@ -46,8 +47,17 @@ Router.route('/help', function () {
 	this.render('footerBar', { to: 'footer' });
 });
 
-Router.route('/drugData', function () {
-	this.render('drugData');
+Router.route('/details', function () {
+	this.render('drugData', {
+		data: inspectDrugData.get()
+	});
+	this.render('footerBar', { to: 'footer' });
+});
+
+Router.route('/details/:_id', function () {
+	this.render('drugData', {
+		data: Drugs.findOne({_id: this.params._id})
+	});
 	this.render('footerBar', { to: 'footer' });
 });
 

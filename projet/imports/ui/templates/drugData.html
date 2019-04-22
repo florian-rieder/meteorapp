@@ -3,21 +3,21 @@
 	{{#if isNotAlreadyInPharmacy}}
 	<button id='addDrugToPharmacyButton'>Ajouter à ma pharmacie</button>
 	{{/if}}
-	<div>
-		<h1>{{drugData.title}}</h1>
+	<div class='drugData_firstInfo'>
+		<h1>{{title}}</h1>
 		<div class="container">
 			<div class="row">
-				<div class="col-m">
+				<div class="col-xs">
 					Composition: <br>
 					<ul>
-						{{#each drugData.composition}}
-						{{> component}}
+						{{#each composition}}
+							{{> component}}
 						{{/each}}
 					</ul>
 				</div>
 				{{#if hasImage}}
-				<div class="col-m">
-					<img src="{{drugData.imgpath}}" alt="image" class='drugData_image'>
+				<div class="col-xs">
+					<img src="{{imgpath}}" alt="image" class='drugData_image'>
 				</div>
 				{{/if}}
 			</div>
@@ -29,21 +29,21 @@
 			<div class='drugData_noticeContainer'>
 				{{#if hasNotice}}
 
-				{{#each subarray in drugData.notice}}
+				{{#each subarray in notice}}
 				{{#if isOfTwoLastFromIndex @index}}
-				{{#each text in subarray}}
-				<p class='drugData_noticeTwoLast'>{{text}}</p>
-				{{/each}}
-				{{else}}
-				<div>
 					{{#each text in subarray}}
-					{{#if isTitleFromIndex @index }}
-					<h2>{{text}}</h2>
-					{{else}}
-					<p>{{text}}</p>
-					{{/if}}
+					<p class='drugData_noticeTwoLast'>{{text}}</p>
 					{{/each}}
-				</div>
+				{{else}}
+					<div>
+						{{#each text in subarray}}
+							{{#if isTitleFromIndex @index }}
+							<h2>{{text}}</h2>
+							{{else}}
+							<p>{{text}}</p>
+							{{/if}}
+						{{/each}}
+					</div>
 				{{/if}}
 				{{/each}}
 

@@ -8,6 +8,15 @@ body {
 	box-sizing: border-box;
 }
 
+h1{
+	font-size: 24px;
+	font-weight: bold;
+}
+h2{
+	font-size: 18px;
+	font-weight: bold;
+}
+
 header{
 	height: 50px;
 	width: 100%;
@@ -180,6 +189,9 @@ header > a, header > a:active, header > a:hover, header > a:visited {
 .drugData_image{
 	width: 100%;
 }
-body > div > div > div.container > div > div.col-m{
+div.drugData_firstInfo > div.container > div > div[class*='col'] {
 	width: 50%;
+}
+div.drugData_firstInfo > div.container {
+	margin-bottom: 10px;
 }

@@ -11,11 +11,14 @@ App.setPreference('HideKeyboardFormAccessoryBar', true);
 App.setPreference('Orientation', 'default');
 
 
-// Add custom tags for a particular PhoneGap/Cordova plugin to the end of the
+App.configurePlugin('cordova-plugin-camera', {
+	'CAMERA_USAGE_DESCRIPTION': 'Pour scanner des codes barres'
+});
 
+// Add custom tags for a particular PhoneGap/Cordova plugin to the end of the
 // generated config.xml. 'Universal Links' is shown as an example here.
 App.appendToConfig(`
-	<universal-links>
-	  <host name="localhost:3000" />
-	</universal-links>
+	<feature name="Camera">
+		<param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+	</feature>
 `);

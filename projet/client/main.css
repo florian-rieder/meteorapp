@@ -176,3 +176,10 @@ header > a, header > a:active, header > a:hover, header > a:visited {
 	color: white;
 	text-decoration: none;
 }
+
+.drugData_image{
+	width: 100%;
+}
+body > div > div > div.container > div > div.col-m{
+	width: 50%;
+}

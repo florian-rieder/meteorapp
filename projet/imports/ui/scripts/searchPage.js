@@ -4,7 +4,7 @@ import './drugData.js';
 import '../../api/collections.js';
 
 import { Template } from 'meteor/templating';
-import { inspectDrugData, searchResults, LoadingWheel, fireDrugAddDialog } from '../../api/utilities';
+import { inspectDrugData, searchResults, LoadingWheel, fireDrugAddDialog, lastActivePage } from '../../api/utilities';
 import Swal from 'sweetalert2';
 
 Template.searchPage.helpers({
@@ -101,49 +101,16 @@ Template.result.events({
 Template.searchBar.events({
 	'click .searchBar_searchButton'(e) {
 		e.preventDefault();
-		//show loading wheel
-		search();
+		const query = document.querySelector('.searchBar_searchSquare').value;
+		Router.go(`/search/${query}`);
+		lastActivePage.set('/search');
 	},
 	//trigger the search when the enter key is pressed
 	'keyup .searchBar_searchSquare'(e) {
 		if (e.keyCode == 13) {// ENTER
-			search();
+			const query = document.querySelector('.searchBar_searchSquare').value;
+			Router.go(`/search/${query}`);
+			lastActivePage.set('/search');
 		}
 	}
 });
-
-function search() {
-	// timestamp used to measure the time duration of the scraper
-	const t0 = performance.now();
-	// empty searchResults (to hide results from page)
-	searchResults.set(undefined);
-	// show loading wheel
-	LoadingWheel.show();
-	/* call searchDrug with the value of the text input, log the result */
-	Meteor.call('searchDrug', document.querySelector('.searchBar_searchSquare').value, (error, result) => {
-		// hide loading wheel
-		LoadingWheel.hide();
-		if (result) {
-			console.log(result.length + ' results');
-			if (result[0] == undefined) {
-				Swal.fire({
-					title: "Nous n'avons trouvé aucun résultat",
-				});
-				// prevents the "Nous avons trouvé 0 resultats." from showing up, since
-				// we have an alert for that
-				result = undefined;
-			}
-			/* add all the results of the search to SearchResults */
-			searchResults.set(result);
-		}
-		if (error) {
-			Swal.fire({
-				title: "Une erreur s'est produite",
-				text: error.message,
-				type: 'error',
-			});
-		}
-		const t1 = performance.now();
-		console.log(`search duration: ~${Math.round(t1 - t0)}ms`);
-	});
-}

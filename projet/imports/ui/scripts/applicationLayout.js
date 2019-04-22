@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import Swal from 'sweetalert2';
-import { lastActivePage } from '../../api/utilities.js';
+import { lastActivePage, search } from '../../api/utilities.js';
 
 import '../templates/footerBar.html';
 import '../templates/drugsList.html';
@@ -19,8 +19,19 @@ Router.route('/', function () {
 	this.render('drugsList');
 	this.render('footerBar', { to: 'footer' });
 });
+// access an url with a search query launches search for said query
+Router.route('/search/:searchquery', function () {
+	this.render('searchPage', {
+		data: () => {
+			return {searchQuery: this.params.searchquery};
+		}
+	});
+	search(this.params.searchquery);
+	
+	this.render('footerBar', { to: 'footer' });
+});
 
-Router.route('/searching', function () {
+Router.route('/search', function () {
 	this.render('searchPage');
 	this.render('footerBar', { to: 'footer' });
 });
@@ -56,7 +67,7 @@ Router.route('/profile', function () {
 					title: "Aucun profil détecté ! Souhaitez-vous en créer un ?",
 					// cancel button
 					showCancelButton: true,
-					cancelButtonText: 'Non.',
+					cancelButtonText: 'Non',
 					// confirm button
 					confirmButtonText: 'Oui !',
 					confirmButtonColor: 'green',

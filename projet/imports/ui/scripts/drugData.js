@@ -11,7 +11,7 @@ Template.drugData.helpers({
 	// used to determine if we should render an "add to pharmacy" button
 	isNotAlreadyInPharmacy() {
 		// check if there is already an instance of this drug in pharmacy
-		return Drugs.find({ 'title': inspectDrugData.get().title }).count() == 0;
+		return Drugs.find({ 'showcaseTitle': inspectDrugData.get().showcaseTitle }).count() == 0;
 	},
 	//notice formatting
 	isTitleFromIndex(index) {
@@ -32,7 +32,15 @@ Template.drugData.helpers({
 
 Template.drugData.events({
 	'click #backButton'() {
-		history.back();
+		// to avoid re fetching the data we already searched after an inspection
+		if(lastActivePage.get().includes('search')){
+			// instead of going to /search/searchquery, we go back to /search, thus displaying
+			// previous search results without refetching them
+			Router.go('/search');
+		} else {
+			history.back();
+		}
+		lastActivePage.set('/drugData');
 	},
 	'click #addDrugToPharmacyButton'() {
 		fireDrugAddDialog(inspectDrugData.get().title).then(swalResult => {

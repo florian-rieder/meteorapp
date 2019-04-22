@@ -5,10 +5,16 @@ import Swal from 'sweetalert2';
 // loading wheel image
 class LoadingWheelController {
 	show() {
-		document.getElementById('loadingWheel').classList.remove('hidden');
+		const spinner = document.getElementById('loadingWheel');
+		if(spinner){
+			spinner.classList.remove('hidden');
+		}
 	}
 	hide() {
-		document.getElementById('loadingWheel').classList.add('hidden');
+		const spinner = document.getElementById('loadingWheel');
+		if(spinner){
+			spinner.classList.add('hidden');
+		}
 	}
 }
 
@@ -118,4 +124,32 @@ export const prettifyDrugTitle = function (str) {
 		console.log('loop finished'); */
 	});
 	return str.join(' ');
+}
+
+export const search = function (query) {
+	// timestamp used to measure the time duration of the scraper
+	const t0 = performance.now();
+	// empty searchResults (to hide results from page)
+	searchResults.set(undefined);
+	// show loading wheel
+	LoadingWheel.show();
+	/* call searchDrug with the value of the text input, log the result */
+	Meteor.call('searchDrug', query, (error, result) => {
+		// hide loading wheel
+		LoadingWheel.hide();
+		if (result) {
+			console.log(result.length + ' results for query "'+ query +'"');
+			/* add all the results of the search to SearchResults */
+			searchResults.set(result);
+		}
+		if (error) {
+			Swal.fire({
+				title: "Une erreur s'est produite",
+				text: error.message,
+				type: 'error',
+			});
+		}
+		const t1 = performance.now();
+		console.log(`search duration: ~${Math.round(t1 - t0)}ms`);
+	});
 }

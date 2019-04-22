@@ -116,13 +116,30 @@ footer{
 	height: 40px;
 	display: flex;
 	align-items: center;
+	margin-bottom: 10px;
 }
 .searchBar_searchSquare{
 	width: 400px;
 	height: 30px;
-	border-radius: 15px;
+	border-top-left-radius: 15px;
+	border-bottom-left-radius: 15px;
 	font-size: 20px;
-	margin-bottom: 10px;
+}
+.searchBar_searchButton{
+	height: 30px;
+	width: 38px;
+	padding: 5px;
+	padding-left: 8px;
+	padding-right: 10px;
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+	background-color: rgb(177, 177, 177);
+}
+.searchBar_searchButton:hover{
+	background-color: rgb(131, 130, 130);	
+}
+.searchBar_searchButton:active{
+	background-color: rgb(221, 221, 221);	
 }
 .footerBar_container{
 	height: 100%;

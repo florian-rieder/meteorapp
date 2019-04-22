@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Drugs } from '../../api/collections.js';
-import { inspectDrugData } from '../../api/utilities.js';
+import { inspectDrugData, lastActivePage } from '../../api/utilities.js';
 import Swal from 'sweetalert2';
 
 let deleteEnabled = new ReactiveVar(false);
@@ -39,7 +39,6 @@ Template.drugsList.events({
 					title: "Êtes-vous sûr de vouloir supprimer ces médicaments de votre pharmacie ?",
 					html: (() => {
 						let displayText = '';
-						console.log(drugsToDelete);
 						drugsToDelete.forEach(drugId => {
 							displayText += Drugs.findOne(drugId).showcaseTitle;
 							displayText += '<br>';
@@ -91,6 +90,7 @@ Template.drug.events({
 	'click .drug_container'(e) {
 		e.preventDefault();
 		Router.go(`/details/${this._id}`);
+		lastActivePage.set('/');
 	},
 	'click .drug_remove'(e) {
 		e.preventDefault();

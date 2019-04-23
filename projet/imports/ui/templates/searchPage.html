@@ -1,7 +1,10 @@
 <template name='searchBar'>
     <div class='searchBar_container'>
         <input type="text" placeholder ="Entrez le nom de votre médicament" class="searchBar_searchSquare" value="{{searchQuery}}">
-		<img src="/images/search_icon.png" alt="Rechercher" class="searchBar_searchButton">
+		<div class="searchBar_searchButton">
+			<img src="/images/search_icon.png" alt="Rechercher" class='searchBar_searchIcon'>
+		</div>
+		
 	</div>
 
 </template>

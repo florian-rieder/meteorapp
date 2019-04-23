@@ -77,6 +77,7 @@ Template.drugsList.events({
 	}
 });
 Template.drug.onCreated(() => {
+	// variable we use to know if this drug has been selected to be removed
 	Template.instance().drugIsInDeleteList = new ReactiveVar(false);
 })
 

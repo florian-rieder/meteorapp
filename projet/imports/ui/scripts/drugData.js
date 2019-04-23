@@ -41,9 +41,9 @@ Template.drugData.events({
 		lastActivePage.set('/details');
 	},
 	'click #addDrugToPharmacyButton'() {
-		fireDrugAddDialog(Template.instance().data.title).then(swalResult => {
+		fireDrugAddDialog(inspectDrugData.get().showcaseTitle).then(swalResult => {
 			if (swalResult.value) {
-				let drugData = Template.instance().data;
+				let drugData = inspectDrugData.get();
 				drugData.createdAt = new Date();
 				drugData.exp = swalResult.value;
 

@@ -28,48 +28,77 @@ Template.result.events({
 		fireDrugAddDialog(this.title).then(swalResult => {
 			// confirm button pressed
 			if (swalResult.value) {
-				// show loading wheel
-				LoadingWheel.show();
-				const accessURL = `https://compendium.ch${this.path}`;
-				// timestamp used to measure the time duration of the scraper
-				const t0 = performance.now();
-				//scrape data at the path specified in the entry
-				Meteor.call('scrapeDrug', accessURL, (error, result) => {
-					// hide loading wheel (pretty self explanatory huh ?)
-					LoadingWheel.hide();
-					if (result) {
-						// add fields to the result object before addind it to db
-						result.exp = swalResult.value;
-						result.createdAt = new Date();
+				// if the drug is already in the inspectDrugData "cache"
+				if (inspectDrugData.get().showcaseTitle === this.title) {
+					// we can simply copy it and not worry about scraping it again, gaining time
+					let drugData = inspectDrugData.get();
+					// add fields to the result object before addind it to db
+					drugData.exp = swalResult.value;
+					drugData.createdAt = new Date();
 
-						console.log(result);
-						// this is a way of calling the drugs.insert method like Meteor.call, but that way we can return
-						// the id in the db of the newly inserted drug
-						const id = Meteor.apply('drugs.insert', [result], { returnStubValue: true });
+					console.log(drugData);
+					// this is a way of calling the drugs.insert method like with Meteor.call, but that way we can return
+					// the id of the newly inserted drug in the db
+					const id = Meteor.apply('drugs.insert', [drugData], { returnStubValue: true });
 
-						Swal.fire({
-							type: 'success',
-							title: "C'est fait !",
-							confirmButtonText: 'Voir',
-							showCancelButton: true,
-							cancelButtonText: 'Ok',
-						}).then(swalResult => {
-							if (swalResult.value) { // pressed confirm button
-								Router.go(`/details/${id}`);
-								lastActivePage.set('/search');
-							}
-						});
-					}
-					if (error) {
-						Swal.fire({
-							type: 'error',
-							title: "Une erreur s'est produite",
-							text: error.message,
-						});
-					}
-					const t1 = performance.now();
-					console.log(`scrape duration: ~${Math.round(t1 - t0)}ms`);
-				});
+					Swal.fire({
+						type: 'success',
+						title: "C'est fait !",
+						confirmButtonText: 'Voir',
+						showCancelButton: true,
+						cancelButtonText: 'Ok',
+					}).then(swalResult => {
+						if (swalResult.value) { // pressed confirm button
+							Router.go(`/details/${id}`);
+							lastActivePage.set('/search');
+						}
+					});
+				}
+				// else we do the scraping
+				else {
+					// show loading wheel
+					LoadingWheel.show();
+					const accessURL = `https://compendium.ch${this.path}`;
+					// timestamp used to measure the time duration of the scraper
+					const t0 = performance.now();
+					//scrape data at the path specified in the entry
+					Meteor.call('scrapeDrug', accessURL, (error, result) => {
+						// hide loading wheel (pretty self explanatory huh ?)
+						LoadingWheel.hide();
+						if (result) {
+							// add fields to the result object before addind it to db
+							result.exp = swalResult.value;
+							result.createdAt = new Date();
+
+							console.log(result);
+							// this is a way of calling the drugs.insert method like with Meteor.call, but that way we can return
+							// the id of the newly inserted drug in the db
+							const id = Meteor.apply('drugs.insert', [result], { returnStubValue: true });
+
+							Swal.fire({
+								type: 'success',
+								title: "C'est fait !",
+								confirmButtonText: 'Voir',
+								showCancelButton: true,
+								cancelButtonText: 'Ok',
+							}).then(swalResult => {
+								if (swalResult.value) { // pressed confirm button
+									Router.go(`/details/${id}`);
+									lastActivePage.set('/search');
+								}
+							});
+						}
+						if (error) {
+							Swal.fire({
+								type: 'error',
+								title: "Une erreur s'est produite",
+								text: error.message,
+							});
+						}
+						const t1 = performance.now();
+						console.log(`scrape duration: ~${Math.round(t1 - t0)}ms`);
+					});
+				}
 			}
 		});
 	},

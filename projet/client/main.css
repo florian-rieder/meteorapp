@@ -124,22 +124,25 @@ footer{
 	border-top-left-radius: 15px;
 	border-bottom-left-radius: 15px;
 	font-size: 20px;
+	border-right: none;
+}
+.searchBar_searchIcon{
+	height: 20px;
+	width: 20px;
 }
 .searchBar_searchButton{
 	height: 30px;
-	width: 38px;
-	padding: 5px;
-	padding-left: 8px;
-	padding-right: 10px;
+	width: 35px;
+	padding-left: 5px;
 	border-top-right-radius: 15px;
 	border-bottom-right-radius: 15px;
-	background-color: rgb(177, 177, 177);
+	background-color: rgb(207, 206, 206);
 }
 .searchBar_searchButton:hover{
-	background-color: rgb(131, 130, 130);	
+	background-color: rgb(161, 161, 161);	
 }
 .searchBar_searchButton:active{
-	background-color: rgb(221, 221, 221);	
+	background-color: rgb(236, 235, 235);
 }
 .footerBar_container{
 	height: 100%;

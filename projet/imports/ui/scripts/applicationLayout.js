@@ -65,7 +65,6 @@ Router.route('/details/:_id', function () {
 Router.route('/profile', function () {
 	// Show dialog on page enter if user has no profile
 	Meteor.call('profile.count', (error, count) => {
-		if (lastActivePage.get() == "/profile") {
 		  if (!error && count === 0) {
 			// if the user has not made a profile yet, show a dialog asking if the user wants to create one
 			Swal.fire({
@@ -89,7 +88,6 @@ Router.route('/profile', function () {
 		  if (error) {
 			console.error(error);
 		  }
-		}
 	  });
 	this.render('profile');
 	this.render('footerBar', { to: 'footer' });

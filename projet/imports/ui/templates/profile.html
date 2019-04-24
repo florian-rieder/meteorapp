@@ -1,12 +1,12 @@
 <template name='profile'>
-    <div id='profile_container' class='hidden'>
+  <button id="confirmButton">Valider</button> 
+  <div id='profile_container' class='hidden'>
         <ul class='profileList center'>
             {{#each fields}}
                 {{> field}}
             {{/each}}
         </ul>
     </div>
-  <button id="confirmButton">Valider</button>
 </template>
 
 <template name="uploadForm">

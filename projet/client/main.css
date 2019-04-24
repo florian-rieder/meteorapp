@@ -248,23 +248,26 @@ div.drugData_firstInfo>div.container {
 
 .profileList {
 	margin: 2px auto;
-    line-height: 1.4;
+	line-height: 1.4;
+	padding: 10px;
 	padding-left: 0;
 	list-style: none;
 }
 
 .field_textInput{
 	position: relative;
-	background-color: #fef3e9;
+	background-color: #ffe4cb;
 	padding: 17px;
-	width: 60%;
-	border: 1px solid black;
-	text-align : center;
+	width: 40%;
+	border: 1px solid #feeee0;
+	text-align : left;
+	color: #817b7ba1;
 }
 
 .profileListItem{
 	text-align: center;
 	width: 100%;
+	padding: 10px;
 }
 
 #profile_container {

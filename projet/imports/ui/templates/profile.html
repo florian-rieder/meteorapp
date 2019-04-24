@@ -1,24 +1,6 @@
 <template name='profile'>
     <div id='profile_container' class='hidden'>
-            <!-- <input type="file" style="visibility:hidden;width:1px" accept="image/gif, image/jpeg, image/png" class="profilePhotoFile">
-            <input type="button" id="btnEditPhoto" value="Edit Photo" class="btn btn-primary" style="width:160px"/> -->
-            
-            <div class="modal fade" id="cropper-modal">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-body">
-                    <div id="cropper">
-                      <img src="" alt="Picture">
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button class="btn btn-primary" id="btnSavePhoto">Save</button>
-                    <button class="btn btn-default" id="btnCancel">Cancel</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-        <ul>
+        <ul class='profileList center'>
             {{#each fields}}
                 {{> field}}
             {{/each}}
@@ -38,9 +20,8 @@
 
 
 <template name='field'>
-<li>
-    {{fieldName}} 
-    <input type="text" class='field_textInput'>
+<li class='profileListItem'> 
+    <input type="text" class='field_textInput' value={{fieldName}}>
 </li>
 
 

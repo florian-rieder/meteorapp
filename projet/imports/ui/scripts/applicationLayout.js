@@ -24,11 +24,11 @@ Router.route('/', function () {
 Router.route('/search/:searchquery', function () {
 	this.render('searchPage', {
 		data: () => {
-			return {searchQuery: this.params.searchquery};
+			return { searchQuery: this.params.searchquery };
 		}
 	});
 	search(this.params.searchquery);
-	
+
 	this.render('footerBar', { to: 'footer' });
 });
 
@@ -56,43 +56,41 @@ Router.route('/details', function () {
 
 Router.route('/details/:_id', function () {
 	this.render('drugData', {
-		data: Drugs.findOne({_id: this.params._id})
+		data: Drugs.findOne({ _id: this.params._id })
 	});
 	this.render('footerBar', { to: 'footer' });
 });
 
-Router.route('/profile', function () {
-	this.render('profile');
-	this.render('footerBar', { to: 'footer' });
 
+Router.route('/profile', function () {
 	// Show dialog on page enter if user has no profile
-	
-	// verify if the user already has made a profile
 	Meteor.call('profile.count', (error, count) => {
 		if (lastActivePage.get() == "/profile") {
-			if (!error && count === 0) {
-				// if the user has not made a profile yet, show a dialog asking if the user wants to create one
-				Swal.fire({
-					type: 'warning',
-					title: "Aucun profil détecté ! Souhaitez-vous en créer un ?",
-					// cancel button
-					showCancelButton: true,
-					cancelButtonText: 'Non',
-					// confirm button
-					confirmButtonText: 'Oui !',
-					confirmButtonColor: 'green',
-
-				}).then(result => {
-					// If the confirm button was pressed
-					if (result.value) {
-						// delete selected drugs
-						document.getElementById('profile_container').classList.remove('hidden');
-					}
-				});
-			}
-			if (error) {
-				console.error(error);
-			}
+		  if (!error && count === 0) {
+			// if the user has not made a profile yet, show a dialog asking if the user wants to create one
+			Swal.fire({
+			  type: 'warning',
+			  title: "Aucun profil détecté ! Souhaitez-vous en créer un ?",
+			  // cancel button
+			  showCancelButton: true,
+			  cancelButtonText: 'Non',
+			  // confirm button
+			  confirmButtonText: 'Oui !',
+			  confirmButtonColor: 'green',
+	  
+			}).then(result => {
+			  // If the confirm button was pressed
+			  if (result.value) {
+				// delete selected drugs
+				document.getElementById('profile_container').classList.remove('hidden');
+			  }
+			});
+		  }
+		  if (error) {
+			console.error(error);
+		  }
 		}
-	});
+	  });
+	this.render('profile');
+	this.render('footerBar', { to: 'footer' });
 });

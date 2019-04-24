@@ -8,16 +8,17 @@ body {
 	box-sizing: border-box;
 }
 
-h1{
+h1 {
 	font-size: 24px;
 	font-weight: bold;
 }
-h2{
+
+h2 {
 	font-size: 18px;
 	font-weight: bold;
 }
 
-header{
+header {
 	height: 50px;
 	width: 100%;
 	font-size: 28px;
@@ -30,7 +31,8 @@ header{
 	display: flex;
 	align-items: center;
 }
-footer{
+
+footer {
 	height: 60px;
 	width: 100%;
 	background-color: rgb(103, 192, 143);
@@ -38,7 +40,8 @@ footer{
 	padding: 10px;
 	border-top: 1px solid rgb(36, 124, 83);
 }
-#body_headerLogo{
+
+#body_headerLogo {
 	background-color: rgba(16, 100, 58, 0.322);
 	border-radius: 25px;
 	width: 150px;
@@ -47,78 +50,93 @@ footer{
 	/* obv. only for the pc version */
 	cursor: pointer;
 }
-.body_content{
+
+.body_content {
 	height: calc(100vh - 110px);
 	overflow-y: auto;
 	padding: 10px;
 	z-index: 1;
 }
 
-.drugData_noticeContainer{
+.center {
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+}
+
+.drugData_noticeContainer {
 	/* height: 300px; */
 	overflow-y: auto;
 	border: 1px solid rgb(63, 63, 63);
 	padding: 10px;
 }
 
-.drugData_noticeTwoLast{
+.drugData_noticeTwoLast {
 	color: grey;
 	font-size: 12px;
 	text-align: right;
 }
 
-.searchResults_container{
+.searchResults_container {
 	height: calc(100vh - 110px - 70px);
 	overflow-y: auto;
 	border: 1px solid rgb(63, 63, 63);
 }
-.searchResults_numberDisplay{
+
+.searchResults_numberDisplay {
 	font-size: 12px;
 	color: grey;
 }
-.result_title{
+
+.result_title {
 	font-size: 15px;
 	font-weight: bold;
 	margin: 0px;
 }
-.result_subtitle{
+
+.result_subtitle {
 	color: grey;
 	font-size: 12px;
 	margin: 0px;
 }
-.result_container{
+
+.result_container {
 	border: 1px solid black;
 	margin: 3px;
 	position: relative;
 }
-.searchResults_ul{
+
+.searchResults_ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
-.result_li{
 
-}
-.result_buttonsContainer{
+
+.result_buttonsContainer {
 	position: absolute;
 	right: 5px;
 	top: 10%;
 }
+
 .drawingBuffer {
 	position: absolute;
 	top: 0;
 	left: 0;
 }
+
 #scannerContainer {
-	position : relative;
+	position: relative;
 }
-.searchBar_container{
+
+.searchBar_container {
 	height: 40px;
 	display: flex;
 	align-items: center;
 	margin-bottom: 10px;
 }
-.searchBar_searchSquare{
+
+.searchBar_searchSquare {
 	width: 400px;
 	height: 30px;
 	border-top-left-radius: 15px;
@@ -126,11 +144,13 @@ footer{
 	font-size: 20px;
 	border-right: none;
 }
-.searchBar_searchIcon{
+
+.searchBar_searchIcon {
 	height: 20px;
 	width: 20px;
 }
-.searchBar_searchButton{
+
+.searchBar_searchButton {
 	height: 30px;
 	width: 35px;
 	padding-left: 5px;
@@ -138,47 +158,54 @@ footer{
 	border-bottom-right-radius: 15px;
 	background-color: rgb(207, 206, 206);
 }
-.searchBar_searchButton:hover{
-	background-color: rgb(161, 161, 161);	
+
+.searchBar_searchButton:hover {
+	background-color: rgb(161, 161, 161);
 }
-.searchBar_searchButton:active{
+
+.searchBar_searchButton:active {
 	background-color: rgb(236, 235, 235);
 }
-.footerBar_container{
+
+.footerBar_container {
 	height: 100%;
 	width: 100%;
 	display: flex;
 	align-items: center;
-    justify-content: space-between;
+	justify-content: space-between;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-#footerBar_container .btn{
+#footerBar_container .btn {
 	width: calc(20vw - 10px);
-	flex: 0 1 auto; /* Default */
+	flex: 0 1 auto;
+	/* Default */
 	/* add a transition effect between normal and hover colors */
 	transition-duration: 0.1s;
 	background-color: rgb(41, 122, 89);
 	border: 1px solid rgb(41, 122, 89);
 }
 
-#footerBar_container .btn:active{
+#footerBar_container .btn:active {
 	background-color: rgb(31, 99, 72);
 	border: 1px solid rgb(31, 99, 72);
 }
 
-.hidden{
+.hidden {
 	display: none;
 }
-#loadingWheel{
+
+#loadingWheel {
 	/* put it in the middle of the screen */
 	position: absolute;
-	top: calc(50vh - 40px); /* value in px is half of the image height */
-	left: calc(50vw - 40px); /* value in px is half of the image width */
+	top: calc(50vh - 40px);
+	/* value in px is half of the image height */
+	left: calc(50vw - 40px);
+	/* value in px is half of the image width */
 }
 
-.drug_container{
+.drug_container {
 	border: 1px solid black;
 	padding: 5px;
 	height: 50px;
@@ -187,31 +214,60 @@ footer{
 	transition-duration: 0.1s;
 }
 
-.drug_container:hover{
+.drug_container:hover {
 	background-color: rgb(212, 212, 212);
 }
 
-#drugList_ul{
+#drugList_ul {
 	list-style-type: none;
 }
 
-#drugList_ul > li{
+#drugList_ul>li {
 	margin-bottom: 5px;
 	margin-top: 5px;
 }
 
 /* override link styling in header logo text */
-header > a, header > a:active, header > a:hover, header > a:visited {
+
+header>a, header>a:active, header>a:hover, header>a:visited {
 	color: white;
 	text-decoration: none;
 }
 
-.drugData_image{
+.drugData_image {
 	width: 100%;
 }
-div.drugData_firstInfo > div.container > div > div[class*='col'] {
+
+div.drugData_firstInfo>div.container>div>div[class*='col'] {
 	width: 50%;
 }
-div.drugData_firstInfo > div.container {
+
+div.drugData_firstInfo>div.container {
 	margin-bottom: 10px;
+}
+
+.profileList {
+	margin: 2px auto;
+    line-height: 1.4;
+	padding-left: 0;
+	list-style: none;
+}
+
+.field_textInput{
+	position: relative;
+	background-color: #fef3e9;
+	padding: 17px;
+	width: 60%;
+	border: 1px solid black;
+	text-align : center;
+}
+
+.profileListItem{
+	text-align: center;
+	width: 100%;
+}
+
+#profile_container {
+	width: 100%;
+	text-align: center;
 }

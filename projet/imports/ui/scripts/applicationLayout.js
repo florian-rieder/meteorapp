@@ -8,7 +8,7 @@ import '../templates/helpPage.html';
 import '../templates/searchPage.html';
 import '../scripts/footerBar.js';
 import '../templates/drugData.html';
-import { Drugs } from '../../api/collections.js';
+import { Drugs, Profile } from '../../api/collections.js';
 
 // routes definition using Iron:router
 
@@ -80,11 +80,13 @@ Router.route('/profile', function () {
 			}).then(result => {
 			  // If the confirm button was pressed
 			  if (result.value) {
-				// delete selected drugs
+				// remove hidden tag
 				document.getElementById('profile_container').classList.remove('hidden');
 			  }
 			});
-		  }
+		  } else {
+				document.getElementById('profile_container').classList.remove('hidden');
+			}
 		  if (error) {
 			console.error(error);
 		  }

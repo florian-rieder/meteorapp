@@ -2,6 +2,10 @@
 import { Template } from 'meteor/templating'
 import '../templates/profile.html';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Meteor } from 'meteor/meteor';
+import { Profile } from '../../api/collections';
+//uncomment to clear Db 
+//Meteor.call('profile.remove');
 
 Template.uploadForm.onCreated(function () {
   this.currentUpload = new ReactiveVar(false);
@@ -14,12 +18,6 @@ Template.uploadForm.helpers({
 });
 
 Template.profile.helpers({
-  /* fields: [
-      {fieldName: 'sexe'},
-      {fieldName: 'prénom'},
-      {fieldName: 'nom'},
-      {fieldName: 'age'},
-  ] */
   fields() {
     return [
       { fieldName: 'Sexe' },
@@ -30,13 +28,16 @@ Template.profile.helpers({
       { fieldName: 'Poids' },
       { fieldName: 'Numéro AVS' },
     ]
-  },
-
+  }
 });
 
 Template.profile.events({
   'click #confirmButton'() {
-    console.log(Array.from(document.querySelectorAll('.field_textInput')).map(v => v.value))
+    let profileArray = Array.from(document.querySelectorAll('.field_textInput')).map(v => v.value);
+    console.log(profileArray);
+    Meteor.call('profile.insert', profileArray);
+    console.log('Added');
+    console.log(Profile.find());
   }
 })
 

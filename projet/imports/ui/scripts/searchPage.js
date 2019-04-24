@@ -28,8 +28,16 @@ Template.result.events({
 		fireDrugAddDialog(this.title).then(swalResult => {
 			// confirm button pressed
 			if (swalResult.value) {
+				// this whole test here is to avoid getting an error if inspectDrugData is not already set
+				// if the users wants to add a drug and has not inspected any drug this session
+				let drugDataCache = inspectDrugData.get();
+				if (drugDataCache == undefined) {
+					drugDataCache = {
+						showcaseTitle: 'string that will not match any drug name'
+					}
+				}
 				// if the drug is already in the inspectDrugData "cache"
-				if (inspectDrugData.get().showcaseTitle === this.title) {
+				if (drugDataCache.showcaseTitle === this.title) {
 					// we can simply copy it and not worry about scraping it again, gaining time
 					let drugData = inspectDrugData.get();
 					// add fields to the result object before addind it to db

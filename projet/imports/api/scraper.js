@@ -17,7 +17,7 @@ Meteor.methods({
 
 // fetches the name, composition and notice from a drug's page on compendium URL
 async function scrapeDrug(compendiumURL) {
-	const titleSelector = '#ctl00_MainContent_ucProductDetail1_dvProduct_lblProductDescr';
+	const additionalInfoPagesThatInterestUs = ["Photo", "Info patient"];
 	// launch puppeteer browser
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
@@ -26,10 +26,14 @@ async function scrapeDrug(compendiumURL) {
 	// await page load
 	await page.waitForNavigation();
 
+	console.log('scraping showcaseTitle...');
+
 	// get the name of the drug
 	const title = await page.evaluate((selector) => {
 		return document.querySelector(selector).textContent;
-	}, titleSelector);
+	}, '#ctl00_MainContent_ucProductDetail1_dvProduct_lblProductDescr');
+
+	console.log('scraping composition...');
 
 	//get the list of components to the drug
 	const composition = await page.evaluate((selector) => {
@@ -39,47 +43,83 @@ async function scrapeDrug(compendiumURL) {
 			});
 	}, '#compEverything > table > tbody > tr');
 
-	// store the link to this drugs images, for later use
-	const imagesPath = await page.evaluate(selector => {
-		const photoAnchor = document.querySelector(selector);
-		// if element exists (not null)
-		if (photoAnchor) {
-			// verify if the 3rd link is actually the photos one, if not, there are no photos for this drug
-			if (photoAnchor.childNodes[1].innerText === "Photo") {
-				return photoAnchor.pathname;
-			} else { return null; }
-		} else { return null; }
+	console.log('evaluating patient info and photos links...');
 
-	}, '#ctl00_MainContent_ucProductDetail1_tblLinkMoreInfosFIPIPhoto > tbody > tr > td:nth-child(3) > a');
-
-	// move to the patient information page of this drug and await page loading
-	await Promise.all([
-		page.waitForNavigation(),
-		page.click('#ctl00_MainContent_ucProductDetail1_tblLinkMoreInfosFIPIPhoto > tbody > tr > td:nth-child(2) > a:nth-child(1)')
-	]);
-
-	const noticePageData = await page.evaluate(() => {
-		const title = document.querySelector('h1').textContent;
-		const firm = document.querySelector('#ctl00_MainContent_ucProductFiPi1_infos > div.monographie > div.ownerCompany').textContent;
-		return {
-			title: title,
-			firm: firm,
-		};
+	// we check which links are available in the "informations supplémentaires" container on
+	// a drug's page on compendium.ch
+	const availableLinks = await page.evaluate(args => {
+		const links = Array.from(document.querySelectorAll(args.selector));
+		let returnLinks = [];
+		// for each of the links there are, we check which ones are the ones we need 
+		// (specified in the very poetically named additionalInfoPagesThatInterestUs array), 
+		// and return the position of that link in its container for later use.
+		links.forEach((link, i) => {
+			args.additionalPages.forEach(name => {
+				// we check the text inside the link against the names that interest us
+				if (link.childNodes[1].textContent === name) {
+					// i + 1 because arrays start at 0, but :nth-child(n) starts at 1
+					returnLinks.push({ name: name, position: i + 1 });
+				}
+			});
+		});
+		return returnLinks;
+	}, {
+		selector: '#ctl00_MainContent_ucProductDetail1_tblLinkMoreInfosFIPIPhoto > tbody > tr > td > a:not(.otherLang)',
+		additionalPages: additionalInfoPagesThatInterestUs,
 	});
 
-	// get the notice of the drug
-	const notice = await page.evaluate((selector) => {
-		return Array.from(document.querySelectorAll(selector))
-			/* get the childnodes of each paragraphs */
-			.map((paragraphe) => Array.from(paragraphe.childNodes)
-				/* get the text content of each element inside a paragraph */
-				.map(element => element.textContent));
-	}, '.monographie > .paragraph');
+	// i don't really know how to describe this
+	// we create a table of boolean values, each of the values in the resulting array are a boolean 
+	// value that indicates if there is an available link for the corresponding page in 
+	// additionalInfoPagesThatInterestUs.
+	// we can then use this table to fetch the data we have access to
+	const availableLinksBoolean = additionalInfoPagesThatInterestUs.map(n => availableLinks.filter(a => a.name == n)[0] != undefined);
 
+
+
+
+	// set return variables to get variables out of the if scopes
+	let imagesPath = undefined;
+	let noticePath = undefined;
 	let imagesReturn = undefined;
+	let noticeTitleReturn = undefined;
+	let noticeFirmReturn = undefined;
+	let noticeReturn = undefined;
 
-	// if we found a link to images
-	if (imagesPath) {
+	// get paths to additional info pages
+	if (availableLinksBoolean[0]) {
+		console.log('scraping images path...');
+
+		// get the position of the link to photos page
+		const imagesPosition = availableLinks.filter(a => a.name == "Photo")[0].position;
+		console.log('imagesPosition', imagesPosition);
+
+		// store the link to this drugs images, for later use
+		imagesPath = await page.evaluate(selector => {
+			const photoAnchor = document.querySelector(selector);
+			return photoAnchor.pathname;
+		}, `#ctl00_MainContent_ucProductDetail1_tblLinkMoreInfosFIPIPhoto > tbody > tr > td:nth-child(${imagesPosition}) > a`);
+	}
+	if (availableLinksBoolean[1]) {
+		console.log('scraping notice path...');
+
+		// get the position of the link to photos page
+		const noticePosition = availableLinks.filter(a => a.name == "Info patient")[0].position;
+		console.log('noticePosition', noticePosition)
+
+		// store the link to this drugs images, for later use
+		noticePath = await page.evaluate(selector => {
+			const noticeAnchor = document.querySelector(selector);
+			return noticeAnchor.pathname;
+		}, `#ctl00_MainContent_ucProductDetail1_tblLinkMoreInfosFIPIPhoto > tbody > tr > td:nth-child(${noticePosition}) > a`);
+	}
+
+
+	// scrape data at info pages
+	if (availableLinksBoolean[0]) {
+		console.log('images found. moving to images page');
+		console.log('imagesPath', imagesPath);
+
 		// go to images page and wait for load
 		await Promise.all([
 			page.waitForNavigation(),
@@ -92,11 +132,15 @@ async function scrapeDrug(compendiumURL) {
 		// on another source server, which is specified in the <iframe> element, that we can access.
 		const pathToSource = await page.evaluate(() => document.querySelector('iframe').src);
 
+		console.log('iframe passed', pathToSource);
+
 		// go to images source page and wait for load
 		await Promise.all([
 			page.waitForNavigation(),
 			page.goto(pathToSource),
 		]);
+
+		console.log('scraping image source...');
 
 		// finally, get the url of the image
 		const imgpath = await page.evaluate(() => {
@@ -106,19 +150,58 @@ async function scrapeDrug(compendiumURL) {
 			return img.src;
 		});
 
+		console.log(imgpath);
+
 		imagesReturn = imgpath;
 	}
+
+	if (availableLinksBoolean[1]) {
+		console.log('notice link found. moving to notice page');
+		// move to the patient information page of this drug and await page loading
+		await Promise.all([
+			page.waitForNavigation(),
+			page.goto(`https://compendium.ch/${noticePath}`)
+		]);
+
+		console.log('scraping notice title and firm...');
+
+		const noticePageData = await page.evaluate(() => {
+			const title = document.querySelector('h1').textContent;
+			const firm = document.querySelector('#ctl00_MainContent_ucProductFiPi1_infos > div.monographie > div.ownerCompany').textContent;
+			return {
+				title: title,
+				firm: firm,
+			};
+		});
+
+		console.log('scraping notice...');
+
+		// get the notice of the drug
+		const notice = await page.evaluate((selector) => {
+			return Array.from(document.querySelectorAll(selector))
+				/* get the childnodes of each paragraphs */
+				.map((paragraphe) => Array.from(paragraphe.childNodes)
+					/* get the text content of each element inside a paragraph */
+					.map(element => element.textContent));
+		}, '.monographie > .paragraph');
+
+		noticeTitleReturn = noticePageData.title;
+		noticeFirmReturn = noticePageData.firm;
+		noticeReturn = notice;
+	}
+
+	console.log('scraping complete !');
 
 	// close the headless browser
 	await browser.close();
 
 	//create return object
 	const drugData = {
-		title: noticePageData.title,
-		firm: noticePageData.firm,
+		title: noticeTitleReturn,
+		firm: noticeFirmReturn,
 		showcaseTitle: prettifyDrugTitle(title),
 		composition: composition,
-		notice: notice,
+		notice: noticeReturn,
 		imgpath: imagesReturn,
 	}
 

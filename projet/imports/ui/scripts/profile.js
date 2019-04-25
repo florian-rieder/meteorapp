@@ -37,7 +37,7 @@ Template.profile.events({
     console.log(profileArray);
     Meteor.call('profile.insert', profileArray);
     console.log('Added');
-    console.log(Profile.find());
+    console.log(Profile.findOne());
   }
 })
 

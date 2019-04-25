@@ -10,6 +10,7 @@ import '../scripts/footerBar.js';
 import '../templates/drugData.html';
 import { Drugs, Profile } from '../../api/collections.js';
 
+
 // routes definition using Iron:router
 
 Router.configure({
@@ -85,6 +86,10 @@ Router.route('/profile', function () {
 			  }
 			});
 		  } else {
+				let profileObj = Profile.findOne();
+				/* for(let i=0; i<8; ++i) {
+
+				} */
 				document.getElementById('profile_container').classList.remove('hidden');
 			}
 		  if (error) {

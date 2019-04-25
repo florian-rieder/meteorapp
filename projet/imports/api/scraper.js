@@ -41,7 +41,15 @@ async function scrapeDrug(compendiumURL) {
 
 	// store the link to this drugs images, for later use
 	const imagesPath = await page.evaluate(selector => {
-		return document.querySelector(selector).pathname;
+		const photoAnchor = document.querySelector(selector);
+		// if element exists (not null)
+		if (photoAnchor) {
+			// verify if the 3rd link is actually the photos one, if not, there are no photos for this drug
+			if (photoAnchor.childNodes[1].innerText === "Photo") {
+				return photoAnchor.pathname;
+			} else { return null; }
+		} else { return null; }
+
 	}, '#ctl00_MainContent_ucProductDetail1_tblLinkMoreInfosFIPIPhoto > tbody > tr > td:nth-child(3) > a');
 
 	// move to the patient information page of this drug and await page loading
@@ -68,31 +76,38 @@ async function scrapeDrug(compendiumURL) {
 				.map(element => element.textContent));
 	}, '.monographie > .paragraph');
 
-	// go to images page and wait for load
-	await Promise.all([
-		page.waitForNavigation(),
-		page.goto(`https://compendium.ch/${imagesPath}`),
-	]);
+	let imagesReturn = undefined;
 
-	// It seems like I can't use document.querySelector to get the image, since
-	// apparently the page is rendered using some software I don't know.
-	// by taking a look at the source of the page, it seems like the images we are looking for are
-	// on another source server, which is specified in the <iframe> element, that we can access.
-	const pathToSource = await page.evaluate(() => document.querySelector('iframe').src);
+	// if we found a link to images
+	if (imagesPath) {
+		// go to images page and wait for load
+		await Promise.all([
+			page.waitForNavigation(),
+			page.goto(`https://compendium.ch/${imagesPath}`),
+		]);
 
-	// go to images source page and wait for load
-	await Promise.all([
-		page.waitForNavigation(),
-		page.goto(pathToSource),
-	]);
+		// It seems like I can't use document.querySelector to get the image, since
+		// apparently the page is rendered using some software I don't know.
+		// by taking a look at the source of the page, it seems like the images we are looking for are
+		// on another source server, which is specified in the <iframe> element, that we can access.
+		const pathToSource = await page.evaluate(() => document.querySelector('iframe').src);
 
-	// finally, get the url of the image
-	const imgpath = await page.evaluate(() => {
-		// [id*="tabs-"] is used to get the div that uses an id unique for each drug
-		// like "#tabs-1498893-1" for example.
-		const img = document.querySelector('div[id*="tabs-"] > div > ul > li > a > img');
-		return img.src;
-	});
+		// go to images source page and wait for load
+		await Promise.all([
+			page.waitForNavigation(),
+			page.goto(pathToSource),
+		]);
+
+		// finally, get the url of the image
+		const imgpath = await page.evaluate(() => {
+			// [id*="tabs-"] is used to get the div that uses an id unique for each drug
+			// like "#tabs-1498893-1" for example.
+			const img = document.querySelector('div[id*="tabs-"] > div > ul > li > a > img');
+			return img.src;
+		});
+
+		imagesReturn = imgpath;
+	}
 
 	// close the headless browser
 	await browser.close();
@@ -104,7 +119,7 @@ async function scrapeDrug(compendiumURL) {
 		showcaseTitle: prettifyDrugTitle(title),
 		composition: composition,
 		notice: notice,
-		imgpath: imgpath,
+		imgpath: imagesReturn,
 	}
 
 	return drugData;

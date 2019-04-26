@@ -1,11 +1,13 @@
 <template name='drugsList'>
-	<h1>{{name}}</h1>
-	<button id='clearDrugs'>{{deleteButtonName}}</button>
-	<ul id='drugList_ul'>
-		{{#each drugs}}
-			{{> drug}}
-		{{/each}}
-	</ul>
+	<div class='container-fluid'>
+		<h1>{{name}}</h1>
+		<button id='clearDrugs'>{{deleteButtonName}}</button>
+		<ul id='drugList_ul'>
+			{{#each drugs}}
+				{{> drug}}
+			{{/each}}
+		</ul>
+	</div>
 </template>
 
 <template name='drug'>

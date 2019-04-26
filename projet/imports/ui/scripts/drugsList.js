@@ -13,8 +13,7 @@ let drugsToDelete = [];
 
 Template.drugsList.helpers({
 	drugs() {
-		console.log(Template.instance().data);
-		// return all drugs whose _id is containd in this category's extKeys
+		// return all drugs whose _id is containd in this category's foreign keys
 		return Drugs.find({_id: {$in: Template.instance().data.extKeys}});
 	},
 	deleteButtonName() {

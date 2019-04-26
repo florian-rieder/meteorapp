@@ -1,27 +1,28 @@
 <template name='searchBar'>
-    <div class='searchBar_container'>
-        <input type="text" placeholder ="Entrez le nom de votre médicament" class="searchBar_searchSquare" value="{{searchQuery}}">
-		<div class="searchBar_searchButton">
-			<img src="/images/search_icon.png" alt="Rechercher" class='searchBar_searchIcon'>
+	<div class='d-flex justify-content-center' style='width: 100%'>
+		<div class='searchBar_container d-flex justify-content-left'>
+			<input type="text" placeholder="Recherche" class="searchBar_searchSquare" value="{{searchQuery}}">
+			<div class="searchBar_searchButton">
+				<img src="/images/search_icon.png" alt="Rechercher" class='searchBar_searchIcon'>
+			</div>
 		</div>
-		
 	</div>
-
 </template>
 
 <template name='searchPage'>
-	{{>searchBar}}
-	<div class='searchResults_container'>
-		<ul class='searchResults_ul'>
-			{{#each results}}
+	<div class='container-fluid'>
+		{{>searchBar}}
+		<div class='searchResults_container'>
+			<ul class='searchResults_ul'>
+				{{#each results}}
 				{{> result}}
-			{{/each}}
-		</ul>
-	</div>
-	{{#if hasResults}}
+				{{/each}}
+			</ul>
+		</div>
+		{{#if hasResults}}
 		<div class='searchResults_numberDisplay'>Nous avons trouvé {{numberOfResults}} resultats.</div>
-	{{/if}}
-	<div></div>
+		{{/if}}
+	</div>
 </template>
 
 <template name='result'>

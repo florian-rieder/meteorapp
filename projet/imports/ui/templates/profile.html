@@ -1,28 +1,31 @@
 <template name='profile'>
-  <button id="confirmButton">Valider</button> 
-  <div id='profile_container' class='hidden'>
-        <ul class='profileList center'>
-            {{#each fields}}
-                {{> field}}
-            {{/each}}
-        </ul>
-    </div>
+	<div class='container-fluid'>
+		<button id="confirmButton">Valider</button>
+		<div id='profile_container' class='hidden'>
+			<ul class='profileList center'>
+				{{#each fields}}
+				{{> field}}
+				{{/each}}
+			</ul>
+		</div>
+	</div>
+
 </template>
 
 <template name="uploadForm">
-  {{#with currentUpload}}
-    Uploading <b>{{file.name}}</b>:
-    <span id="progress">{{progress.get}}%</span>
-  {{else}}
-    <input id="fileInput" type="file" />
-  {{/with}}
+	{{#with currentUpload}}
+	Uploading <b>{{file.name}}</b>:
+	<span id="progress">{{progress.get}}%</span>
+	{{else}}
+	<input id="fileInput" type="file" />
+	{{/with}}
 </template>
 
 
 <template name='field'>
-<li class='profileListItem'> 
-    <input type="text" class='field_textInput' placeholder={{fieldName}} name={{fieldName}}>
-</li>
+	<li class='profileListItem'>
+		<input type="text" class='field_textInput' placeholder={{fieldName}} name={{fieldName}}>
+	</li>
 
 
 </template>

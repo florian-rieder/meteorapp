@@ -14,7 +14,6 @@ Template.drugCategories.helpers({
 Template.drugCategories.events({
 	'click .drugCategories_addCategory' (e) {
 		e.preventDefault();
-		console.log('clicked');
 		Swal.fire({
 			title: 'Ajouter une catégorie',
 			showCancelButton: true,

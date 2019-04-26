@@ -6,7 +6,6 @@ import '../../api/collections.js';
 import { Template } from 'meteor/templating';
 import { inspectDrugData, searchResults, LoadingWheel, fireDrugAddDialog, lastActivePage } from '../../api/utilities';
 import Swal from 'sweetalert2';
-import { Categories } from '../../api/collections.js';
 
 Template.searchPage.helpers({
 	results() {

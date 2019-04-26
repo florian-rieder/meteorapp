@@ -69,14 +69,11 @@ async function scrapeDrug(compendiumURL) {
 	});
 
 	// i don't really know how to describe this
-	// we create a table of boolean values, each of the values in the resulting array are a boolean 
+	// we create a table of boolean values. each of the values in the resulting array are a boolean 
 	// value that indicates if there is an available link for the corresponding page in 
 	// additionalInfoPagesThatInterestUs.
 	// we can then use this table to fetch the data we have access to
 	const availableLinksBoolean = additionalInfoPagesThatInterestUs.map(n => availableLinks.filter(a => a.name == n)[0] != undefined);
-
-
-
 
 	// set return variables to get variables out of the if scopes
 	let imagesPath = undefined;
@@ -92,33 +89,35 @@ async function scrapeDrug(compendiumURL) {
 
 		// get the position of the link to photos page
 		const imagesPosition = availableLinks.filter(a => a.name == "Photo")[0].position;
-		console.log('imagesPosition', imagesPosition);
 
 		// store the link to this drugs images, for later use
 		imagesPath = await page.evaluate(selector => {
 			const photoAnchor = document.querySelector(selector);
 			return photoAnchor.pathname;
 		}, `#ctl00_MainContent_ucProductDetail1_tblLinkMoreInfosFIPIPhoto > tbody > tr > td:nth-child(${imagesPosition}) > a`);
+	} else {
+		console.log('images path not available')
 	}
 	if (availableLinksBoolean[1]) {
 		console.log('scraping notice path...');
 
 		// get the position of the link to photos page
 		const noticePosition = availableLinks.filter(a => a.name == "Info patient")[0].position;
-		console.log('noticePosition', noticePosition)
 
 		// store the link to this drugs images, for later use
 		noticePath = await page.evaluate(selector => {
 			const noticeAnchor = document.querySelector(selector);
 			return noticeAnchor.pathname;
 		}, `#ctl00_MainContent_ucProductDetail1_tblLinkMoreInfosFIPIPhoto > tbody > tr > td:nth-child(${noticePosition}) > a`);
+	} else {
+		console.log('notice path not available')
 	}
 
 
 	// scrape data at info pages
 	if (availableLinksBoolean[0]) {
 		console.log('images found. moving to images page');
-		console.log('imagesPath', imagesPath);
+		console.log('images path', imagesPath);
 
 		// go to images page and wait for load
 		await Promise.all([
@@ -126,10 +125,10 @@ async function scrapeDrug(compendiumURL) {
 			page.goto(`https://compendium.ch/${imagesPath}`),
 		]);
 
-		// It seems like I can't use document.querySelector to get the image, since
-		// apparently the page is rendered using some software I don't know.
-		// by taking a look at the source of the page, it seems like the images we are looking for are
-		// on another source server, which is specified in the <iframe> element, that we can access.
+		// It seems like I can't use document.querySelector to get the image, because the element is not
+		// classically rendered, and is not in the source of the page.
+		// by taking a look at it, it seems like the images we are looking for are on another
+		// source server, which is specified in the <iframe> element, that we can access.
 		const pathToSource = await page.evaluate(() => document.querySelector('iframe').src);
 
 		console.log('iframe passed', pathToSource);
@@ -149,8 +148,6 @@ async function scrapeDrug(compendiumURL) {
 			const img = document.querySelector('div[id*="tabs-"] > div > ul > li > a > img');
 			return img.src;
 		});
-
-		console.log(imgpath);
 
 		imagesReturn = imgpath;
 	}
@@ -179,9 +176,9 @@ async function scrapeDrug(compendiumURL) {
 		// get the notice of the drug
 		const notice = await page.evaluate((selector) => {
 			return Array.from(document.querySelectorAll(selector))
-				/* get the childnodes of each paragraphs */
+				// get the childnodes of each paragraphs
 				.map((paragraphe) => Array.from(paragraphe.childNodes)
-					/* get the text content of each element inside a paragraph */
+					// get the text content of each element inside a paragraph
 					.map(element => element.textContent));
 		}, '.monographie > .paragraph');
 
@@ -195,7 +192,7 @@ async function scrapeDrug(compendiumURL) {
 	// close the headless browser
 	await browser.close();
 
-	//create return object
+	// create return object
 	const drugData = {
 		title: noticeTitleReturn,
 		firm: noticeFirmReturn,

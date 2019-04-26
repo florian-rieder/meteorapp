@@ -4,21 +4,27 @@
 	<button id='addDrugToPharmacyButton'>Ajouter à ma pharmacie</button>
 	{{/if}}
 	<div class='drugData_firstInfo'>
-		<h1>{{title}}</h1>
+		<h1>{{displayTitle}}</h1>
 		<div class="container">
 			<div class="row">
 				<div class="col-xs">
+					{{#if hasComposition}}
 					Composition: <br>
 					<ul>
 						{{#each composition}}
 							{{> component}}
 						{{/each}}
 					</ul>
+					{{else}}
+					<span>Composition indisponible.</span>
+					{{/if}}
 				</div>
 				{{#if hasImage}}
 				<div class="col-xs">
 					<img src="{{imgpath}}" alt="image" class='drugData_image'>
 				</div>
+				{{else}}
+				<div class="col-xs">Image indisponible.</div>
 				{{/if}}
 			</div>
 		</div>

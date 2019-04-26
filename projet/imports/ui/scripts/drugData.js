@@ -26,6 +26,14 @@ Template.drugData.helpers({
 		// check if we got a path to an image
 		return Template.instance().data.imgpath != null;
 	},
+	hasComposition() {
+		return Template.instance().data.composition[0] != undefined;
+	},
+	displayTitle() {
+		const prettyTitle = Template.instance().data.title;
+		const backupTitle = Template.instance().data.showcaseTitle;
+		return prettyTitle == undefined ? backupTitle : prettyTitle;
+	}
 });
 
 Template.drugData.events({

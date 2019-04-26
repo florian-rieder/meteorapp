@@ -15,9 +15,10 @@ Meteor.methods({
 	}
 });
 
-// fetches the name, composition and notice from a drug's page on compendium URL
+// fetches the name, composition, notice and images from a drug's page on compendium URL
 async function scrapeDrug(compendiumURL) {
-	const additionalInfoPagesThatInterestUs = ["Photo", "Info patient"];
+	// annex pages that will interest us and that we will want to scrape stuff on
+	const additionalInfoPages = ["Photo", "Info patient"];
 	// launch puppeteer browser
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
@@ -51,7 +52,7 @@ async function scrapeDrug(compendiumURL) {
 		const links = Array.from(document.querySelectorAll(args.selector));
 		let returnLinks = [];
 		// for each of the links there are, we check which ones are the ones we need 
-		// (specified in the very poetically named additionalInfoPagesThatInterestUs array), 
+		// (specified in the additionalInfoPages array), 
 		// and return the position of that link in its container for later use.
 		links.forEach((link, i) => {
 			args.additionalPages.forEach(name => {
@@ -65,15 +66,15 @@ async function scrapeDrug(compendiumURL) {
 		return returnLinks;
 	}, {
 		selector: '#ctl00_MainContent_ucProductDetail1_tblLinkMoreInfosFIPIPhoto > tbody > tr > td > a:not(.otherLang)',
-		additionalPages: additionalInfoPagesThatInterestUs,
+		additionalPages: additionalInfoPages,
 	});
 
 	// i don't really know how to describe this
 	// we create a table of boolean values. each of the values in the resulting array are a boolean 
 	// value that indicates if there is an available link for the corresponding page in 
-	// additionalInfoPagesThatInterestUs.
+	// additionalInfoPages.
 	// we can then use this table to fetch the data we have access to
-	const availableLinksBoolean = additionalInfoPagesThatInterestUs.map(n => availableLinks.filter(a => a.name == n)[0] != undefined);
+	const availableLinksBoolean = additionalInfoPages.map(n => availableLinks.filter(a => a.name == n)[0] != undefined);
 
 	// set return variables to get variables out of the if scopes
 	let imagesPath = undefined;

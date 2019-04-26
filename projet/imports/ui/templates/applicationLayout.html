@@ -7,7 +7,7 @@
 
 	<body>
 		<div class='body_content'>
-			{{>yield}}
+			{{> yield}}
 		</div>
 		<!-- loading wheel gif made using loading.io -->
 		<img id='loadingWheel' class='hidden' src="/images/Rolling-0.8s-80px.gif" alt="loading...">
@@ -16,4 +16,12 @@
 	<footer>
 		{{> yield "footer"}}
 	</footer>
+</template>
+
+<template name='404-NOT-FOUND'>
+	<div class='container d-flex justify-content-center align-items-center flex-column' style='height: 100%; text-align: center;'>
+		<h1 style='font-size: 10em;'>404</h1>
+		<p style='color: grey; font-size: 1.5em;'>Cette page n'existe pas</p>
+		<a href="/" style='font-size: 1em;'>Vous pouvez revenir à la page d'accueil en cliquant ici.</a>
+	</div>
 </template>

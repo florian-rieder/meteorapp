@@ -1,15 +1,25 @@
 <template name='helpPage'>
 	{{> helpBar}}
-	<!--<div class='helpPage_buttons'>
-		{{#each buttons}}
-			{{> helpButton}}
-		{{/each}}
-	</div>-->
-	<div class='helpPage_content'>
-		<div class='helpContact'>
+	<div class='container-fluid'>
+		{{#if pageIs 'contacts'}}
 			{{> contactList}}
 			<button class='helpContact_add'>Ajouter contact</button>
-		</div>
+		{{else}}
+			{{#if pageIs 'parameters'}}
+				<!-- insert parameters subpage template here -->
+				paramètres
+			{{else}}
+				{{#if pageIs 'nearby-stores'}}
+					<!-- insert nearby-stores subpage template here -->
+					stores
+				{{else}}
+					{{#if pageIs 'support'}}
+						<!-- insert support subpage template here -->
+						support
+					{{/if}}
+				{{/if}}
+			{{/if}}
+		{{/if}}
 	</div>
 </template>
 
@@ -33,10 +43,8 @@
 
 <template name='helpBar'>
 	<nav class="navbar navbar-light" style="background-color: rgb(212, 212, 212);">
-		<a href="#" class="badge badge-success">Contacts</a>
-		<a href="#" class="badge badge-success">Pharmacies Proches</a>
-		<a href="#" class="badge badge-success">Support Tech</a>
-		<a href="#" class="badge badge-success">Réglages</a>
-		<a href="#" class="badge badge-success">F à Q</a>
+		{{#each buttons}}
+			<a href="/help/{{path}}" class="badge badge-success">{{name}}</a>
+		{{/each}}
 	</nav>
 </template>

@@ -14,7 +14,8 @@ import { Drugs, Profile } from '../../api/collections.js';
 // routes definition using Iron:router
 
 Router.configure({
-	layoutTemplate: 'applicationLayout'
+	layoutTemplate: 'applicationLayout',
+	notFoundTemplate: '404-NOT-FOUND',
 });
 
 Router.route('/', function () {
@@ -44,7 +45,13 @@ Router.route('/scan', function () {
 });
 
 Router.route('/help', function () {
-	this.render('helpPage');
+	Router.go('/help/contacts');
+});
+
+Router.route('/help/:subPage', function () {
+	this.render('helpPage', {
+		data: {page: this.params.subPage},
+	});
 	this.render('footerBar', { to: 'footer' });
 });
 

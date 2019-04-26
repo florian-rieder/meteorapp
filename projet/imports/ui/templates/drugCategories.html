@@ -1,0 +1,17 @@
+<template name='drugCategories'>
+	<nav class="navbar navbar-light" style="background-color: rgb(212, 212, 212);">
+		<div>
+			<button class='drugCategories_addCategory'>+</button>
+		</div>
+	</nav>
+	{{#each categories}}
+		{{> category}}
+	{{/each}}
+</template>
+
+<template name='category'>
+	<div class='category_container d-flex'>
+		<div class='mr-auto p-2'>{{name}}</div>
+		<div class='p-2'>{{drugsInCategory}}</div>
+	</div>
+</template>

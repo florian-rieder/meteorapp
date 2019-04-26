@@ -1,10 +1,10 @@
 import '../templates/drugsList.html';
-import '../templates/footerBar.html';
+
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Drugs } from '../../api/collections.js';
-import { inspectDrugData, lastActivePage } from '../../api/utilities.js';
+import { lastActivePage } from '../../api/utilities.js';
 import Swal from 'sweetalert2';
 
 let deleteEnabled = new ReactiveVar(false);
@@ -13,7 +13,9 @@ let drugsToDelete = [];
 
 Template.drugsList.helpers({
 	drugs() {
-		return Drugs.find({});
+		console.log(Template.instance().data);
+		// return all drugs whose _id is containd in this category's extKeys
+		return Drugs.find({_id: {$in: Template.instance().data.extKeys}});
 	},
 	deleteButtonName() {
 		// user is already deleting drugs

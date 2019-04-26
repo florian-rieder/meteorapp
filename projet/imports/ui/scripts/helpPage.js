@@ -16,14 +16,6 @@ Template.helpPage.helpers({
 	pageIs(string){
 		return Template.instance().data.page === string;
 	}
-})
-
-Template.contactList.helpers({
-    buttons() {
-        return [
-            {name: 'CHUV'}
-        ]
-    }
 });
 
 

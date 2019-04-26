@@ -1,19 +1,38 @@
 import { ReactiveVar } from 'meteor/reactive-var';
 import Swal from 'sweetalert2';
+import { Categories } from './collections.js';
 
 // this is a class with a few methods that we can use as an """API""" to controll the
 // loading wheel image
 class LoadingWheelController {
 	show() {
 		const spinner = document.getElementById('loadingWheel');
-		if(spinner){
+		if (spinner) {
 			spinner.classList.remove('hidden');
 		}
 	}
 	hide() {
 		const spinner = document.getElementById('loadingWheel');
-		if(spinner){
+		if (spinner) {
 			spinner.classList.add('hidden');
+		}
+	}
+}
+
+export class CategoryItem {
+	constructor(name) {
+		this.name = name;
+		this.extKeys = [];
+	}
+	addKey(id) {
+		this.extKeys.push(id);
+	}
+	// removes all instances of a certain id from the external keys
+	removeKey(id) {
+		for (let i = this.extKeys.length - 1; i >= 0; i--) {
+			if (this.extKeys[i] === id) {
+				this.extKeys.splice(i, 1);
+			}
 		}
 	}
 }
@@ -40,14 +59,31 @@ export const fireDrugAddDialog = async function (title) {
 		text: "Voulez vous ajouter ce médicament à votre pharmacie ?",
 		// with swal2, we can insert HTML inside the dialog, and yield the values
 		// entered in inputs using preConfirm()
-		html:
+		html: (() => {
 			// should we disallow the user to enter an expiration date that's already past ?
 			// or should we let them enter it and then notify them that it's expired ?
-			`EXP: <input type='month' id='swal_expInputMonth' value='${year}-${month}'>`,
+			let htmlString = `EXP: <input type='month' id='swal-input_expirationMonth' value='${year}-${month}'> <br>`;
+
+			// create a drop down list listing all categories for the user to select one
+			htmlString += `Catégorie: <select class='swal-input_select'>`;
+			Categories.find().forEach(cat => {
+				htmlString += ` <option value="${cat._id}">${cat.name}</option> `;
+			});
+			htmlString += `</select>`;
+
+			// return the generated html string
+			return htmlString;
+		})(),
 		preConfirm: () => {
 			// get input data and format it
-			const month = document.getElementById('swal_expInputMonth').value;
-			return new Date(month);
+			const expirationDate = new Date(document.getElementById('swal-input_expirationMonth').value);
+			const selectForm = document.querySelector('.swal-input_select');
+			const selectedCategoryId = selectForm.options[selectForm.selectedIndex].value;
+
+			return {
+				exp: expirationDate,
+				categoryId: selectedCategoryId,
+			};
 		},
 		// cancel button
 		showCancelButton: true,
@@ -138,7 +174,7 @@ export const search = function (query) {
 		// hide loading wheel
 		LoadingWheel.hide();
 		if (result) {
-			console.log(result.length + ' results for query "'+ query +'"');
+			console.log(result.length + ' results for query "' + query + '"');
 			/* add all the results of the search to SearchResults */
 			searchResults.set(result);
 		}

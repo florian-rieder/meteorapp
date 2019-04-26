@@ -6,6 +6,7 @@ import '../../api/collections.js';
 import { Template } from 'meteor/templating';
 import { inspectDrugData, searchResults, LoadingWheel, fireDrugAddDialog, lastActivePage } from '../../api/utilities';
 import Swal from 'sweetalert2';
+import { Categories } from '../../api/collections.js';
 
 Template.searchPage.helpers({
 	results() {
@@ -41,13 +42,13 @@ Template.result.events({
 					// we can simply copy it and not worry about scraping it again, gaining time
 					let drugData = inspectDrugData.get();
 					// add fields to the result object before addind it to db
-					drugData.exp = swalResult.value;
+					drugData.exp = swalResult.value.exp;
 					drugData.createdAt = new Date();
 
 					console.log(drugData);
 					// this is a way of calling the drugs.insert method like with Meteor.call, but that way we can return
 					// the id of the newly inserted drug in the db
-					const id = Meteor.apply('drugs.insert', [drugData], { returnStubValue: true });
+					const id = Meteor.apply('drugs.insert', [drugData, swalResult.value.categoryId], { returnStubValue: true });
 
 					Swal.fire({
 						type: 'success',
@@ -75,13 +76,13 @@ Template.result.events({
 						LoadingWheel.hide();
 						if (result) {
 							// add fields to the result object before addind it to db
-							result.exp = swalResult.value;
+							result.exp = swalResult.value.exp;
 							result.createdAt = new Date();
 
 							console.log(result);
 							// this is a way of calling the drugs.insert method like with Meteor.call, but that way we can return
 							// the id of the newly inserted drug in the db
-							const id = Meteor.apply('drugs.insert', [result], { returnStubValue: true });
+							const id = Meteor.apply('drugs.insert', [result, swalResult.value.categoryId], { returnStubValue: true });
 
 							Swal.fire({
 								type: 'success',

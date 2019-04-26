@@ -1,32 +1,68 @@
 import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
+import { CategoryItem } from './utilities.js';
 
 // export all the collections so that they are accessible from other files
 export const Drugs = new Mongo.Collection('drugs'); // user pharmacy
 export const Profile = new Mongo.Collection('profile');
+export const Categories = new Mongo.Collection('categories'); // categories in which the user can put his drugs
 
 // wrap db methods in meteor methods to call them from the client
-// note: i'm not sure we event need them to be wrapped like that - florian
+// note: i'm not sure we even need them to be wrapped like that
+
+// Drugs
 Meteor.methods({
-	'drugs.insert' (drugData) {
-		return Drugs.insert(drugData);
+	'drugs.insert'(drugData, targetCategoryId) {
+		// insert drug and get its id
+		const drugId = Drugs.insert(drugData);
+		// add the id to the external keys of targeted category
+		Meteor.call('categories.addExtKey', targetCategoryId, drugId);
+
+		return drugId;
 	},
-	'drugs.remove' (id) {
+	'drugs.remove'(id) {
 		Drugs.remove(id);
+		// remove foreign key for this drug inside all categories
+		Categories.find().forEach(cat => {
+			Meteor.call('categories.removeExtKey', cat._id, id);
+		});
 	},
-	'drugs.removeAll' () {
+	'drugs.removeAll'() {
 		Drugs.remove({});
+		Categories.find().forEach(cat => {
+			Meteor.call('categories.removeExtKey', cat._id, id);
+		});
 	},
 });
 
+// Profile
 Meteor.methods({
-	'profile.insert' (profileArray) {
+	'profile.insert'(profileArray) {
 		Profile.insert(profileArray);
 	},
-	'profile.remove' () {
+	'profile.remove'() {
 		Profile.remove({});
 	},
-	'profile.count' () {
+	'profile.count'() {
 		return Profile.find().count();
 	}
-})
+});
+
+// Categories
+Meteor.methods({
+	'categories.insert'(categoryObject) {
+		Categories.insert(categoryObject);
+	},
+	'categories.addExtKey'(categoryId, drugId) {
+		Categories.update(
+			{ _id: categoryId },
+			{ $push: { extKeys: drugId } }
+		);
+	},
+	'categories.removeExtKey'(categoryId, drugId) {
+		Categories.update(
+			{ _id: categoryId },
+			{ $pull: { extKeys: drugId } }
+		);
+	}
+});

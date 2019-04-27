@@ -147,7 +147,8 @@ async function scrapeDrug(compendiumURL) {
 			// [id*="tabs-"] is used to get the div that uses an id unique for each drug
 			// like "#tabs-1498893-1" for example.
 			const img = document.querySelector('div[id*="tabs-"] > div > ul > li > a > img');
-			return img.src;
+			// avoid getting an error that crashes the scraper if there is actually no image there, despite our efforts
+			return img == null ? undefined : img.src;
 		});
 
 		imagesReturn = imgpath;

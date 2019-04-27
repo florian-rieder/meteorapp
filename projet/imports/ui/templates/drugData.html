@@ -1,66 +1,66 @@
 <template name="drugData">
-	<button id='backButton'>Back</button>
-	{{#if isNotAlreadyInPharmacy}}
-	<button id='addDrugToPharmacyButton'>Ajouter à ma pharmacie</button>
-	{{/if}}
-	<div class='drugData_firstInfo'>
-		<h1>{{displayTitle}}</h1>
-		<div class="container">
-			<div class='row'>
-				<div>Fabricant: {{firm}}</div>
-			</div>
-			<div class="row">
-				<div class="col-xs">
-					{{#if hasComposition}}
-					Composition: <br>
-					<ul>
-						{{#each composition}}
-							{{> component}}
-						{{/each}}
-					</ul>
-					{{else}}
-					<span>Composition indisponible.</span>
-					{{/if}}
-				</div>
-				{{#if hasImage}}
-				<div class="col-xs">
-					<img src="{{imgpath}}" alt="image" class='drugData_image'>
-				</div>
-				{{else}}
-				<div class="col-xs">Image indisponible.</div>
+	<div class='container-fluid'>
+		<div class='drugData_container'>
+				<button id='backButton'>Back</button>
+				{{#if isNotAlreadyInPharmacy}}
+					<button id='addDrugToPharmacyButton'>Ajouter à ma pharmacie</button>
 				{{/if}}
-			</div>
-		</div>
-
-		<div>
-
-			<!-- notice formatting using spacebars -->
-			<div class='drugData_noticeContainer'>
-				{{#if hasNotice}}
-
-				{{#each subarray in notice}}
-				{{#if isOfTwoLastFromIndex @index}}
-					{{#each text in subarray}}
-					<p class='drugData_noticeTwoLast'>{{text}}</p>
-					{{/each}}
-				{{else}}
-					<div>
-						{{#each text in subarray}}
-							{{#if isTitleFromIndex @index }}
-							<h2>{{text}}</h2>
+				<div class='drugData_firstInfo'>
+					<h1>{{displayTitle}}</h1>
+					<div class="container">
+						<div class='row'>
+							<div>Fabricant: {{firm}}</div>
+						</div>
+						<div class="row">
+							<div class="col-xs">
+								{{#if hasComposition}}
+								Composition: <br>
+								<ul>
+									{{#each composition}}
+									{{> component}}
+									{{/each}}
+								</ul>
+								{{else}}
+								<span>Composition indisponible.</span>
+								{{/if}}
+							</div>
+							{{#if hasImage}}
+							<div class="col-xs">
+								<img src="{{imgpath}}" alt="image" class='drugData_image'>
+							</div>
 							{{else}}
-							<p>{{text}}</p>
+							<div class="col-xs">Image indisponible.</div>
 							{{/if}}
-						{{/each}}
+						</div>
 					</div>
-				{{/if}}
-				{{/each}}
-
-				{{else}}
-				<p>Nous n'avons pas trouvé de notice d'emballage pour ce médicament.</p>
-				{{/if}}
-			</div>
-
+		
+					<div>
+						<!-- notice formatting using spacebars -->
+						<div class='drugData_noticeContainer'>
+							{{#if hasNotice}}
+								{{#each subarray in notice}}
+									{{#if isOfTwoLastFromIndex @index}}
+										{{#each text in subarray}}
+											<p class='drugData_noticeTwoLast'>{{text}}</p>
+										{{/each}}
+									{{else}}
+										<div>
+											{{#each text in subarray}}
+												{{#if isTitleFromIndex @index }}
+													<h2>{{text}}</h2>
+												{{else}}
+													<p>{{text}}</p>
+												{{/if}}
+											{{/each}}
+										</div>
+									{{/if}}
+								{{/each}}
+							{{else}}
+							<p>Nous n'avons pas trouvé de notice d'emballage pour ce médicament.</p>
+							{{/if}}
+						</div>
+					</div>
+				</div>
 		</div>
 	</div>
 </template>

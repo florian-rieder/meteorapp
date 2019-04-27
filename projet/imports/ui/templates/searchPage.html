@@ -1,7 +1,7 @@
 <template name='searchBar'>
 	<div class='d-flex justify-content-center' style='width: 100%'>
 		<div class='searchBar_container d-flex justify-content-left'>
-			<input type="text" placeholder="Recherche" class="searchBar_searchSquare" value="{{searchQuery}}">
+			<input type="search" placeholder="Recherche" class="searchBar_searchSquare" value="{{searchQuery}}">
 			<div class="searchBar_searchButton">
 				<img src="/images/search_icon.png" alt="Rechercher" class='searchBar_searchIcon'>
 			</div>
@@ -27,12 +27,12 @@
 
 <template name='result'>
 	<li class='result_li'>
-		<div class='result_container'>
-			<h3 class='result_title'>{{title}}</h3>
-			<p class='result_subtitle'>{{subtitle}}</p>
-			<div class='result_buttonsContainer'>
-				<button class='result_add'>Ajouter</button>
-				<button class='result_inspect'>Inspecter</button>
+		<div class='result_container d-flex p-2 flex-column'>
+			<h3 class='result_title {{#if isNcHc}}result_grayedText{{/if}}'>{{title}}</h3>
+			<p class='result_subtitle {{#if isNcHc}}result_grayedText{{/if}}'>{{subtitle}}</p>
+			<div class='ml-auto'>
+				<button class='result_add btn btn-info btn-sm'>Ajouter</button>
+				<button class='result_inspect btn btn-info btn-sm'>Inspecter</button>
 			</div>
 		</div>
 	</li>

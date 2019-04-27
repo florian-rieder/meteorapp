@@ -1,7 +1,7 @@
 body {
 	margin: 0px;
 	font-family: sans-serif;
-	/*background-color: aquamarine*/
+	background-color: #caffe0;
 }
 
 * {
@@ -23,10 +23,10 @@ header {
 	width: 100%;
 	font-size: 28px;
 	color: white;
-	background-color: rgb(103, 192, 143);
+	background-color: #5abb85;
 	z-index: 2;
 	padding: 10px;
-	border-bottom: 1px solid rgb(36, 124, 83);
+	border-bottom: 1px solid #4ca876;
 	/* vertically center items contained in the header (logo) */
 	display: flex;
 	align-items: center;
@@ -35,10 +35,10 @@ header {
 footer {
 	height: 60px;
 	width: 100%;
-	background-color: rgb(103, 192, 143);
+	background-color: #5abb85;
 	z-index: 2;
 	padding: 10px;
-	border-top: 1px solid rgb(36, 124, 83);
+	border-top: 1px solid #4ca876;
 }
 
 #body_headerLogo {
@@ -62,6 +62,13 @@ footer {
 	width: 50%;
 	padding: 10px;
 }
+.drugData_container{
+	margin-top: 1em;
+	margin-bottom: 1em;
+	padding: 1em;
+	border: 1px solid #4ca876;
+	background-color: white;
+}
 
 .drugData_noticeContainer {
 	/* height: 300px; */
@@ -69,7 +76,6 @@ footer {
 	border: 1px solid rgb(63, 63, 63);
 	padding: 10px;
 }
-
 .drugData_noticeTwoLast {
 	color: grey;
 	font-size: 12px;
@@ -80,32 +86,12 @@ footer {
 	height: calc(100vh - 110px - 70px);
 	overflow-y: auto;
 	border: 1px solid rgb(63, 63, 63);
+	background-color: white;
 }
-
 .searchResults_numberDisplay {
 	font-size: 12px;
 	color: grey;
 }
-
-.result_title {
-	font-size: 15px;
-	font-weight: bold;
-	margin: 0px;
-}
-
-.result_subtitle {
-	color: grey;
-	font-size: 12px;
-	margin: 0px;
-}
-
-.result_container {
-	border: 1px solid black;
-	margin: 0.5em;
-	padding: 0.5em;
-	position: relative;
-}
-
 .searchResults_ul {
 	list-style-type: none;
 	margin: 0;
@@ -113,10 +99,22 @@ footer {
 }
 
 
-.result_buttonsContainer {
-	position: absolute;
-	right: 5px;
-	top: 10%;
+.result_title {
+	font-size: 15px;
+	font-weight: bold;
+	margin: 0px;
+}
+.result_subtitle {
+	color: grey;
+	font-size: 12px;
+	margin: 0px;
+}
+.result_grayedText{
+	color: rgb(172, 172, 172);
+}
+.result_container {
+	border: 1px solid black;
+	margin: 0.5em;
 }
 
 .drawingBuffer {
@@ -215,9 +213,9 @@ footer {
 }
 
 .drug_container {
-	border: 1px solid black;
-	padding: 5px;
-	height: 50px;
+	border: 1px solid #4ca876;
+	background-color: white;
+	padding: 1em;
 	width: 70vw;
 	display: inline-block;
 	transition-duration: 0.1s;
@@ -285,7 +283,7 @@ div.drugData_firstInfo>div.container {
 }
 
 .category_container{
-	border: 1px solid black;
+	border: 1px solid #4ca876;
 	padding: 1em;
 	margin: 1em;
 	background-color: white;

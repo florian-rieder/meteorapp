@@ -20,6 +20,13 @@ Template.searchPage.helpers({
 	}
 });
 
+Template.result.helpers({
+	isNcHc(){
+		const title = Template.instance().data.title;
+		return title.includes('nc') || title.includes('hc');
+	}
+})
+
 Template.result.events({
 	'click .result_add'(e) {
 		e.preventDefault();

@@ -15,6 +15,39 @@ Meteor.methods({
 	}
 });
 
+// list of resources to ignore while scraping to optimize performance
+const blockedResourceTypes = [
+	'image',
+	'media',
+	'font',
+	'texttrack',
+	'object',
+	'beacon',
+	'csp_report',
+	'imageset',
+];
+const skippedResources = [
+	'quantserve',
+	'adzerk',
+	'doubleclick',
+	'adition',
+	'exelator',
+	'sharethrough',
+	'cdn.api.twitter',
+	'google-analytics',
+	'googletagmanager',
+	'google',
+	'fontawesome',
+	'facebook',
+	'analytics',
+	'optimizely',
+	'clicktale',
+	'mixpanel',
+	'zedo',
+	'clicksor',
+	'tiqcdn',
+];
+
 // fetches the name, composition, notice and images from a drug's page on compendium URL
 async function scrapeDrug(compendiumURL) {
 	// annex pages that will interest us and that we will want to scrape stuff on
@@ -22,6 +55,21 @@ async function scrapeDrug(compendiumURL) {
 	// launch puppeteer browser
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
+
+	// optimize performance by blocking HTTP requests that are not necessary
+	await page.setRequestInterception(true);
+	page.on('request', request => {
+		const requestUrl = request._url.split('?')[0].split('#')[0];
+		if (
+			blockedResourceTypes.indexOf(request.resourceType()) !== -1 ||
+			skippedResources.some(resource => requestUrl.indexOf(resource) !== -1)
+		) {
+			request.abort();
+		} else {
+			request.continue();
+		}
+	});
+
 	await page.goto(compendiumURL);
 
 	// await page load
@@ -65,9 +113,9 @@ async function scrapeDrug(compendiumURL) {
 		});
 		return returnLinks;
 	}, {
-		selector: '#ctl00_MainContent_ucProductDetail1_tblLinkMoreInfosFIPIPhoto > tbody > tr > td > a:not(.otherLang)',
-		additionalPages: additionalInfoPages,
-	});
+			selector: '#ctl00_MainContent_ucProductDetail1_tblLinkMoreInfosFIPIPhoto > tbody > tr > td > a:not(.otherLang)',
+			additionalPages: additionalInfoPages,
+		});
 
 	// i don't really know how to describe this
 	// we create a table of boolean values. each of the values in the resulting array are a boolean 
@@ -214,6 +262,21 @@ async function searchByString(searchString) {
 	// launch puppeteer browser
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
+
+	// optimize performance by blocking HTTP requests that are not necessary
+	await page.setRequestInterception(true);
+	page.on('request', request => {
+		const requestUrl = request._url.split('?')[0].split('#')[0];
+		if (
+			blockedResourceTypes.indexOf(request.resourceType()) !== -1 ||
+			skippedResources.some(resource => requestUrl.indexOf(resource) !== -1)
+		) {
+			request.abort();
+		} else {
+			request.continue();
+		}
+	});
+
 	await page.goto(searchURL);
 
 	const trSelector = '#ctl00_MainContent_ucProductFullSearch1_gvwProducts > tbody > tr';

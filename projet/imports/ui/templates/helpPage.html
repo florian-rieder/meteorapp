@@ -3,7 +3,6 @@
 	<div class='container-fluid'>
 		{{#if pageIs 'contacts'}}
 			{{> contactList}}
-			<button class='helpContact_add'>Ajouter contact</button>
 		{{else}}
 			{{#if pageIs 'parameters'}}
 				<!-- insert parameters subpage template here -->
@@ -24,15 +23,35 @@
 </template>
 
 <template name='contactList'>
-	<p>Contact List :</p>
-	<div>
-		<p>Emergency Rescue Service (Ambulance) : 144</p>
-	</div>
-	<div>
-		<p>
-			<a href="http://www.chuv.ch">CHUV</a>
-		</p>
-	</div>	
+	<table class="table table-hover table-bordered">
+			<thead>
+			  <tr>
+				<th scope="col">#</th>
+				<th scope="col">Nom</th>
+				<th scope="col">Téléphone</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr>
+				<th scope="row">1</th>
+				<td>Emergency Rescue Service (Ambulance)</td>
+				<td>144</td>
+			  </tr>
+			  <tr>
+				<th scope="row">2</th>
+				<td><a href="http://www.chuv.ch">CHUV</a></td>
+				<td>021 314 11 11</td>
+			  </tr>
+			</tbody>
+	</table>
+	<div class="input-group">
+			<div class="input-group-prepend">
+			  <span class="input-group-text">Nom & Téléphone</span>
+			</div>
+			<input type="text" aria-label="First name" class="form-control">
+			<input type="text" aria-label="Last name" class="form-control">
+			<button class="btn btn-outline-secondary" type="button" id="button-addon2">Ajouter Contact</button>
+		  </div>
 </template>
 
 <template name='helpBar'>

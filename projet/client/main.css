@@ -242,7 +242,8 @@ header>a, header>a:active, header>a:hover, header>a:visited {
 }
 
 .drugData_image {
-	width: 100%;
+	max-width: 100%;
+	max-height: 60vh;
 }
 
 div.drugData_firstInfo>div.container>div>div[class*='col'] {

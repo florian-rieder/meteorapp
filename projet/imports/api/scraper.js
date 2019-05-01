@@ -53,7 +53,7 @@ async function scrapeDrug(compendiumURL) {
 	// annex pages that will interest us and that we will want to scrape stuff on
 	const additionalInfoPages = ["Photo", "Info patient"];
 	// launch puppeteer browser
-	const browser = await puppeteer.launch();
+	const browser = await puppeteer.launch(/* {headless: false} */);
 	const page = await browser.newPage();
 
 	// optimize performance by blocking HTTP requests that are not necessary
@@ -260,7 +260,7 @@ async function searchByString(searchString) {
 	const newString = searchString.split(' ').join('!20');
 	const searchURL = `https://compendium.ch/search/${newString}/fr`;
 	// launch puppeteer browser
-	const browser = await puppeteer.launch();
+	const browser = await puppeteer.launch(/* {headless: false} */);
 	const page = await browser.newPage();
 
 	// optimize performance by blocking HTTP requests that are not necessary

@@ -24,17 +24,6 @@ export class CategoryItem {
 		this.name = name;
 		this.extKeys = [];
 	}
-	addKey(id) {
-		this.extKeys.push(id);
-	}
-	// removes all instances of a certain id from the external keys
-	removeKey(id) {
-		for (let i = this.extKeys.length - 1; i >= 0; i--) {
-			if (this.extKeys[i] === id) {
-				this.extKeys.splice(i, 1);
-			}
-		}
-	}
 }
 
 export const inspectDrugData = new ReactiveVar(undefined);

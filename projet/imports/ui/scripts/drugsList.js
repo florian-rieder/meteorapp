@@ -58,11 +58,6 @@ Template.drugsList.events({
 					if (result.value) {
 						// delete selected drugs
 						drugsToDelete.forEach(id => Meteor.call('drugs.remove', id));
-						// show complete message
-						Swal.fire({
-							type: 'success',
-							title: "C'est fait !",
-						});
 					}
 					// either way, reset drugsToDelete array
 					drugsToDelete = [];

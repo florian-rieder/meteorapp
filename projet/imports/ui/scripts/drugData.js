@@ -55,7 +55,7 @@ Template.drugData.events({
 				drugData.createdAt = new Date();
 				drugData.exp = swalResult.value.exp;
 
-				Meteor.call('drugs.insert', drugData, swalResult.categoryId);
+				Meteor.call('drugs.insert', drugData, swalResult.value.categoryId);
 				Swal.fire({
 					type: 'success',
 					title: "C'est fait !",

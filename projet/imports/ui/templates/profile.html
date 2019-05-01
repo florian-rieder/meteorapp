@@ -1,10 +1,5 @@
 <template name='profile'>
-	<div class='container-fluid'>
-		{{#if getDisplay}}
-		<button id="confirmButton">Valider</button>
-		{{else}}
-		<button id="modifyButton">Modifier</button>
-		{{/if}}
+	<div class='d-flex justify-content-center vertical-center'>
 		<div id='profile_container'>
 			<ul class='profileList center'>
 				{{#each fields}}
@@ -13,12 +8,19 @@
 					<input type="text" class='field_textInput' placeholder={{fieldName}} name={{fieldName}}
 						id={{fieldId}} value={{getProfileField @index}}>
 					{{else}}
-					<p>{{getProfileField @index}}</p>
+					<p class='center lead profileElement'>{{getProfileField @index}}</p>
 					{{/if}}
 				</li>
 				{{/each}}
 			</ul>
 		</div>
+		
 	</div>
-
+	<div class='d-flex justify-content-center'>
+			{{#if getDisplay}}
+			<button id="confirmButton" class='btn btn-success'>Valider</button>
+			{{else}}
+			<button id="modifyButton" class='btn btn-primary'>Modifier</button>
+			{{/if}}
+	</div>
 </template>

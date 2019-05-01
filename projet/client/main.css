@@ -1,7 +1,7 @@
 body {
 	margin: 0px;
 	font-family: sans-serif;
-	background-color: #caffe0;
+	background-color: rgba(236, 236, 236, 0.692)
 }
 
 * {
@@ -267,7 +267,7 @@ div.drugData_firstInfo>div.container {
 	padding: 17px;
 	width: 40%;
 	border: 1px solid #feeee0;
-	text-align : left;
+	text-align : center;
 	color: #363636d3;
 }
 
@@ -278,8 +278,14 @@ div.drugData_firstInfo>div.container {
 }
 
 #profile_container {
-	width: 100%;
+	width: 60%;
 	text-align: center;
+	background-color: rgb(148, 221, 176)
+}
+
+.profileElement {
+	background-color: #d7f0c3;
+	height: 50px;
 }
 
 .category_container{
@@ -291,4 +297,16 @@ div.drugData_firstInfo>div.container {
 }
 .category_container:hover{
 	background-color: rgb(212, 212, 212);
+}
+
+#confirmButton{
+	width : 30%;	
+}
+
+#modifyButton{
+	width: 30%;
+}
+
+.vertical-center{
+	margin-top : 50px;
 }

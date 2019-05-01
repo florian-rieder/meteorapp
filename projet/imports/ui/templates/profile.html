@@ -1,28 +1,24 @@
 <template name='profile'>
 	<div class='container-fluid'>
+		{{#if getDisplay}}
 		<button id="confirmButton">Valider</button>
+		{{else}}
+		<button id="modifyButton">Modifier</button>
+		{{/if}}
 		<div id='profile_container'>
 			<ul class='profileList center'>
-        {{#each fields}}
-        <li class='profileListItem'>
-          {{#if hasProfileData}}
-          <p>{{getProfileField @index}}</p>
-          {{else}}
-          <input type="text" class='field_textInput' placeholder={{fieldName}} name={{fieldName}} id={{fieldId}}>
-          {{/if}}
-        </li>
-        {{/each}}
+				{{#each fields}}
+				<li class='profileListItem'>
+					{{#if getDisplay}}
+					<input type="text" class='field_textInput' placeholder={{fieldName}} name={{fieldName}}
+						id={{fieldId}} value={{getProfileField @index}}>
+					{{else}}
+					<p>{{getProfileField @index}}</p>
+					{{/if}}
+				</li>
+				{{/each}}
 			</ul>
 		</div>
 	</div>
 
-</template>
-
-<template name="uploadForm">
-	{{#with currentUpload}}
-	Uploading <b>{{file.name}}</b>:
-	<span id="progress">{{progress.get}}%</span>
-	{{else}}
-	<input id="fileInput" type="file" />
-	{{/with}}
 </template>

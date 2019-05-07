@@ -6,6 +6,7 @@ import '../templates/applicationLayout.html';
 let scannerIsRunning = false;
 
 function startScanner() {
+	console.log('here');
 	//initialization of scanner config
 	Quagga.init({
 		inputStream: {
@@ -170,11 +171,21 @@ function stopScanner() {
 
 Template.quagScan.events({
 	'click #scan_btn'() {
-		if (scannerIsRunning) {
-			stopScanner();
-		} else {
-			startScanner();
-		}
-		console.log('quagga running: ' + scannerIsRunning);
+		var permissions = cordova.plugins.permissions;
+		permissions.requestPermission(permissions.CAMERA, () => console.log('ouiiii9'), () => console.log('nooooon'));
+		permissions.hasPermission(permissions.CAMERA, function (status) {
+			if (status.hasPermission) {
+				console.log("Yes :D ");
+				if (scannerIsRunning) {
+					stopScanner();
+				} else {
+					startScanner();
+				}
+				console.log('coucou quagga running: ' + scannerIsRunning);
+			}
+			else {
+				console.warn("No :( ");
+			}
+		});
 	}
 })

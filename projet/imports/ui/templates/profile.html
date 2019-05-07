@@ -1,26 +1,36 @@
 <template name='profile'>
+	<h1 class='d-flex justify-content-center'>Votre Profil</h1>
 	<div class='d-flex justify-content-center vertical-center'>
 		<div id='profile_container'>
 			<ul class='profileList center'>
 				{{#each fields}}
 				<li class='profileListItem'>
-					{{#if getDisplay}}
-					<input type="text" class='field_textInput' placeholder={{fieldName}} name={{fieldName}}
-						id={{fieldId}} value={{getProfileField @index}}>
+					{{#if hasProfileData}}
+						{{#if getDisplay}}
+						<input type="text" class='field_textInput' placeholder={{fieldName}} name={{fieldName}}
+							id={{fieldId}} value={{getProfileField @index}}>
 					{{else}}
-					<p class='center lead profileElement'>{{getProfileField @index}}</p>
+						<p class='center lead profileElement'>{{getProfileField @index}}</p>
+						{{/if}}
+					{{else}}
+					<input type="text" class='field_textInput' placeholder={{fieldName}} name={{fieldName}}
+					id={{fieldId}}>
 					{{/if}}
 				</li>
 				{{/each}}
 			</ul>
 		</div>
-		
+
 	</div>
 	<div class='d-flex justify-content-center'>
+		{{#if hasProfileData}}
 			{{#if getDisplay}}
-			<button id="confirmButton" class='btn btn-success'>Valider</button>
+				<button id="confirmModify" class='btn btn-success'>Valider</button>
 			{{else}}
-			<button id="modifyButton" class='btn btn-primary'>Modifier</button>
+				<button id="modifyButton" class='btn btn-primary'>Modifier</button>
 			{{/if}}
+		{{else}}
+			<button id="confirmButton" class='btn btn-success'>Valider</button>
+		{{/if}}
 	</div>
 </template>

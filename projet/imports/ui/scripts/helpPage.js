@@ -8,6 +8,7 @@ Template.helpBar.helpers({
 			{ name: 'Contacts', path: 'contacts' },
 			{ name: 'Pharmacies', path: 'nearby-stores' },
 			{ name: 'Support techniques', path: 'support' },
+			{ name: 'F à Q', path: 'fàq' },
         ]
     }
 });

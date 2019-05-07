@@ -51,7 +51,7 @@ footer {
 	cursor: pointer;
 }
 
-.body_content {
+main {
 	height: calc(100vh - 110px);
 	overflow-y: auto;
 	z-index: 1;

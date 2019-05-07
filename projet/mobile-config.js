@@ -18,7 +18,5 @@ App.configurePlugin('cordova-plugin-camera', {
 // Add custom tags for a particular PhoneGap/Cordova plugin to the end of the
 // generated config.xml. 'Universal Links' is shown as an example here.
 App.appendToConfig(`
-	<feature name="Camera">
-		<param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
-	</feature>
+
 `);

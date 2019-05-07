@@ -1,21 +1,25 @@
 <template name="applicationLayout">
-	<header>
-		<a href="/">
-			<div id='body_headerLogo'>Medintake</div>
-		</a>
-	</header>
+
 
 	<body>
-		<div class='body_content'>
+		<header>
+			<a href="/">
+				<div id='body_headerLogo'>Medintake</div>
+			</a>
+		</header>
+
+		<main>
 			{{> yield}}
-		</div>
-		<!-- loading wheel gif made using loading.io -->
-		<img id='loadingWheel' class='hidden' src="/images/Rolling-0.8s-80px.gif" alt="loading...">
+			<!-- loading wheel gif made using loading.io -->
+			<img id='loadingWheel' class='hidden' src="/images/Rolling-0.8s-80px.gif" alt="loading...">
+		</main>
+
+		<footer>
+			{{> yield "footer"}}
+		</footer>
 	</body>
 
-	<footer>
-		{{> yield "footer"}}
-	</footer>
+
 </template>
 
 <template name='404-NOT-FOUND'>

@@ -125,6 +125,8 @@ Template.result.events({
 		LoadingWheel.show();
 		const accessURL = `https://compendium.ch${this.path}`;
 		Meteor.call('scrapeDrug', accessURL, (error, result) => {
+			const t1 = performance.now();
+			console.log(`scraping duration: ~${Math.round(t1 - t0)}ms`);
 			LoadingWheel.hide();
 			if (result) {
 				inspectDrugData.set(result);
@@ -138,8 +140,7 @@ Template.result.events({
 					type: 'error',
 				});
 			}
-			const t1 = performance.now();
-			console.log(`scraping duration: ~${Math.round(t1 - t0)}ms`);
+			
 		});
 	}
 })

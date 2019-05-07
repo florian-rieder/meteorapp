@@ -47,16 +47,42 @@ const skippedResources = [
 	'clicksor',
 	'tiqcdn',
 ];
+/* NOT WORKING
+// https://stackoverflow.com/questions/52431775/whats-the-performance-difference-of-puppeteer-launch-versus-puppeteer-connect
+// initialize browser (at startup)
+let browser, browserWSEndpoint, page;
+(async () => {
+	browser = await puppeteer.launch();
+	browserWSEndpoint = browser.wsEndpoint();
+	page = await browser.newPage();
+	
+	// optimize performance by blocking HTTP requests that are not necessary
+	await page.setRequestInterception(true);
+	page.on('request', request => {
+		const requestUrl = request._url.split('?')[0].split('#')[0];
+		if (
+			blockedResourceTypes.indexOf(request.resourceType()) !== -1 ||
+			skippedResources.some(resource => requestUrl.indexOf(resource) !== -1)
+		) {
+			request.abort();
+		} else {
+			request.continue();
+		}
+	});
+	browser.disconnect();
+})()
+*/
 
 // fetches the name, composition, notice and images from a drug's page on compendium URL
 async function scrapeDrug(compendiumURL) {
 	// annex pages that will interest us and that we will want to scrape stuff on
 	const additionalInfoPages = ["Photo", "Info patient"];
 	// launch puppeteer browser
-	const browser = await puppeteer.launch(/* {headless: false} */);
+	/* browser = await puppeteer.connect({ browserWSEndpoint }); */
+	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
-
-	// optimize performance by blocking HTTP requests that are not necessary
+	
+	// optimize performance by blocking requests that are not necessary
 	await page.setRequestInterception(true);
 	page.on('request', request => {
 		const requestUrl = request._url.split('?')[0].split('#')[0];
@@ -125,12 +151,7 @@ async function scrapeDrug(compendiumURL) {
 	const availableLinksBoolean = additionalInfoPages.map(n => availableLinks.filter(a => a.name == n)[0] != undefined);
 
 	// set return variables to get variables out of the if scopes
-	let imagesPath = undefined;
-	let noticePath = undefined;
-	let imagesReturn = undefined;
-	let noticeTitleReturn = undefined;
-	let noticeFirmReturn = undefined;
-	let noticeReturn = undefined;
+	let imagesPath, noticePath, imagesReturn, noticeTitleReturn, noticeFirmReturn, noticeReturn;
 
 	// get paths to additional info pages
 	if (availableLinksBoolean[0]) {
@@ -162,7 +183,6 @@ async function scrapeDrug(compendiumURL) {
 		console.log('notice path not available')
 	}
 
-
 	// scrape data at info pages
 	if (availableLinksBoolean[0]) {
 		console.log('images found. moving to images page');
@@ -178,8 +198,9 @@ async function scrapeDrug(compendiumURL) {
 		// classically rendered, and is not in the source of the page.
 		// by taking a look at it, it seems like the images we are looking for are on another
 		// source server, which is specified in the <iframe> element, that we can access.
+		
 		const pathToSource = await page.evaluate(() => document.querySelector('iframe').src);
-
+		/* framesReturn = await page.frames(); */
 		console.log('iframe passed', pathToSource);
 
 		// go to images source page and wait for load
@@ -254,16 +275,22 @@ async function scrapeDrug(compendiumURL) {
 
 	return drugData;
 }
+
+/********************
+ ****** SEARCH ******
+ ********************/
+
 // fetches the results of the search of any string sent to compendium.ch search engine
 async function searchByString(searchString) {
 	// convert the searchString into a format suitable to be injected in an URL
 	const newString = searchString.split(' ').join('!20');
 	const searchURL = `https://compendium.ch/search/${newString}/fr`;
 	// launch puppeteer browser
-	const browser = await puppeteer.launch(/* {headless: false} */);
+	/* browser = await puppeteer.connect({ browserWSEndpoint }); */
+	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
-
-	// optimize performance by blocking HTTP requests that are not necessary
+	
+	// optimize performance by blocking requests that are not necessary
 	await page.setRequestInterception(true);
 	page.on('request', request => {
 		const requestUrl = request._url.split('?')[0].split('#')[0];

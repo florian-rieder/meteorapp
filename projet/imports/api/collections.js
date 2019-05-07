@@ -45,6 +45,12 @@ Meteor.methods({
 	},
 	'profile.count'() {
 		return Profile.find().count();
+	},
+	'profile.update'(id, profile) {
+		Profile.update( 
+			{_id: id},
+			profile
+		);
 	}
 });
 

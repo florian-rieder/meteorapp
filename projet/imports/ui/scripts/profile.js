@@ -27,7 +27,7 @@ Template.profile.helpers({
         fieldId: 'avs' },
     ],
   hasProfileData() {
-    returnTemplate.instance().data != undefined;
+    return Template.instance().data != undefined;
   },
   getProfileField(index){
     return Template.instance().data[index];
@@ -45,5 +45,10 @@ Template.profile.events({
   },
   'click #modifyButton'() {
     displayInputs.set(true);
+  },
+  'click #confirmModify'() {
+    let profileArray = Array.from(document.querySelectorAll('.field_textInput')).map(v => v.value);
+    Meteor.call('profile.update', Profile.findOne({})._id, profileArray.reduce((o, key, i) => Object.assign(o, {[i] : key}),{}));
+    displayInputs.set(false);
   }
 });

@@ -12,9 +12,14 @@
 					<!-- insert nearby-stores subpage template here -->
 					stores
 				{{else}}
-					{{#if pageIs 'support'}}
-						<!-- insert support subpage template here -->
-						support
+					{{#if pageIs 'fàq'}}
+						<!-- insert fàq subpage template here -->
+						fàq
+					{{else}}
+						{{#if pageIs 'support'}}
+							<!-- insert support subpage template here -->
+							support
+						{{/if}}
 					{{/if}}
 				{{/if}}
 			{{/if}}
@@ -44,14 +49,6 @@
 			  </tr>
 			</tbody>
 	</table>
-	<!--<div class="input-group">
-			<div class="input-group-prepend">
-			  <span class="input-group-text">Nom & Téléphone</span>
-			</div>
-			<input type="text" aria-label="First name" class="form-control">
-			<input type="text" aria-label="Last name" class="form-control">
-			<button class="btn btn-outline-secondary" type="button" id="button-addon2">Ajouter Contact</button>
-			</div>-->
 			<div class="input-group mb-3">
 				<input type="text" class="form-control" placeholder="Nom" aria-label="Recipient's username" aria-describedby="button-addon2">
 				<div class="input-group-append">

@@ -1,21 +1,54 @@
-import Quagga from "quagga"
+import Quagga from "quagga";
+import { inspectDrugData, lastActivePage, LoadingWheel } from '../../api/utilities.js';
 import '../templates/quagScan.html'
 import '../templates/applicationLayout.html';
 
-//Flag for scanner status
-let scannerIsRunning = false;
+// Flag for scanner status
+export let scannerIsRunning = false;
 
-function startScanner() {
-	console.log('here');
-	//initialization of scanner config
+// start/stop scanner
+Template.quagScan.events({
+	'click #scan_btn'() {
+		if (Meteor.isCordova) {
+			var permissions = cordova.plugins.permissions;
+			permissions.requestPermission(permissions.CAMERA, () => console.log('ouiiii9'), () => console.log('nooooon'));
+			permissions.hasPermission(permissions.CAMERA, function (status) {
+				if (status.hasPermission) {
+					console.log("Yes :D ");
+					toggleScan();
+				}
+				else {
+					console.warn("No :( ");
+				}
+			});
+		} else {
+			toggleScan();
+		}
+
+		function toggleScan() {
+			if (scannerIsRunning) {
+				stopScanner();
+			} else {
+				startScanner();
+			}
+			console.log('quagga running: ' + scannerIsRunning);
+		}
+	}
+});
+
+export function startScanner() {
+	const bodyWidth = window.innerWidth;
+	const bodyHeight = document.querySelector('main').clientHeight;
+	console.log('width: ' + bodyWidth + ' height: ' + bodyHeight);
+	// initialization of scanner config
 	Quagga.init({
 		inputStream: {
 			name: "Live",
 			type: "LiveStream",
 			target: document.querySelector('#scannerContainer'),
 			constraints: {
-				width: 480,
-				height: 320,
+				width: bodyWidth,
+				height: bodyHeight,
 				facingMode: "environment",
 			},
 		},
@@ -51,7 +84,6 @@ function startScanner() {
 			readers: [
 				// order matters, and do not add unnecessary readers
 				"ean_reader",
-				//"ean_8_reader",
 			],
 		},
 	},
@@ -67,33 +99,33 @@ function startScanner() {
 			// Set flag to is running
 			scannerIsRunning = true;
 		});
-	/*
-		Quagga.onProcessed(function (result) {
-			//sets context and canvas for quagga overlay
-			var drawingCtx = Quagga.canvas.ctx.overlay,
-				drawingCanvas = Quagga.canvas.dom.overlay;
-	
-			//Draws box around codebar for visual feedback of scanner, different visual feedback depending on result type
-			if (result) {
-				//General detection of barcode
-				if (result.boxes) {
-					drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
-					result.boxes.filter(function (box) {
-						return box !== result.box;
-					}).forEach(function (box) {
-						Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "green", lineWidth: 2 });
-					});
-				}
-				//precise detection of barcode
-				if (result.box) {
-					Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "#00F", lineWidth: 2 });
-				}
-				//Red line indicating full detection process
-				if (result.codeResult && result.codeResult.code) {
-					Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'red', lineWidth: 3 });
-				}
+
+	Quagga.onProcessed(function (result) {
+		//sets context and canvas for quagga overlay
+		var drawingCtx = Quagga.canvas.ctx.overlay,
+			drawingCanvas = Quagga.canvas.dom.overlay;
+
+		//Draws box around codebar for visual feedback of scanner, different visual feedback depending on result type
+		if (result) {
+			//General detection of barcode
+			if (result.boxes) {
+				drawingCtx.clearRect(0, 0, parseInt(drawingCanvas.getAttribute("width")), parseInt(drawingCanvas.getAttribute("height")));
+				result.boxes.filter(function (box) {
+					return box !== result.box;
+				}).forEach(function (box) {
+					Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "black", lineWidth: 2 });
+				});
 			}
-		}); */
+			//precise detection of barcode
+			if (result.box) {
+				Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "white", lineWidth: 2 });
+			}
+			//Red line indicating full detection process
+			if (result.codeResult && result.codeResult.code) {
+				Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'rgb(71, 91, 206)', lineWidth: 3 });
+			}
+		}
+	});
 
 	let results = [];
 	let detectedBarCodes = 0;
@@ -104,13 +136,16 @@ function startScanner() {
 
 		results.push(result.codeResult.code);
 		if (detectedBarCodes >= samples) {
-			//if we scanned $samples bar codes, stop the scanner
+			// if we scanned $samples bar codes, stop the scanner
 			stopScanner();
 			// get the most occuring result in the array (get its mode)
 			const mostOccurringBarcode = mode(results);
 			// use the most occurring barcode for stuff
 			console.log('most occurring barcode: ' + mostOccurringBarcode);
-			// ...
+			searchCode(mostOccurringBarcode);
+			// reset variables
+			results = [];
+			detectedBarCodes = 0;
 		} else {
 			detectedBarCodes++;
 		}
@@ -161,31 +196,40 @@ function startScanner() {
 	});
 }
 
-function stopScanner() {
+export function stopScanner() {
 	Quagga.stop();
 	scannerIsRunning = false;
 	document.getElementById("scannerContainer").innerHTML = ""; //removes frozen video window
 }
 
-// Start/stop scanner
-
-Template.quagScan.events({
-	'click #scan_btn'() {
-		var permissions = cordova.plugins.permissions;
-		permissions.requestPermission(permissions.CAMERA, () => console.log('ouiiii9'), () => console.log('nooooon'));
-		permissions.hasPermission(permissions.CAMERA, function (status) {
-			if (status.hasPermission) {
-				console.log("Yes :D ");
-				if (scannerIsRunning) {
-					stopScanner();
-				} else {
-					startScanner();
-				}
-				console.log('coucou quagga running: ' + scannerIsRunning);
+function searchCode(code) {
+	LoadingWheel.show();
+	// we found out that searching for the code in compendium search engine returned the drug
+	Meteor.call('searchDrug', code, (err, res) => {
+		if (res) {
+			if (res[0]) {
+				// so we take the first element of search results and scrape it
+				Meteor.call('scrapeDrug', `http://www.compendium.ch${res[0].path}`, (error, result) => {
+					if (result) {
+						LoadingWheel.hide();
+						inspectDrugData.set(result);
+						Router.go('/details');
+						lastActivePage.set('/scan');
+						console.log('inspectDrugData: ' + inspectDrugData.get().title);
+					}
+					if (error) {
+						LoadingWheel.hide();
+						console.log('error while scraping drug from barcode.')
+					}
+				});
+			} else {
+				LoadingWheel.hide();
+				console.log('no drug found with this barcode.')
 			}
-			else {
-				console.warn("No :( ");
-			}
-		});
-	}
-})
+		}
+		if (err) {
+			LoadingWheel.hide();
+			console.log('error while searching for barcode.')
+		}
+	})
+}

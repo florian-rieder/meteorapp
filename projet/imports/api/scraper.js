@@ -75,6 +75,7 @@ let browser, browserWSEndpoint, page;
 
 // fetches the name, composition, notice and images from a drug's page on compendium URL
 async function scrapeDrug(compendiumURL) {
+	console.log('scraping started...');
 	// annex pages that will interest us and that we will want to scrape stuff on
 	const additionalInfoPages = ["Photo", "Info patient"];
 	// launch puppeteer browser
@@ -282,6 +283,7 @@ async function scrapeDrug(compendiumURL) {
 
 // fetches the results of the search of any string sent to compendium.ch search engine
 async function searchByString(searchString) {
+	console.log('search started...');
 	// convert the searchString into a format suitable to be injected in an URL
 	const newString = searchString.split(' ').join('!20');
 	const searchURL = `https://compendium.ch/search/${newString}/fr`;

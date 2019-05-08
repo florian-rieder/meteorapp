@@ -58,7 +58,7 @@
 			<div class="input-group mb-3">
 				<input type="text" class="form-control" placeholder="Téléphone" aria-label="Recipient's username" aria-describedby="button-addon2">
 				<div class="input-group-append">
-					<button class="btn btn-outline-secondary" type="button" id="button-addon2">Sauvgarder</button>
+					<button class="btn btn-outline-success" type="button" id="button-addon2">Sauvgarder</button>
 				</div>
 			</div>
 </template>
@@ -95,4 +95,46 @@
 			"<br>Longitude: " + position.coords.longitude;
 		}
 		</script>
+			<table class="table table-hover table-bordered">
+					<thead>
+						<tr>
+						<th scope="col">#</th>
+						<th scope="col">Nom</th>
+						<th scope="col">Téléphone</th>
+						<th scope="col">Address</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+						<th scope="row">1</th>
+						<td>Pharmacie MetroFlon</td>
+						<td>021 318 73 10</td>
+						<td>Place de l'Europe 5, 1003 Lausanne</td>
+						</tr>
+						<tr>
+						<th scope="row">2</th>
+						<td><a>Pharmacie MetroOuchy</a></td>
+						<td>021 612 03 03</td>
+						<td>Place de la Navigation 6, 1006 Lausanne</td>
+						</tr>
+					</tbody>
+			</table>
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" placeholder="Nom" aria-label="Recipient's username" aria-describedby="button-addon2">
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary" type="button" id="button-addon2">Prochain</button>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" placeholder="Téléphone" aria-label="Recipient's username" aria-describedby="button-addon2">
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary" type="button" id="button-addon2">Prochain</button>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+							<input type="text" class="form-control" placeholder="Address" aria-label="Recipient's username" aria-describedby="button-addon2">
+							<div class="input-group-append">
+								<button class="btn btn-outline-success" type="button" id="button-addon2">Sauvgarder</button>
+							</div>
+						</div>
 </template>

@@ -129,6 +129,7 @@ Template.result.events({
 			console.log(`scraping duration: ~${Math.round(t1 - t0)}ms`);
 			LoadingWheel.hide();
 			if (result) {
+				console.log(result);
 				inspectDrugData.set(result);
 				Router.go('/details');
 				lastActivePage.set('/search');

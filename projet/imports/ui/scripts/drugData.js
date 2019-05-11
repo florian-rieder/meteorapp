@@ -33,6 +33,30 @@ Template.drugData.helpers({
 		const prettyTitle = Template.instance().data.title;
 		const backupTitle = Template.instance().data.showcaseTitle;
 		return prettyTitle == undefined ? backupTitle : prettyTitle;
+	},
+	renderNotice() {
+		const notice = Template.instance().data.notice;
+		let HTMLString = '';
+		notice.forEach(paragraph => {
+			HTMLString += '<div>'
+			paragraph.forEach(el => renderItem(el));
+			HTMLString += '</div>';
+		});
+		return HTMLString;
+
+		function renderItem(item) {
+			const name = item.name;
+			const value = item.value;
+			if(Array.isArray(value)) {
+				HTMLString += `<${name}>`;
+				value.forEach(el => {
+					renderItem(el);
+				});
+				HTMLString += `</${name}>`;
+			} else {
+				HTMLString += `<${name}>${value}</${name}>`;
+			}
+		}
 	}
 });
 

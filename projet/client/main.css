@@ -9,12 +9,12 @@ body {
 }
 
 h1 {
-	font-size: 24px;
+	font-size: 18px;
 	font-weight: bold;
 }
 
 h2 {
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: bold;
 }
 
@@ -312,4 +312,14 @@ div.drugData_firstInfo>div.container {
 
 .vertical-center{
 	margin-top : 30px;
+}
+/* styling tables (notices) */
+.drugData_noticeContainer table,th, td {
+  border: 1px solid black;
+}
+.drugData_noticeContainer table {
+	width: 100%;
+}
+.drugData_noticeContainer thead td {
+	font-weight: bold;
 }

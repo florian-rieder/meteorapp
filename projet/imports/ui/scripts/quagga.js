@@ -37,8 +37,8 @@ Template.quagScan.events({
 });
 
 export function startScanner() {
-	const bodyWidth = window.innerWidth;
-	const bodyHeight = document.querySelector('main').clientHeight;
+	const bodyWidth = $('main').width();
+	const bodyHeight = $('main').height();
 	console.log('width: ' + bodyWidth + ' height: ' + bodyHeight);
 	// initialization of scanner config
 	Quagga.init({

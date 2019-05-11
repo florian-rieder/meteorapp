@@ -82,7 +82,7 @@ async function scrapeDrug(compendiumURL) {
 	/* browser = await puppeteer.connect({ browserWSEndpoint }); */
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
-	
+
 	// optimize performance by blocking requests that are not necessary
 	await page.setRequestInterception(true);
 	page.on('request', request => {
@@ -199,7 +199,7 @@ async function scrapeDrug(compendiumURL) {
 		// classically rendered, and is not in the source of the page.
 		// by taking a look at it, it seems like the images we are looking for are on another
 		// source server, which is specified in the <iframe> element, that we can access.
-		
+
 		const pathToSource = await page.evaluate(() => document.querySelector('iframe').src);
 		/* framesReturn = await page.frames(); */
 		console.log('iframe passed', pathToSource);
@@ -247,11 +247,32 @@ async function scrapeDrug(compendiumURL) {
 
 		// get the notice of the drug
 		const notice = await page.evaluate((selector) => {
-			return Array.from(document.querySelectorAll(selector))
-				// get the childnodes of each paragraphs
-				.map((paragraphe) => Array.from(paragraphe.childNodes)
-					// get the text content of each element inside a paragraph
-					.map(element => element.textContent));
+			let paragraphs = Array.from(document.querySelectorAll(selector));
+			paragraphs.forEach((p, i, a) => a[i] = toTree(p))
+			return paragraphs;
+			
+			function toTree(paragraph) {
+				let newArray = getChildnodesRecursively(paragraph);
+				return newArray;
+				
+				function getChildnodesRecursively(element) {
+					let returnValue;
+					if(element.childNodes.length > 0 && !Array.from(element.childNodes).map(e => e.nodeName).includes('#text')) {
+						let children = Array.from(element.childNodes);
+						children.forEach((e, i, a) => {
+							let newObj = {
+								name: e.nodeName,
+								value: getChildnodesRecursively(e)
+							};
+							a[i] = newObj;
+						})
+						returnValue = children;
+					} else {
+						returnValue = element.textContent;
+					}
+					return returnValue;
+				}
+			}
 		}, '.monographie > .paragraph');
 
 		noticeTitleReturn = noticePageData.title;
@@ -291,7 +312,7 @@ async function searchByString(searchString) {
 	/* browser = await puppeteer.connect({ browserWSEndpoint }); */
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
-	
+
 	// optimize performance by blocking requests that are not necessary
 	await page.setRequestInterception(true);
 	page.on('request', request => {

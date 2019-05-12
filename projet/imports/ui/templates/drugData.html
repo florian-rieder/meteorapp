@@ -1,50 +1,68 @@
 <template name="drugData">
 	<div class='container-fluid'>
 		<div class='drugData_container'>
-				<button id='backButton'>Back</button>
-				{{#if isNotAlreadyInPharmacy}}
-					<button id='addDrugToPharmacyButton'>Ajouter à ma pharmacie</button>
-				{{/if}}
-				<div class='drugData_firstInfo'>
-					<h1>{{displayTitle}}</h1>
-					<div class="container">
-						<div class='row'>
-							<div>Fabricant: {{firm}}</div>
-						</div>
-						<div class="row">
-							<div class="col-xs">
-								{{#if hasComposition}}
-								Composition: <br>
-								<ul>
-									{{#each composition}}
-									{{> component}}
-									{{/each}}
-								</ul>
-								{{else}}
-								<span>Composition indisponible.</span>
-								{{/if}}
-							</div>
-							{{#if hasImage}}
-							<div class="col-xs">
-								<img src="{{imgpath}}" alt="image" class='drugData_image'>
-							</div>
-							{{else}}
-							<div class="col-xs">Image indisponible.</div>
-							{{/if}}
-						</div>
+			<button id='backButton'>Back</button>
+			{{#if isNotAlreadyInPharmacy}}
+			<button id='addDrugToPharmacyButton'>Ajouter à ma pharmacie</button>
+			{{/if}}
+			<div class='drugData_firstInfo'>
+				<h1>{{displayTitle}}</h1>
+				<div style='text-align: right'>Fabricant: {{firm}}</div>
+			</div>
+			{{#if hasImage}}
+			<div>
+				<img src="{{imgpath}}" alt="image" class='drugData_image'>
+			</div>
+			{{else}}
+			<div>Image indisponible.</div>
+			{{/if}}
+			
+			<div class="accordion" id='drugData_accordion'>
+				<div class="card">
+					<div class="card-header" id="headingOne" data-toggle="collapse" href="#collapseOne">
+						<h5 class="mb-0">
+							<button class="btn btn-link" type="button" data-toggle="collapse" href="#collapseOne" aria-expanded="true"
+							 aria-controls="collapseOne">
+								Composition
+							</button>
+						</h5>
 					</div>
-		
-					<div>
-						<!-- notice formatting using spacebars -->
-						<div class='drugData_noticeContainer'>
-							{{#if hasNotice}}
-								{{{renderNotice}}}
+
+					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#drugData_accordion">
+						<div class="card-body">
+							{{#if hasComposition}}
+							Composition: <br>
+							<ul>
+								{{#each composition}}
+								{{> component}}
+								{{/each}}
+							</ul>
 							{{else}}
-								<p>Nous n'avons pas trouvé de notice d'emballage pour ce médicament.</p>
+							<span>Composition indisponible.</span>
 							{{/if}}
 						</div>
 					</div>
 				</div>
+				<div class="card">
+					<div class="card-header" id="headingTwo" data-toggle="collapse" href="#collapseTwo">
+						<h5 class="mb-0">
+							<button class="btn btn-link collapsed" type="button" data-toggle="collapse" href="#collapseTwo"
+							 aria-expanded="false" aria-controls="collapseTwo">
+								Notice d'emballage
+							</button>
+						</h5>
+					</div>
+					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#drugData_accordion">
+						<div class="card-body">
+							{{#if hasNotice}}
+							{{{renderNotice}}}
+							{{else}}
+							<p>Nous n'avons pas trouvé de notice d'emballage pour ce médicament.</p>
+							{{/if}}
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>

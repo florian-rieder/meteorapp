@@ -14,11 +14,11 @@ Template.quagScan.events({
 			permissions.requestPermission(permissions.CAMERA, () => console.log('ouiiii9'), () => console.log('nooooon'));
 			permissions.hasPermission(permissions.CAMERA, function (status) {
 				if (status.hasPermission) {
-					console.log("Yes :D ");
+					console.log("camera permission granted");
 					toggleScan();
 				}
 				else {
-					console.warn("No :( ");
+					console.warn("camera permission refused");
 				}
 			});
 		} else {
@@ -49,7 +49,7 @@ export function startScanner() {
 			constraints: {
 				width: bodyWidth,
 				height: bodyHeight,
-				facingMode: "environment",
+				facingMode: 'environment',
 			},
 		},
 		frequency: 20,
@@ -89,8 +89,8 @@ export function startScanner() {
 	},
 		function (err) {
 			if (err) {
-				console.error(err);
-				return
+				console.error(err.name + ': ' + err.message);
+				return;
 			}
 
 			console.log("Initialization finished. Ready to start");
@@ -179,19 +179,10 @@ export function startScanner() {
 			}
 			//end  */
 
-			//get the property name with the highest count
-			const mode = Object.getOwnPropertyNames(processed).reduce((mode, code) => {
-				//mode is the barcode that has (will have) the highest occurrence
-				//code is the different barcodes quagga has found
-
-				//if the value of processed.mode is inferior to the value of processed.code
-				if (processed[mode] < processed[code]) {
-					return code; // assign code to mode
-				} else {
-					return mode; // do nothing
-				}
-			});
-			return mode.slice(1);
+			// it was so beautiful as a one-liner that I simply had to factor it like that 
+			// (sorry for readability... tl;dr: returns the barcode with the highest count)
+			return Object.getOwnPropertyNames(processed).reduce((mode, code) => processed[mode] < processed[code] ? code : mode)
+				.slice(1); // remove underscore
 		}
 	});
 }

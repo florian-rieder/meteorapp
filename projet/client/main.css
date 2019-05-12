@@ -1,7 +1,7 @@
 body {
 	margin: 0px;
 	font-family: sans-serif;
-	background-color: rgba(236, 236, 236, 0.692)
+	background-color: rgba(236, 236, 236) !important;
 }
 
 * {
@@ -222,7 +222,7 @@ main {
 }
 
 .drug_container:hover {
-	background-color: rgb(212, 212, 212);
+	background-color: rgb(231, 231, 231);
 }
 
 #drugList_ul {

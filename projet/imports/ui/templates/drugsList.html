@@ -1,7 +1,7 @@
 <template name='drugsList'>
-	<div class='container-fluid'>
+	<div class='container-fluid' style='position: relative;'>
 		<h1>{{name}}</h1>
-		<button id='clearDrugs'>{{deleteButtonName}}</button>
+		<button id='clearDrugs' class='btn btn-sm btn-danger' style='position: absolute; right: 15px; top: 15px;'>{{deleteButtonName}}</button>
 		<ul id='drugList_ul'>
 			{{#each drugs}}
 				{{> drug}}
@@ -16,7 +16,7 @@
 			<div class='drug_container'>
 				{{showcaseTitle}}
 			</div>
-			{{#if deleteButtonIsVisible}}
+			{{#if deleteEnabled}}
 				<button class='drug_remove btn btn-danger btn-sm' style='display: inline-block;'>Supprimer</button>
 			{{/if}}
 		</div>

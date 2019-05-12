@@ -5,16 +5,13 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Drugs } from '../../api/collections.js';
 import { lastActivePage } from '../../api/utilities.js';
-import Swal from 'sweetalert2';
 
 let deleteEnabled = new ReactiveVar(false);
-let drugsToDelete = [];
-
 
 Template.drugsList.helpers({
 	drugs() {
 		// return all drugs whose _id is containd in this category's foreign keys
-		return Drugs.find({_id: {$in: Template.instance().data.extKeys}});
+		return Drugs.find({ _id: { $in: Template.instance().data.extKeys } });
 	},
 	deleteButtonName() {
 		// user is already deleting drugs
@@ -31,55 +28,19 @@ Template.drugsList.helpers({
 Template.drugsList.events({
 	'click #clearDrugs'(e) {
 		e.preventDefault();
-		// user is already deleting drugs
 		if (deleteEnabled.get()) {
-			if (drugsToDelete.length > 0) {
-				// ask for confirmation if any drug was selected to be deleted
-				Swal.fire({
-					type: 'warning',
-					title: "Êtes-vous sûr de vouloir supprimer ces médicaments de votre pharmacie ?",
-					html: (() => {
-						let displayText = '';
-						drugsToDelete.forEach(drugId => {
-							displayText += Drugs.findOne(drugId).showcaseTitle;
-							displayText += '<br>';
-						});
-						return displayText;
-					})(),
-					// cancel button
-					showCancelButton: true,
-					cancelButtonText: 'Annuler',
-					// confirm button
-					confirmButtonText: 'Supprimer',
-					confirmButtonColor: 'red',
-
-				}).then(result => {
-					// If the confirm button was pressed
-					if (result.value) {
-						// delete selected drugs
-						drugsToDelete.forEach(id => Meteor.call('drugs.remove', id));
-					}
-					// either way, reset drugsToDelete array
-					drugsToDelete = [];
-				});
-			}
+			// user is already deleting drugs
 			deleteEnabled.set(false);
-		}
-		// user is not already deleting drugs
-		else {
+		} else {
+			// user is not already deleting drugs
 			deleteEnabled.set(true);
 		}
-
 	}
 });
-Template.drug.onCreated(() => {
-	// variable we use to know if this drug has been selected to be removed
-	Template.instance().drugIsInDeleteList = new ReactiveVar(false);
-})
 
 Template.drug.helpers({
-	deleteButtonIsVisible() {
-		return deleteEnabled.get() && !Template.instance().drugIsInDeleteList.get();
+	deleteEnabled() {
+		return deleteEnabled.get();
 	}
 })
 
@@ -91,7 +52,6 @@ Template.drug.events({
 	},
 	'click .drug_remove'(e) {
 		e.preventDefault();
-		drugsToDelete.push(this._id);
-		Template.instance().drugIsInDeleteList.set(true); // this makes delete button not reappear after deletion was aborted
+		Meteor.call('drugs.remove', this._id)
 	}
 });

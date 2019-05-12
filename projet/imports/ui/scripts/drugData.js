@@ -10,13 +10,6 @@ Template.drugData.helpers({
 		// check if there is already an instance of this drug in pharmacy
 		return Drugs.find({ 'showcaseTitle': Template.instance().data.showcaseTitle }).count() == 0;
 	},
-	//notice formatting
-	isTitleFromIndex(index) {
-		return index == 0;
-	},
-	isOfTwoLastFromIndex(index) {
-		return index > Template.instance().data.notice.length - 3;
-	},
 	hasNotice() {
 		if (Template.instance().data.notice != undefined) {
 			return Template.instance().data.notice[0] != undefined;

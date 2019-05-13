@@ -70,5 +70,10 @@ Meteor.methods({
 			{ _id: categoryId },
 			{ $pull: { extKeys: drugId } }
 		);
+	},
+	'categories.remove'(categoryId) {
+		let category = Categories.findOne(categoryId);
+		category.extKeys.forEach((key) => Drugs.remove(key));
+		Categories.remove(categoryId);
 	}
 });

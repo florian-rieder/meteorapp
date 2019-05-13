@@ -299,6 +299,10 @@ div.drugData_firstInfo>div.container {
 .category_container:hover{
 	background-color: rgb(212, 212, 212);
 }
+.category_remove{
+	float: right;
+	margin-left: 10px;
+}
 
 #confirmButton{
 	width : 30%;
@@ -314,12 +318,13 @@ div.drugData_firstInfo>div.container {
 	margin-top : 30px;
 }
 /* styling tables (notices) */
-.drugData_noticeContainer table,th, td {
-  border: 1px solid black;
+table,th,td {
+	border: 1px solid black;
+	vertical-align: middle;
 }
-.drugData_noticeContainer table {
+table {
 	width: 100%;
 }
-.drugData_noticeContainer thead td {
+thead td {
 	font-weight: bold;
 }

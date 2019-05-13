@@ -52,7 +52,8 @@ Router.route('/scan', function () {
 
 	// added small delay because Quagga would throw an error because of the target selector not being loaded yet
 	setTimeout(startScanner, 50);
-}, {
+}, 
+{
 	onStop: function() {
 		// when user leaves the page
 		if(scannerIsRunning) {

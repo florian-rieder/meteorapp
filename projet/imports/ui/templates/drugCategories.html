@@ -1,17 +1,24 @@
 <template name='drugCategories'>
-	<nav class="navbar navbar-light" style="background-color: rgb(212, 212, 212);">
-		<div>
-			<button class='drugCategories_addCategory'>+</button>
+	<nav class="navbar navbar-light">
+		<div class='ml-auto'>
+			<button id='drugCategories_addCategory' class='btn btn-info'>+</button>
+			<button id='drugCategories_remove' class='btn btn-info'>-</button>
 		</div>
 	</nav>
 	{{#each categories}}
-		{{> category}}
+	{{> category}}
 	{{/each}}
 </template>
 
 <template name='category'>
-	<div class='category_container d-flex'>
-		<div class='mr-auto p-2'>{{name}}</div>
-		<div class='p-2'>{{drugsInCategory}}</div>
+	<div style='width: 100%'>
+		<div class='category_container d-flex'>
+			<div class='mr-auto p-2'>{{name}}</div>
+			<div class='p-2'>{{drugsInCategory}}</div>
+			{{#if deleteEnabled}}
+			<button class='category_remove btn btn-danger btn-sm'>Supprimer</button>
+			{{/if}}
+		</div>
+
 	</div>
 </template>

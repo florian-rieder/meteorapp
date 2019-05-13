@@ -5,6 +5,8 @@ import { Categories } from '../../api/collections';
 import Swal from 'sweetalert2';
 import { CategoryItem } from '../../api/utilities';
 
+let catDeleteEnabled = new ReactiveVar(false);
+
 Template.drugCategories.helpers({
 	categories() {
 		return Categories.find();
@@ -12,7 +14,7 @@ Template.drugCategories.helpers({
 });
 
 Template.drugCategories.events({
-	'click .drugCategories_addCategory' (e) {
+	'click #drugCategories_addCategory' (e) {
 		e.preventDefault();
 		Swal.fire({
 			title: 'Ajouter une catégorie',
@@ -42,18 +44,45 @@ Template.drugCategories.events({
 				Meteor.call('categories.insert', new CategoryItem(swalResult.value));
 			}
 		});
+	},
+	'click #drugCategories_remove' (e) {
+		e.preventDefault();
+		if(catDeleteEnabled.get()) {
+			catDeleteEnabled.set(false);
+		} else {
+			catDeleteEnabled.set(true);
+		}
 	}
 })
 
 Template.category.helpers({
 	drugsInCategory() {
 		return Template.instance().data.extKeys.length;
+	},
+	deleteEnabled() {
+		return catDeleteEnabled.get();
 	}
 })
 
 Template.category.events({
 	'click .category_container' (e) {
 		e.preventDefault();
+		if(!catDeleteEnabled.get()) {
 		Router.go(`/category/${Template.instance().data._id}`);
+		}
+	},
+	'click .category_remove' (e) {
+		e.preventDefault();
+		Swal.fire({
+			title: `Êtes-vous sûr de vouloir supprimer ${this.name} ?`,
+			text: 'Les médicaments contenus dans cette catégorie seront supprimés',
+			confirmButtonText: 'Confirmer',
+			showCancelButton: true,
+			cancelButtonText: 'Annuler',
+		}).then(swalResult => {
+			if(swalResult.value) {
+				Meteor.call('categories.remove', this._id);
+			}
+		});
 	}
 });

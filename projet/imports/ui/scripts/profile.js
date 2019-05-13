@@ -4,10 +4,8 @@ import '../templates/profile.html';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
 import { Profile } from '../../api/collections';
-import Swal from 'sweetalert2';
 
 let displayInputs = new ReactiveVar(Profile.findOne() == undefined ? false : true);
-console.log(displayInputs);
 
 Template.profile.helpers({
   fields: [

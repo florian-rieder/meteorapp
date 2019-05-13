@@ -5,7 +5,7 @@ import { Categories } from '../../api/collections';
 import Swal from 'sweetalert2';
 import { CategoryItem } from '../../api/utilities';
 
-let catDeleteEnabled = new ReactiveVar(false);
+export const catDeleteEnabled = new ReactiveVar(false);
 
 Template.drugCategories.helpers({
 	categories() {

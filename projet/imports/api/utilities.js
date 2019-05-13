@@ -51,22 +51,48 @@ export const fireDrugAddDialog = async function (title) {
 		html: (() => {
 			// should we disallow the user to enter an expiration date that's already past ?
 			// or should we let them enter it and then notify them that it's expired ?
-			let htmlString = `EXP: <input type='month' id='swal-input_expirationMonth' value='${year}-${month}'> <br>`;
-
+			let htmlString = `<div>EXP:</div>`;
+			htmlString += `<input type='month' id='swal-input_expirationMonth' class='form-control' value='${year}-${month}'> <br>`
+			htmlString += `<div class='mr-auto'>Catégorie:</div>`;
+			htmlString += `<div style="width: 100%; position: relative">`;
 			// create a drop down list listing all categories for the user to select one
-			htmlString += `Catégorie: <select class='swal-input_select'>`;
+			htmlString += `<div style='width: calc(100% - 4em)'><select id='swal-input_select' class='form-control'>`;
 			Categories.find().forEach(cat => {
 				htmlString += ` <option value="${cat._id}">${cat.name}</option> `;
 			});
 			htmlString += `</select>`;
+			htmlString += `<input id='swal-input_categoryName' type='text' class='form-control hidden'></div>`;
+			// create button to add new category
+			htmlString += '<div style="position: absolute; top: 3px; right: 0px;" class="d-flex flex-row align-middle">'
+			htmlString += `<button id="swal-input_addCategory" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Create new category">+</button>`;
+			htmlString += `<img src="/images/info_icon.png" class="infoIcon" data-toggle="tooltip" data-placement="top" data-trigger="click" title="Create new category" style='margin-left: 4px'>`;
+			htmlString += '</div></div>';
 
 			// return the generated html string
 			return htmlString;
 		})(),
+		onOpen() { // when modal has opened
+			//initialize bootstrap tooltip
+			$(function () {
+				$('[data-toggle="tooltip"]').tooltip();
+			});
+			$('#swal-input_addCategory').click((e) => {
+				e.preventDefault();
+				const selectInput = document.querySelector('#swal-input_select');
+				const textInput = document.querySelector('#swal-input_categoryName');
+				if(textInput.classList.contains('hidden')){
+					textInput.classList.remove('hidden');
+					selectInput.classList.add('hidden');
+				} else {
+					textInput.classList.add('hidden');
+					selectInput.classList.remove('hidden');
+				}
+			});
+		},
 		preConfirm: () => {
 			// get input data and format it
 			const expirationDate = new Date(document.getElementById('swal-input_expirationMonth').value);
-			const selectForm = document.querySelector('.swal-input_select');
+			const selectForm = document.querySelector('#swal-input_select');
 			const selectedCategoryId = selectForm.options[selectForm.selectedIndex].value;
 
 			return {

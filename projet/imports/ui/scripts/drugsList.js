@@ -6,7 +6,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import { Drugs } from '../../api/collections.js';
 import { lastActivePage } from '../../api/utilities.js';
 
-let deleteEnabled = new ReactiveVar(false);
+export const deleteEnabled = new ReactiveVar(false);
 
 Template.drugsList.helpers({
 	drugs() {

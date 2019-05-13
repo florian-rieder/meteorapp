@@ -4,7 +4,7 @@ import '../templates/quagScan.html'
 import '../templates/applicationLayout.html';
 
 // Flag for scanner status
-export let scannerIsRunning = false;
+let scannerIsRunning = false;
 
 // start/stop scanner
 Template.quagScan.events({

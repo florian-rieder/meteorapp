@@ -7,7 +7,9 @@ import '../templates/drugData.html';
 
 import { search, inspectDrugData } from '../../api/utilities.js';
 import { Drugs, Profile, Categories } from '../../api/collections.js';
-import { startScanner, scannerIsRunning, stopScanner } from './quagga';
+import { startScanner, stopScanner } from './quagga';
+import { catDeleteEnabled } from './drugCategories';
+import { deleteEnabled } from './drugsList';
 
 
 // routes definition using Iron:router
@@ -20,6 +22,11 @@ Router.configure({
 Router.route('/', function () {
 	this.render('drugCategories');
 	this.render('footerBar', { to: 'footer' });
+},
+{
+	onStop: function () { // when user leaves the page
+		catDeleteEnabled.set(false);
+	}
 });
 
 Router.route('/category/:_id', function () {
@@ -27,6 +34,11 @@ Router.route('/category/:_id', function () {
 		data: Categories.findOne(this.params._id)
 	});
 	this.render('footerBar', { to: 'footer' });
+},
+{
+	onStop: function () { // when user leaves the page
+		deleteEnabled.set(false);
+	}
 });
 
 // access an url with a search query launches search for said query
@@ -52,14 +64,11 @@ Router.route('/scan', function () {
 
 	// added small delay because Quagga would throw an error because of the target selector not being loaded yet
 	setTimeout(startScanner, 50);
-}, 
+},
 {
-	onStop: function() {
-		// when user leaves the page
-		if(scannerIsRunning) {
-			stopScanner();
-		}
-}
+	onStop: function () { // when user leaves the page
+		stopScanner();
+	}
 });
 
 Router.route('/help', function () {
@@ -89,6 +98,6 @@ Router.route('/details/:_id', function () {
 
 
 Router.route('/profile', function () {
-	this.render('profile',{data: Profile.findOne()});
+	this.render('profile', { data: Profile.findOne() });
 	this.render('footerBar', { to: 'footer' });
 });

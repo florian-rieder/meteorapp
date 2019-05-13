@@ -11,4 +11,3 @@ import '../api/files.js';
 import './scripts/helpPage.js';
 import './scripts/footerBar.js';
 import './scripts/drugCategories.js';
-

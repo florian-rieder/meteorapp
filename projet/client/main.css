@@ -200,7 +200,7 @@ main {
 }
 
 .hidden {
-	display: none;
+	display: none !important;
 }
 
 #loadingWheel {
@@ -327,4 +327,8 @@ table {
 }
 thead td {
 	font-weight: bold;
+}
+.infoIcon{
+	height: 28px;
+	width: 28px;
 }

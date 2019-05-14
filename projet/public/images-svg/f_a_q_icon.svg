@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 50 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+    <g transform="matrix(1,0,0,1,-103.514,-1343.16)">
+        <rect id="Plan-de-travail1" serif:id="Plan de travail1" x="0" y="0" width="2732" height="2048" style="fill:none;"/>
+        <g id="Plan-de-travail11" serif:id="Plan de travail1">
+            <g transform="matrix(0.390625,-3.39258e-17,-2.67147e-17,0.416667,330.467,237.66)">
+                <g id="Delete">
+                </g>
+            </g>
+            <g transform="matrix(0.583674,-5.06922e-17,-3.99173e-17,0.622585,-860.124,582.023)">
+                <g id="Search">
+                </g>
+            </g>
+            <g>
+                <g id="New-Message" serif:id="New Message" transform="matrix(1.15495,4.27075e-32,1.40287e-32,1.13814,-6.63001,913.666)">
+                    <path d="M116.8,377.8C105.2,377.8 95.8,385.5 95.8,394.9C95.8,400.6 99.1,405.5 104.4,408.6C103.7,412.1 99.9,415.8 99.9,415.8C99.9,415.8 106.4,416.6 111.2,411.8C111.2,411.8 116.8,412 118.8,411.9C130.4,411.6 137.8,404.2 137.8,394.8C137.8,385.4 128.4,377.8 116.8,377.8ZM118.8,409.9C117,409.9 110.4,409.8 110.3,409.7C109.5,411 105.4,414 103.4,413.8C104.8,412.3 106.5,408.2 106.4,407.4C105.7,407 105.1,406.6 104.4,406.2C100.3,403.4 97.7,399.3 97.7,394.7C97.7,386.4 106.2,379.6 116.7,379.6C127.2,379.6 135.7,386.4 135.7,394.7C135.7,403 129.3,409.9 118.8,409.9Z" style="fill:rgb(25,194,169);fill-rule:nonzero;stroke:rgb(25,194,169);stroke-width:0.87px;"/>
+                </g>
+                <g transform="matrix(1.29618,0,0,0.85129,-29.2856,193.02)">
+                    <text x="114.115px" y="1388.46px" style="font-family:'DINCondensed-Bold', 'DIN Condensed';font-weight:700;font-stretch:condensed;font-size:37.264px;fill:rgb(25,194,169);">?</text>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,158.481,-132.13)">
+                <clipPath id="_clip1">
+                    <rect x="347.052" y="1684.91" width="50.476" height="42.571"/>
+                </clipPath>
+                <g clip-path="url(#_clip1)">
+                    <g id="Menu--wide-" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-1" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-2" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-3" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-4" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-5" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-6" serif:id="Menu (wide)">
+                    </g>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,21.4959,-28.2154)">
+                <clipPath id="_clip2">
+                    <rect x="347.052" y="1684.91" width="50.476" height="42.571"/>
+                </clipPath>
+                <g clip-path="url(#_clip2)">
+                    <g id="Menu--wide-7" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-8" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-9" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-10" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-11" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-12" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-13" serif:id="Menu (wide)">
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

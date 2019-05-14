@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 404 81" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-162.577,-998.461)">
+        <rect id="Plan-de-travail1" serif:id="Plan de travail1" x="0" y="0" width="2732" height="2048" style="fill:none;"/>
+        <g id="Plan-de-travail11" serif:id="Plan de travail1">
+            <g transform="matrix(0.390625,-3.39258e-17,-2.67147e-17,0.416667,330.467,237.66)">
+                <g id="Delete">
+                </g>
+            </g>
+            <g transform="matrix(0.583674,-5.06922e-17,-3.99173e-17,0.622585,-860.124,582.023)">
+                <g id="Search">
+                </g>
+            </g>
+            <g>
+                <g transform="matrix(1.02888,0,0,1.09239,65.9746,633.09)">
+                    <path d="M484.265,370.864C484.265,361.617 480.365,352.749 473.423,346.211C466.48,339.672 457.065,335.999 447.247,335.999C373.022,335.999 206.773,335.999 132.541,335.999C112.092,335.999 95.515,351.612 95.515,370.872C95.515,371.057 95.515,371.242 95.515,371.427C95.515,380.743 99.445,389.678 106.439,396.266C113.434,402.854 122.92,406.555 132.812,406.555C207.204,406.555 373.233,406.555 447.328,406.555C457.124,406.555 466.519,402.89 473.446,396.365C480.373,389.841 484.265,380.992 484.265,371.765C484.265,371.465 484.265,371.165 484.265,370.864Z" style="fill:white;stroke:rgb(25,194,169);stroke-width:3.15px;"/>
+                </g>
+                <g transform="matrix(0.778983,0,0,0.778983,-214.658,884.808)">
+                    <text x="616.46px" y="222.403px" style="font-family:'DINCondensed-Bold', 'DIN Condensed';font-weight:700;font-stretch:condensed;font-size:57.992px;fill:rgb(25,194,169);">PHARMACIES</text>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,158.481,-132.13)">
+                <clipPath id="_clip1">
+                    <rect x="347.052" y="1684.91" width="50.476" height="42.571"/>
+                </clipPath>
+                <g clip-path="url(#_clip1)">
+                    <g id="Menu--wide-" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-1" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-2" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-3" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-4" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-5" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-6" serif:id="Menu (wide)">
+                    </g>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,21.4959,-28.2154)">
+                <clipPath id="_clip2">
+                    <rect x="347.052" y="1684.91" width="50.476" height="42.571"/>
+                </clipPath>
+                <g clip-path="url(#_clip2)">
+                    <g id="Menu--wide-7" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-8" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-9" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-10" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-11" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-12" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-13" serif:id="Menu (wide)">
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

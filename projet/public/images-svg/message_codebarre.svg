@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 425 134" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-101.082,-527.767)">
+        <rect id="Plan-de-travail1" serif:id="Plan de travail1" x="0" y="0" width="2732" height="2048" style="fill:none;"/>
+        <g id="Plan-de-travail11" serif:id="Plan de travail1">
+            <g transform="matrix(0.390625,-3.39258e-17,-2.67147e-17,0.416667,330.467,237.66)">
+                <g id="Delete">
+                </g>
+            </g>
+            <g>
+                <g transform="matrix(1.11377,0,0,1.51754,-11.6904,-274.007)">
+                    <path d="M480.941,544.497C480.941,536.186 471.747,529.438 460.422,529.438L123.272,529.438C111.947,529.438 102.753,536.186 102.753,544.497L102.753,574.616C102.753,582.928 111.947,589.676 123.272,589.676L126.154,589.676L178.391,615.492L166.917,589.676L460.422,589.676C471.747,589.676 480.941,582.928 480.941,574.616L480.941,544.497Z" style="fill:white;stroke:rgb(25,194,169);stroke-width:2.51px;"/>
+                </g>
+                <g transform="matrix(0.604202,0,0,0.604202,-148.6,430.859)">
+                    <text x="531.27px" y="222.403px" style="font-family:'DINCondensed-Bold', 'DIN Condensed';font-weight:700;font-stretch:condensed;font-size:57.992px;fill:rgb(25,194,169);">Dirigez la camér<tspan x="824.244px 845.701px 856.488px 876.553px 898.01px " y="222.403px 222.403px 222.403px 222.403px 222.403px ">a ver</tspan>s</text>
+                    <text x="619.069px" y="291.993px" style="font-family:'DINCondensed-Bold', 'DIN Condensed';font-weight:700;font-stretch:condensed;font-size:57.992px;fill:rgb(25,194,169);">le code barre</text>
+                </g>
+            </g>
+            <g transform="matrix(0.583674,-5.06922e-17,-3.99173e-17,0.622585,-860.124,582.023)">
+                <g id="Search">
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,158.481,-132.13)">
+                <clipPath id="_clip1">
+                    <rect x="347.052" y="1684.91" width="50.476" height="42.571"/>
+                </clipPath>
+                <g clip-path="url(#_clip1)">
+                    <g id="Menu--wide-" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-1" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-2" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-3" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-4" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-5" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-6" serif:id="Menu (wide)">
+                    </g>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,21.4959,-28.2154)">
+                <clipPath id="_clip2">
+                    <rect x="347.052" y="1684.91" width="50.476" height="42.571"/>
+                </clipPath>
+                <g clip-path="url(#_clip2)">
+                    <g id="Menu--wide-7" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-8" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-9" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-10" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-11" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-12" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-13" serif:id="Menu (wide)">
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

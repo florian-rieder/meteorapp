@@ -26,7 +26,6 @@ header {
 	background-color: #5abb85;
 	z-index: 2;
 	padding: 10px;
-	border-bottom: 1px solid #4ca876;
 	/* vertically center items contained in the header (logo) */
 	display: flex;
 	align-items: center;
@@ -38,7 +37,6 @@ footer {
 	background-color: #5abb85;
 	z-index: 2;
 	padding: 10px;
-	border-top: 1px solid #4ca876;
 }
 
 #body_headerLogo {
@@ -183,20 +181,14 @@ main {
 	margin-left: auto;
 	margin-right: auto;
 }
-
-#footerBar_container .btn {
-	width: calc(20vw - 10px);
+.navButton_button {
 	flex: 0 1 auto;
-	/* Default */
-	/* add a transition effect between normal and hover colors */
-	transition-duration: 0.1s;
-	background-color: rgb(41, 122, 89);
-	border: 1px solid rgb(41, 122, 89);
+	background-color: white !important;
 }
 
-#footerBar_container .btn:active {
-	background-color: rgb(31, 99, 72);
-	border: 1px solid rgb(31, 99, 72);
+.navButton_button img {
+	width: 2em;
+	height: 2em;
 }
 
 .hidden {
@@ -331,4 +323,20 @@ thead td {
 .infoIcon{
 	height: 28px;
 	width: 28px;
+}
+.deleteButton{
+	height: 2em;
+	width: 2em;
+	cursor: pointer;
+}
+.deleteButton:hover {
+	animation-name: wiggle;
+	animation-duration: 500ms;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in-out;
+}
+@keyframes wiggle {
+	25% {transform: rotate(45deg);}
+	50% {transform: rotate(-25deg);}
+	25% {transform: rotate3d(1, 1, 1, 45deg);}
 }

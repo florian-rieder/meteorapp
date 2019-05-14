@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 55 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+    <g transform="matrix(1,0,0,1,-720.05,-415.547)">
+        <rect id="Plan-de-travail1" serif:id="Plan de travail1" x="0" y="0" width="2732" height="2048" style="fill:none;"/>
+        <g id="Plan-de-travail11" serif:id="Plan de travail1">
+            <g transform="matrix(0.390625,-3.39258e-17,-2.67147e-17,0.416667,330.467,237.66)">
+                <g id="Delete">
+                </g>
+            </g>
+            <g transform="matrix(0.583674,-5.06922e-17,-3.99173e-17,0.622585,-860.124,582.023)">
+                <g id="Search">
+                </g>
+            </g>
+            <g id="Cancel" transform="matrix(1.24092,1.52955e-32,1.52955e-32,1.24092,144.202,-1988.11)">
+                <path d="M486.05,1937C498.192,1937 508.05,1946.86 508.05,1959C508.05,1971.14 498.192,1981 486.05,1981C473.908,1981 464.05,1971.14 464.05,1959C464.05,1946.86 473.908,1937 486.05,1937ZM478.979,1950.52L477.565,1951.93L484.636,1959L477.565,1966.07L478.979,1967.49L486.05,1960.41L493.121,1967.49L494.535,1966.07L487.464,1959L494.535,1951.93L493.121,1950.52L486.05,1957.59L478.979,1950.52Z" style="fill:rgb(213,0,25);"/>
+            </g>
+            <g transform="matrix(1,0,0,1,158.481,-132.13)">
+                <clipPath id="_clip1">
+                    <rect x="347.052" y="1684.91" width="50.476" height="42.571"/>
+                </clipPath>
+                <g clip-path="url(#_clip1)">
+                    <g id="Menu--wide-" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-1" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-2" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-3" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-4" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-5" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-6" serif:id="Menu (wide)">
+                    </g>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,21.4959,-28.2154)">
+                <clipPath id="_clip2">
+                    <rect x="347.052" y="1684.91" width="50.476" height="42.571"/>
+                </clipPath>
+                <g clip-path="url(#_clip2)">
+                    <g id="Menu--wide-7" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-8" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-9" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-10" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-11" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-12" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-13" serif:id="Menu (wide)">
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

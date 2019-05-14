@@ -11,12 +11,12 @@
 </template>
 
 <template name='category'>
-	<div style='width: 100%'>
-		<div class='category_container d-flex'>
-			<div class='mr-auto p-2'>{{name}}</div>
-			<div class='p-2'>{{drugsInCategory}}</div>
+	<div style='width: 100%;'>
+		<div class='category_container d-flex' style='height: 4em;'>
+			<div class='mr-auto align-middle' style='vertical-align: middle; line-height: 2em;'>{{name}}</div>
+			<div class='align-middle' style='vertical-align: middle; line-height: 2em;'>{{drugsInCategory}}</div>
 			{{#if deleteEnabled}}
-			<button class='category_remove btn btn-danger btn-sm'>Supprimer</button>
+			<img class='category_remove deleteButton align-middle' src='/images-svg/supp_bouton.svg' alt='Supprimer'>
 			{{/if}}
 		</div>
 

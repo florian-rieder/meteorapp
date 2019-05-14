@@ -51,9 +51,9 @@ export const fireDrugAddDialog = async function (title) {
 		html: (() => {
 			// should we disallow the user to enter an expiration date that's already past ?
 			// or should we let them enter it and then notify them that it's expired ?
-			let htmlString = `<div>EXP:</div>`;
+			let htmlString = `<div style='text-align: left;'>EXP:</div>`;
 			htmlString += `<input type='month' id='swal-input_expirationMonth' class='form-control' value='${year}-${month}'> <br>`
-			htmlString += `<div class='mr-auto'>Catégorie:</div>`;
+			htmlString += `<div style='text-align: left;'>Catégorie:</div>`;
 			htmlString += `<div style="width: 100%; position: relative">`;
 			// create a drop down list listing all categories for the user to select one
 			htmlString += `<div style='width: calc(100% - 4em)'><select id='swal-input_select' class='form-control'>`;

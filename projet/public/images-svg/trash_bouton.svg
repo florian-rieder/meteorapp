@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 91 77" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-561.221,-404.718)">
+        <rect id="Plan-de-travail1" serif:id="Plan de travail1" x="0" y="0" width="2732" height="2048" style="fill:none;"/>
+        <g id="Plan-de-travail11" serif:id="Plan de travail1">
+            <g>
+                <g transform="matrix(0.474064,0,0,1,249.283,238.135)">
+                    <path d="M845.298,204.443C845.298,184.457 811.12,168.255 768.961,168.255C757.963,168.255 746.658,168.255 735.703,168.255C716.032,168.255 697.166,171.959 683.256,178.553C669.346,185.147 661.532,194.091 661.532,203.416C661.532,203.758 661.532,204.101 661.532,204.443C661.532,214.177 669.689,223.512 684.208,230.395C698.727,237.278 718.419,241.145 738.951,241.145C748.522,241.145 758.307,241.145 767.878,241.145C810.636,241.145 845.298,224.713 845.298,204.443C845.298,204.443 845.298,204.443 845.298,204.443Z" style="fill:white;stroke:rgb(25,194,169);stroke-width:4.27px;"/>
+                </g>
+                <g id="Delete" transform="matrix(0.390625,-3.39258e-17,-2.67147e-17,0.416667,330.467,237.66)">
+                    <g transform="matrix(2.56,2.0844e-16,1.64135e-16,2.4,209.92,-1.4966e-13)">
+                        <path d="M198.103,180.001C198.238,180.006 198.373,180.015 198.508,180.032C198.836,180.074 199.159,180.156 199.467,180.278C200.035,180.502 200.55,180.858 200.961,181.31C201.33,181.716 201.614,182.198 201.79,182.717C201.929,183.13 201.994,183.559 202,183.994L202,186L200,186C200,185.316 200.008,184.632 199.999,183.948C199.99,183.714 199.948,183.485 199.862,183.267C199.654,182.74 199.22,182.316 198.688,182.121C198.483,182.046 198.27,182.009 198.052,182.001C195.351,181.966 192.649,181.966 189.948,182.001C189.73,182.009 189.517,182.046 189.312,182.121C188.765,182.322 188.322,182.765 188.121,183.312C188.039,183.536 188.003,183.769 188,184.006L188,186L186,186C186,185.299 185.992,184.598 186.001,183.897C186.018,183.462 186.093,183.035 186.243,182.625C186.633,181.56 187.479,180.693 188.533,180.278C188.841,180.156 189.164,180.074 189.492,180.032C189.627,180.015 189.762,180.006 189.897,180.001C192.632,179.966 195.368,179.966 198.103,180.001Z" style="fill:rgb(213,0,25);fill-rule:nonzero;stroke:rgb(213,0,25);stroke-width:1px;stroke-linecap:butt;stroke-miterlimit:1.41421;"/>
+                    </g>
+                    <g transform="matrix(2.56,2.0844e-16,1.64135e-16,2.4,209.92,-1.4966e-13)">
+                        <rect x="176" y="186" width="36" height="2" style="fill:rgb(213,0,25);fill-rule:nonzero;stroke:rgb(213,0,25);stroke-width:1px;stroke-linecap:butt;stroke-miterlimit:1.41421;"/>
+                    </g>
+                    <g transform="matrix(2.56,2.0844e-16,1.64135e-16,2.4,209.92,-1.4966e-13)">
+                        <rect x="193" y="192" width="2" height="32" style="fill:rgb(213,0,25);fill-rule:nonzero;stroke:rgb(213,0,25);stroke-width:1px;stroke-linecap:butt;stroke-miterlimit:1.41421;"/>
+                    </g>
+                    <g transform="matrix(2.56,2.0844e-16,1.64135e-16,2.4,209.92,-1.4966e-13)">
+                        <path d="M202,192.031L201,224.031L199,223.969L200,191.969C200.667,191.99 201.333,192.01 202,192.031Z" style="fill:rgb(213,0,25);fill-rule:nonzero;stroke:rgb(213,0,25);stroke-width:1px;stroke-linecap:butt;stroke-miterlimit:1.41421;"/>
+                    </g>
+                    <g transform="matrix(2.56,2.0844e-16,1.64135e-16,2.4,209.92,-1.4966e-13)">
+                        <path d="M189,223.969L187,224.031L186,192.031L188,191.969C188.333,202.635 188.666,213.302 189,223.969Z" style="fill:rgb(213,0,25);fill-rule:nonzero;stroke:rgb(213,0,25);stroke-width:1px;stroke-linecap:butt;stroke-miterlimit:1.41421;"/>
+                    </g>
+                    <g transform="matrix(2.38933,1.94544e-16,1.64135e-16,2.4,243.029,-1.46964e-13)">
+                        <path d="M181.859,226.133C181.879,226.359 181.931,226.579 182.027,226.787C182.255,227.285 182.703,227.684 183.246,227.874C183.454,227.946 183.671,227.985 183.892,227.998C190.609,228.225 197.335,228.076 204.056,227.999C204.278,227.992 204.496,227.958 204.707,227.89C205.271,227.706 205.738,227.3 205.973,226.787C206.069,226.579 206.121,226.359 206.141,226.134L209.003,187.93L211.14,188.07C210.184,200.839 209.391,213.619 208.269,226.376C208.222,226.79 208.119,227.192 207.943,227.575C207.486,228.571 206.593,229.367 205.505,229.747C205.056,229.904 204.586,229.983 204.107,229.999C197.37,230.075 190.63,230.075 183.893,229.999C183.414,229.983 182.944,229.904 182.495,229.747C181.375,229.356 180.463,228.524 180.018,227.488C179.853,227.102 179.759,226.698 179.723,226.285L176.86,188.07L178.997,187.93C179.951,200.665 180.905,213.399 181.859,226.133Z" style="fill:rgb(213,0,25);fill-rule:nonzero;stroke:rgb(213,0,25);stroke-width:1.03px;stroke-linecap:butt;stroke-miterlimit:1.41421;"/>
+                    </g>
+                </g>
+            </g>
+            <g transform="matrix(0.583674,-5.06922e-17,-3.99173e-17,0.622585,-860.124,582.023)">
+                <g id="Search">
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,158.481,-132.13)">
+                <clipPath id="_clip1">
+                    <rect x="347.052" y="1684.91" width="50.476" height="42.571"/>
+                </clipPath>
+                <g clip-path="url(#_clip1)">
+                    <g id="Menu--wide-" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-1" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-2" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-3" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-4" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-5" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-6" serif:id="Menu (wide)">
+                    </g>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,21.4959,-28.2154)">
+                <clipPath id="_clip2">
+                    <rect x="347.052" y="1684.91" width="50.476" height="42.571"/>
+                </clipPath>
+                <g clip-path="url(#_clip2)">
+                    <g id="Menu--wide-7" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-8" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-9" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-10" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-11" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-12" serif:id="Menu (wide)">
+                    </g>
+                    <g id="Menu--wide-13" serif:id="Menu (wide)">
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,13 +1,18 @@
 <template name='drugCategories'>
 	<nav class="navbar navbar-light">
+		<div>
+			
+		</div>
 		<div class='ml-auto'>
 			<button id='drugCategories_addCategory' class='btn btn-info'>+</button>
 			<button id='drugCategories_remove' class='btn btn-info'>-</button>
 		</div>
 	</nav>
-	{{#each categories}}
-	{{> category}}
-	{{/each}}
+	<div>
+		{{#each categories}}
+		{{> category}}
+		{{/each}}
+	</div>
 </template>
 
 <template name='category'>

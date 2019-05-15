@@ -3,7 +3,7 @@ import '../templates/drugCategories.html';
 import { Template } from 'meteor/templating';
 import { Categories } from '../../api/collections';
 import Swal from 'sweetalert2';
-import { CategoryItem } from '../../api/utilities';
+import { CategoryItem, fireCategoryAddDialog } from '../../api/utilities';
 
 export const catDeleteEnabled = new ReactiveVar(false);
 
@@ -20,33 +20,7 @@ Template.drugCategories.events({
 		if(catDeleteEnabled.get()) {
 			catDeleteEnabled.set(false);
 		}
-		Swal.fire({
-			title: 'Ajouter une catégorie',
-			showCancelButton: true,
-			cancelButtonText: 'Annuler',
-			confirmButtonText: 'Valider',
-			html: (() => {
-				let htmlString = '';
-				htmlString += `<div class='container'>` +
-				`<div class='row>` +
-				`<div class='col-xs'>Nom :</div>` +
-				`<div class='col-xs'><input type='text' id='swal-input_categoryName' placeholder='Mes médicaments'></div>`+
-				`</div></div>`;
-				return htmlString;
-			})(),
-			onOpen: () => {
-				document.getElementById('swal-input_categoryName').focus();
-			},
-			preConfirm: () => {
-				const input = document.getElementById('swal-input_categoryName');
-				const catName = input.value;
-				if(catName == ''){
-					catName = input.placeholder;
-				}
-
-				return catName;
-			}
-		}).then((swalResult) => {
+		fireCategoryAddDialog().then((swalResult) => {
 			if(swalResult.value) {
 				Meteor.call('categories.insert', new CategoryItem(swalResult.value));
 			}

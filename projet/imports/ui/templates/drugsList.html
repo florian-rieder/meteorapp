@@ -1,7 +1,9 @@
 <template name='drugsList'>
 	<div class='container-fluid' style='position: relative;'>
-		<h1>{{name}}</h1>
-		<button id='clearDrugs' class='btn btn-sm btn-danger' style='position: absolute; right: 15px; top: 15px;'>{{deleteButtonName}}</button>
+		<nav class="navbar navbar-light">
+				<h1>{{name}}</h1>
+				<button id='clearDrugs' class='btn btn-sm btn-danger ml-auto' style='position: absolute; right: 15px; top: 15px;'>{{deleteButtonName}}</button>
+		</nav>
 		<div>
 			{{#each drugs}}
 			{{> drug}}

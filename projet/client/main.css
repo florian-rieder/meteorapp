@@ -20,12 +20,13 @@ h2 {
 
 header {
 	height: 50px;
+	padding: 0;
+	padding-left: 10px;
 	width: 100%;
 	font-size: 28px;
 	color: white;
 	background-color: #5abb85;
 	z-index: 2;
-	padding: 10px;
 	/* vertically center items contained in the header (logo) */
 	display: flex;
 	align-items: center;
@@ -36,7 +37,7 @@ footer {
 	width: 100%;
 	background-color: #5abb85;
 	z-index: 2;
-	padding: 10px;
+	padding: 0;
 }
 
 #body_headerLogo {
@@ -175,15 +176,16 @@ main {
 .footerBar_container {
 	height: 100%;
 	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 	margin-left: auto;
 	margin-right: auto;
 }
 .navButton_button {
-	flex: 0 1 auto;
 	background-color: white !important;
+	height: auto;
+	padding: 0;
+	width: calc((90%-5px)/5);
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
 }
 
 .navButton_button img {
@@ -257,23 +259,19 @@ main {
   }
 }
 
-
 .drug_container {
 	border: 1px solid #4ca876;
 	background-color: white;
 	padding: 1em;
 	width: calc(100% - 2em);
 	display: inline-block;
-	transition-duration: 0.1s;
+	transition-duration: 100ms;
 	margin: 1em;
 }
-
 .drug_container:hover {
-	background-color: rgb(231, 231, 231);
+	transform: scale(1.05);
 }
 .drug_icon {
-	border: 1px solid #4ca876;
-	border-radius: 3px;
 	margin-right: 0.5em;
 }
 .drug_icon img{
@@ -353,10 +351,10 @@ div.drugData_firstInfo>div.container {
 	padding: 1em;
 	margin: 1em;
 	background-color: white;
-	transition-duration: 0.1s;
+	transition-duration: 100ms;
 }
 .category_container:hover{
-	background-color: rgb(212, 212, 212);
+	transform: scale(1.05);
 }
 .category_remove{
 	float: right;
@@ -405,7 +403,20 @@ thead td {
 	animation-timing-function: ease-in-out;
 }
 @keyframes wiggle {
-	25% {transform: rotate(45deg);}
-	50% {transform: rotate(-25deg);}
-	25% {transform: rotate3d(1, 1, 1, 45deg);}
+	25% { transform: rotate(45deg); }
+	25% { transform: rotate3d(1, 1, 1, 45deg); }
+	50% { transform: rotate(-25deg); }
+}
+
+/* swal2 custom classes */
+.btn-swal-left {
+	margin-right: 1em;
+	width: 40%;
+}
+.btn-swal-right {
+	margin-left: 1em;
+	width: 40%;
+}
+.swal-buttonsContainer {
+	width: 100%;
 }

@@ -1,6 +1,6 @@
 <template name='footerBar'>
-	<footer>
-		<div id='footerBar_container' class='container-fluid d-flex justify-content-around'>
+	<footer class='d-flex'>
+		<div id='footerBar_container' class='container-fluid d-flex justify-content-around align-middle'>
 			{{#each buttons}}
 			{{> navButton}}
 			{{/each}}
@@ -9,7 +9,7 @@
 </template>
 
 <template name='navButton'>
-	<button class='navButton_button btn btn btn-outline-light'>
-		<img src={{imgsrc}} alt={{name}}>
+	<button class='navButton_button btn btn btn-outline-light d-flex justify-content-center'>
+		<img src={{imgsrc}} alt={{name}} class='align-middle'>
 	</button>
 </template>

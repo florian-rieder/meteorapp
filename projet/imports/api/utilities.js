@@ -61,10 +61,9 @@ export const fireDrugAddDialog = async function (title) {
 				htmlString += ` <option value="${cat._id}">${cat.name}</option> `;
 			});
 			htmlString += `</select>`;
-			htmlString += `<input id='swal-input_categoryName' type='text' class='form-control hidden'></div>`;
 			// create button to add new category
 			htmlString += '<div style="position: absolute; top: 3px; right: 0px;" class="d-flex flex-row align-middle">'
-			htmlString += `<button id="swal-input_addCategory" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="Create new category">+</button>`;
+			htmlString += `<button id="swal-input_addCategory" class="btn btn-info btn-sm">+</button>`;
 			htmlString += `<img src="/images/info_icon.png" class="infoIcon" data-toggle="tooltip" data-placement="top" data-trigger="click" title="Create new category" style='margin-left: 4px'>`;
 			htmlString += '</div></div>';
 
@@ -72,21 +71,21 @@ export const fireDrugAddDialog = async function (title) {
 			return htmlString;
 		})(),
 		onOpen() { // when modal has opened
-			//initialize bootstrap tooltip
+			// initialize bootstrap tooltips
 			$(function () {
 				$('[data-toggle="tooltip"]').tooltip();
 			});
+
+			// add listener to category add button
 			$('#swal-input_addCategory').click((e) => {
 				e.preventDefault();
-				const selectInput = document.querySelector('#swal-input_select');
-				const textInput = document.querySelector('#swal-input_categoryName');
-				if(textInput.classList.contains('hidden')){
-					textInput.classList.remove('hidden');
-					selectInput.classList.add('hidden');
-				} else {
-					textInput.classList.add('hidden');
-					selectInput.classList.remove('hidden');
-				}
+				fireCategoryAddDialog().then(swalResult => {
+					if (swalResult.value) {
+						Meteor.call('categories.insert', new CategoryItem(swalResult.value));
+					}
+					// resume drug add dialog (launch a new one)
+					fireDrugAddDialog();
+				});
 			});
 		},
 		preConfirm: () => {
@@ -105,6 +104,43 @@ export const fireDrugAddDialog = async function (title) {
 		cancelButtonText: 'Annuler',
 		// confirm button
 		confirmButtonText: 'Confirmer',
+		focusConfirm: true,
+		buttonsStyling: false,
+		customClass: {
+			actions: 'swal-buttonsContainer d-flex justify-content-around',
+			confirmButton: 'btn btn-primary btn-swal-left',
+			cancelButton: 'btn btn-danger btn-swal-right'
+		}
+	});
+}
+
+export const fireCategoryAddDialog = async function () {
+	return Swal.fire({
+		title: 'Ajouter une catégorie',
+		showCancelButton: true,
+		cancelButtonText: 'Annuler',
+		confirmButtonText: 'Valider',
+		html: (() => {
+			let htmlString = '';
+			htmlString += `<div class='container'>` +
+				`<div class='row>` +
+				`<div class='col-xs'>Nom :</div>` +
+				`<div class='col-xs'><input type='text' id='swal-input_categoryName' placeholder='Mes médicaments'></div>` +
+				`</div></div>`;
+			return htmlString;
+		})(),
+		onOpen: () => {
+			document.getElementById('swal-input_categoryName').focus();
+		},
+		preConfirm: () => {
+			const input = document.getElementById('swal-input_categoryName');
+			const catName = input.value;
+			if (catName.length == 0) {
+				catName = input.placeholder;
+			}
+
+			return catName;
+		}
 	});
 }
 // function to replace abreviations in drug titles with full length word

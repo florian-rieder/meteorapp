@@ -132,9 +132,8 @@ export function startScanner() {
 	const samples = 5;
 
 	Quagga.onDetected(function (result) {
-		console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result.codeResult);
-
 		results.push(result.codeResult.code);
+		
 		if (detectedBarCodes === samples) {
 			// if we scanned $samples bar codes, stop the scanner
 			stopScanner();

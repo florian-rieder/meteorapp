@@ -10,12 +10,16 @@ export const catDeleteEnabled = new ReactiveVar(false);
 Template.drugCategories.helpers({
 	categories() {
 		return Categories.find();
-	}
+	},
 });
 
 Template.drugCategories.events({
 	'click #drugCategories_addCategory' (e) {
 		e.preventDefault();
+		// stop deletion if enabled
+		if(catDeleteEnabled.get()) {
+			catDeleteEnabled.set(false);
+		}
 		Swal.fire({
 			title: 'Ajouter une catégorie',
 			showCancelButton: true,
@@ -30,6 +34,9 @@ Template.drugCategories.events({
 				`</div></div>`;
 				return htmlString;
 			})(),
+			onOpen: () => {
+				document.getElementById('swal-input_categoryName').focus();
+			},
 			preConfirm: () => {
 				const input = document.getElementById('swal-input_categoryName');
 				const catName = input.value;

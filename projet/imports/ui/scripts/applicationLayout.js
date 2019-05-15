@@ -96,7 +96,6 @@ Router.route('/details/:_id', function () {
 	this.render('footerBar', { to: 'footer' });
 });
 
-
 Router.route('/profile', function () {
 	this.render('profile', { data: Profile.findOne() });
 	this.render('footerBar', { to: 'footer' });

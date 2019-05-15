@@ -41,6 +41,9 @@ Template.drugsList.events({
 Template.drug.helpers({
 	deleteEnabled() {
 		return deleteEnabled.get();
+	},
+	hasImage() {
+		return Template.instance().data.imgpath != undefined;
 	}
 })
 

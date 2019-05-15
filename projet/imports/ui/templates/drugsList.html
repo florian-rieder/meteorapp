@@ -2,23 +2,33 @@
 	<div class='container-fluid' style='position: relative;'>
 		<h1>{{name}}</h1>
 		<button id='clearDrugs' class='btn btn-sm btn-danger' style='position: absolute; right: 15px; top: 15px;'>{{deleteButtonName}}</button>
-		<ul id='drugList_ul'>
+		<div>
 			{{#each drugs}}
-				{{> drug}}
+			{{> drug}}
 			{{/each}}
-		</ul>
+		</div>
 	</div>
 </template>
 
 <template name='drug'>
-	<li>
-		<div>
-			<div class='drug_container'>
+	<div>
+		<div class='drug_container d-flex justify-content-around'>
+			{{#if hasImage}}
+			<div class='drug_icon align-middle'>
+				<img src='{{imgpath}}' alt="image" class='drugData_image'>
+			</div>
+			{{/if}}
+
+			<div class='align-middle'>
 				{{showcaseTitle}}
 			</div>
+
 			{{#if deleteEnabled}}
+			<div class='align-middle'>
 				<img src='/images-svg/supp_bouton.svg' class='drug_remove deleteButton' style='display: inline-block;'>
+			</div>
 			{{/if}}
 		</div>
-	</li>
+
+	</div>
 </template>

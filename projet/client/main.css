@@ -1,6 +1,6 @@
 body {
 	margin: 0px;
-	font-family: sans-serif;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	background-color: rgba(236, 236, 236) !important;
 }
 
@@ -208,13 +208,26 @@ main {
 	border: 1px solid #4ca876;
 	background-color: white;
 	padding: 1em;
-	width: 70vw;
+	width: calc(100% - 2em);
 	display: inline-block;
 	transition-duration: 0.1s;
+	margin: 1em;
 }
 
 .drug_container:hover {
 	background-color: rgb(231, 231, 231);
+}
+.drug_icon {
+	border: 1px solid #4ca876;
+	border-radius: 3px;
+	margin-right: 0.5em;
+}
+.drug_icon img{
+	max-width: 3em;
+	max-height: 3em;
+	min-width: 1.5em;
+	min-height: 1.5em;
+	
 }
 
 #drugList_ul {
@@ -328,8 +341,10 @@ thead td {
 	height: 2em;
 	width: 2em;
 	cursor: pointer;
+	transition: 200ms linear;
 }
 .deleteButton:hover {
+	transform: scale(1.1);
 	animation-name: wiggle;
 	animation-duration: 500ms;
 	animation-iteration-count: 1;

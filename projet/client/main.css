@@ -195,14 +195,68 @@ main {
 	display: none !important;
 }
 
-#loadingWheel {
-	/* put it in the middle of the screen */
-	position: absolute;
-	top: calc(50vh - 40px);
-	/* value in px is half of the image height */
-	left: calc(50vw - 40px);
-	/* value in px is half of the image width */
+/* SVG spinner icon animation */
+/* from https://codepen.io/svnt/pen/qraaRN?editors=1100 */
+.spinner {
+  -webkit-animation: rotate 1.5s linear infinite;
+          animation: rotate 1.5s linear infinite;
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -35px 0 0 -35px;
+  width: 70px;
+  height: 70px;
 }
+.spinner .path {
+  stroke: #63be91;
+  stroke-linecap: round;
+  -webkit-animation: dash 1.25s ease-in-out infinite;
+          animation: dash 1.25s ease-in-out infinite;
+}
+
+@-webkit-keyframes rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
 
 .drug_container {
 	border: 1px solid #4ca876;

@@ -121,9 +121,9 @@ export function startScanner() {
 				Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "white", lineWidth: 2 });
 			}
 			//Red line indicating full detection process
-			if (result.codeResult && result.codeResult.code) {
+			/* if (result.codeResult && result.codeResult.code) {
 				Quagga.ImageDebug.drawPath(result.line, { x: 'x', y: 'y' }, drawingCtx, { color: 'rgb(71, 91, 206)', lineWidth: 3 });
-			}
+			} */
 		}
 	});
 
@@ -135,7 +135,7 @@ export function startScanner() {
 		console.log("Barcode detected and processed : [" + result.codeResult.code + "]", result.codeResult);
 
 		results.push(result.codeResult.code);
-		if (detectedBarCodes >= samples) {
+		if (detectedBarCodes === samples) {
 			// if we scanned $samples bar codes, stop the scanner
 			stopScanner();
 			// get the most occuring result in the array (get its mode)

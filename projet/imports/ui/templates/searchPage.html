@@ -31,8 +31,12 @@
 			<h3 class='result_title {{#if isNcHc}}result_grayedText{{/if}}'>{{title}}</h3>
 			<p class='result_subtitle {{#if isNcHc}}result_grayedText{{/if}}'>{{subtitle}}</p>
 			<div class='ml-auto'>
+				{{#if isAlreadyInPharmacy}}
+				<button class='result_inPharmacy btn btn-info btn-sm'>Voir dans la pharmacie</button>
+				{{else}}
 				<button class='result_add btn btn-info btn-sm'>Ajouter</button>
 				<button class='result_inspect btn btn-info btn-sm'>Inspecter</button>
+				{{/if}}
 			</div>
 		</div>
 	</li>

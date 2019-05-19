@@ -14,21 +14,21 @@ Template.drugCategories.helpers({
 });
 
 Template.drugCategories.events({
-	'click #drugCategories_addCategory' (e) {
+	'click #drugCategories_addCategory'(e) {
 		e.preventDefault();
 		// stop deletion if enabled
-		if(catDeleteEnabled.get()) {
+		if (catDeleteEnabled.get()) {
 			catDeleteEnabled.set(false);
 		}
 		fireCategoryAddDialog().then((swalResult) => {
-			if(swalResult.value) {
+			if (swalResult.value) {
 				Meteor.call('categories.insert', new CategoryItem(swalResult.value));
 			}
 		});
 	},
-	'click #drugCategories_remove' (e) {
+	'click #drugCategories_remove'(e) {
 		e.preventDefault();
-		if(catDeleteEnabled.get()) {
+		if (catDeleteEnabled.get()) {
 			catDeleteEnabled.set(false);
 		} else {
 			catDeleteEnabled.set(true);
@@ -46,13 +46,13 @@ Template.category.helpers({
 })
 
 Template.category.events({
-	'click .category_container' (e) {
+	'click .category_container'(e) {
 		e.preventDefault();
-		if(!catDeleteEnabled.get()) {
-		Router.go(`/category/${Template.instance().data._id}`);
+		if (!catDeleteEnabled.get()) {
+			Router.go(`/category/${Template.instance().data._id}`);
 		}
 	},
-	'click .category_remove' (e) {
+	'click .category_remove'(e) {
 		e.preventDefault();
 		Swal.fire({
 			title: `Êtes-vous sûr de vouloir supprimer ${this.name} ?`,
@@ -60,8 +60,10 @@ Template.category.events({
 			confirmButtonText: 'Confirmer',
 			showCancelButton: true,
 			cancelButtonText: 'Annuler',
+			buttonsStyling: false,
+			customClass: swalCustomClasses,
 		}).then(swalResult => {
-			if(swalResult.value) {
+			if (swalResult.value) {
 				Meteor.call('categories.remove', this._id);
 			}
 		});

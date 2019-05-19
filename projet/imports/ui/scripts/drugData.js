@@ -40,7 +40,7 @@ Template.drugData.helpers({
 		function renderItem(item) {
 			const name = item.name;
 			const value = item.value;
-			if(Array.isArray(value)) {
+			if (Array.isArray(value)) {
 				HTMLString += `<${name}>`;
 				value.forEach(el => {
 					renderItem(el);
@@ -56,7 +56,7 @@ Template.drugData.helpers({
 Template.drugData.events({
 	'click #backButton'() {
 		// to avoid re fetching the data we already searched after an inspection
-		if(lastActivePage.get().includes('search')){
+		if (lastActivePage.get().includes('search')) {
 			// instead of going to /search/searchquery, we go back to /search, thus displaying
 			// previous search results without refetching them
 			Router.go('/search');
@@ -76,6 +76,8 @@ Template.drugData.events({
 				Swal.fire({
 					type: 'success',
 					title: "C'est fait !",
+					buttonsStyling: false,
+					customClass: swalCustomClasses,
 				});
 			}
 		});

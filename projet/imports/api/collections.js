@@ -1,6 +1,5 @@
 import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
-import { CategoryItem } from './utilities.js';
 
 // export all the collections so that they are accessible from other files
 export const Drugs = new Mongo.Collection('drugs'); // user pharmacy
@@ -22,7 +21,7 @@ Meteor.methods({
 	},
 	'drugs.remove'(id) {
 		Drugs.remove(id);
-		// remove foreign key for this drug inside all categories
+		// remove foreign key for this drug from all categories
 		Categories.find().forEach(cat => {
 			Meteor.call('categories.removeExtKey', cat._id, id);
 		});

@@ -1,3 +1,9 @@
+:root {
+	/* define global css variables */
+	--main-header-color: #5abb85;
+	--main-border-color: #4ca876;
+}
+
 body {
 	margin: 0px;
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -25,7 +31,7 @@ header {
 	width: 100%;
 	font-size: 28px;
 	color: white;
-	background-color: #5abb85;
+	background-color: var(--main-header-color);
 	z-index: 2;
 	/* vertically center items contained in the header (logo) */
 	display: flex;
@@ -35,7 +41,7 @@ header {
 footer {
 	height: 60px;
 	width: 100%;
-	background-color: #5abb85;
+	background-color: var(--main-header-color);
 	z-index: 2;
 	padding: 0;
 }
@@ -65,7 +71,7 @@ main {
 	margin-top: 1em;
 	margin-bottom: 1em;
 	padding: 1em;
-	border: 1px solid #4ca876;
+	border: 1px solid var(--main-border-color);
 	background-color: white;
 }
 
@@ -216,14 +222,12 @@ main {
   -webkit-animation: dash 1.25s ease-in-out infinite;
           animation: dash 1.25s ease-in-out infinite;
 }
-
 @-webkit-keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
   }
 }
-
 @keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
@@ -260,7 +264,7 @@ main {
 }
 
 .drug_container {
-	border: 1px solid #4ca876;
+	border: 1px solid var(--main-border-color);
 	background-color: white;
 	padding: 1em;
 	width: calc(100% - 2em);
@@ -347,7 +351,7 @@ div.drugData_firstInfo>div.container {
 }
 
 .category_container{
-	border: 1px solid #4ca876;
+	border: 1px solid var(--main-border-color);
 	padding: 1em;
 	margin: 1em;
 	background-color: white;

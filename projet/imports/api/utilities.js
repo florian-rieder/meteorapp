@@ -32,6 +32,12 @@ export const lastActivePage = new ReactiveVar('/');
 
 export const LoadingWheel = new LoadingWheelController();
 
+export const swalCustomClasses = {
+	actions: 'swal-buttonsContainer d-flex justify-content-around',
+	confirmButton: 'btn btn-lg btn-primary btn-swal-left',
+	cancelButton: 'btn btn-lg btn-danger btn-swal-right'
+};
+
 // since we need to show this dialog at more than one place in the code, we export it as global
 // to call the same function from different places.
 export const fireDrugAddDialog = async function (title) {
@@ -106,11 +112,7 @@ export const fireDrugAddDialog = async function (title) {
 		confirmButtonText: 'Confirmer',
 		focusConfirm: true,
 		buttonsStyling: false,
-		customClass: {
-			actions: 'swal-buttonsContainer d-flex justify-content-around',
-			confirmButton: 'btn btn-primary btn-swal-left',
-			cancelButton: 'btn btn-danger btn-swal-right'
-		}
+		customClass: swalCustomClasses,
 	});
 }
 
@@ -120,9 +122,10 @@ export const fireCategoryAddDialog = async function () {
 		showCancelButton: true,
 		cancelButtonText: 'Annuler',
 		confirmButtonText: 'Valider',
+		buttonsStyling: false,
+		customClass: swalCustomClasses,
 		html: (() => {
-			let htmlString = '';
-			htmlString += `<div class='container'>` +
+			let htmlString = `<div class='container'>` +
 				`<div class='row>` +
 				`<div class='col-xs'>Nom :</div>` +
 				`<div class='col-xs'><input type='text' id='swal-input_categoryName' placeholder='Mes médicaments'></div>` +
@@ -130,11 +133,14 @@ export const fireCategoryAddDialog = async function () {
 			return htmlString;
 		})(),
 		onOpen: () => {
+			// focus on text input
 			document.getElementById('swal-input_categoryName').focus();
 		},
 		preConfirm: () => {
+			// get the value in input
 			const input = document.getElementById('swal-input_categoryName');
 			const catName = input.value;
+			// if user left it empty, replace the value with the placeholder
 			if (catName.length == 0) {
 				catName = input.placeholder;
 			}
@@ -179,18 +185,20 @@ export const prettifyDrugTitle = function (str) {
 	}
 	// now we are going to separate the string into an array to be able to check each word individually
 	str = str.split(' ');
-	str.forEach((word, i, arr) => {
+	str.forEach((word, i, string) => {
 		// iterate through the replaceTable properties
 		Object.getOwnPropertyNames(replaceTable).forEach(abrev => {
 			// split by '/' to put abreviations in an array, or separate them if there are many
 			abrevArray = abrev.split('/');
+			// replace words that are abreviations with the corresponding full word
 			abrevArray.forEach((a) => {
 				// only replace in the cases we have the abreviation surrounded by spaces, 
 				// to avoid detecting abreviations inside a word
 				if (word === a) {
-					arr[i] = replaceTable[abrev];
+					string[i] = replaceTable[abrev];
 				}
 			});
+
 		});
 
 		// try to optimise it a bit by adding breaks when an abreviation is found for a word in the title
@@ -234,9 +242,24 @@ export const search = function (query) {
 				title: "Une erreur s'est produite",
 				text: error.message,
 				type: 'error',
+				buttonsStyling: false,
+				customClass: swalCustomClasses,
 			});
 		}
 		const t1 = performance.now();
 		console.log(`search duration: ~${Math.round(t1 - t0)}ms`);
+	});
+}
+
+export const fireErrorDialog = function(error) {
+	Swal.fire({
+		title: "Une erreur s'est produite",
+		text: error.message,
+		type: 'error',
+		buttonsStyling: false,
+		customClass: {
+			actions: 'swal-buttonsContainer d-flex justify-content-center',
+			confirmButton: 'btn btn-lg btn-primary',
+		}
 	});
 }

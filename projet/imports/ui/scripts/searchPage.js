@@ -4,8 +4,9 @@ import './drugData.js';
 import '../../api/collections.js';
 
 import { Template } from 'meteor/templating';
-import { inspectDrugData, searchResults, LoadingWheel, fireDrugAddDialog, lastActivePage } from '../../api/utilities';
+import { inspectDrugData, searchResults, LoadingWheel, fireDrugAddDialog, lastActivePage, fireErrorDialog } from '../../api/utilities';
 import Swal from 'sweetalert2';
+import { Drugs } from '../../api/collections.js';
 
 Template.searchPage.helpers({
 	results() {
@@ -21,9 +22,12 @@ Template.searchPage.helpers({
 });
 
 Template.result.helpers({
-	isNcHc(){
+	isNcHc() {
 		const title = Template.instance().data.title;
 		return title.includes('nc') || title.includes('hc');
+	},
+	isAlreadyInPharmacy() {
+		return Drugs.find({ 'showcaseTitle': Template.instance().data.title }).count() > 0;
 	}
 })
 
@@ -55,19 +59,7 @@ Template.result.events({
 					// this is a way of calling the drugs.insert method like with Meteor.call, but that way we can return
 					// the id of the newly inserted drug in the db
 					const id = Meteor.apply('drugs.insert', [drugData, swalResult.value.categoryId], { returnStubValue: true });
-
-					Swal.fire({
-						type: 'success',
-						title: "C'est fait !",
-						confirmButtonText: 'Voir',
-						showCancelButton: true,
-						cancelButtonText: 'Ok',
-					}).then(swalResult => {
-						if (swalResult.value) { // pressed confirm button
-							Router.go(`/details/${id}`);
-							lastActivePage.set('/search');
-						}
-					});
+					fireGoToDrugPageDialog(id);
 				}
 				// else we do the scraping
 				else {
@@ -89,26 +81,10 @@ Template.result.events({
 							// this is a way of calling the drugs.insert method like with Meteor.call, but that way we can return
 							// the id of the newly inserted drug in the db
 							const id = Meteor.apply('drugs.insert', [result, swalResult.value.categoryId], { returnStubValue: true });
-
-							Swal.fire({
-								type: 'success',
-								title: "C'est fait !",
-								confirmButtonText: 'Voir',
-								showCancelButton: true,
-								cancelButtonText: 'Ok',
-							}).then(swalResult => {
-								if (swalResult.value) { // pressed confirm button
-									Router.go(`/details/${id}`);
-									lastActivePage.set('/search');
-								}
-							});
+							fireGoToDrugPageDialog(id);
 						}
 						if (error) {
-							Swal.fire({
-								type: 'error',
-								title: "Une erreur s'est produite",
-								text: error.message,
-							});
+							fireErrorDialog(error)
 						}
 						const t1 = performance.now();
 						console.log(`scrape duration: ~${Math.round(t1 - t0)}ms`);
@@ -135,16 +111,17 @@ Template.result.events({
 				lastActivePage.set('/search');
 			}
 			if (error) {
-				Swal.fire({
-					title: "Une erreur s'est produite",
-					text: error.message,
-					type: 'error',
-				});
+				fireErrorDialog(error);
 			}
-			
 		});
+	},
+	'click .result_inPharmacy'(e){
+		e.preventDefault();
+		let id = Drugs.findOne({'showcaseTitle': this.title})._id;
+		Router.go(`/details/${id}`);
+		lastActivePage.set('/search');
 	}
-})
+});
 
 Template.searchBar.events({
 	'click .searchBar_searchButton'(e) {
@@ -162,3 +139,24 @@ Template.searchBar.events({
 		}
 	}
 });
+
+function fireGoToDrugPageDialog() {
+	Swal.fire({
+		type: 'success',
+		title: "C'est fait !",
+		confirmButtonText: 'Voir',
+		showCancelButton: true,
+		cancelButtonText: 'Ok',
+		buttonsStyling: false,
+		customClass: {
+			actions: 'swal-buttonsContainer d-flex justify-content-around',
+			confirmButton: 'btn btn-lg btn-primary btn-swal-left',
+			cancelButton: 'btn btn-lg btn-outline-secondary btn-swal-right'
+		}
+	}).then(swalResult => {
+		if (swalResult.value) { // pressed confirm button
+			Router.go(`/details/${id}`);
+			lastActivePage.set('/search');
+		}
+	});
+}

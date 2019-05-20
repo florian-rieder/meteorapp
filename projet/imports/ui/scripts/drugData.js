@@ -81,5 +81,27 @@ Template.drugData.events({
 				});
 			}
 		});
+	},
+	//Accordion collapse functions
+	'click #drugComposition_accordion'() {
+		acc = document.getElementById('drugComposition_accordion');
+		acc.classList.toggle('active');
+		//Toggle between hiding and showing the active panel
+		var panel = acc.nextElementSibling;
+		if (panel.style.display === "block") {
+			panel.style.display = "none";
+		} else {
+			panel.style.display = "block";
+		}
+	},
+	'click #drugNotice_accordion'() {
+		acc = document.getElementById('drugNotice_accordion');
+		acc.classList.toggle('active');
+		var panel = acc.nextElementSibling;
+		if (panel.style.display === "block") {
+			panel.style.display = "none";
+		} else {
+			panel.style.display = "block";
+		}
 	}
 });

@@ -73,6 +73,7 @@ main {
 	padding: 1em;
 	border: 1px solid var(--main-border-color);
 	background-color: white;
+	height: calc(50vh);
 }
 
 .drugData_noticeContainer {
@@ -303,8 +304,11 @@ header>a, header>a:active, header>a:hover, header>a:visited {
 }
 
 .drugData_image {
-	max-width: 100%;
-	max-height: 60vh;
+	max-width: 29vw;
+	max-height: 20vh;
+	align-content: center;
+	position: relative;
+	margin-top: 2vh;
 }
 
 div.drugData_firstInfo>div.container>div>div[class*='col'] {
@@ -423,4 +427,32 @@ thead td {
 }
 .swal-buttonsContainer {
 	width: 100%;
+}
+/* Drug Data Accordion */
+.accordion {
+	background-color: #eee;
+	color: #444;
+	cursor: pointer;
+	padding: 18px;
+	width: 100%;
+	text-align: left;
+	border: none;
+	outline: none;
+	transition: 0.4s;
+}
+.active, .accordion:hover {
+	background-color: #ccc;
+}
+.panel {
+	padding: 0 18px;
+	background-color: white;
+	display: none;
+	overflow: hidden;
+  }
+.accText{
+	text-align: center;
+}
+.imageContainer{
+	text-align: center;
+	height: 25vh;
 }

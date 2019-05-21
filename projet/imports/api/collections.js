@@ -5,6 +5,7 @@ import { Meteor } from 'meteor/meteor';
 export const Drugs = new Mongo.Collection('drugs'); // user pharmacy
 export const Profile = new Mongo.Collection('profile');
 export const Categories = new Mongo.Collection('categories'); // categories in which the user can put his drugs
+export const Pharmacies = new Mongo.Collection('pharmacies');
 
 // wrap db methods in meteor methods to call them from the client
 // note: i'm not sure we even need them to be wrapped like that
@@ -76,3 +77,11 @@ Meteor.methods({
 		Categories.remove(categoryId);
 	}
 });
+
+// Pharmacies
+
+Meteor.methods({
+	'pharmacies.insert'(pharmacy){
+		Pharmacies.insert(pharmacy)
+	}
+})

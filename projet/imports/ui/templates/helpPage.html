@@ -37,32 +37,16 @@
 			</tr>
 		</thead>
 		<tbody>
+			{{#each contacts}}
 			<tr>
-				<th scope="row">1</th>
-				<td>Emergency Rescue Service (Ambulance)</td>
-				<td>144</td>
+			<th scope="row">{{plusOne @index}}</th>
+			<td>{{place}}</td>
+			<td>{{phone}}</td>
 			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td><a href="http://www.chuv.ch">CHUV</a></td>
-				<td>021 314 11 11</td>
-			</tr>
+			{{/each}}
 		</tbody>
 	</table>
-	<div class="input-group mb-3">
-		<input type="text" class="form-control" placeholder="Nom" aria-label="Recipient's username"
-			aria-describedby="button-addon2">
-		<div class="input-group-append">
-			<button class="btn btn-outline-secondary" type="button" id="button-addon2">Prochain</button>
-		</div>
-	</div>
-	<div class="input-group mb-3">
-		<input type="text" class="form-control" placeholder="Téléphone" aria-label="Recipient's username"
-			aria-describedby="button-addon2">
-		<div class="input-group-append">
-			<button class="btn btn-outline-success" type="button" id="button-addon2">Sauvgarder</button>
-		</div>
-	</div>
+	<button id='contacts_add' class='btn btn-outline-primary'>Ajouter</button>
 </template>
 
 <template name='helpBar'>

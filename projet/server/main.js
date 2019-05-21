@@ -2,7 +2,7 @@ import '../imports/api/scraper.js';
 import '../imports/api/collections.js';
 
 import { Meteor } from 'meteor/meteor';
-import { Categories, Pharmacies } from '../imports/api/collections.js';
+import { Categories, Pharmacies, Contacts } from '../imports/api/collections.js';
 import { CategoryItem } from '../imports/api/utilities.js';
 
 Meteor.startup(() => {
@@ -22,6 +22,16 @@ Meteor.startup(() => {
 			name: 'Pharmacie MetroOuchy',
 			tel: '021 612 03 03',
 			address: 'Place de la Navigation 6, 1006 Lausanne'
+		});
+	}
+	if (Contacts.findOne() == undefined) {
+		Contacts.insert({
+			place: 'Emergency Rescue Service (Ambulance)',
+			phone: '144'
+		});
+		Contacts.insert({
+			place: 'CHUV',
+			phone: '021 314 11 11'
 		});
 	}
 });

@@ -1,6 +1,6 @@
 import {Template} from 'meteor/templating'
 import '../templates/helpPage.html';
-import { Pharmacies } from '../../api/collections';
+import { Pharmacies, Contacts } from '../../api/collections';
 import Swal from 'sweetalert2';
 import { Meteor } from 'meteor/meteor';
 
@@ -25,6 +25,15 @@ Template.helpPage.helpers({
 Template.stores.helpers({
 	pharmacies(){
 		return Pharmacies.find();
+	},
+	plusOne(index){
+		return index + 1;
+	}
+})
+
+Template.contactList.helpers({
+	contacts(){
+		return Contacts.find();
 	},
 	plusOne(index){
 		return index + 1;
@@ -57,6 +66,33 @@ Template.stores.events({
 			if(swalResult.value){
 				console.log(swalResult.value)
 				Meteor.call('pharmacies.insert', swalResult.value);
+			}
+		})
+	}
+})
+
+Template.contactList.events({
+	'click #contacts_add'(e){
+		e.preventDefault();
+		Swal.fire({
+			title: 'Ajouter un contact',
+			html: (() => {
+				let HTMLString = "<input type='text' class='form-control' id='swal-input_place'>"
+				HTMLString += "<input type='tel' class='form-control' id='swal-input_phone'>"
+				return HTMLString;
+			})(),
+			preConfirm(){
+				let place = document.getElementById('swal-input_place').value
+				let phone = document.getElementById('swal-input_phone').value
+				return {
+					place: place,
+					phone: phone
+				}
+			}
+		}).then((swalResult) => {
+			if(swalResult.value){
+				console.log(swalResult.value)
+				Meteor.call('contacts.insert', swalResult.value);
 			}
 		})
 	}

@@ -1,24 +1,32 @@
 <template name='profile'>
 	<h1 class='d-flex justify-content-center'>Votre Profil</h1>
+	<div class='text-center'>
+	{{#each profImage}}
+	{{> profIcon}}
+	{{/each}}
+	</div>
 	<div class='d-flex justify-content-center vertical-center'>
-		<div id='profile_container'>
-			<ul class='profileList center'>
+		<div class='container'>
 				{{#each fields}}
-				<li class='profileListItem'>
+				<div class='row' id={{fieldId}}>
+					<div class='col'>
+						<p>{{fieldName}}</p>
+					</div>
+					<div class='col-8'>
 					{{#if hasProfileData}}
 						{{#if getDisplay}}
-						<input type="text" class='field_textInput' placeholder={{fieldName}} name={{fieldName}}
-							id={{fieldId}} value={{getProfileField @index}}>
-					{{else}}
-						<p class='center lead profileElement'>{{getProfileField @index}}</p>
+						<input type="text" class='field_textInput form-control' placeholder={{fieldName}} name={{fieldName}}
+							value={{getProfileField @index}} style='background-color: #c3c7cfcb'>
+						{{else}}
+						<p class='profileElement form-control'>{{getProfileField @index}}</p>
 						{{/if}}
 					{{else}}
-					<input type="text" class='field_textInput' placeholder={{fieldName}} name={{fieldName}}
-					id={{fieldId}}>
+					<input type="text" class='field_textInput form-control' placeholder={{fieldName}} name={{fieldName}}
+					id={{fieldId}} style='background-color: #c3c7cfcb'>
 					{{/if}}
-				</li>
+				</div>
+				</div>
 				{{/each}}
-			</ul>
 		</div>
 
 	</div>
@@ -33,4 +41,7 @@
 			<button id="confirmButton" class='btn btn-success'>Valider</button>
 		{{/if}}
 	</div>
+</template>
+<template name='profIcon'>
+	<img src="{{imgsrc}}" alt="image profile">
 </template>

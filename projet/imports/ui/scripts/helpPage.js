@@ -6,11 +6,11 @@ import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 const contactDeleteEnabled = new ReactiveVar(false);
+const pharmacyDeleteEnabled = new ReactiveVar(false);
 
 Template.helpBar.helpers({
     buttons() {
         return [
-			{ name: 'Paramètres', path: 'parameters'},
 			{ name: 'Contacts', path: 'contacts' },
 			{ name: 'Pharmacies', path: 'nearby-stores' },
 			{ name: 'Support techniques', path: 'support' },
@@ -31,8 +31,21 @@ Template.stores.helpers({
 	},
 	plusOne(index){
 		return index + 1;
-	}
-})
+	},
+	deleteEnabled() {
+		return pharmacyDeleteEnabled.get();
+	},
+	deleteButtonName() {
+		// user is already deleting pharmacies
+		if (pharmacyDeleteEnabled.get()) {
+			return 'Confirmer';
+		}
+		// user is not already deleting pharmacies
+		else {
+			return 'Supprimer des pharmacies';
+		}
+	}	
+});
 
 Template.contactList.helpers({
 	contacts(){
@@ -45,16 +58,16 @@ Template.contactList.helpers({
 		return contactDeleteEnabled.get();
 	},
 	deleteButtonName() {
-		// user is already deleting drugs
+		// user is already deleting contacts
 		if (contactDeleteEnabled.get()) {
 			return 'Confirmer';
 		}
-		// user is not already deleting drugs
+		// user is not already deleting contacts
 		else {
 			return 'Supprimer des contacts';
 		}
 	}
-})
+});
 
 Template.stores.events({
 	'click #stores_add'(e){
@@ -85,7 +98,21 @@ Template.stores.events({
 			}
 		})
 	}
-})
+	,'click #clearPharmacies'(e) {
+		e.preventDefault();
+		if (pharmacyDeleteEnabled.get()) {
+			// user is already deleting pharmacies
+			pharmacyDeleteEnabled.set(false);
+		} else {
+			// user is not already deleting pharmacies
+			pharmacyDeleteEnabled.set(true);
+	}
+	'click .pharmacy_remove'(e);{
+		e.preventDefault();
+		Meteor.call('pharmacies.remove',)
+	}	
+},		
+});
 
 Template.contactList.events({
 	'click #contacts_add'(e){
@@ -115,18 +142,15 @@ Template.contactList.events({
 	,'click #clearContacts'(e) {
 			e.preventDefault();
 			if (contactDeleteEnabled.get()) {
-				// user is already deleting drugs
+				// user is already deleting contacts
 				contactDeleteEnabled.set(false);
 			} else {
-				// user is not already deleting drugs
+				// user is not already deleting contacts
 				contactDeleteEnabled.set(true);
 		}
-	}
-});
-
-Template.contact.events({
+	},
 	'click .contact_remove'(e){
 		e.preventDefault();
-		Meteor.call('contacts.remove', this._id);
+		Meteor.call('contacts.remove',)
 	}
-})
+});

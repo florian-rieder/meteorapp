@@ -129,7 +129,7 @@ Template.contactList.events({
 			title: 'Ajouter un contact',
 			html: (() => {
 				let HTMLString = "<input type='text' class='form-control' id='swal-input_place' placeholder='Nom :'>"
-				HTMLString += "<input type='tel' class='form-control' id='swal-input_phone'> placeholder='Téléphone :'"
+				HTMLString += "<input type='tel' class='form-control' id='swal-input_phone' placeholder='Téléphone :'>"
 				return HTMLString;
 			})(),
 			preConfirm(){

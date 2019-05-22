@@ -21,6 +21,9 @@ Template.drugsList.helpers({
 Template.drugsList.events({
 	'click #clearDrugs'(e) {
 		e.preventDefault();
+		//Toggle Rubbish bin red background when clicked	
+		$('#clearDrugs').toggleClass("delRed");
+		
 		if (deleteEnabled.get()) {
 			// user is already deleting drugs
 			deleteEnabled.set(false);

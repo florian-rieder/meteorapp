@@ -429,6 +429,6 @@ thead td {
 #clearDrugs{
 	transition: color 2s;
 }
-#clearDrugs:hover{
+#clearDrugs.delRed{
 	background-color: red;
 }

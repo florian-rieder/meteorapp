@@ -2,7 +2,7 @@
 Medintake permet d'accéder aux informations de ses médicaments, telles que leur notice d'emballage ou leur composition, en scannant le code barre de l'emballage ou en le recherchant. L'application offre également des fonctionnalités de gestion de sa pharmacie, en permettant de classer ses médicaments, de surveiller leurs dates d'expiration.
 
 # Technologie
-Medintake utilise le framework Meteor.js avec Cordova pour le portage sur mobile (Android).
+Medintake utilise le framework Meteor.js 1.8.1 avec Cordova pour le portage sur mobile (Android).
 
 ## Librairies
 - Bootstrap (CSS)

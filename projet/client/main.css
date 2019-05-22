@@ -272,9 +272,6 @@ main {
 	transition-duration: 100ms;
 	margin: 1em;
 }
-.drug_container:hover {
-	transform: scale(1.05);
-}
 .drug_icon {
 	margin-right: 0.5em;
 }
@@ -362,9 +359,6 @@ div.drugData_firstInfo>div.container {
 	background-color: white;
 	transition-duration: 100ms;
 }
-.category_container:hover{
-	transform: scale(1.05);
-}
 .category_remove{
 	float: right;
 	margin-left: 10px;
@@ -431,4 +425,10 @@ thead td {
 }
 .profileElement{
 	margin-bottom: 0.3em;
+}
+#clearDrugs{
+	transition: color 2s;
+}
+#clearDrugs.delRed{
+	background-color: red;
 }

@@ -90,7 +90,7 @@ export const fireDrugAddDialog = async function (title) {
 						Meteor.call('categories.insert', new CategoryItem(swalResult.value));
 					}
 					// resume drug add dialog (launch a new one)
-					fireDrugAddDialog();
+					fireDrugAddDialog(title);
 				});
 			});
 		},
@@ -139,7 +139,7 @@ export const fireCategoryAddDialog = async function () {
 		preConfirm: () => {
 			// get the value in input
 			const input = document.getElementById('swal-input_categoryName');
-			const catName = input.value;
+			let catName = input.value;
 			// if user left it empty, replace the value with the placeholder
 			if (catName.length == 0) {
 				catName = input.placeholder;

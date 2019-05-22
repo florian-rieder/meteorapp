@@ -3,7 +3,7 @@ import '../templates/drugCategories.html';
 import { Template } from 'meteor/templating';
 import { Categories } from '../../api/collections';
 import Swal from 'sweetalert2';
-import { CategoryItem, fireCategoryAddDialog } from '../../api/utilities';
+import { CategoryItem, fireCategoryAddDialog, swalCustomClasses } from '../../api/utilities';
 
 export const catDeleteEnabled = new ReactiveVar(false);
 
@@ -11,6 +11,9 @@ Template.drugCategories.helpers({
 	categories() {
 		return Categories.find();
 	},
+	trashIc: [
+		{imgsrc: '/images-svg/rubbish-bin2.svg'}
+	],
 });
 
 Template.drugCategories.events({

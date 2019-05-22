@@ -1,8 +1,10 @@
 <template name='drugsList'>
 	<div class='container-fluid' style='position: relative;'>
-		<nav class="navbar navbar-light">
-				<h1>{{name}}</h1>
-				<button id='clearDrugs' class='btn btn-sm btn-danger ml-auto' style='position: absolute; right: 15px; top: 15px;'>{{deleteButtonName}}</button>
+		<nav class="d-flex justify-content-around navbar navbar-light" style='height: 20vh'>
+			<h1>{{name}}</h1>
+			<img id='clearDrugs' class='btn btn-sm ml-auto'
+				style='position: absolute; right: 3vw; top: 2vh; width: 40px; height: 40px;'
+				src='/images-svg/rubbish-bin.svg' alt='image poubelle'>
 		</nav>
 		<div>
 			{{#each drugs}}

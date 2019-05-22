@@ -17,8 +17,7 @@
 		fàq
 		{{else}}
 		{{#if pageIs 'support'}}
-		<!-- insert support subpage template here -->
-		support
+		{{> supportUs}}
 		{{/if}}
 		{{/if}}
 		{{/if}}
@@ -98,6 +97,41 @@
 			{{/each}}
 		</tbody>
 	</table>
-	<button id='stores_add' class='btn btn-sm btn-primary'>Ajouter</button>
+	<button id='stores_add' class='btn btn-sm btn-primary' alt='Ajouter'>Ajouter</button>
 	<button id='clearPharmacies' class='pharmacy_remove btn btn-sm btn-danger'>{{deleteButtonName}}</button>	
+</template>
+
+<template name='supportUs'>
+	<h2 class="text-center">L'équipe de développement de Meditake</h2>
+	<table class="table table-hover">
+		<thead class="thead-dark">
+		  <tr>
+			<th scope="col">Nom</th>
+			<th scope="col">Nom de Famille</th>
+			<th scope="col">Email</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+			<td>Florian</td>
+			<td>Rieder</td>
+			<td>florian.rieder@unil.ch</td>
+		  </tr>
+		  <tr>
+			<td>Pedro</td>
+			<td>Tome</td>
+			<td>pedro.tome@unil.ch</td>
+		  </tr>
+		  <tr>
+			<td>Amirhossein</td>
+			<td>Asadizanjani</td>
+			<td>amirhossein.asadizanjani@unil.ch</td>
+		  </tr>
+		  <tr>
+			<td>Célia</td>
+			<td>Riva</td>
+			<td>celia.riva@unil.ch</td>
+		  </tr>		  
+		</tbody>
+	</table>
 </template>

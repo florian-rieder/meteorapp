@@ -3,19 +3,21 @@
         <div class="page-header">
             <h1>Mes Traitements</h1>
         </div>
-        <div class='container-fluid'>
-            <div class="row" style='margin-left: 10px; width: 300vw;'>
+        <div class='container-fluid' style='margin-top: 15vh;'>
+            <div class="row" style='margin-left: 10px; width: 180vw;'>
                 {{#each weekDays}}
-                <div class='d-flex col-1 wkd justify-content-center'>
+                <div class='d-flex col wkd justify-content-center' style='padding-left: 10vw'>
                     {{> day}}
                 </div>
                 {{/each}}
             </div>
+            <div class='container' style='margin-top: 10vh;'>
             {{#each timeStamp}}
-            <div class='row'>
+            <div class='row' style='padding-bottom: 30px'>
                     {{>time}}
             </div>
             {{/each}}
+            </div>
         </div>
     </div>
 

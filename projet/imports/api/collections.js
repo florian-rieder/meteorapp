@@ -84,6 +84,9 @@ Meteor.methods({
 Meteor.methods({
 	'pharmacies.insert'(pharmacy){
 		Pharmacies.insert(pharmacy)
+	},
+	'pharmacies.remove' (id){
+		Pharmacies.remove(id);
 	}
 })
 
@@ -92,6 +95,9 @@ Meteor.methods({
 Meteor.methods({
 	'contacts.insert'(contact){
 		Contacts.insert(contact)
-	}
+	},
+	'contacts.remove'(id) {
+		Contacts.remove(id);
+	},
 })
 

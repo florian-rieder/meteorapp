@@ -2,139 +2,81 @@
 	{{> helpBar}}
 	<div class='container-fluid'>
 		{{#if pageIs 'contacts'}}
-			{{> contactList}}
+		{{> contactList}}
 		{{else}}
-			{{#if pageIs 'parameters'}}
-				<!-- insert parameters subpage template here -->
-				paramètres
-			{{else}}
-				{{#if pageIs 'nearby-stores'}}
-					<!-- insert nearby-stores subpage template here -->
-					{{> stores}}
-				{{else}}
-					{{#if pageIs 'faq'}}
-						<!-- insert fàq subpage template here -->
-						fàq
-					{{else}}
-						{{#if pageIs 'support'}}
-							<!-- insert support subpage template here -->
-							support
-						{{/if}}
-					{{/if}}
-				{{/if}}
-			{{/if}}
+		{{#if pageIs 'parameters'}}
+		<!-- insert parameters subpage template here -->
+		paramètres
+		{{else}}
+		{{#if pageIs 'nearby-stores'}}
+		<!-- insert nearby-stores subpage template here -->
+		{{> stores}}
+		{{else}}
+		{{#if pageIs 'faq'}}
+		<!-- insert fàq subpage template here -->
+		fàq
+		{{else}}
+		{{#if pageIs 'support'}}
+		<!-- insert support subpage template here -->
+		support
+		{{/if}}
+		{{/if}}
+		{{/if}}
+		{{/if}}
 		{{/if}}
 	</div>
 </template>
 
 <template name='contactList'>
 	<table class="table table-hover table-bordered">
-			<thead>
-			  <tr>
+		<thead>
+			<tr>
 				<th scope="col">#</th>
 				<th scope="col">Nom</th>
 				<th scope="col">Téléphone</th>
-			  </tr>
-			</thead>
-			<tbody>
-			  <tr>
-				<th scope="row">1</th>
-				<td>Emergency Rescue Service (Ambulance)</td>
-				<td>144</td>
-			  </tr>
-			  <tr>
-				<th scope="row">2</th>
-				<td><a href="http://www.chuv.ch">CHUV</a></td>
-				<td>021 314 11 11</td>
-			  </tr>
-			</tbody>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each contacts}}
+			<tr>
+			<th scope="row">{{plusOne @index}}</th>
+			<td>{{place}}</td>
+			<td>{{phone}}</td>
+			</tr>
+			{{/each}}
+		</tbody>
 	</table>
-			<div class="input-group mb-3">
-				<input type="text" class="form-control" placeholder="Nom" aria-label="Recipient's username" aria-describedby="button-addon2">
-				<div class="input-group-append">
-					<button class="btn btn-outline-secondary" type="button" id="button-addon2">Prochain</button>
-				</div>
-			</div>
-			<div class="input-group mb-3">
-				<input type="text" class="form-control" placeholder="Téléphone" aria-label="Recipient's username" aria-describedby="button-addon2">
-				<div class="input-group-append">
-					<button class="btn btn-outline-success" type="button" id="button-addon2">Sauvgarder</button>
-				</div>
-			</div>
+	<button id='contacts_add' class='btn btn-outline-primary'>Ajouter</button>
 </template>
 
 <template name='helpBar'>
 	<nav class="navbar navbar-light" style="background-color: rgb(212, 212, 212);">
 		{{#each buttons}}
-			<a href="/help/{{path}}" class="badge badge-success">{{name}}</a>
+		<a href="/help/{{path}}" class="badge badge-success">{{name}}</a>
 		{{/each}}
 	</nav>
 </template>
 
 <template name='stores'>
-
-		<p>Click the button to get your coordinates.</p>
-
-		<button onclick="getLocation()">Try It</button>
-		
-		<p id="demo"></p>
-		
-		<script>
-		var x = document.getElementById("demo");
-		
-		function getLocation() {
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(showPosition);
-			} else { 
-				x.innerHTML = "Geolocation is not supported by this browser.";
-			}
-		}
-		
-		function showPosition(position) {
-			x.innerHTML = "Latitude: " + position.coords.latitude + 
-			"<br>Longitude: " + position.coords.longitude;
-		}
-		</script>
-			<table class="table table-hover table-bordered">
-					<thead>
-						<tr>
-						<th scope="col">#</th>
-						<th scope="col">Nom</th>
-						<th scope="col">Téléphone</th>
-						<th scope="col">Addresse</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-						<th scope="row">1</th>
-						<td>Pharmacie MetroFlon</td>
-						<td>021 318 73 10</td>
-						<td>Place de l'Europe 5, 1003 Lausanne</td>
-						</tr>
-						<tr>
-						<th scope="row">2</th>
-						<td><a>Pharmacie MetroOuchy</a></td>
-						<td>021 612 03 03</td>
-						<td>Place de la Navigation 6, 1006 Lausanne</td>
-						</tr>
-					</tbody>
-			</table>
-					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Nom" aria-label="Recipient's username" aria-describedby="button-addon2">
-						<div class="input-group-append">
-							<button class="btn btn-outline-secondary" type="button" id="button-addon2">Prochain</button>
-						</div>
-					</div>
-					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Téléphone" aria-label="Recipient's username" aria-describedby="button-addon2">
-						<div class="input-group-append">
-							<button class="btn btn-outline-secondary" type="button" id="button-addon2">Prochain</button>
-						</div>
-					</div>
-					<div class="input-group mb-3">
-							<input type="text" class="form-control" placeholder="Address" aria-label="Recipient's username" aria-describedby="button-addon2">
-							<div class="input-group-append">
-								<button class="btn btn-outline-success" type="button" id="button-addon2">Sauvgarder</button>
-							</div>
-						</div>
+	<table class="table table-hover table-bordered">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Nom</th>
+				<th scope="col">Téléphone</th>
+				<th scope="col">Addresse</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each pharmacies}}
+			<tr>
+			<th scope="row">{{plusOne @index}}</th>
+			<td>{{name}}</td>
+			<td>{{tel}}</td>
+			<td>{{address}}</td>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+	<button id='stores_add' class='btn btn-outline-primary'>Ajouter</button>
 </template>

@@ -315,15 +315,15 @@ div.drugData_firstInfo>div.container {
 .profileList {
 	margin: 2px auto;
 	line-height: 1.4;
-	padding: 10px;
+	padding: 2px;
 	padding-left: 0;
 	list-style: none;
+	display: flex;
 }
 
 .field_textInput{
 	position: relative;
 	background-color: #ffe4cb;
-	padding: 17px;
 	width: 40%;
 	border: 1px solid #feeee0;
 	text-align : center;
@@ -331,21 +331,26 @@ div.drugData_firstInfo>div.container {
 }
 
 .profileListItem{
+	position: relative;
 	text-align: center;
-	width: 100%;
-	padding: 10px;
+	align-content: center;
+	width: 3em;
+	height: 0.2em;
+	padding: 0em;
+	border: 1px solid blue;
 }
 
 #profile_container {
-	width: 60%;
+	width: 80%;
+	height: 23em; 
 	text-align: center;
-	background-color: rgb(148, 221, 176)
+	background-color: rgb(148, 221, 176);
+	display: grid;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	border: 1px solid black;
 }
 
-.profileElement {
-	background-color: #d7f0c3;
-	height: 50px;
-}
 
 .category_container{
 	border: 1px solid var(--main-border-color);
@@ -366,7 +371,7 @@ div.drugData_firstInfo>div.container {
 
 #modifyButton{
 	width: 30%;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 .vertical-center{
@@ -417,4 +422,7 @@ thead td {
 }
 .swal-buttonsContainer {
 	width: 100%;
+}
+.profileElement{
+	margin-bottom: 0.3em;
 }

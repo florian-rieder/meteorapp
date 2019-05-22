@@ -24,6 +24,11 @@ Template.profile.helpers({
       { fieldName: 'Numéro AVS',
         fieldId: 'avs' },
     ],
+  profImage: [
+    {
+      imgsrc: '/images-svg/profile.svg'
+    }
+  ],
   hasProfileData() {
     return Template.instance().data != undefined;
   },

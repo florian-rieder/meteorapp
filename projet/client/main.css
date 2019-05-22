@@ -432,3 +432,7 @@ thead td {
 #clearDrugs.delRed{
 	background-color: red;
 }
+#drugCategories_remove.delRed{
+	background-color: red;
+	border-color: red;
+}

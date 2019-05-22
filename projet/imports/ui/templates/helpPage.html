@@ -47,7 +47,7 @@
 				<td>{{phone}}</td>
 				{{#if deleteEnabled}}
 				<td>
-					<img src='/images-svg/supp_bouton.svg' class='drug_remove deleteButton'
+					<img src='/images-svg/supp_bouton.svg' class='contacts_remove deleteButton'
 						style='display: inline-block;'>
 				</td>
 				{{/if}}
@@ -55,8 +55,8 @@
 			{{/each}}
 		</tbody>
 	</table>
-	<button id='contacts_add' class='btn btn-outline-primary'>Ajouter</button>
-	<button id='clearContacts' class='btn btn-sm btn-danger'>{{deleteButtonName}}</button>
+	<button id='contacts_add' class='btn btn-sm btn-primary'>Ajouter</button>
+	<button id='clearContacts' class='contact_remove btn btn-sm btn-danger'>{{deleteButtonName}}</button>
 
 </template>
 
@@ -90,7 +90,7 @@
 				<td>{{address}}</td>
 				{{#if deleteEnabled}}
 				<td>
-					<img src='/images-svg/supp_bouton.svg' class='drug_remove deleteButton'
+					<img src='/images-svg/supp_bouton.svg' class='pharmacies_remove deleteButton'
 						style='display: inline-block;'>
 				</td>
 				{{/if}}				
@@ -98,6 +98,6 @@
 			{{/each}}
 		</tbody>
 	</table>
-	<button id='stores_add' class='btn btn-outline-primary'>Ajouter</button>
-	<button id='clearPharmacies' class='btn btn-sm btn-danger'>{{deleteButtonName}}</button>	
+	<button id='stores_add' class='btn btn-sm btn-primary'>Ajouter</button>
+	<button id='clearPharmacies' class='pharmacy_remove btn btn-sm btn-danger'>{{deleteButtonName}}</button>	
 </template>

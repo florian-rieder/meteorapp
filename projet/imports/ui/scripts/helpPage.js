@@ -42,7 +42,7 @@ Template.stores.helpers({
 		}
 		// user is not already deleting pharmacies
 		else {
-			return 'Supprimer des pharmacies';
+			return 'Supprimer';
 		}
 	}	
 });
@@ -64,26 +64,33 @@ Template.contactList.helpers({
 		}
 		// user is not already deleting contacts
 		else {
-			return 'Supprimer des contacts';
+			return 'Supprimer';
 		}
 	}
 });
 
 Template.stores.events({
-	'click #stores_add'(e){
+	'click #stores_add'(e) {
 		e.preventDefault();
 		Swal.fire({
 			title: 'Ajouter une pharmacie',
 			html: (() => {
-				let HTMLString = "<input type='text' class='form-control' id='swal-input_name'>"
-				HTMLString += "<input type='tel' class='form-control' id='swal-input_tel'>"
-				HTMLString += "<input type='text' class='form-control' id='swal-input_address'>"
+				let HTMLString = "<input type='text' class='form-control' id='swal-input_name' placeholder='Nom :'>"
+				HTMLString += "<input type='tel' class='form-control' id='swal-input_tel' placeholder='Téléphone :'>"
+				HTMLString += "<input type='text' class='form-control' id='swal-input_address' placeholder='Addresse :'>"
 				return HTMLString;
 			})(),
 			preConfirm(){
 				let name = document.getElementById('swal-input_name').value
 				let tel = document.getElementById('swal-input_tel').value
 				let address = document.getElementById('swal-input_address').value
+
+				/*if(name.length == 0){
+					Swal.showValidationError('Veuillez entrer un nom!');
+				} else {
+					
+					Swal.resetValidationError();
+				}*/
 
 				return {
 					name: name,
@@ -97,8 +104,8 @@ Template.stores.events({
 				Meteor.call('pharmacies.insert', swalResult.value);
 			}
 		})
-	}
-	,'click #clearPharmacies'(e) {
+	},
+	'click #clearPharmacies'(e) {
 		e.preventDefault();
 		if (pharmacyDeleteEnabled.get()) {
 			// user is already deleting pharmacies
@@ -106,12 +113,13 @@ Template.stores.events({
 		} else {
 			// user is not already deleting pharmacies
 			pharmacyDeleteEnabled.set(true);
-	}
-	'click .pharmacy_remove'(e);{
+		}
+	},
+	'click .pharmacies_remove'(e) {
 		e.preventDefault();
-		Meteor.call('pharmacies.remove',)
+		console.log(this._id)
+		Meteor.call('pharmacies.remove', this._id)
 	}	
-},		
 });
 
 Template.contactList.events({
@@ -149,8 +157,8 @@ Template.contactList.events({
 				contactDeleteEnabled.set(true);
 		}
 	},
-	'click .contact_remove'(e){
+	'click .contacts_remove'(e){
 		e.preventDefault();
-		Meteor.call('contacts.remove',)
+		Meteor.call('contacts.remove', this._id)
 	}
 });

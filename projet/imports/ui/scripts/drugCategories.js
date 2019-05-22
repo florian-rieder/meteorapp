@@ -73,6 +73,8 @@ Template.category.events({
 					Meteor.call('categories.remove', this._id);
 				}
 			});
+		} else {
+			Meteor.call('categories.remove', this._id);
 		}
 	}
 });

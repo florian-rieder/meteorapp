@@ -58,18 +58,23 @@ Template.category.events({
 	},
 	'click .category_remove'(e) {
 		e.preventDefault();
-		Swal.fire({
-			title: `Êtes-vous sûr de vouloir supprimer ${this.name} ?`,
-			text: 'Les médicaments contenus dans cette catégorie seront supprimés',
-			confirmButtonText: 'Confirmer',
-			showCancelButton: true,
-			cancelButtonText: 'Annuler',
-			buttonsStyling: false,
-			customClass: swalCustomClasses,
-		}).then(swalResult => {
-			if (swalResult.value) {
-				Meteor.call('categories.remove', this._id);
-			}
-		});
+		// show dialog only if there are drugs in this category
+		if(this.extKeys.length > 0){
+			Swal.fire({
+				title: `Êtes-vous sûr de vouloir supprimer ${this.name} ?`,
+				text: 'Les médicaments contenus dans cette catégorie seront supprimés',
+				confirmButtonText: 'Confirmer',
+				showCancelButton: true,
+				cancelButtonText: 'Annuler',
+				buttonsStyling: false,
+				customClass: swalCustomClasses,
+			}).then(swalResult => {
+				if (swalResult.value) {
+					Meteor.call('categories.remove', this._id);
+				}
+			});
+		} else {
+			Meteor.call('categories.remove', this._id);
+		}
 	}
 });

@@ -29,7 +29,7 @@ Template.result.helpers({
 	isAlreadyInPharmacy() {
 		return Drugs.find({ 'showcaseTitle': Template.instance().data.title }).count() > 0;
 	}
-})
+});
 
 Template.result.events({
 	'click .result_add'(e) {
@@ -141,7 +141,7 @@ Template.searchBar.events({
 	}
 });
 
-function fireGoToDrugPageDialog() {
+function fireGoToDrugPageDialog(id) {
 	Swal.fire({
 		type: 'success',
 		title: "C'est fait !",

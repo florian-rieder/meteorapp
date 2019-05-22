@@ -3,6 +3,9 @@ import '../templates/helpPage.html';
 import { Pharmacies, Contacts } from '../../api/collections';
 import Swal from 'sweetalert2';
 import { Meteor } from 'meteor/meteor';
+import { ReactiveVar } from 'meteor/reactive-var';
+
+const contactDeleteEnabled = new ReactiveVar(false);
 
 Template.helpBar.helpers({
     buttons() {
@@ -37,6 +40,19 @@ Template.contactList.helpers({
 	},
 	plusOne(index){
 		return index + 1;
+	},
+	deleteEnabled() {
+		return contactDeleteEnabled.get();
+	},
+	deleteButtonName() {
+		// user is already deleting drugs
+		if (contactDeleteEnabled.get()) {
+			return 'Confirmer';
+		}
+		// user is not already deleting drugs
+		else {
+			return 'Supprimer des contacts';
+		}
 	}
 })
 
@@ -95,5 +111,22 @@ Template.contactList.events({
 				Meteor.call('contacts.insert', swalResult.value);
 			}
 		})
+	}
+	,'click #clearContacts'(e) {
+			e.preventDefault();
+			if (contactDeleteEnabled.get()) {
+				// user is already deleting drugs
+				contactDeleteEnabled.set(false);
+			} else {
+				// user is not already deleting drugs
+				contactDeleteEnabled.set(true);
+		}
+	}
+});
+
+Template.contact.events({
+	'click .contact_remove'(e){
+		e.preventDefault();
+		Meteor.call('contacts.remove', this._id);
 	}
 })

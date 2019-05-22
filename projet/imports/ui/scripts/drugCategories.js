@@ -11,6 +11,9 @@ Template.drugCategories.helpers({
 	categories() {
 		return Categories.find();
 	},
+	trashIc: [
+		{imgsrc: '/images-svg/rubbish-bin2.svg'}
+	],
 });
 
 Template.drugCategories.events({

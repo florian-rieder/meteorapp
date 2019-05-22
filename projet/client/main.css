@@ -432,3 +432,9 @@ thead td {
 .profileElement{
 	margin-bottom: 0.3em;
 }
+#clearDrugs{
+	transition: color 2s;
+}
+#clearDrugs:hover{
+	background-color: red;
+}

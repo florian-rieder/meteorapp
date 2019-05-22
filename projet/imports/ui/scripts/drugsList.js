@@ -13,16 +13,9 @@ Template.drugsList.helpers({
 		// return all drugs whose _id is containd in this category's foreign keys
 		return Drugs.find({ _id: { $in: Template.instance().data.extKeys } });
 	},
-	deleteButtonName() {
-		// user is already deleting drugs
-		if (deleteEnabled.get()) {
-			return 'Confirmer';
-		}
-		// user is not already deleting drugs
-		else {
-			return 'Supprimer des médicaments';
-		}
-	}
+	trashIcons: [
+		{imgsrc: '/images-svg/rubbish-bin.svg'}
+	]
 });
 
 Template.drugsList.events({

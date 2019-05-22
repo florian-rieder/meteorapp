@@ -11,6 +11,9 @@ Template.drugCategories.helpers({
 	categories() {
 		return Categories.find();
 	},
+	trashIc: [
+		{imgsrc: '/images-svg/rubbish-bin2.svg'}
+	],
 });
 
 Template.drugCategories.events({
@@ -28,6 +31,7 @@ Template.drugCategories.events({
 	},
 	'click #drugCategories_remove'(e) {
 		e.preventDefault();
+		$('#drugCategories_remove').toggleClass('delRed');
 		if (catDeleteEnabled.get()) {
 			catDeleteEnabled.set(false);
 		} else {

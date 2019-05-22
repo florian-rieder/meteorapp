@@ -1,0 +1,30 @@
+<template name='drugTrt'>
+    <div class="container" style='text-align: center;'>
+        <div class="page-header">
+            <h1>Mes Traitements</h1>
+        </div>
+        <div class='container-fluid'>
+            <div class="row" style='margin-left: 10px; width: 300vw;'>
+                {{#each weekDays}}
+                <div class='d-flex col-1 wkd justify-content-center'>
+                    {{> day}}
+                </div>
+                {{/each}}
+            </div>
+            {{#each timeStamp}}
+            <div class='row'>
+                    {{>time}}
+            </div>
+            {{/each}}
+        </div>
+    </div>
+
+</template>
+
+<template name="day">
+    {{day}}
+</template>
+
+<template name='time'>
+    {{time}}
+</template>

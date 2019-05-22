@@ -51,7 +51,7 @@ Template.result.events({
 				if (drugDataCache.showcaseTitle === this.title) {
 					// we can simply copy it and not worry about scraping it again, gaining time
 					let drugData = inspectDrugData.get();
-					// add fields to the result object before addind it to db
+					// add fields to the result object before adding it to db
 					drugData.exp = swalResult.value.exp;
 					drugData.createdAt = new Date();
 
@@ -124,13 +124,14 @@ Template.result.events({
 });
 
 Template.searchBar.events({
+	// trigger search when search icon is clicked
 	'click .searchBar_searchButton'(e) {
 		e.preventDefault();
 		const query = document.querySelector('.searchBar_searchSquare').value;
 		Router.go(`/search/${query}`);
 		lastActivePage.set('/search');
 	},
-	//trigger the search when the enter key is pressed
+	// trigger search when the enter key is pressed
 	'keyup .searchBar_searchSquare'(e) {
 		if (e.keyCode == 13) {// ENTER
 			const query = document.querySelector('.searchBar_searchSquare').value;

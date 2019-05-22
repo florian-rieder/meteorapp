@@ -145,7 +145,7 @@ async function scrapeDrug(compendiumURL) {
 		});
 
 	// i don't really know how to describe this
-	// we create a table of boolean values. each of the values in the resulting array are a boolean 
+	// we create a table of boolean values. each of the values in the resulting array is a boolean 
 	// value that indicates if there is an available link for the corresponding page in 
 	// additionalInfoPages.
 	// we can then use this table to fetch the data we have access to
@@ -172,10 +172,10 @@ async function scrapeDrug(compendiumURL) {
 	if (availableLinksBoolean[1]) {
 		console.log('scraping notice path...');
 
-		// get the position of the link to photos page
+		// get the position of the link to notice page
 		const noticePosition = availableLinks.filter(a => a.name == "Info patient")[0].position;
 
-		// store the link to this drugs images, for later use
+		// store the link to this drugs notice, for later use
 		noticePath = await page.evaluate(selector => {
 			const noticeAnchor = document.querySelector(selector);
 			return noticeAnchor.pathname;
@@ -247,6 +247,11 @@ async function scrapeDrug(compendiumURL) {
 
 		// get the notice of the drug
 		const notice = await page.evaluate((selector) => {
+			// we use a recursive function to save each paragraph as a tree
+			// we will represent each HTML node as an object that has 2 properties: name (the node name), and value.
+			// the value property can be one of two things: a string of text, or an array object which will then represent
+			// its child nodes.
+			// a simple and kinda ugly way of doing that would have been to return the innerHTML property of the .monographie element
 			let paragraphs = Array.from(document.querySelectorAll(selector));
 			paragraphs.forEach((p, i, a) => a[i] = toTree(p))
 			return paragraphs;
@@ -257,17 +262,21 @@ async function scrapeDrug(compendiumURL) {
 				
 				function getChildnodesRecursively(element) {
 					let returnValue;
+					// if element has child nodes and child nodes arent #text elements
 					if(element.childNodes.length > 0 && !Array.from(element.childNodes).map(e => e.nodeName).includes('#text')) {
+						// get array of child nodes
 						let children = Array.from(element.childNodes);
-						children.forEach((e, i, a) => {
-							let newObj = {
+						// replace each child node with an object, and run this function to get its value (either another object or text)
+						children.map(e => {
+							return {
 								name: e.nodeName,
 								value: getChildnodesRecursively(e)
 							};
-							a[i] = newObj;
 						})
+						// so in the case the current element has child nodes, set its value to the array of child nodes objects
 						returnValue = children;
 					} else {
+						// in the case the current element has no child nodes, set its value to its text content
 						returnValue = element.textContent;
 					}
 					return returnValue;

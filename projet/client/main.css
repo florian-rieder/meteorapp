@@ -272,9 +272,6 @@ main {
 	transition-duration: 100ms;
 	margin: 1em;
 }
-.drug_container:hover {
-	transform: scale(1.05);
-}
 .drug_icon {
 	margin-right: 0.5em;
 }
@@ -356,9 +353,6 @@ div.drugData_firstInfo>div.container {
 	margin: 1em;
 	background-color: white;
 	transition-duration: 100ms;
-}
-.category_container:hover{
-	transform: scale(1.05);
 }
 .category_remove{
 	float: right;

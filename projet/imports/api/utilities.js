@@ -67,6 +67,7 @@ export const fireDrugAddDialog = async function (title) {
 				htmlString += ` <option value="${cat._id}">${cat.name}</option> `;
 			});
 			htmlString += `</select>`;
+			htmlString += '<input type="text" placeholder="Nouvelle catégorie" id="swal-input_category_name" class="form-control hidden" style="width: calc(100% - 2em);">'
 			// create button to add new category
 			htmlString += '<div style="position: absolute; top: 3px; right: 0px;" class="d-flex flex-row align-middle">'
 			htmlString += `<button id="swal-input_addCategory" class="btn btn-info btn-sm">+</button>`;
@@ -83,22 +84,44 @@ export const fireDrugAddDialog = async function (title) {
 			});
 
 			// add listener to category add button
-			$('#swal-input_addCategory').click((e) => {
+			const catBtn = document.querySelector('#swal-input_addCategory');
+			const catTxt = document.querySelector('#swal-input_category_name');
+			const catSlct = document.querySelector('#swal-input_select');
+			catBtn.addEventListener('click', (e) => {
 				e.preventDefault();
-				fireCategoryAddDialog().then(swalResult => {
-					if (swalResult.value) {
-						Meteor.call('categories.insert', new CategoryItem(swalResult.value));
-					}
-					// resume drug add dialog (launch a new one)
-					fireDrugAddDialog(title);
-				});
-			});
+				
+				if(catTxt.classList.contains('hidden')){
+					// hide select and show text input
+					catTxt.classList.remove('hidden');
+					catSlct.classList.add('hidden');
+					catBtn.innerHTML = 'Annuler';
+				} else {
+					catTxt.classList.add('hidden');
+					catSlct.classList.remove('hidden');
+					catBtn.innerHTML = '+';
+				}
+			})
 		},
 		preConfirm: () => {
 			// get input data and format it
 			const expirationDate = new Date(document.getElementById('swal-input_expirationMonth').value);
 			const selectForm = document.querySelector('#swal-input_select');
-			const selectedCategoryId = selectForm.options[selectForm.selectedIndex].value;
+			const newCategoryTextInput = document.querySelector('#swal-input_category_name');
+
+			let selectedCategoryId;
+			// if text input is not hidden, user wants to create a new category
+			if(!newCategoryTextInput.classList.contains('hidden')){
+				let newCatName = newCategoryTextInput.value;
+				// if user did not enter anything, use the placeholder
+				if(newCatName === ''){
+					newCatName = newCategoryTextInput.placeholder;
+				}
+				selectedCategoryId = Meteor.apply('categories.insert', [new CategoryItem(newCatName)], { returnStubValue: true });
+			} 
+			// else, user selected a category from the dropdown menu
+			else {
+				selectedCategoryId = selectForm.options[selectForm.selectedIndex].value;
+			}
 
 			return {
 				exp: expirationDate,

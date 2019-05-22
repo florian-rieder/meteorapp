@@ -58,7 +58,7 @@ Meteor.methods({
 // Categories
 Meteor.methods({
 	'categories.insert'(categoryObject) {
-		Categories.insert(categoryObject);
+		return Categories.insert(categoryObject);
 	},
 	'categories.addExtKey'(categoryId, drugId) {
 		Categories.update(

@@ -9,14 +9,11 @@ const contactDeleteEnabled = new ReactiveVar(false);
 const pharmacyDeleteEnabled = new ReactiveVar(false);
 
 Template.helpBar.helpers({
-    buttons() {
-        return [
+    buttons: [
 			{ name: 'Contacts', path: 'contacts' },
-			{ name: 'Pharmacies', path: 'nearby-stores' },
+			{ name: 'Pharmacies', path: 'stores' },
 			{ name: 'Support techniques', path: 'support' },
-			{ name: 'F à Q', path: 'faq' },
-        ]
-    }
+    ]
 });
 
 Template.helpPage.helpers({

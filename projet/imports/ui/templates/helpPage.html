@@ -2,24 +2,14 @@
 	{{> helpBar}}
 	<div class='container-fluid'>
 		{{#if pageIs 'contacts'}}
-		{{> contactList}}
+			{{> contactList}}
 		{{else}}
-		{{#if pageIs 'parameters'}}
-		<!-- insert parameters subpage template here -->
-		paramètres
-		{{else}}
-		{{#if pageIs 'nearby-stores'}}
-		<!-- insert nearby-stores subpage template here -->
-		{{> stores}}
-		{{else}}
-		{{#if pageIs 'faq'}}
-		<!-- insert fàq subpage template here -->
-		fàq
+		{{#if pageIs 'stores'}}
+			<!-- insert nearby-stores subpage template here -->
+			{{> stores}}
 		{{else}}
 		{{#if pageIs 'support'}}
-		{{> supportUs}}
-		{{/if}}
-		{{/if}}
+			{{> supportUs}}
 		{{/if}}
 		{{/if}}
 		{{/if}}

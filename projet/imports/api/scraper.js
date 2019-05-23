@@ -47,31 +47,6 @@ const skippedResources = [
 	'clicksor',
 	'tiqcdn',
 ];
-/* NOT WORKING
-// https://stackoverflow.com/questions/52431775/whats-the-performance-difference-of-puppeteer-launch-versus-puppeteer-connect
-// initialize browser (at startup)
-let browser, browserWSEndpoint, page;
-(async () => {
-	browser = await puppeteer.launch();
-	browserWSEndpoint = browser.wsEndpoint();
-	page = await browser.newPage();
-	
-	// optimize performance by blocking HTTP requests that are not necessary
-	await page.setRequestInterception(true);
-	page.on('request', request => {
-		const requestUrl = request._url.split('?')[0].split('#')[0];
-		if (
-			blockedResourceTypes.indexOf(request.resourceType()) !== -1 ||
-			skippedResources.some(resource => requestUrl.indexOf(resource) !== -1)
-		) {
-			request.abort();
-		} else {
-			request.continue();
-		}
-	});
-	browser.disconnect();
-})()
-*/
 
 // fetches the name, composition, notice and images from a drug's page on compendium URL
 async function scrapeDrug(compendiumURL) {
@@ -79,7 +54,6 @@ async function scrapeDrug(compendiumURL) {
 	// annex pages that will interest us and that we will want to scrape stuff on
 	const additionalInfoPages = ["Photo", "Info patient"];
 	// launch puppeteer browser
-	/* browser = await puppeteer.connect({ browserWSEndpoint }); */
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
 
@@ -118,6 +92,21 @@ async function scrapeDrug(compendiumURL) {
 				return { component: tr.textContent }
 			});
 	}, '#compEverything > table > tbody > tr');
+
+	console.log('scraping packagings...');
+
+	const packagings = await page.evaluate(() => {
+		let quantities = Array.from(document.querySelectorAll('span[id*="lblQuantity"]')).map(node => node.textContent);
+		let prices = Array.from(document.querySelectorAll('span[id*="lblPrice"]')).map(node => node.textContent)
+		let packagings = [];
+		quantities.forEach((el, i) => {
+			packagings.push({
+				quantity: el,
+				price: prices[i],
+			})
+		});
+		return packagings;
+	});
 
 	console.log('evaluating patient info and photos links...');
 
@@ -247,41 +236,14 @@ async function scrapeDrug(compendiumURL) {
 
 		// get the notice of the drug
 		const notice = await page.evaluate((selector) => {
-			// we use a recursive function to save each paragraph as a tree
-			// we will represent each HTML node as an object that has 2 properties: name (the node name), and value.
-			// the value property can be one of two things: a string of text, or an array object which will then represent
-			// its child nodes.
-			// a simple and kinda ugly way of doing that would have been to return the innerHTML property of the .monographie element
-			let paragraphs = Array.from(document.querySelectorAll(selector));
-			paragraphs.forEach((p, i, a) => a[i] = toTree(p))
-			return paragraphs;
-			
-			function toTree(paragraph) {
-				let newArray = getChildnodesRecursively(paragraph);
-				return newArray;
-				
-				function getChildnodesRecursively(element) {
-					let returnValue;
-					// if element has child nodes and child nodes arent #text elements
-					if(element.childNodes.length > 0 && !Array.from(element.childNodes).map(e => e.nodeName).includes('#text')) {
-						// get array of child nodes
-						let children = Array.from(element.childNodes);
-						// replace each child node with an object, and run this function to get its value (either another object or text)
-						children.map(e => {
-							return {
-								name: e.nodeName,
-								value: getChildnodesRecursively(e)
-							};
-						})
-						// so in the case the current element has child nodes, set its value to the array of child nodes objects
-						returnValue = children;
-					} else {
-						// in the case the current element has no child nodes, set its value to its text content
-						returnValue = element.textContent;
-					}
-					return returnValue;
-				}
-			}
+			let notice = document.querySelectorAll(selector);
+			// transform the nodeList into an HTML string
+			// from https://stackoverflow.com/questions/21792722/convert-nodelist-back-to-html
+			const html = Array.prototype.reduce.call(notice, function (html, node) {
+				return html + (node.outerHTML || node.nodeValue);
+			}, "");
+
+			return html;
 		}, '.monographie > .paragraph');
 
 		noticeTitleReturn = noticePageData.title;
@@ -302,6 +264,7 @@ async function scrapeDrug(compendiumURL) {
 		composition: composition,
 		notice: noticeReturn,
 		imgpath: imagesReturn,
+		packagings: packagings
 	}
 
 	return drugData;

@@ -5,7 +5,6 @@ import '../templates/searchPage.html';
 import '../scripts/footerBar.js';
 import '../templates/drugData.html';
 
-
 import { search, inspectDrugData } from '../../api/utilities.js';
 import { Drugs, Profile, Categories } from '../../api/collections.js';
 import { startScanner, stopScanner } from './quagga';

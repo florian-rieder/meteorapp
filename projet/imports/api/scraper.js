@@ -2,8 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import puppeteer from 'puppeteer';
 import { prettifyDrugTitle } from './utilities';
 
-/* we wrap functions that use puppeteer inside Meteor.methods to be able to access
-	 them from the client */
+// we wrap functions that use puppeteer inside Meteor.methods to be able to access
+// them from the client
 Meteor.methods({
 	'scrapeDrug': async function (compendiumURL) {
 		let result = await scrapeDrug(compendiumURL);
@@ -270,9 +270,9 @@ async function scrapeDrug(compendiumURL) {
 	return drugData;
 }
 
-/********************
- ****** SEARCH ******
- ********************/
+/****************************************
+ **************** SEARCH ****************
+ ****************************************/
 
 // fetches the results of the search of any string sent to compendium.ch search engine
 async function searchByString(searchString) {

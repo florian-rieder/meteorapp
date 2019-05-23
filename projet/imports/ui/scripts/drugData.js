@@ -28,39 +28,6 @@ Template.drugData.helpers({
 		const prettyTitle = Template.instance().data.title;
 		const backupTitle = Template.instance().data.showcaseTitle;
 		return prettyTitle == undefined ? backupTitle : prettyTitle;
-	},
-	// this function takes the notice array and outputs html code for it
-	renderNotice() {
-		const notice = Template.instance().data.notice;
-		let HTMLString = '';
-		// for each paragraph (element in the notice array) create a div
-		notice.forEach(paragraph => {
-			HTMLString += '<div>'
-			// then, render recursively all nodes in the paragraph
-			paragraph.forEach(el => renderItem(el));
-			HTMLString += '</div>';
-		});
-		return HTMLString;
-
-		// this function takes a notice item ({name: <nodeName>, value: <string> or <array of child nodes>})
-		// and adds it to the HTMLString in HTML code, and does it recursively.
-		function renderItem(item) {
-			const name = item.name;
-			const value = item.value;
-			// if the value of the current item is an array (-> there are child nodes to the current node)
-			if (Array.isArray(value)) {
-				HTMLString += `<${name}>`;
-				// render children
-				value.forEach(el => {
-					renderItem(el);
-				});
-				HTMLString += `</${name}>`;
-			} 
-			// if the value of the current node is a string, simply render it, we're at the end of one branch
-			else {
-				HTMLString += `<${name}>${value}</${name}>`;
-			}
-		}
 	}
 });
 

@@ -16,9 +16,9 @@
 
 <template name='drug'>
 	<div>
-		<div class='drug_container d-flex justify-content-around'>
+		<div class='drug_container d-flex justify-content-left'>
 			{{#if hasImage}}
-			<div class='drug_icon align-middle'>
+			<div class='drug_icon align-middle center-image'>
 				<img src='{{imgpath}}' alt="image" class='drugData_image'>
 			</div>
 			{{/if}}
@@ -28,8 +28,8 @@
 			</div>
 
 			{{#if deleteEnabled}}
-			<div class='align-middle'>
-				<img src='/images-svg/supp_bouton.svg' class='drug_remove deleteButton' style='display: inline-block;'>
+			<div class='align-middle ml-auto center-image'>
+				<img src='/images-svg/supp_bouton.svg' class='drug_remove deleteButton ' style='display: inline-block;'>
 			</div>
 			{{/if}}
 		</div>

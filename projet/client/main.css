@@ -6,7 +6,7 @@
 
 body {
 	margin: 0px;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: Helvetica, Arial, sans-serif !important;
 	background-color: rgba(236, 236, 236) !important;
 }
 
@@ -271,16 +271,18 @@ main {
 	display: inline-block;
 	transition-duration: 100ms;
 	margin: 1em;
+	overflow: hidden;
 }
 .drug_icon {
-	margin-right: 0.5em;
+	margin-right: 1em;
+	width: 3em;
+	height: 3em;
 }
 .drug_icon img{
 	max-width: 3em;
 	max-height: 3em;
 	min-width: 1.5em;
 	min-height: 1.5em;
-	
 }
 
 #drugList_ul {
@@ -437,4 +439,10 @@ thead td {
 .wkd{
 	background-color: #5ab48ad3;
 	border-color: var(--main-border-color);
+}
+.center-image{
+	display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }

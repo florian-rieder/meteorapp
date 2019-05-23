@@ -76,7 +76,7 @@ main {
 }
 
 .drugData_noticeContainer {
-	/* height: 300px; */
+	font-size: 12px !important;
 	overflow-y: auto;
 	border: 1px solid rgb(63, 63, 63);
 	padding: 10px;
@@ -323,9 +323,7 @@ div.drugData_firstInfo>div.container {
 
 .field_textInput{
 	position: relative;
-	background-color: #ffe4cb;
 	width: 40%;
-	border: 1px solid #feeee0;
 	text-align : center;
 	color: #363636d3;
 }

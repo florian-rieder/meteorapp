@@ -1,2 +1,2 @@
-export const SENDER_ID = '658423076938';
-export const SERVER_API_KEY = 'AAAAmU0S2Eo:APA91bFV96HZqoJD4QXaQ_mQVMZEw9DwMgFUMvOlTpWRmfTZ4IpmwOjGUshbqHlrz8WDa4t005EheNtXq1M3Is4jcBcONc5X7lrJSQMUtPvEP3QWfZSWyDcTDXpD6CPYwqQFJz4WaJGY';
+export const SENDER_ID = 'test';
+export const SERVER_API_KEY = 'Test';

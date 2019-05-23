@@ -7,6 +7,7 @@ export const Profile = new Mongo.Collection('profile');
 export const Categories = new Mongo.Collection('categories'); // categories in which the user can put his drugs
 export const Pharmacies = new Mongo.Collection('pharmacies');
 export const Contacts = new Mongo.Collection('contacts');
+export const Treatment = new Mongo.Collection('drugTrt');
 
 // wrap db methods in meteor methods to call them from the client
 // note: i'm not sure we even need them to be wrapped like that

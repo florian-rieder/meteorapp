@@ -55,3 +55,13 @@ Template.profile.events({
     displayInputs.set(false);
   }
 });
+
+Push.send({
+  from: 'push',
+  title: 'Hello',
+  text: 'world',
+  badge: 1, //optional, use it to set badge count of the receiver when the app is in background.
+  query: {
+    
+  }
+});

@@ -434,3 +434,7 @@ thead td {
 	background-color: red;
 	border-color: red;
 }
+.wkd{
+	background-color: #5ab48ad3;
+	border-color: var(--main-border-color);
+}

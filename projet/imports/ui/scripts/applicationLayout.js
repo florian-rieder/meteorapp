@@ -5,6 +5,7 @@ import '../templates/searchPage.html';
 import '../scripts/footerBar.js';
 import '../templates/drugData.html';
 
+
 import { search, inspectDrugData } from '../../api/utilities.js';
 import { Drugs, Profile, Categories } from '../../api/collections.js';
 import { startScanner, stopScanner } from './quagga';
@@ -99,4 +100,9 @@ Router.route('/details/:_id', function () {
 Router.route('/profile', function () {
 	this.render('profile', { data: Profile.findOne() });
 	this.render('footerBar', { to: 'footer' });
+});
+
+Router.route('/drugTrt', function () {
+	this.render('drugTrt');
+	this.render('footerBar', { to: 'footer'});
 });

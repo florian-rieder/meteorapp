@@ -1,5 +1,6 @@
 import '../imports/api/scraper.js';
 import '../imports/api/collections.js';
+import '../imports/api/push.js';
 
 import { Meteor } from 'meteor/meteor';
 import { Categories, Pharmacies, Contacts } from '../imports/api/collections.js';

@@ -1,8 +1,9 @@
 import '../imports/ui/body.js';
+import {SENDER_ID} from '../imports/api/credentials.js';
 
 Push.Configure({
     android: {
-      senderID: 111111111111,
+      senderID: SENDER_ID,
       alert: true,
       badge: true,
       sound: true,

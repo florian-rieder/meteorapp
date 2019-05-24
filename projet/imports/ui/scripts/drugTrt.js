@@ -6,13 +6,13 @@ import { Drugs } from '../../api/collections.js'
 
 Template.drugTrt.helpers({
     weekDays: [
-        {day: 'Lun'},
-        {day: 'Mar'},
-        {day: 'Mer'},
-        {day: 'Jeu'},
-        {day: 'Ven'},
-        {day: 'Sam'},
-        {day: 'Dim'},
+        {day: 'L'},
+        {day: 'M'},
+        {day: 'M'},
+        {day: 'J'},
+        {day: 'V'},
+        {day: 'S'},
+        {day: 'D'},
 
     ],
     timeStamp: [
@@ -24,8 +24,8 @@ Template.drugTrt.helpers({
         {time: '12:00'},
         {time: '14:00'},
         {time: '16:00'},
-        {time: '18h00'},
-        {time: '20h00'},
+        {time: '18:00'},
+        {time: '20:00'},
         {time: '22:00'},
     ]
 });

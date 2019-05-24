@@ -11,3 +11,4 @@ import './scripts/helpPage.js';
 import './scripts/footerBar.js';
 import './scripts/drugCategories.js';
 import './scripts/drugTrt.js';
+import '../api/push.js'

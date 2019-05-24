@@ -10,9 +10,9 @@ const pharmacyDeleteEnabled = new ReactiveVar(false);
 
 Template.helpBar.helpers({
     buttons: [
-			{ name: 'Contacts', path: 'contacts' },
-			{ name: 'Pharmacies', path: 'stores' },
-			{ name: 'Support techniques', path: 'support' },
+			{ name: 'Contacts', path: 'contacts', imgsrc: '/images-svg/contactes_icon.svg' },
+			{ name: 'Pharmacies', path: 'stores', imgsrc: '/images-svg/pharma_icon.svg' },
+			{ name: 'Support', path: 'support', imgsrc: '/images-svg/supp_tech_icon.svg' }
     ]
 });
 

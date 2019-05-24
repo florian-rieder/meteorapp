@@ -16,7 +16,8 @@
 </template>
 
 <template name='contactList'>
-	<table class="table table-hover table-bordered">
+	<div class="table-responsive">
+	<table class="table table-hover table-bordered table-sm">
 		<thead>
 			<tr>
 				<th scope="col">#</th>
@@ -43,6 +44,7 @@
 			{{/each}}
 		</tbody>
 	</table>
+	</div>
 	<button id='contacts_add' class='btn btn-sm btn-primary'>Ajouter</button>
 	<button id='clearContacts' class='contact_remove btn btn-sm btn-danger'>{{deleteButtonName}}</button>
 
@@ -51,13 +53,20 @@
 <template name='helpBar'>
 	<nav class="navbar navbar-light" style="background-color: rgb(212, 212, 212);">
 		{{#each buttons}}
-		<a href="/help/{{path}}" class="badge badge-success">{{name}}</a>
+		<a href="{{path}}" class="badge badge-success">{{>helpButton}}</a>
 		{{/each}}
 	</nav>
 </template>
 
+<template name="helpButton">
+		<button class='helpButton_button justify-content-center'>
+			<img src={{imgsrc}} alt={{name}} class='align-middle' style="height: 32px; width: 32px">
+		</button>
+	</template>
+	
 <template name='stores'>
-	<table class="table table-hover table-bordered">
+	<div class="table-responsive">
+	<table class="table table-hover table-bordered table-sm">
 		<thead>
 			<tr>
 				<th scope="col">#</th>
@@ -86,6 +95,7 @@
 			{{/each}}
 		</tbody>
 	</table>
+	</div>
 	<button id='stores_add' class='btn btn-sm btn-primary' alt='Ajouter'>Ajouter</button>
 	<button id='clearPharmacies' class='pharmacy_remove btn btn-sm btn-danger'>{{deleteButtonName}}</button>	
 </template>

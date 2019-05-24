@@ -236,10 +236,34 @@ async function scrapeDrug(compendiumURL) {
 
 		// get the notice of the drug
 		const notice = await page.evaluate((selector) => {
-			let notice = document.querySelectorAll(selector);
+			let paragraphs = document.querySelectorAll(selector);
+
+			// add responsive wrapper to tables (if table is larger than phone screen, add a scroll bar)
+			paragraphs.forEach(parent => {
+				// from https://stackoverflow.com/questions/53794834/javascript-how-to-append-node-in-its-correct-index-with-wrapper
+				const { childNodes } = parent;
+				for (let i = 0; i < childNodes.length; i++) {
+					const el = childNodes[i];
+					// if the node type is an element
+					if (el.nodeType === 1) {
+						// if the node is a table
+						if (el.tagName === 'TABLE') {
+							// wrap it in a div with bootstrap class "table-responsive"
+							const div = document.createElement('div');
+							div.classList.add('table-responsive');
+							div.appendChild(el);
+				
+							// Replace the child node with the new div node
+							parent.replaceChild(div, childNodes[i]);    
+						}
+					}
+				};
+			})
+			
+
 			// transform the nodeList into an HTML string
 			// from https://stackoverflow.com/questions/21792722/convert-nodelist-back-to-html
-			const html = Array.prototype.reduce.call(notice, function (html, node) {
+			const html = Array.prototype.reduce.call(paragraphs, function (html, node) {
 				return html + (node.outerHTML || node.nodeValue);
 			}, "");
 

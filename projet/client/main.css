@@ -74,13 +74,7 @@ main {
 	border: 1px solid var(--main-border-color);
 	background-color: white;
 }
-
-.drugData_noticeContainer {
-	font-size: 12px !important;
-	overflow-y: auto;
-	border: 1px solid rgb(63, 63, 63);
-	padding: 10px;
-}
+	
 .drugData_noticeTwoLast {
 	color: grey;
 	font-size: 12px;
@@ -445,4 +439,9 @@ thead td {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+.monPublicationDate{
+	text-align: right;
+	color: grey;
 }

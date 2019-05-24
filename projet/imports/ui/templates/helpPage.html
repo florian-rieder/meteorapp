@@ -31,7 +31,7 @@
 
 <template name='contactList'>
 	<div class="table-responsive">
-	<table class="table table-hover table-bordered table-sm">
+	<table class="table table-hover table-bordered table-sm table-striped">
 		<thead class="thead-dark">
 			<tr>
 				{{#if deleteEnabled}}
@@ -61,12 +61,11 @@
 	</div>
 	<button id='contacts_add' class='btn btn-sm btn-primary'>Ajouter</button>
 	<button id='clearContacts' class='contact_remove btn btn-sm btn-danger'>{{deleteButtonName}}</button>
-
 </template>
 	
 <template name='stores'>
 	<div class="table-responsive">
-	<table class="table table-hover table-bordered table-sm">
+	<table class="table table-hover table-bordered table-sm table-striped">
 		<thead class="thead-dark">
 			<tr>
 				{{#if deleteEnabled}}
@@ -103,7 +102,7 @@
 <template name='supportUs'>
 	<h4 class="text-center">L'équipe de développement de Medintake</h4>
 	<div class="table-responsive">
-	<table class="table table-hover table-sm">
+	<table class="table table-hover table-sm table-striped">
 		<thead class="thead-dark">
 		  <tr>
 			<th scope="col" class="text-left">Prénom</th>

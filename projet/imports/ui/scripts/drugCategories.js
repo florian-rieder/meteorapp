@@ -31,7 +31,7 @@ Template.drugCategories.events({
 	},
 	'click #drugCategories_remove'(e) {
 		e.preventDefault();
-		$('#drugCategories_remove').toggleClass('delRed');
+		$('#drugCategories_remove').toggleClass('btn-danger');
 		if (catDeleteEnabled.get()) {
 			catDeleteEnabled.set(false);
 		} else {

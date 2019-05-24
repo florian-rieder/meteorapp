@@ -3,15 +3,15 @@
         <div class="page-header">
             <h1>Mes Traitements</h1>
         </div>
-        <div class='container-fluid' style='margin-top: 15vh;'>
-            <div class="row" style='margin-left: 10px; width: 180vw;'>
+        <div style='margin-top: 10vh;'>
+            <div class="row text-left" style='margin-left: 5px; width: 290px;'>
                 {{#each weekDays}}
-                <div class='d-flex col wkd justify-content-center' style='padding-left: 10vw'>
+                <div class='d-flex col wkd justify-content-center'>
                     {{> day}}
                 </div>
                 {{/each}}
             </div>
-            <div class='container' style='margin-top: 10vh;'>
+            <div class='container' style='margin-top: 5vh;'>
             {{#each timeStamp}}
             <div class='row' style='padding-bottom: 30px'>
                     {{>time}}

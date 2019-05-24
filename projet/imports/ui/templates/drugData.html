@@ -1,34 +1,48 @@
 <template name="drugData">
 	<div class='container-fluid'>
-		<button id='backButton' class='btn btn-info'>Back</button>
-		{{#if isNotAlreadyInPharmacy}}
-		<button id='addDrugToPharmacyButton' class='btn btn-info'>Ajouter à ma pharmacie</button>
-		{{/if}}
-		<div class='drugData_firstInfo'>
-			<h1>{{displayTitle}}</h1>
-			<div style='text-align: right'>
-				Fabricant{{#if hasFirm}}: {{firm}}{{else}} indisponible. {{/if}}
-			</div>
-		</div>
-		<div class='d-flex justify-content-center' style='padding: 2em;'>
-		{{#if hasImage}}
-			<img src={{imgpath}} alt="image" class='drugData_image'>
-		{{else}}
-			Image indisponible.
-		{{/if}}
+		<div style='padding: 1em 0 1em 0;'>
+				<button id='backButton' class='btn btn-info'>Back</button>
+				{{#if isNotAlreadyInPharmacy}}
+					<button id='addDrugToPharmacyButton' class='btn btn-info'>Ajouter à ma pharmacie</button>
+				{{/if}}
 		</div>
 
 		<div class="accordion" id='drugData_accordion'>
 			<div class="card">
-				<div class="card-header" id="headingOne" data-toggle="collapse" href="#collapseOne">
+				<div class="card-header" id="headingTitre" data-toggle="collapse" href="#collapseTitre">
 					<h5 class="mb-0">
-						<button class="btn btn-link" type="button" data-toggle="collapse" href="#collapseOne" aria-expanded="true"
-						 aria-controls="collapseOne">
+						<button class="btn btn-link" type="button" data-toggle="collapse" href="#collapseTitre" aria-expanded="false"
+						 aria-controls="collapseTitre">
+							{{displayTitle}}
+						</button>
+					</h5>
+				</div>
+				<div id="collapseTitre" class="collapse show" aria-labelledby="headingTitre" data-parent="#drugData_accordion">
+					<div class="card-body">
+						<div class='d-flex justify-content-center' style='padding: 2em;'>
+							{{#if hasImage}}
+							<img src={{imgpath}} alt="image" class='drugData_image'>
+							{{else}}
+							Image indisponible.
+							{{/if}}
+						</div>
+						<div>
+							Fabricant{{#if hasFirm}}: {{firm}}{{else}} indisponible.{{/if}}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="card-header" id="headingComposition" data-toggle="collapse" href="#collapseComposition">
+					<h5 class="mb-0">
+						<button class="btn btn-link collapsed" type="button" data-toggle="collapse" href="#collapseComposition" aria-expanded="true"
+						 aria-controls="collapseComposition">
 							Composition
 						</button>
 					</h5>
 				</div>
-				<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#drugData_accordion">
+				<div id="collapseComposition" class="collapse" aria-labelledby="headingComposition" data-parent="#drugData_accordion">
 					<div class="card-body">
 						{{#if hasComposition}}
 						Composition: <br>
@@ -45,15 +59,15 @@
 			</div>
 
 			<div class="card">
-				<div class="card-header" id="headingTwo" data-toggle="collapse" href="#collapseTwo">
+				<div class="card-header" id="headingEmballages" data-toggle="collapse" href="#collapseEmballages">
 					<h5 class="mb-0">
-						<button class="btn btn-link collapsed" type="button" data-toggle="collapse" href="#collapseTwo" aria-expanded="false"
-						 aria-controls="collapseTwo">
+						<button class="btn btn-link collapsed" type="button" data-toggle="collapse" href="#collapseEmballages"
+						 aria-expanded="false" aria-controls="collapseEmballages">
 							Emballages
 						</button>
 					</h5>
 				</div>
-				<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#drugData_accordion">
+				<div id="collapseEmballages" class="collapse" aria-labelledby="headingEmballages" data-parent="#drugData_accordion">
 					<div class="card-body">
 						<div class='container'>
 							{{#if hasPackagings}}
@@ -64,7 +78,7 @@
 							</div>
 							{{/each}}
 							{{else}}
-								Emballages indisponibles.
+							Emballages indisponibles.
 							{{/if}}
 						</div>
 					</div>
@@ -72,23 +86,23 @@
 			</div>
 
 			<div class="card">
-				<div class="card-header" id="headingThree" data-toggle="collapse" href="#collapseThree">
+				<div class="card-header" id="headingNotice" data-toggle="collapse" href="#collapseNotice">
 					<h5 class="mb-0">
-						<button class="btn btn-link collapsed" type="button" data-toggle="collapse" href="#collapseThree" aria-expanded="false"
-						 aria-controls="collapseThree">
+						<button class="btn btn-link collapsed" type="button" data-toggle="collapse" href="#collapseNotice" aria-expanded="false"
+						 aria-controls="collapseNotice">
 							Notice d'emballage
 						</button>
 					</h5>
 				</div>
-				<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#drugData_accordion">
+				<div id="collapseNotice" class="collapse" aria-labelledby="headingNotice" data-parent="#drugData_accordion">
 					<div class="card-body">
 						<div class='drugData_notice'>
-								{{#if hasNotice}}
-								<!-- HTML injection from compendium.ch -->
-								{{{notice}}}
-								{{else}}
-								<p>Nous n'avons pas trouvé de notice d'emballage pour ce médicament.</p>
-								{{/if}}
+							{{#if hasNotice}}
+							<!-- HTML injection from compendium.ch -->
+							{{{notice}}}
+							{{else}}
+							<p>Nous n'avons pas trouvé de notice d'emballage pour ce médicament.</p>
+							{{/if}}
 						</div>
 					</div>
 				</div>

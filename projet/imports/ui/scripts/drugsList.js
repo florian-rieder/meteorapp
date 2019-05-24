@@ -22,7 +22,7 @@ Template.drugsList.events({
 	'click #clearDrugs'(e) {
 		e.preventDefault();
 		//Toggle Rubbish bin red background when clicked	
-		$('#clearDrugs').toggleClass("delRed");
+		$('#clearDrugs').toggleClass("btn-danger");
 		
 		if (deleteEnabled.get()) {
 			// user is already deleting drugs

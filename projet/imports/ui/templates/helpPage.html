@@ -31,7 +31,7 @@
 
 <template name='contactList'>
 	<div class="table-responsive">
-	<table class="table table-hover table-bordered table-sm">
+	<table class="table table-hover table-bordered table-sm table-striped">
 		<thead class="thead-dark">
 			<tr>
 				{{#if deleteEnabled}}
@@ -61,12 +61,11 @@
 	</div>
 	<button id='contacts_add' class='btn btn-sm btn-primary'>Ajouter</button>
 	<button id='clearContacts' class='contact_remove btn btn-sm btn-danger'>{{deleteButtonName}}</button>
-
 </template>
 	
 <template name='stores'>
 	<div class="table-responsive">
-	<table class="table table-hover table-bordered table-sm">
+	<table class="table table-hover table-bordered table-sm table-striped">
 		<thead class="thead-dark">
 			<tr>
 				{{#if deleteEnabled}}
@@ -101,9 +100,9 @@
 </template>
 
 <template name='supportUs'>
-	<h4 class="text-center">L'équipe de développement de Medintake</h4>
+	<h4 class="text-center text-success">L'équipe de développement de Medintake</h4>
 	<div class="table-responsive">
-	<table class="table table-hover table-sm">
+	<table class="table table-hover table-sm table-striped">
 		<thead class="thead-dark">
 		  <tr>
 			<th scope="col" class="text-left">Prénom</th>
@@ -135,15 +134,15 @@
 		</tbody>
 	</table>
 	</div>
-	<h5 class="text-left">Technologie</h5>
+	<h5 class="text-left text-success">Technologie</h5>
 	<p class="text-left">Medintake utilise le framework Meteor.js 1.8.1 avec Cordova</p>
-	<h6 class="text-left">Librairies :</h6>
+	<h6 class="text-left text-success">Librairies :</h6>
 	<li class="text-left">Bootstrap (CSS)</li>
 	<li class="text-left">Sweet Alert 2 (boîtes de dialogues)</li>
 	<li class="text-left">Puppeteer (web scraping)</li>
 	<li class="text-left">QuaggaJS (scan de codes barre)</li>
 	<li class="text-left" style="margin-bottom: 16px">Iron:Router (routes)</li>
-	<h6 class="text-left">Plugins Cordova :</h6>
+	<h6 class="text-left text-success">Plugins Cordova :</h6>
 	<p class="text-left">cordova-plugin-camera (caméra mobile) et cordova-plugin-android-permissions (permissions caméra mobile)</p>
-	<p class="text-left">Ce programme est un logiciel gratuit. Copyright © 2019</p>
+	<p class="text-left text-success">Ce programme est un logiciel gratuit. Copyright © 2019</p>
 </template>

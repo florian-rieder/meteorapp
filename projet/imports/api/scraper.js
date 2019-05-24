@@ -260,7 +260,6 @@ async function scrapeDrug(compendiumURL) {
 				};
 			})
 			
-
 			// transform the nodeList into an HTML string
 			// from https://stackoverflow.com/questions/21792722/convert-nodelist-back-to-html
 			const html = Array.prototype.reduce.call(paragraphs, function (html, node) {

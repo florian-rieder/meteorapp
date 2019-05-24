@@ -1,6 +1,7 @@
-import { Template } from 'meteor/templating';
 import '../templates/drugData.html';
-import { inspectDrugData, lastActivePage, fireDrugAddDialog } from '../../api/utilities.js';
+
+import { Template } from 'meteor/templating';
+import { inspectDrugData, lastActivePage, fireDrugAddDialog, swalCustomClasses } from '../../api/utilities.js';
 import Swal from 'sweetalert2';
 import { Drugs } from '../../api/collections';
 
@@ -12,7 +13,7 @@ Template.drugData.helpers({
 	},
 	hasNotice() {
 		if (Template.instance().data.notice != undefined) {
-			return Template.instance().data.notice[0] != undefined;
+			return Template.instance().data.notice.length > 0;
 		} else {
 			return false;
 		}
@@ -22,7 +23,13 @@ Template.drugData.helpers({
 		return Template.instance().data.imgpath != null;
 	},
 	hasComposition() {
-		return Template.instance().data.composition[0] != undefined;
+		return Template.instance().data.composition.length > 0;
+	},
+	hasPackagings() {
+		return Template.instance().data.packagings.length > 0;
+	},
+	hasFirm() {
+		return Template.instance().data.firm != undefined;
 	},
 	displayTitle() {
 		const prettyTitle = Template.instance().data.title;

@@ -15,31 +15,45 @@
 	</div>
 </template>
 
+<template name='helpBar'>
+		<nav class="navbar navbar-light" style="background-color: rgb(212, 212, 212);">
+			{{#each buttons}}
+			<a href="{{path}}" class="badge badge-success">{{>helpButton}}</a>
+			{{/each}}
+		</nav>
+	</template>
+	
+	<template name="helpButton">
+			<button class='helpButton_button justify-content-center'>
+				<img src={{imgsrc}} alt={{name}} class='align-middle' style="height: 32px; width: 32px">
+			</button>
+		</template>
+
 <template name='contactList'>
 	<div class="table-responsive">
 	<table class="table table-hover table-bordered table-sm">
-		<thead>
+		<thead class="thead-dark">
 			<tr>
-				<th scope="col">#</th>
-				<th scope="col">Nom</th>
-				<th scope="col">Téléphone</th>
 				{{#if deleteEnabled}}
 				<th></th>
 				{{/if}}
+				<th scope="col" class="text-center">#</th>
+				<th scope="col" class="text-center">Nom</th>
+				<th scope="col" class="text-center">Téléphone</th>
 			</tr>
 		</thead>
 		<tbody>
 			{{#each contacts}}
 			<tr>
-				<th scope="row">{{plusOne @index}}</th>
-				<td>{{place}}</td>
-				<td>{{phone}}</td>
 				{{#if deleteEnabled}}
 				<td>
 					<img src='/images-svg/supp_bouton.svg' class='contacts_remove deleteButton'
 						style='display: inline-block;'>
 				</td>
-				{{/if}}
+				{{/if}}				
+				<th scope="row">{{plusOne @index}}</th>
+				<td>{{place}}</td>
+				<td>{{phone}}</td>
 			</tr>
 			{{/each}}
 		</tbody>
@@ -49,48 +63,34 @@
 	<button id='clearContacts' class='contact_remove btn btn-sm btn-danger'>{{deleteButtonName}}</button>
 
 </template>
-
-<template name='helpBar'>
-	<nav class="navbar navbar-light" style="background-color: rgb(212, 212, 212);">
-		{{#each buttons}}
-		<a href="{{path}}" class="badge badge-success">{{>helpButton}}</a>
-		{{/each}}
-	</nav>
-</template>
-
-<template name="helpButton">
-		<button class='helpButton_button justify-content-center'>
-			<img src={{imgsrc}} alt={{name}} class='align-middle' style="height: 32px; width: 32px">
-		</button>
-	</template>
 	
 <template name='stores'>
 	<div class="table-responsive">
 	<table class="table table-hover table-bordered table-sm">
-		<thead>
+		<thead class="thead-dark">
 			<tr>
-				<th scope="col">#</th>
-				<th scope="col">Nom</th>
-				<th scope="col">Téléphone</th>
-				<th scope="col">Addresse</th>
 				{{#if deleteEnabled}}
 				<th></th>
-				{{/if}}				
+				{{/if}}	
+				<th scope="col" class="text-center">#</th>
+				<th scope="col" class="text-center">Nom</th>
+				<th scope="col" class="text-center">Téléphone</th>
+				<th scope="col" class="text-center">Addresse</th>			
 			</tr>
 		</thead>
 		<tbody>
 			{{#each pharmacies}}
 			<tr>
-				<th scope="row">{{plusOne @index}}</th>
-				<td>{{name}}</td>
-				<td>{{tel}}</td>
-				<td>{{address}}</td>
-				{{#if deleteEnabled}}
+				{{#if deleteEnabled}}	
 				<td>
 					<img src='/images-svg/supp_bouton.svg' class='pharmacies_remove deleteButton'
 						style='display: inline-block;'>
 				</td>
-				{{/if}}				
+				{{/if}}	
+				<th scope="row">{{plusOne @index}}</th>
+				<td>{{name}}</td>
+				<td>{{tel}}</td>
+				<td>{{address}}</td>		
 			</tr>
 			{{/each}}
 		</tbody>
@@ -106,9 +106,9 @@
 	<table class="table table-hover table-sm">
 		<thead class="thead-dark">
 		  <tr>
-			<th scope="col" class="text-center">Prénom</th>
-			<th scope="col" class="text-center">Nom</th>
-			<th scope="col" class="text-center">Email</th>
+			<th scope="col" class="text-left">Prénom</th>
+			<th scope="col" class="text-left">Nom</th>
+			<th scope="col" class="text-left">Email</th>
 		  </tr>
 		</thead>
 		<tbody>

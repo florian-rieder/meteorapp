@@ -15,7 +15,6 @@ Template.quagScan.events({
 			permissions.checkPermission(permissions.CAMERA, function (status) {
 				if (status.hasPermission) {
 					console.log("camera permission allowed");
-					toggleScan();
 				}
 				else {
 					console.warn("camera permission not allowed");
@@ -24,7 +23,7 @@ Template.quagScan.events({
 						() => {
 							// permission granted
 							console.log('permission granted.');
-							toggleScan();
+							startScanner();
 						}, 
 						() => {
 							// permission refused

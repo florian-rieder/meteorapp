@@ -1,5 +1,6 @@
-import {Template} from 'meteor/templating'
 import '../templates/helpPage.html';
+
+import {Template} from 'meteor/templating'
 import { Pharmacies, Contacts } from '../../api/collections';
 import Swal from 'sweetalert2';
 import { Meteor } from 'meteor/meteor';

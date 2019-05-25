@@ -1,6 +1,6 @@
-//ligne qui permet de gérer des templates
-import { Template } from 'meteor/templating'
 import '../templates/profile.html';
+
+import { Template } from 'meteor/templating'
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Meteor } from 'meteor/meteor';
 import { Profile } from '../../api/collections';
@@ -53,15 +53,5 @@ Template.profile.events({
     let profileArray = Array.from(document.querySelectorAll('.field_textInput')).map(v => v.value);
     Meteor.call('profile.update', Profile.findOne({})._id, profileArray.reduce((o, key, i) => Object.assign(o, {[i] : key}),{}));
     displayInputs.set(false);
-  }
-});
-
-Push.send({
-  from: 'push',
-  title: 'Hello',
-  text: 'world',
-  badge: 1, //optional, use it to set badge count of the receiver when the app is in background.
-  query: {
-    
   }
 });

@@ -4,13 +4,13 @@
 		{{#if pageIs 'contacts'}}
 			{{> contactList}}
 		{{else}}
-		{{#if pageIs 'stores'}}
-			{{> stores}}
-		{{else}}
-		{{#if pageIs 'support'}}
-			{{> supportUs}}
-		{{/if}}
-		{{/if}}
+			{{#if pageIs 'stores'}}
+				{{> stores}}
+			{{else}}
+				{{#if pageIs 'support'}}
+					{{> supportUs}}
+				{{/if}}
+			{{/if}}
 		{{/if}}
 	</div>
 </template>

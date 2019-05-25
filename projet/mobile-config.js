@@ -12,7 +12,7 @@ App.setPreference('Orientation', 'default');
 
 
 App.configurePlugin('cordova-plugin-camera', {
-	'CAMERA_USAGE_DESCRIPTION': 'Pour scanner des codes barres'
+	'CAMERA_USAGE_DESCRIPTION': "Nous avons besoin d'avoir accès à la caméra pour scanner des codes barre."
 });
 
 // Add custom tags for a particular PhoneGap/Cordova plugin to the end of the
@@ -20,6 +20,3 @@ App.configurePlugin('cordova-plugin-camera', {
 App.appendToConfig(`
 
 `);
-App.configurePlugin('phonegap-plugin-push', {
-	SENDER_ID: 857342720473
-  });

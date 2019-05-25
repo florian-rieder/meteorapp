@@ -1,6 +1,5 @@
 import '../imports/api/scraper.js';
 import '../imports/api/collections.js';
-import '../imports/api/push.js';
 
 import { Meteor } from 'meteor/meteor';
 import { Categories, Pharmacies, Contacts } from '../imports/api/collections.js';
@@ -8,19 +7,8 @@ import { CategoryItem } from '../imports/api/utilities.js';
 
 Meteor.startup(() => {
 	// code to run on server at startup
-	Push.send({
-		from: 'test',
-		title: 'test',
-		 text: 'hello',
-			android_channel_id:this.userId,		//The android channel should match the id on the client
-			query: {
-				userId: this.userId
-			}, 
-			gcm: {
-			  style: 'inbox',
-			  summaryText: 'There are %n% notifications'
-			},          
-  });  
+
+	// add default elements to dbs
 	// if there are no categories, create one
 	if (Categories.findOne() == undefined) {
 		Categories.insert(new CategoryItem('Mes médicaments'));

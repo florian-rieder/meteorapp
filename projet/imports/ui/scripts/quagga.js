@@ -11,14 +11,25 @@ Template.quagScan.events({
 	'click #scan_btn'() {
 		if (Meteor.isCordova) {
 			var permissions = cordova.plugins.permissions;
-			permissions.requestPermission(permissions.CAMERA, () => console.log('ouiiii9'), () => console.log('nooooon'));
-			permissions.hasPermission(permissions.CAMERA, function (status) {
+			// check if the app has permission to use the camera
+			permissions.checkPermission(permissions.CAMERA, function (status) {
 				if (status.hasPermission) {
-					console.log("camera permission granted");
+					console.log("camera permission allowed");
 					toggleScan();
 				}
 				else {
-					console.warn("camera permission refused");
+					console.warn("camera permission not allowed");
+					// if permission is not allowed, request permission to use the camera
+					permissions.requestPermission(permissions.CAMERA, 
+						() => {
+							// permission granted
+							console.log('permission granted.');
+							toggleScan();
+						}, 
+						() => {
+							// permission refused
+							console.log('permission refused.');
+						})
 				}
 			});
 		} else {
@@ -196,29 +207,26 @@ function searchCode(code) {
 	LoadingWheel.show();
 	// we found out that searching for the code in compendium search engine returned the drug
 	Meteor.call('searchDrug', code, (err, res) => {
+		LoadingWheel.hide();
 		if (res) {
 			if (res[0]) {
 				// so we take the first element of search results and scrape it
 				Meteor.call('scrapeDrug', `http://www.compendium.ch${res[0].path}`, (error, result) => {
 					if (result) {
-						LoadingWheel.hide();
 						inspectDrugData.set(result);
 						Router.go('/details');
 						lastActivePage.set('/scan');
 						console.log('inspectDrugData: ' + inspectDrugData.get().title);
 					}
 					if (error) {
-						LoadingWheel.hide();
 						console.log('error while scraping drug from barcode.')
 					}
 				});
 			} else {
-				LoadingWheel.hide();
 				console.log('no drug found with this barcode.')
 			}
 		}
 		if (err) {
-			LoadingWheel.hide();
 			console.log('error while searching for barcode.')
 		}
 	})

@@ -1,5 +1,4 @@
 import '../imports/api/scraper.js';
-import '../imports/api/collections.js';
 
 import { Meteor } from 'meteor/meteor';
 import { Categories, Pharmacies, Contacts } from '../imports/api/collections.js';
@@ -36,5 +35,3 @@ Meteor.startup(() => {
 		});
 	}
 });
-
-

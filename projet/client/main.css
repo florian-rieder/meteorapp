@@ -407,12 +407,10 @@ thead td {
 
 /* swal2 custom classes */
 .btn-swal-left {
-	margin-right: 1em;
-	width: 40%;
+	width: 45%;
 }
 .btn-swal-right {
-	margin-left: 1em;
-	width: 40%;
+	width: 45%;
 }
 .swal-buttonsContainer {
 	width: 100%;

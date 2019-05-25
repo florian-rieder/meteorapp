@@ -11,25 +11,15 @@ Template.quagScan.events({
 	'click #scan_btn'() {
 		if (Meteor.isCordova) {
 			var permissions = cordova.plugins.permissions;
-			// check if the app has permission to use the camera
+			permissions.requestPermission(permissions.CAMERA, () => console.log('ouiiii9'), () => console.log('nooooon'));
 			permissions.checkPermission(permissions.CAMERA, function (status) {
+				console.log(status.hasPermission);
 				if (status.hasPermission) {
-					console.log("camera permission allowed");
+					console.log("camera permission granted");
 					toggleScan();
 				}
 				else {
-					console.warn("camera permission not allowed");
-					// if permission is not allowed, request permission to use the camera
-					permissions.requestPermission(permissions.CAMERA, 
-						() => {
-							// permission granted
-							console.log('permission granted.');
-							toggleScan();
-						}, 
-						() => {
-							// permission refused
-							console.log('permission refused.');
-						});
+					console.warn("camera permission refused");
 				}
 			});
 		} else {

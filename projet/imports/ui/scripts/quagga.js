@@ -29,7 +29,7 @@ Template.quagScan.events({
 						() => {
 							// permission refused
 							console.log('permission refused.');
-						});
+						})
 				}
 			});
 		} else {

@@ -51,8 +51,10 @@ const skippedResources = [
 // fetches the name, composition, notice and images from a drug's page on compendium URL
 async function scrapeDrug(compendiumURL) {
 	console.log('scraping started...');
+
 	// annex pages that will interest us and that we will want to scrape stuff on
 	const additionalInfoPages = ["Photo", "Info patient"];
+
 	// launch puppeteer browser
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage();
@@ -95,9 +97,13 @@ async function scrapeDrug(compendiumURL) {
 
 	console.log('scraping packagings...');
 
+	// get the packagings quantity and corresponding prices
 	const packagings = await page.evaluate(() => {
+		// get the nodes containing quantities and prices and get their text content
 		let quantities = Array.from(document.querySelectorAll('span[id*="lblQuantity"]')).map(node => node.textContent);
 		let prices = Array.from(document.querySelectorAll('span[id*="lblPrice"]')).map(node => node.textContent)
+		
+		// format the data in an array of objects with a quantity and price property
 		let packagings = [];
 		quantities.forEach((el, i) => {
 			packagings.push({
@@ -105,6 +111,7 @@ async function scrapeDrug(compendiumURL) {
 				price: prices[i],
 			})
 		});
+
 		return packagings;
 	});
 
@@ -133,10 +140,9 @@ async function scrapeDrug(compendiumURL) {
 			additionalPages: additionalInfoPages,
 		});
 
-	// i don't really know how to describe this
-	// we create a table of boolean values. each of the values in the resulting array is a boolean 
-	// value that indicates if there is an available link for the corresponding page in 
-	// additionalInfoPages.
+	// i don't really know how to describe this...
+	// we create a table of boolean values. Each of the values in the resulting array is a boolean 
+	// value that indicates if there is an available link for the corresponding page in additionalInfoPages.
 	// we can then use this table to fetch the data we have access to
 	const availableLinksBoolean = additionalInfoPages.map(n => availableLinks.filter(a => a.name == n)[0] != undefined);
 

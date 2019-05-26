@@ -1,7 +1,9 @@
 <template name='searchBar'>
 	<div class='d-flex justify-content-center' style='width: 100%'>
 		<div class='searchBar_container d-flex justify-content-left'>
-			<input type="search" placeholder="Recherche" class="searchBar_searchSquare" value="{{searchQuery}}">
+			<div class='searchBar_searchSquare-wrapper'>
+					<input type="search" placeholder="Recherche" class="searchBar_searchSquare" value="{{searchQuery}}">
+			</div>
 			<div class="searchBar_searchButton">
 				<img src="/images/search_icon.png" alt="Rechercher" class='searchBar_searchIcon'>
 			</div>

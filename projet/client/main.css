@@ -458,3 +458,13 @@ thead td {
 .card-header{
 	overflow: auto;
 }
+
+.hourCell{
+	border: 1px solid var(--main-border-color);
+	background-color: lightgrey;
+	width: 3em;
+}
+
+.toggledCell {
+	background-color: red;
+}

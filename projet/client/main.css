@@ -459,15 +459,30 @@ thead td {
 	overflow: auto;
 }
 
+.helpButton_button{
+	background-color: white !important;
+}
+
+/* drugTrt */
 .cell{
 	border: 1px solid var(--main-border-color);
 	background-color: lightgrey;
+	width: 2em;
+	height: 2em;
+}
+.toggledCell {
+	background-color: rgb(179, 62, 62);
+}
+.leftColumn{
+	margin-right: 1em;
 	width: 3em;
 }
-
-.toggledCell {
-	background-color: red;
+.treatmentGrid{
+	width: 100%;
+	overflow-x: auto;
 }
-.helpButton_button{
-	background-color: white !important;
+.trtCell{
+	width: 2em; 
+	text-align: center;
+	display: inline-block;
 }

@@ -108,6 +108,8 @@ Router.route('/drugTrt', function () {
 
 Router.route('/treatment/:_id', function () {
 	this.render('drugTrt', {
-		data: Drugs.findOne({_id: this.params._id}).treatmentGrid
+		data: () => {
+			return Drugs.findOne({_id: this.params._id});
+		}
 	})
 });

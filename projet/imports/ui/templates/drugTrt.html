@@ -1,63 +1,50 @@
 <template name='drugTrt'>
-    <div class="container justify-content-center" style='text-align: center;'>
-        <div class="page-header">
-            <h1>Mes Traitements</h1>
-        </div>
-        <h3>Jours de la semaine</h3>
-        <div class='container-fluid justify-content-center'>
-            <div class="row justify-content-center" style='width: 100%; position: relative; margin-left: 0vw'>
-                {{#each weekDays}}
-                <div class='d-flex col wkd justify-content-center' style='width: 1em'>
-                    {{> day}}
-                </div>
-                {{/each}}
-            </div>
+	<div class='container'>
+		<div class="page-header" style='text-align: center'>
+			<h1>Mon traitement</h1>
+			<h2>{{title}}</h2>
+		</div>
+
+		<div class='treatmentGrid d-flex justify-content-center'>
+			<div>
+				<!-- header -->
+				<div>
+					<div class='leftColumn trtCell'></div>
+					{{#each weekDays}}
+					<div class='trtCell'>
+						{{> day}}
+					</div>
+					{{/each}}
 				</div>
-				
-        <div class='container-fluid justify-content-space-between' style='text-align: center; padding-top: 50px;'>
-						<h3>Calendrier Horaire</h3>
-						<div class='treatmentGrid'>
-								{{#each timeSpan in test}}
-								<div class="row justify-content-center" style='width: 100%; position: relative; margin-left: 0vw'>
-									<div style='margin-right: 1em;'>
-											{{getTime @index}}
-									</div>
-									{{#each day in timeSpan}}
-										<div class='d-flex' style='margin-left: 0;'>
-												{{> hourCell day}}
-										</div>
-									{{/each}}
-									<br>
-								</div>
-								{{/each}}
-						</div>
-						
-            <!-- {{#each timeStamp}}
-            <div class="row justify-content-center" style='width: 100%; position: relative; margin-left: 0vw'>
-                <div style='padding-right: 20px;'>
-                {{>time}}
-                </div>
-                {{#each weekDays}}
-                <div class='d-flex' style='margin-left: 0;'>
-                    {{> hourCell}}
-                </div>
-                {{/each}}
-            </div>
-            {{/each}} -->
-        </div>
 
-    </div>
+				<!-- grid content -->
+				{{#each timeSpan in grid}}
+				<div>
+					<div class='leftColumn trtCell'>
+						{{getTime @index}}
+					</div>
+					{{#each cellData in timeSpan}}
+					<div class='trtCell'>
+						{{> hourCell cellData}}
+					</div>
+					{{/each}}
+				</div>
+				{{/each}}
+			</div>
+		</div>
 
+
+	</div>
 </template>
 
 <template name="day">
-    {{day}}
+	{{day}}
 </template>
 
 <template name='time'>
-    {{time}}
+	{{time}}
 </template>
 
 <template name='hourCell'>
-		<div class='cell {{#if isChecked}}toggledCell{{/if}}'>{{pos.time}} {{pos.day}}</div>
+	<div class='cell {{#if isChecked}}toggledCell{{/if}}'></div>
 </template>

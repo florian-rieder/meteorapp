@@ -4,12 +4,8 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Drugs } from '../../api/collections.js';
 
-let grid = new ReactiveVar([]);
-
-Template.drugTrt.onCreated(() => {
-	grid.set(Template.instance().data);
-	console.log(grid.get());
-})
+let grid = new ReactiveVar(undefined);
+let currentDrug = undefined;
 
 Template.drugTrt.helpers({
     weekDays: [
@@ -35,7 +31,15 @@ Template.drugTrt.helpers({
         {time: '20:00'},
         {time: '22:00'},
 		],
-		test(){
+		grid(){
+			// setup variables in helper, because for some reason it doesn't work in onCreated
+			if(currentDrug == undefined){ // strict equality would not work, because this helper will trigger a few time while its data returns null. (null == undefined -> true, null === undefined -> false)
+				currentDrug = Template.instance().data;
+			}
+			if(grid.get() === undefined){
+				grid.set(Template.instance().data.treatmentGrid);
+			}
+			// return grid
 			return grid.get();
 		},
 		getTime(index){
@@ -68,15 +72,20 @@ Template.hourCell.events({
 		e.preventDefault();
 		let data = Template.instance().data;
 
+		// toggle checked boolean
 		if(data.checked){
 			data.checked = false;
 		} else {
 			data.checked = true;
 		}
+
 		// modify in grid
 		let totalGrid = grid.get();
 		totalGrid[data.pos.time][data.pos.day] = data;
 		grid.set(totalGrid);
-		console.log(grid.get());
+		
+		// update drug in db
+		currentDrug.treatmentGrid = grid.get();
+		Meteor.call('drugs.update', currentDrug._id, currentDrug);
 	}
 })

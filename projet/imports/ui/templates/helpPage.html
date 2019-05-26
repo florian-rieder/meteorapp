@@ -16,17 +16,17 @@
 </template>
 
 <template name='helpBar'>
-		<nav class="navbar navbar-light" style="background-color: rgb(212, 212, 212);">
-			<div class='container-fluid d-flex justify-content-around align-middle'>
-				{{#each buttons}}
-					<a href="{{path}}">
-						<button class='helpButton_button btn btn-outline-light d-flex justify-content-center' >				
-							<img src={{imgsrc}} alt={{name}} class='align-middle' style="height: 32px; width: 32px">				
-						</button>
-					</a>
-				{{/each}}				
-			</div>
-		</nav>
+	<nav class="navbar navbar-light" style="background-color: rgb(212, 212, 212);">
+		<div class='container-fluid d-flex justify-content-around align-middle'>
+			{{#each buttons}}
+				<a href="{{path}}">
+					<button class='helpButton_button btn btn-outline-light d-flex justify-content-center'>				
+						<img src={{imgsrc}} alt={{name}} class='align-middle' style="height: 32px; width: 32px">				
+					</button>
+				</a>
+			{{/each}}				
+		</div>
+	</nav>
 </template>
 
 <template name='contactList'>

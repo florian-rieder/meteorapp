@@ -9,6 +9,81 @@ import { ReactiveVar } from 'meteor/reactive-var';
 const contactDeleteEnabled = new ReactiveVar(false);
 const pharmacyDeleteEnabled = new ReactiveVar(false);
 
+Template.stores.events({
+	'click #stores_add'(e) {
+		e.preventDefault();
+		Swal.fire({
+			title: 'Ajouter une pharmacie',
+			html: (() => {
+				let HTMLString = "<input type='text' class='form-control' id='swal-input_name' placeholder='Nom :'>"
+				HTMLString += "<input type='tel' class='form-control' id='swal-input_tel' placeholder='Téléphone :'>"
+				HTMLString += "<input type='text' class='form-control' id='swal-input_address' placeholder='Addresse :'>"
+				return HTMLString;
+			})(),
+			preConfirm(){
+				let name = document.getElementById('swal-input_name').value
+				let tel = document.getElementById('swal-input_tel').value
+				let address = document.getElementById('swal-input_address').value
+
+				/*if(name.length == 0){
+					Swal.showValidationError('Veuillez entrer un nom!');
+				} else {
+					
+					Swal.resetValidationError();
+				}*/
+
+				return {
+					name: name,
+					tel: tel,
+					address: address
+				}
+			}
+		}).then((swalResult) => {
+			if(swalResult.value){
+				console.log(swalResult.value)
+				Meteor.call('pharmacies.insert', swalResult.value);
+			}
+		})
+	},
+	'click #clearPharmacies'(e) {
+		e.preventDefault();
+		if (pharmacyDeleteEnabled.get()) {
+			// user is already deleting pharmacies
+			pharmacyDeleteEnabled.set(false);
+		} else {
+			// user is not already deleting pharmacies
+			pharmacyDeleteEnabled.set(true);
+		}
+	},
+	'click .pharmacies_remove'(e) {
+		e.preventDefault();
+		console.log(this._id)
+		Meteor.call('pharmacies.remove', this._id)
+	}	
+});
+
+Template.stores.helpers({
+	pharmacies(){
+		return Pharmacies.find();
+	},
+	plusOne(index){
+		return index + 1;
+	},
+	deleteEnabled() {
+		return pharmacyDeleteEnabled.get();
+	},
+	deleteButtonName() {
+		// user is already deleting pharmacies
+		if (pharmacyDeleteEnabled.get()) {
+			return 'Confirmer';
+		}
+		// user is not already deleting pharmacies
+		else {
+			return 'Supprimer';
+		}
+	}	
+});
+
 Template.helpBar.helpers({
     buttons: [
 			{ name: 'Contacts', path: 'contacts', imgsrc: '/images-svg/contactes_icon.svg' },
@@ -84,79 +159,4 @@ Template.contactList.helpers({
 			return 'Supprimer';
 		}
 	}
-});
-
-Template.stores.events({
-	'click #stores_add'(e) {
-		e.preventDefault();
-		Swal.fire({
-			title: 'Ajouter une pharmacie',
-			html: (() => {
-				let HTMLString = "<input type='text' class='form-control' id='swal-input_name' placeholder='Nom :'>"
-				HTMLString += "<input type='tel' class='form-control' id='swal-input_tel' placeholder='Téléphone :'>"
-				HTMLString += "<input type='text' class='form-control' id='swal-input_address' placeholder='Addresse :'>"
-				return HTMLString;
-			})(),
-			preConfirm(){
-				let name = document.getElementById('swal-input_name').value
-				let tel = document.getElementById('swal-input_tel').value
-				let address = document.getElementById('swal-input_address').value
-
-				/*if(name.length == 0){
-					Swal.showValidationError('Veuillez entrer un nom!');
-				} else {
-					
-					Swal.resetValidationError();
-				}*/
-
-				return {
-					name: name,
-					tel: tel,
-					address: address
-				}
-			}
-		}).then((swalResult) => {
-			if(swalResult.value){
-				console.log(swalResult.value)
-				Meteor.call('pharmacies.insert', swalResult.value);
-			}
-		})
-	},
-	'click #clearPharmacies'(e) {
-		e.preventDefault();
-		if (pharmacyDeleteEnabled.get()) {
-			// user is already deleting pharmacies
-			pharmacyDeleteEnabled.set(false);
-		} else {
-			// user is not already deleting pharmacies
-			pharmacyDeleteEnabled.set(true);
-		}
-	},
-	'click .pharmacies_remove'(e) {
-		e.preventDefault();
-		console.log(this._id)
-		Meteor.call('pharmacies.remove', this._id)
-	}	
-});
-
-Template.stores.helpers({
-	pharmacies(){
-		return Pharmacies.find();
-	},
-	plusOne(index){
-		return index + 1;
-	},
-	deleteEnabled() {
-		return pharmacyDeleteEnabled.get();
-	},
-	deleteButtonName() {
-		// user is already deleting pharmacies
-		if (pharmacyDeleteEnabled.get()) {
-			return 'Confirmer';
-		}
-		// user is not already deleting pharmacies
-		else {
-			return 'Supprimer';
-		}
-	}	
 });

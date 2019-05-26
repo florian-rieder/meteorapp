@@ -28,73 +28,73 @@
 </template>
 
 <template name='contactList'>
-	<div class="table-responsive">
-	<table class="table table-hover table-bordered table-sm table-striped">
-		<thead class="thead-dark">
-			<tr>
-				{{#if deleteEnabled}}
-				<th></th>
-				{{/if}}
-				<th scope="col" class="text-center">#</th>
-				<th scope="col" class="text-center">Nom</th>
-				<th scope="col" class="text-center">Téléphone</th>
-			</tr>
-		</thead>
-		<tbody>
-			{{#each contacts}}
-			<tr>
-				{{#if deleteEnabled}}
-				<td>
-					<img src='/images-svg/supp_bouton.svg' class='contacts_remove deleteButton'
-						style='display: inline-block;'>
-				</td>
-				{{/if}}				
-				<th scope="row">{{plusOne @index}}</th>
-				<td>{{place}}</td>
-				<td>{{phone}}</td>
-			</tr>
-			{{/each}}
-		</tbody>
-	</table>
-	</div>
-	<button id='contacts_add' class='btn btn-sm btn-primary'>Ajouter</button>
-	<button id='clearContacts' class='contact_remove btn btn-sm btn-danger'>{{deleteButtonName}}</button>
+<div class="table-responsive">
+<table class="table table-hover table-bordered table-sm table-striped">
+	<thead class="thead-dark">
+		<tr>
+			{{#if deleteEnabled}}
+			<th></th>
+			{{/if}}
+			<th scope="col" class="text-center">#</th>
+			<th scope="col" class="text-center">Nom</th>
+			<th scope="col" class="text-center">Téléphone</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each contacts}}
+		<tr>
+			{{#if deleteEnabled}}
+			<td>
+				<img src='/images-svg/supp_bouton.svg' class='contacts_remove deleteButton'
+					style='display: inline-block;'>
+			</td>
+			{{/if}}				
+			<th scope="row">{{plusOne @index}}</th>
+			<td>{{place}}</td>
+			<td>{{phone}}</td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
+</div>
+<button id='contacts_add' class='btn btn-sm btn-primary'>Ajouter</button>
+<button id='clearContacts' class='contact_remove btn btn-sm btn-danger'>{{deleteButtonName}}</button>
 </template>
-	
+
 <template name='stores'>
-	<div class="table-responsive">
-	<table class="table table-hover table-bordered table-sm table-striped">
-		<thead class="thead-dark">
-			<tr>
-				{{#if deleteEnabled}}
-				<th></th>
-				{{/if}}	
-				<th scope="col" class="text-center">#</th>
-				<th scope="col" class="text-center">Nom</th>
-				<th scope="col" class="text-center">Téléphone</th>
-				<th scope="col" class="text-center">Addresse</th>			
-			</tr>
-		</thead>
-		<tbody>
-			{{#each pharmacies}}
-			<tr>
-				{{#if deleteEnabled}}	
-				<td>
-					<img src='/images-svg/supp_bouton.svg' class='pharmacies_remove deleteButton'
-						style='display: inline-block;'>
-				</td>
-				{{/if}}	
-				<th scope="row">{{plusOne @index}}</th>
-				<td>{{name}}</td>
-				<td>{{tel}}</td>
-				<td>{{address}}</td>		
-			</tr>
-			{{/each}}
-		</tbody>
-	</table>
-	</div>
-	<button id='stores_add' class='btn btn-sm btn-primary' alt='Ajouter'>Ajouter</button>
-	<button id='clearPharmacies' class='pharmacy_remove btn btn-sm btn-danger'>{{deleteButtonName}}</button>	
+<div class="table-responsive">
+<table class="table table-hover table-bordered table-sm table-striped">
+	<thead class="thead-dark">
+		<tr>
+			{{#if deleteEnabled}}
+			<th></th>
+			{{/if}}	
+			<th scope="col" class="text-center">#</th>
+			<th scope="col" class="text-center">Nom</th>
+			<th scope="col" class="text-center">Téléphone</th>
+			<th scope="col" class="text-center">Addresse</th>			
+		</tr>
+	</thead>
+	<tbody>
+		{{#each pharmacies}}
+		<tr>
+			{{#if deleteEnabled}}	
+			<td>
+				<img src='/images-svg/supp_bouton.svg' class='pharmacies_remove deleteButton'
+					style='display: inline-block;'>
+			</td>
+			{{/if}}	
+			<th scope="row">{{plusOne @index}}</th>
+			<td>{{name}}</td>
+			<td>{{tel}}</td>
+			<td>{{address}}</td>		
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
+</div>
+<button id='stores_add' class='btn btn-sm btn-primary' alt='Ajouter'>Ajouter</button>
+<button id='clearPharmacies' class='pharmacy_remove btn btn-sm btn-danger'>{{deleteButtonName}}</button>	
 </template>
 
 <template name='supportUs'>
@@ -133,7 +133,7 @@
 	</table>
 	</div>
 	<h5 class="text-left text-success">Technologie</h5>
-	<p class="text-left">Les informations des médicaments viennet de <a href="compendium.ch">compendium</a> et Medintake utilise le framework Meteor.js 1.8.1 avec Cordova</p>
+	<p class="text-left">Les informations des médicaments viennet de <a href="http://www.compendium.ch">compendium</a> et Medintake utilise le framework Meteor.js 1.8.1 avec Cordova</p>
 	<h6 class="text-left text-success">Librairies :</h6>
 	<li class="text-left">Bootstrap (CSS)</li>
 	<li class="text-left">Sweet Alert 2 (boîtes de dialogues)</li>

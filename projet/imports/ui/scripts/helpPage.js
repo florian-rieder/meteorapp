@@ -45,28 +45,6 @@ Template.stores.helpers({
 	}	
 });
 
-Template.contactList.helpers({
-	contacts(){
-		return Contacts.find();
-	},
-	plusOne(index){
-		return index + 1;
-	},
-	deleteEnabled() {
-		return contactDeleteEnabled.get();
-	},
-	deleteButtonName() {
-		// user is already deleting contacts
-		if (contactDeleteEnabled.get()) {
-			return 'Confirmer';
-		}
-		// user is not already deleting contacts
-		else {
-			return 'Supprimer';
-		}
-	}
-});
-
 Template.stores.events({
 	'click #stores_add'(e) {
 		e.preventDefault();
@@ -118,6 +96,28 @@ Template.stores.events({
 		console.log(this._id)
 		Meteor.call('pharmacies.remove', this._id)
 	}	
+});
+
+Template.contactList.helpers({
+	contacts(){
+		return Contacts.find();
+	},
+	plusOne(index){
+		return index + 1;
+	},
+	deleteEnabled() {
+		return contactDeleteEnabled.get();
+	},
+	deleteButtonName() {
+		// user is already deleting contacts
+		if (contactDeleteEnabled.get()) {
+			return 'Confirmer';
+		}
+		// user is not already deleting contacts
+		else {
+			return 'Supprimer';
+		}
+	}
 });
 
 Template.contactList.events({

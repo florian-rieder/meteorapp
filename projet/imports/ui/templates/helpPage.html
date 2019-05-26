@@ -15,54 +15,6 @@
 	</div>
 </template>
 
-<template name='supportUs'>
-	<h4 class="text-center text-success">L'équipe de développement de Medintake</h4>
-	<div class="table-responsive">
-	<table class="table table-hover table-sm table-striped">
-		<thead class="thead-dark">
-		  <tr>
-			<th scope="col" class="text-left">Prénom</th>
-			<th scope="col" class="text-left">Nom</th>
-			<th scope="col" class="text-left">Email</th>
-		  </tr>
-		</thead>
-		<tbody>
-		  <tr>
-			<td>Florian</td>
-			<td>Rieder</td>
-			<td>florian.rieder@unil.ch</td>
-		  </tr>
-		  <tr>
-			<td>Pedro</td>
-			<td>Tome</td>
-			<td>pedro.tome@unil.ch</td>
-		  </tr>
-		  <tr>
-			<td>Amirhossein</td>
-			<td>Asadizanjani</td>
-			<td>amirhossein.asadizanjani@unil.ch</td>
-		  </tr>
-		  <tr>
-			<td>Célia</td>
-			<td>Riva</td>
-			<td>celia.riva@unil.ch</td>
-		  </tr>		  
-		</tbody>
-	</table>
-	</div>
-	<h5 class="text-left text-success">Technologie</h5>
-	<p class="text-left">Les informations des médicaments viennet de <a href="http://www.compendium.ch">compendium</a> et Medintake utilise le framework Meteor.js 1.8.1 avec Cordova</p>
-	<h6 class="text-left text-success">Librairies :</h6>
-	<li class="text-left">Bootstrap (CSS)</li>
-	<li class="text-left">Sweet Alert 2 (boîtes de dialogues)</li>
-	<li class="text-left">Puppeteer (web scraping)</li>
-	<li class="text-left">QuaggaJS (scan de codes barre)</li>
-	<li class="text-left" style="margin-bottom: 16px">Iron:Router (routes)</li>
-	<h6 class="text-left text-success">Plugins Cordova :</h6>
-	<p class="text-left">cordova-plugin-camera (caméra mobile) et cordova-plugin-android-permissions (permissions caméra mobile)</p>
-	<p class="text-left text-success">Ce programme est un logiciel gratuit. Copyright © 2019</p>
-</template>
-
 <template name='helpBar'>
 	<nav class="navbar navbar-light" style="background-color: rgb(145, 145, 145)">
 		{{#each buttons}}
@@ -75,7 +27,6 @@
 		<button class='helpButton_button btn btn-outline-light d-flex justify-content-center' style="background-color: rgb(255, 255, 255);">
 			<img src={{imgsrc}} alt={{name}} class='align-middle' style="height: 32px; width: 32px">
 		</button>
-</template>
 </template>
 
 <template name='contactList'>
@@ -146,4 +97,52 @@
 </div>
 <button id='stores_add' class='btn btn-sm btn-primary' alt='Ajouter'>Ajouter</button>
 <button id='clearPharmacies' class='pharmacy_remove btn btn-sm btn-danger'>{{deleteButtonName}}</button>	
+</template>
+
+<template name='supportUs'>
+	<h4 class="text-center text-success">L'équipe de développement de Medintake</h4>
+	<div class="table-responsive">
+	<table class="table table-hover table-sm table-striped">
+		<thead class="thead-dark">
+		  <tr>
+			<th scope="col" class="text-left">Prénom</th>
+			<th scope="col" class="text-left">Nom</th>
+			<th scope="col" class="text-left">Email</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr>
+			<td>Florian</td>
+			<td>Rieder</td>
+			<td>florian.rieder@unil.ch</td>
+		  </tr>
+		  <tr>
+			<td>Pedro</td>
+			<td>Tome</td>
+			<td>pedro.tome@unil.ch</td>
+		  </tr>
+		  <tr>
+			<td>Amirhossein</td>
+			<td>Asadizanjani</td>
+			<td>amirhossein.asadizanjani@unil.ch</td>
+		  </tr>
+		  <tr>
+			<td>Célia</td>
+			<td>Riva</td>
+			<td>celia.riva@unil.ch</td>
+		  </tr>		  
+		</tbody>
+	</table>
+	</div>
+	<h5 class="text-left text-success">Technologie</h5>
+	<p class="text-left">Les informations des médicaments viennet de <a href="http://www.compendium.ch">compendium</a> et Medintake utilise le framework Meteor.js 1.8.1 avec Cordova</p>
+	<h6 class="text-left text-success">Librairies :</h6>
+	<li class="text-left">Bootstrap (CSS)</li>
+	<li class="text-left">Sweet Alert 2 (boîtes de dialogues)</li>
+	<li class="text-left">Puppeteer (web scraping)</li>
+	<li class="text-left">QuaggaJS (scan de codes barre)</li>
+	<li class="text-left" style="margin-bottom: 16px">Iron:Router (routes)</li>
+	<h6 class="text-left text-success">Plugins Cordova :</h6>
+	<p class="text-left">cordova-plugin-camera (caméra mobile) et cordova-plugin-android-permissions (permissions caméra mobile)</p>
+	<p class="text-left text-success">Ce programme est un logiciel gratuit. Copyright © 2019</p>
 </template>

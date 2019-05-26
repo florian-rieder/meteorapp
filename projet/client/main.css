@@ -458,3 +458,7 @@ thead td {
 .card-header{
 	overflow: auto;
 }
+
+.helpButton_button{
+	background-color: white;
+}

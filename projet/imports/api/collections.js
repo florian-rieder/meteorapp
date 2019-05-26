@@ -39,6 +39,14 @@ Meteor.methods({
 			{_id: id},
 			drug
 		);
+	},
+	'drugs.moveCategory'(drugId, newCategoryId){
+		// remove key in current category (check all categories)
+		Categories.find().forEach(cat => {
+			Meteor.call('categories.removeExtKey', cat._id, drugId);
+		});
+		// add key in new category
+		Meteor.call('categories.addExtKey', newCategoryId, drugId);
 	}
 });
 

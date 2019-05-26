@@ -48,4 +48,5 @@ function checkExpirations(){
 			expiredDrugs.push(drug);
 		}
 	});
+	return expiredDrugs;
 }

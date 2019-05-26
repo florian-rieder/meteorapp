@@ -1,13 +1,17 @@
 <template name="drugData">
 	<div class='container-fluid'>
 		<div style='padding: 1em 0 1em 0;'>
-				<button id='backButton' class='btn btn-info'>Back</button>
+			<button id='backButton' class='btn btn-light'>Back</button>
+			<div style='float: right'>
 				{{#if isNotAlreadyInPharmacy}}
-					<button id='addDrugToPharmacyButton' class='btn btn-info'>Ajouter à ma pharmacie</button>
+				<button id='addDrugToPharmacyButton' class='btn btn-info'>Ajouter à ma pharmacie</button>
 				{{/if}}
 				{{#unless isNotAlreadyInPharmacy}}
-					<button id='goToTreatment' class='btn btn-info'>Traitement</button>
+				<button id='goToTreatment' class='btn btn-info'>Traitement</button>
+				<button id='moveCategory' class='btn btn-info'>Déplacer</button>
 				{{/unless}}
+			</div>
+
 		</div>
 
 		<div class="accordion" id='drugData_accordion'>
@@ -39,8 +43,8 @@
 			<div class="card">
 				<div class="card-header" id="headingComposition" data-toggle="collapse" href="#collapseComposition">
 					<h5 class="mb-0">
-						<button class="btn btn-link collapsed" type="button" data-toggle="collapse" href="#collapseComposition" aria-expanded="true"
-						 aria-controls="collapseComposition">
+						<button class="btn btn-link collapsed" type="button" data-toggle="collapse" href="#collapseComposition"
+						 aria-expanded="true" aria-controls="collapseComposition">
 							Composition
 						</button>
 					</h5>

@@ -3,7 +3,7 @@ import '../templates/drugData.html';
 import { Template } from 'meteor/templating';
 import { inspectDrugData, lastActivePage, fireDrugAddDialog, swalCustomClasses, createTreatmentGrid } from '../../api/utilities.js';
 import Swal from 'sweetalert2';
-import { Drugs } from '../../api/collections';
+import { Categories, Drugs } from '../../api/collections';
 
 Template.drugData.helpers({
 	// used to determine if we should render an "add to pharmacy" button
@@ -71,5 +71,33 @@ Template.drugData.events({
 	'click #goToTreatment'(){
 		Router.go(`/treatment/${this._id}`);
 		lastActivePage.set('/details');
+	},
+	'click #moveCategory'(){
+		Swal.fire({
+			title: 'Déplacer vers une autre catégorie',
+			html: (() => {
+				let HTMLString = '<select id="swal-input_selectCategory" class="form-control">';
+				Categories.find().forEach(cat => {
+					HTMLString += ` <option value="${cat._id}">${cat.name}</option> `;
+				})
+				HTMLString += '</select>';
+				return HTMLString;
+			})(),
+			showCancelButton: true,
+			cancelButtonText: 'Annuler',
+			confirmButtonText: 'Confirmer',
+			buttonsStyling: false,
+			customClass: swalCustomClasses,
+			preConfirm(){
+				// get selected category id
+				const selectForm = document.querySelector('#swal-input_selectCategory');
+				return selectForm.options[selectForm.selectedIndex].value;
+			}
+		}).then(swalResult => {
+			if(swalResult.value){
+				// move drug to new category
+				Meteor.call('drugs.moveCategory', this._id, swalResult.value);
+			}
+		})
 	}
 });

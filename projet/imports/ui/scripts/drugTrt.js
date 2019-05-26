@@ -33,12 +33,8 @@ Template.drugTrt.helpers({
 		],
 		grid(){
 			// setup variables in helper, because for some reason it doesn't work in onCreated
-			if(currentDrug == undefined){ // strict equality would not work, because this helper will trigger a few time while its data returns null. (null == undefined -> true, null === undefined -> false)
-				currentDrug = Template.instance().data;
-			}
-			if(grid.get() === undefined){
-				grid.set(Template.instance().data.treatmentGrid);
-			}
+			currentDrug = Template.instance().data;
+			grid.set(Template.instance().data.treatmentGrid);
 			// return grid
 			return grid.get();
 		},

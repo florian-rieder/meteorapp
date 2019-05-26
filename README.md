@@ -28,6 +28,13 @@ Enfin, il peut également enregistrer des rappels pour prendre des médicaments.
 
 ![Traitement](https://raw.githubusercontent.com/Sergenti/meteorapp/master/screenshots/traitement.png "Traitement")
 
+# Base de données
+Medintake utilise 5 collections MongoDB:
+* Drugs: contient les données de tous les médicaments enregistrés par l'utilisateur.
+* Categories: contient les catégories de l'utilisateur. Chaque catégorie contient des clés étrangères faisant référence à des documents contenus dans la collection Drugs.
+* Profile: contient le profil de l'utilisateur.
+* Pharmacies et Contacts: contiennent les coordonnées de pharmacies et de personnes/institutions entrées par l'utilisateur.
+
 # Technologie
 Medintake utilise le framework Meteor.js 1.8.1 avec Cordova pour le portage sur mobile (Android).
 
@@ -75,3 +82,5 @@ Ensuite, ajouter le fichier AndroidManifest.xml (à la racine de ce repo) dans .
 - Pedro Tomé
 - Amirhossein	Asadizanjani
 - Célia Riva
+
+Copyright (c) 2019 - Tous droits réservés.

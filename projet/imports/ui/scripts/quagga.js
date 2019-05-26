@@ -155,19 +155,18 @@ export function startScanner() {
 				// for each result, we count the number of occurrences
 				array.forEach(result => {
 					// we use an object whose properties are the value of the result, that way we
-					// can create a new property called `_${result}` (because we can't use numbers as variable names)
+					// can create a new property called with the name of the result (the barcode)
 					// and we then count the number of occurrences of all results.
-					if (processed[`_${result}`] === undefined) { // strict equality
-						processed[`_${result}`] = 1;
+					if (processed[result] === undefined) { // strict equality
+						processed[result] = 1;
 					} else {
-						processed[`_${result}`]++;
+						processed[result]++;
 					}
 				});
 
 				// it was so beautiful as a one-liner that I simply had to factor it like that 
 				// (sorry for readability... tl;dr: returns the barcode with the highest count)
-				return Object.getOwnPropertyNames(processed).reduce((mode, code) => processed[mode] < processed[code] ? code : mode)
-					.slice(1); // remove underscore
+				return Object.getOwnPropertyNames(processed).reduce((mode, code) => processed[mode] < processed[code] ? code : mode);
 			}
 		});
 	}

@@ -3,6 +3,7 @@ import { inspectDrugData, lastActivePage, LoadingWheel } from '../../api/utiliti
 import '../templates/quagScan.html'
 import '../templates/applicationLayout.html';
 
+
 // Flag for scanner status
 let scannerIsRunning = false;
 
@@ -12,9 +13,11 @@ Template.quagScan.events({
 		if (Meteor.isCordova) {
 			var permissions = cordova.plugins.permissions;
 			// check if the app has permission to use the camera
+			// Fix for NotReadableError: video source, don't forget to add Camera Permissions in Android Manifest !!!
 			permissions.checkPermission(permissions.CAMERA, function (status) {
 				if (status.hasPermission) {
 					console.log("camera permission allowed");
+					toggleScan();
 				}
 				else {
 					console.warn("camera permission not allowed");
@@ -23,7 +26,7 @@ Template.quagScan.events({
 						() => {
 							// permission granted
 							console.log('permission granted.');
-							startScanner();
+							toggleScan();
 						}, 
 						() => {
 							// permission refused
@@ -200,6 +203,7 @@ export function stopScanner() {
 	Quagga.stop();
 	scannerIsRunning = false;
 	document.getElementById("scannerContainer").innerHTML = ""; //removes frozen video window
+	console.log('scanner stopped')
 }
 
 function searchCode(code) {

@@ -23,26 +23,45 @@ Template.helpPage.helpers({
 	}
 });
 
-Template.stores.helpers({
-	pharmacies(){
-		return Pharmacies.find();
-	},
-	plusOne(index){
-		return index + 1;
-	},
-	deleteEnabled() {
-		return pharmacyDeleteEnabled.get();
-	},
-	deleteButtonName() {
-		// user is already deleting pharmacies
-		if (pharmacyDeleteEnabled.get()) {
-			return 'Confirmer';
+Template.contactList.events({
+	'click #contacts_add'(e){
+		e.preventDefault();
+		Swal.fire({
+			title: 'Ajouter un contact',
+			html: (() => {
+				let HTMLString = "<input type='text' class='form-control' id='swal-input_place' placeholder='Nom :'>"
+				HTMLString += "<input type='tel' class='form-control' id='swal-input_phone' placeholder='Téléphone :'>"
+				return HTMLString;
+			})(),
+			preConfirm(){
+				let place = document.getElementById('swal-input_place').value
+				let phone = document.getElementById('swal-input_phone').value
+				return {
+					place: place,
+					phone: phone
+				}
+			}
+		}).then((swalResult) => {
+			if(swalResult.value){
+				console.log(swalResult.value)
+				Meteor.call('contacts.insert', swalResult.value);
+			}
+		})
+	}
+	,'click #clearContacts'(e) {
+			e.preventDefault();
+			if (contactDeleteEnabled.get()) {
+				// user is already deleting contacts
+				contactDeleteEnabled.set(false);
+			} else {
+				// user is not already deleting contacts
+				contactDeleteEnabled.set(true);
 		}
-		// user is not already deleting pharmacies
-		else {
-			return 'Supprimer';
-		}
-	}	
+	},
+	'click .contacts_remove'(e){
+		e.preventDefault();
+		Meteor.call('contacts.remove', this._id)
+	}
 });
 
 Template.contactList.helpers({
@@ -120,43 +139,24 @@ Template.stores.events({
 	}	
 });
 
-Template.contactList.events({
-	'click #contacts_add'(e){
-		e.preventDefault();
-		Swal.fire({
-			title: 'Ajouter un contact',
-			html: (() => {
-				let HTMLString = "<input type='text' class='form-control' id='swal-input_place' placeholder='Nom :'>"
-				HTMLString += "<input type='tel' class='form-control' id='swal-input_phone' placeholder='Téléphone :'>"
-				return HTMLString;
-			})(),
-			preConfirm(){
-				let place = document.getElementById('swal-input_place').value
-				let phone = document.getElementById('swal-input_phone').value
-				return {
-					place: place,
-					phone: phone
-				}
-			}
-		}).then((swalResult) => {
-			if(swalResult.value){
-				console.log(swalResult.value)
-				Meteor.call('contacts.insert', swalResult.value);
-			}
-		})
-	}
-	,'click #clearContacts'(e) {
-			e.preventDefault();
-			if (contactDeleteEnabled.get()) {
-				// user is already deleting contacts
-				contactDeleteEnabled.set(false);
-			} else {
-				// user is not already deleting contacts
-				contactDeleteEnabled.set(true);
-		}
+Template.stores.helpers({
+	pharmacies(){
+		return Pharmacies.find();
 	},
-	'click .contacts_remove'(e){
-		e.preventDefault();
-		Meteor.call('contacts.remove', this._id)
-	}
+	plusOne(index){
+		return index + 1;
+	},
+	deleteEnabled() {
+		return pharmacyDeleteEnabled.get();
+	},
+	deleteButtonName() {
+		// user is already deleting pharmacies
+		if (pharmacyDeleteEnabled.get()) {
+			return 'Confirmer';
+		}
+		// user is not already deleting pharmacies
+		else {
+			return 'Supprimer';
+		}
+	}	
 });

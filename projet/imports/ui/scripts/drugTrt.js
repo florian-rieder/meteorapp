@@ -2,7 +2,10 @@ import '../templates/drugTrt.html';
 
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { Drugs } from '../../api/collections.js'
+import { Drugs } from '../../api/collections.js';
+
+var toggleCell = false;
+
 
 Template.drugTrt.helpers({
     weekDays: [
@@ -28,4 +31,22 @@ Template.drugTrt.helpers({
         {time: '20:00'},
         {time: '22:00'},
     ]
-});
+})
+
+Template.drugTrt.events({
+    'click .hourCell'() {
+        let cells = document.querySelector('.hourCell');
+        switch(toggleCell) {
+            case true:
+                cells.classList.remove('toggledCell');
+                toggleCell = false;
+                break;
+            case false:
+                cells.classList.add('toggledCell');
+                toggleCell = true;
+                break;
+        }
+        
+
+    }
+})

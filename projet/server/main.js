@@ -2,7 +2,7 @@ import '../imports/api/scraper.js';
 import '../imports/api/collections.js';
 
 import { Meteor } from 'meteor/meteor';
-import { Categories, Pharmacies, Contacts } from '../imports/api/collections.js';
+import { Categories, Pharmacies, Contacts, Drugs } from '../imports/api/collections.js';
 import { CategoryItem } from '../imports/api/utilities.js';
 
 Meteor.startup(() => {
@@ -34,6 +34,18 @@ Meteor.startup(() => {
 			phone: '021 314 11 11'
 		});
 	}
+
+	checkExpirations();
 });
 
 
+function checkExpirations(){
+	const today = new Date();
+	let expiredDrugs = [];
+	Drugs.find().forEach(drug => {
+		if(drug.exp.getTime() < today.getTime()){
+			console.log('drug expired: ' + drug.showcaseTitle);
+			expiredDrugs.push(drug);
+		}
+	});
+}

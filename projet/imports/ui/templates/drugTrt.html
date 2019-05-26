@@ -17,10 +17,12 @@
             <h3>Calendrier Horaire</h3>
             {{#each timeStamp}}
             <div class="row justify-content-center" style='width: 100%; position: relative; margin-left: 0vw'>
+                <div style='padding-right: 20px;'>
                 {{>time}}
+                </div>
                 {{#each weekDays}}
-                <div class='d-flex col-1 justify-content-center' style='margin-left: 0em; width: 1em;'>
-                    <input type="checkbox" name="" id="">
+                <div class='d-flex' style='margin-left: 0em;'>
+                    <div class='hourCell'></div>
                 </div>
                 {{/each}}
             </div>

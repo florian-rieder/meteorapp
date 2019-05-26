@@ -14,6 +14,7 @@ Medintake utilise le framework Meteor.js 1.8.1 avec Cordova pour le portage sur 
 ## Plugins Cordova
 - cordova-plugin-camera (caméra mobile)
 - cordova-plugin-android-permissions (permissions caméra mobile)
+- cordova-plugin-local-notification
 
 # Installation
 ## Web (version de développement)

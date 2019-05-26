@@ -467,8 +467,8 @@ thead td {
 .cell{
 	border: 1px solid var(--main-border-color);
 	background-color: lightgrey;
-	width: 2em;
-	height: 2em;
+	width: 1.5em;
+	height: 1.5em;
 }
 .toggledCell {
 	background-color: rgb(179, 62, 62);
@@ -482,7 +482,7 @@ thead td {
 	overflow-x: auto;
 }
 .trtCell{
-	width: 2em; 
+	width: 1.5em; 
 	text-align: center;
 	display: inline-block;
 }

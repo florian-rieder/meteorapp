@@ -3,6 +3,7 @@ import '../templates/drugTrt.html';
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Drugs } from '../../api/collections.js';
+import { lastActivePage } from '../../api/utilities.js';
 
 let grid = new ReactiveVar(undefined);
 let currentDrug = undefined;
@@ -83,5 +84,13 @@ Template.hourCell.events({
 		// update drug in db
 		currentDrug.treatmentGrid = grid.get();
 		Meteor.call('drugs.update', currentDrug._id, currentDrug);
+		
+	},
+})
+
+Template.drugTrt.events({
+	'click #backButton'() {
+		lastActivePage.set(`/treatment/${currentDrug._id}`);
+		Router.go(`/details/${currentDrug._id}`);
 	}
 })

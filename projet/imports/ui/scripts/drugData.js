@@ -45,6 +45,8 @@ Template.drugData.events({
 			// instead of going to /search/searchquery, we go back to /search, thus displaying
 			// previous search results without refetching them
 			Router.go('/search');
+		} else if (lastActivePage.get().includes('/treatment/')) {
+			Router.go('/');
 		} else {
 			history.back();
 		}

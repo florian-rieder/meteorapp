@@ -1,7 +1,7 @@
 import '../templates/drugData.html';
 
 import { Template } from 'meteor/templating';
-import { inspectDrugData, lastActivePage, fireDrugAddDialog, swalCustomClasses } from '../../api/utilities.js';
+import { inspectDrugData, lastActivePage, fireDrugAddDialog, swalCustomClasses, createTreatmentGrid } from '../../api/utilities.js';
 import Swal from 'sweetalert2';
 import { Drugs } from '../../api/collections';
 
@@ -56,6 +56,7 @@ Template.drugData.events({
 				let drugData = inspectDrugData.get();
 				drugData.createdAt = new Date();
 				drugData.exp = swalResult.value.exp;
+				drugData.treatmentGrid = createTreatmentGrid();
 
 				Meteor.call('drugs.insert', drugData, swalResult.value.categoryId);
 				Swal.fire({
@@ -66,5 +67,9 @@ Template.drugData.events({
 				});
 			}
 		});
+	},
+	'click #goToTreatment'(){
+		Router.go(`/treatment/${this._id}`);
+		lastActivePage.set('/details');
 	}
 });

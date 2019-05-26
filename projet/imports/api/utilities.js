@@ -89,8 +89,8 @@ export const fireDrugAddDialog = async function (title) {
 			const catSlct = document.querySelector('#swal-input_select');
 			catBtn.addEventListener('click', (e) => {
 				e.preventDefault();
-				
-				if(catTxt.classList.contains('hidden')){
+
+				if (catTxt.classList.contains('hidden')) {
 					// hide select and show text input
 					catTxt.classList.remove('hidden');
 					catSlct.classList.add('hidden');
@@ -110,14 +110,14 @@ export const fireDrugAddDialog = async function (title) {
 
 			let selectedCategoryId;
 			// if text input is not hidden, user wants to create a new category
-			if(!newCategoryTextInput.classList.contains('hidden')){
+			if (!newCategoryTextInput.classList.contains('hidden')) {
 				let newCatName = newCategoryTextInput.value;
 				// if user did not enter anything, use the placeholder
-				if(newCatName === ''){
+				if (newCatName === '') {
 					newCatName = newCategoryTextInput.placeholder;
 				}
 				selectedCategoryId = Meteor.apply('categories.insert', [new CategoryItem(newCatName)], { returnStubValue: true });
-			} 
+			}
 			// else, user selected a category from the dropdown menu
 			else {
 				selectedCategoryId = selectForm.options[selectForm.selectedIndex].value;
@@ -274,7 +274,7 @@ export const search = function (query) {
 	});
 }
 
-export const fireErrorDialog = function(error) {
+export const fireErrorDialog = function (error) {
 	Swal.fire({
 		title: "Une erreur s'est produite",
 		text: error.message,
@@ -285,4 +285,26 @@ export const fireErrorDialog = function(error) {
 			confirmButton: 'btn btn-lg btn-primary',
 		}
 	});
+}
+
+export const createTreatmentGrid = function () {
+	const weekDays = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
+	const timeStamps = ['00', '02', '04', '06', '08', '10', '12', '14', '16', '18', '20', '22']
+
+	let treatmentGrid = [];
+	
+	timeStamps.forEach((timeStamp, i) => {
+		treatmentGrid.push([]);
+		weekDays.forEach((day, j) => {
+			treatmentGrid[i].push({
+				pos: {
+					time: i,
+					day: j
+				},
+				checked: false,
+			});
+		});
+	});
+
+	return treatmentGrid;
 }

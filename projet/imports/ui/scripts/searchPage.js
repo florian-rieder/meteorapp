@@ -4,7 +4,7 @@ import './drugData.js';
 import '../../api/collections.js';
 
 import { Template } from 'meteor/templating';
-import { inspectDrugData, searchResults, LoadingWheel, fireDrugAddDialog, lastActivePage, fireErrorDialog } from '../../api/utilities';
+import { inspectDrugData, searchResults, LoadingWheel, fireDrugAddDialog, lastActivePage, fireErrorDialog, createTreatmentGrid } from '../../api/utilities';
 import Swal from 'sweetalert2';
 import { Drugs } from '../../api/collections.js';
 
@@ -54,6 +54,7 @@ Template.result.events({
 					// add fields to the result object before adding it to db
 					drugData.exp = swalResult.value.exp;
 					drugData.createdAt = new Date();
+					drugData.treatmentGrid = createTreatmentGrid();
 
 					console.log(drugData);
 					// this is a way of calling the drugs.insert method like with Meteor.call, but that way we can return
@@ -76,6 +77,7 @@ Template.result.events({
 							// add fields to the result object before addind it to db
 							result.exp = swalResult.value.exp;
 							result.createdAt = new Date();
+							result.treatmentGrid = createTreatmentGrid();
 
 							console.log(result);
 							// this is a way of calling the drugs.insert method like with Meteor.call, but that way we can return

@@ -459,7 +459,7 @@ thead td {
 	overflow: auto;
 }
 
-.hourCell{
+.cell{
 	border: 1px solid var(--main-border-color);
 	background-color: lightgrey;
 	width: 3em;

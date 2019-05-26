@@ -5,6 +5,9 @@
 				{{#if isNotAlreadyInPharmacy}}
 					<button id='addDrugToPharmacyButton' class='btn btn-info'>Ajouter à ma pharmacie</button>
 				{{/if}}
+				{{#unless isNotAlreadyInPharmacy}}
+					<button id='goToTreatment' class='btn btn-info'>Traitement</button>
+				{{/unless}}
 		</div>
 
 		<div class="accordion" id='drugData_accordion'>

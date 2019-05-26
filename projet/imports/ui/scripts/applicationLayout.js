@@ -105,3 +105,9 @@ Router.route('/drugTrt', function () {
 	this.render('drugTrt');
 	this.render('footerBar', { to: 'footer'});
 });
+
+Router.route('/treatment/:_id', function () {
+	this.render('drugTrt', {
+		data: Drugs.findOne({_id: this.params._id}).treatmentGrid
+	})
+});

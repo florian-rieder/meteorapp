@@ -135,6 +135,7 @@ main {
 	width: 100%;
 	position: relative;
 }
+/* wrapper used to make a full width search bar (inspired from https://stackoverflow.com/questions/40208829/responsive-full-width-input-with-button) */
 .searchBar_searchSquare-wrapper{
 	display: inline-block;
 	position: absolute;
@@ -283,8 +284,7 @@ main {
 }
 .drug_icon {
 	margin-right: 1em;
-	width: 3em;
-	height: 3em;
+	width: 30px;
 }
 .drug_icon img{
 	max-width: 3em;
@@ -312,6 +312,7 @@ header>a, header>a:active, header>a:hover, header>a:visited {
 .drugData_image {
 	max-width: 100%;
 	max-height: 60vh;
+	object-fit: contain; /* avoids image being squeezed on small screens */
 }
 
 div.drugData_firstInfo>div.container>div>div[class*='col'] {

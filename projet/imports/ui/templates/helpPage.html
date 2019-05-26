@@ -16,18 +16,21 @@
 </template>
 
 <template name='helpBar'>
-		<nav class="navbar navbar-light" style="background-color: rgb(212, 212, 212);">
+	<nav class="navbar navbar-light" style="background-color: rgb(212, 212, 212);">
+		<div class='container-fluid d-flex justify-content-around align-middle'>
 			{{#each buttons}}
-			<button class='helpButton_button justify-content-center btn btn-outline-light'>
 				<a href="{{path}}">
-					<img src={{imgsrc}} alt={{name}} class='align-middle' style="height: 32px; width: 32px">
+					<button class='helpButton_button btn btn-outline-light d-flex justify-content-center'>				
+						<img src={{imgsrc}} alt={{name}} class='align-middle' style="height: 32px; width: 32px">				
+					</button>
 				</a>
-			</button>
-			{{/each}}
-		</nav>
+			{{/each}}				
+		</div>
+	</nav>
 </template>
 
 <template name='contactList'>
+		<h4 class="text-center text-success">Sauvgarder ici vos contacts urgences :</h4>
 <div class="table-responsive">
 <table class="table table-hover table-bordered table-sm table-striped">
 	<thead class="thead-dark">
@@ -62,6 +65,7 @@
 </template>
 
 <template name='stores'>
+	<h4 class="text-center text-success">Sauvgarder ici vos pharmacies les plus fréquentés :</h4>
 <div class="table-responsive">
 <table class="table table-hover table-bordered table-sm table-striped">
 	<thead class="thead-dark">

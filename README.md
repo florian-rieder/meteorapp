@@ -24,9 +24,11 @@ Pour chaque médicament, l'utilisateur a accès:
 ![Données de médicaments](https://raw.githubusercontent.com/Sergenti/meteorapp/master/screenshots/details.png "Données de médicaments")
 ![Notice de médicaments](https://raw.githubusercontent.com/Sergenti/meteorapp/master/screenshots/notice.png "Notice de médicaments")
 
-Enfin, il peut également enregistrer des rappels pour prendre des médicaments.
+Enfin, il peut également enregistrer des rappels pour prendre des médicaments, et est averti si la date d'expiration d'un médicament est dépassée.
 
 ![Traitement](https://raw.githubusercontent.com/Sergenti/meteorapp/master/screenshots/traitement.png "Traitement")
+
+L'utilisateur a accès à une page de profil, où il peut enregistrer des informations personnelles, et a également la possibilité d'enregistrer les coordonnées de pharmacies, personnes ou institutions dans la page d'aide, de façon à rassembler toutes les informations qui pourraient lui être utile dans l'application.
 
 # Base de données
 Medintake utilise 5 collections MongoDB:
@@ -82,5 +84,3 @@ Ensuite, ajouter le fichier AndroidManifest.xml (à la racine de ce repo) dans .
 - Pedro Tomé
 - Amirhossein	Asadizanjani
 - Célia Riva
-
-Copyright (c) 2019 - Tous droits réservés.

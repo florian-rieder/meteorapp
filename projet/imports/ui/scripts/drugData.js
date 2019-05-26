@@ -35,6 +35,14 @@ Template.drugData.helpers({
 		const prettyTitle = Template.instance().data.title;
 		const backupTitle = Template.instance().data.showcaseTitle;
 		return prettyTitle == undefined ? backupTitle : prettyTitle;
+	},
+	isExpired(){
+		const today = new Date();
+		return Template.instance().data.exp.getTime() < today.getTime();
+	},
+	getExp(){
+		let exp = Template.instance().data.exp;
+		return `${exp.getMonth()} / ${exp.getFullYear()}`;
 	}
 });
 

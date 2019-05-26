@@ -67,7 +67,8 @@ Router.route('/scan', function () {
 },
 {
 	onStop: function () { // when user leaves the page
-		stopScanner();
+		// added small delay because if the page is loaded and closed quick enough, stopScanner would occur before the scanner was running, and thus would not close it
+		setTimeout(stopScanner, 1000)
 	}
 });
 

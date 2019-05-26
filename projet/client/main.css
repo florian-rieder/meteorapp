@@ -459,10 +459,6 @@ thead td {
 	overflow: auto;
 }
 
-.helpButton_button{
-	background-color: white !important;
-}
-
 /* drugTrt */
 .cell{
 	border: 1px solid var(--main-border-color);

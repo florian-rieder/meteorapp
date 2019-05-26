@@ -2,6 +2,7 @@ import Quagga from "quagga";
 import { inspectDrugData, lastActivePage, LoadingWheel } from '../../api/utilities.js';
 import '../templates/quagScan.html'
 import '../templates/applicationLayout.html';
+import Swal from "sweetalert2";
 
 
 // Flag for scanner status
@@ -9,7 +10,7 @@ let scannerIsRunning = false;
 
 export function startScanner() {
 	// permissions check if mobile
-	if(Meteor.isCordova){
+	if (Meteor.isCordova) {
 		var permissions = cordova.plugins.permissions;
 		// check if the app has permission to use the camera
 		// Fix for NotReadableError: video source, don't forget to add Camera Permissions in Android Manifest !!!
@@ -114,12 +115,12 @@ export function startScanner() {
 					result.boxes.filter(function (box) {
 						return box !== result.box;
 					}).forEach(function (box) {
-						Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "black", lineWidth: 2 });
+						Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, { color: "white", lineWidth: 2 });
 					});
 				}
 				//precise detection of barcode
 				if (result.box) {
-					Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "white", lineWidth: 2 });
+					Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, { color: "red", lineWidth: 2 });
 				}
 				//Red line indicating full detection process
 				/* if (result.codeResult && result.codeResult.code) {
@@ -176,7 +177,7 @@ export function stopScanner() {
 	Quagga.stop();
 	scannerIsRunning = false;
 	document.getElementById("scannerContainer").innerHTML = ""; //removes frozen video window
-	console.log('scanner stopped')
+	console.log('scanner stopped.');
 }
 
 function searchCode(code) {
@@ -195,15 +196,30 @@ function searchCode(code) {
 						console.log('inspectDrugData: ' + inspectDrugData.get().title);
 					}
 					if (error) {
-						console.log('error while scraping drug from barcode.')
+						fireSwalErrorMsg("Une erreur s'est produite durant le téléchargement du médicament.")
 					}
 				});
 			} else {
-				console.log('no drug found with this barcode.')
+				LoadingWheel.hide();
+				fireSwalErrorMsg('Aucun médicament ne correspond à ce code barre.')
 			}
 		}
 		if (err) {
-			console.log('error while searching for barcode.')
+			LoadingWheel.hide();
+			fireSwalErrorMsg("Une erreur s'est produite pendant la recherche de médicaments correspondant à ce code barre.")
 		}
-	})
+	});
+
+	function fireSwalErrorMsg(message) {
+		Swal.fire({
+			title: "Une erreur s'est produite",
+			text: message,
+			type: 'error',
+			buttonsStyling: false,
+			customClass: {
+				actions: 'swal-buttonsContainer d-flex justify-content-center',
+				confirmButton: 'btn btn-lg btn-primary',
+			}
+		})
+	}
 }

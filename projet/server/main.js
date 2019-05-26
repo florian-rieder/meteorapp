@@ -34,17 +34,16 @@ Meteor.startup(() => {
 			phone: '021 314 11 11'
 		});
 	}
-
+	// check expirations on startup (or every month, but that would need a job scheduler, which we don't have time to implement)
 	checkExpirations();
+	// then send notifications for expired drugs
 });
-
 
 function checkExpirations(){
 	const today = new Date();
 	let expiredDrugs = [];
 	Drugs.find().forEach(drug => {
 		if(drug.exp.getTime() < today.getTime()){
-			console.log('drug expired: ' + drug.showcaseTitle);
 			expiredDrugs.push(drug);
 		}
 	});

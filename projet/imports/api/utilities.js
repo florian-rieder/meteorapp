@@ -287,6 +287,7 @@ export const fireErrorDialog = function (error) {
 	});
 }
 
+// generate 2d array for drug treatment
 export const createTreatmentGrid = function () {
 	const weekDays = ['L', 'M', 'M', 'J', 'V', 'S', 'D']
 	const timeStamps = ['00', '02', '04', '06', '08', '10', '12', '14', '16', '18', '20', '22']

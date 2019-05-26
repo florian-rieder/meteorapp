@@ -1,7 +1,8 @@
 :root {
 	/* define global css variables */
-	--main-header-color: #5abb85;
+	--main-header-color: #44d384;
 	--main-border-color: #4ca876;
+	--searchBar-border-color: rgb(145, 145, 145);
 }
 
 body {
@@ -84,7 +85,7 @@ main {
 .searchResults_container {
 	height: calc(100vh - 110px - 70px);
 	overflow-y: auto;
-	border: 1px solid rgb(63, 63, 63);
+	border: 1px solid var(--searchBar-border-color);
 	background-color: white;
 }
 .searchResults_numberDisplay {
@@ -131,16 +132,25 @@ main {
 	height: 2em;
 	margin-bottom: 0.5em;
 	margin-top: 0.5em;
+	width: 100%;
+	position: relative;
 }
-
+.searchBar_searchSquare-wrapper{
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	right: 2.3em;
+	height: inherit;
+}
 .searchBar_searchSquare {
 	margin: 0;
 	height: inherit;
-	width: 80vw;
+	width: 100%;
+	/* width: calc(100% - 1.5em); */
 	padding-left: 0.6em;
 	font-size: 20px;
 	border-style: none;
-	border: 1px solid rgb(99, 99, 99);
+	border: 1px solid var(--searchBar-border-color);
 	border-right: none;
 	border-top-left-radius: 1em;
 	border-bottom-left-radius: 1em;
@@ -154,7 +164,11 @@ main {
 	margin: 0;
 	height: 2em;
 	width: 2.3em;
-	border: 1px solid rgb(99, 99, 99);
+	position: absolute;
+	right: 0;
+	display: inline-block;
+
+	border: 1px solid var(--searchBar-border-color);
 	border-left: none;
 	border-top-right-radius: 1em;
 	border-bottom-right-radius: 1em;

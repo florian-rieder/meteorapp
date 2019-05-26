@@ -112,5 +112,6 @@ Router.route('/treatment/:_id', function () {
 		data: () => {
 			return Drugs.findOne({_id: this.params._id});
 		}
-	})
+	});
+	this.render('footerBar', { to: 'footer'});
 });

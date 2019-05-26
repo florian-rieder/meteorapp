@@ -85,7 +85,7 @@ async function scrapeDrug(compendiumURL) {
 
 	console.log('scraping composition...');
 
-	//get the list of components to the drug
+	//get the list of components of the drug
 	const composition = await page.evaluate((selector) => {
 		return Array.from(document.querySelectorAll(selector))
 			.map((tr) => {

@@ -7,7 +7,6 @@ import { CategoryItem } from '../imports/api/utilities.js';
 
 Meteor.startup(() => {
 	// code to run on server at startup
-
 	// add default elements to dbs
 	// if there are no categories, create one
 	if (Categories.findOne() == undefined) {

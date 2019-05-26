@@ -1,33 +1,32 @@
 <template name='drugTrt'>
-    <div class="container" style='text-align: center;'>
+    <div class="container justify-content-center" style='text-align: center;'>
         <div class="page-header">
             <h1>Mes Traitements</h1>
         </div>
-<<<<<<< HEAD
-        <div style='margin-top: 10vh;'>
-            <div class="row text-left" style='margin-left: 5px; width: 290px;'>
+        <h3>Jours de la semaine</h3>
+        <div class='container-fluid justify-content-center'>
+            <div class="row justify-content-center" style='width: 100%; position: relative; margin-left: 0vw'>
                 {{#each weekDays}}
-                <div class='d-flex col wkd justify-content-center'>
-=======
-        <div class='container-fluid'>
-            <div class="row" style='margin-left: 10px; width: 300vw;'>
-                {{#each weekDays}}
-                <div class='d-flex col-1 wkd justify-content-center'>
->>>>>>> parent of 9942de5... Drug Treatment quick update
+                <div class='d-flex col wkd justify-content-center' style='width: 1em'>
                     {{> day}}
                 </div>
                 {{/each}}
             </div>
-<<<<<<< HEAD
-            <div class='container' style='margin-top: 5vh;'>
-=======
->>>>>>> parent of 9942de5... Drug Treatment quick update
+        </div>
+        <div class='container-fluid justify-content-space-between' style='text-align: center; padding-top: 50px;'>
+            <h3>Calendrier Horaire</h3>
             {{#each timeStamp}}
-            <div class='row'>
-                    {{>time}}
+            <div class="row justify-content-center" style='width: 100%; position: relative; margin-left: 0vw'>
+                {{>time}}
+                {{#each weekDays}}
+                <div class='d-flex col-1 justify-content-center' style='margin-left: 0em; width: 1em;'>
+                    <input type="checkbox" name="" id="">
+                </div>
+                {{/each}}
             </div>
             {{/each}}
         </div>
+
     </div>
 
 </template>

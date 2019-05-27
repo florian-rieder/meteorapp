@@ -48,7 +48,7 @@ Template.drugData.helpers({
 	},
 	getExp(index) {
 		let exp = Template.instance().data.exp[index];
-		return `${exp.getMonth()} / ${exp.getFullYear()}`;
+		return `${exp.getMonth() + 1} / ${exp.getFullYear()}`;
 	},
 	deleteEnabled(){
 		return expDeleteEnabled.get();

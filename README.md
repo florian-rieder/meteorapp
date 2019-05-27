@@ -1,4 +1,4 @@
-Cette application a été réalisée dans le cadre du cours "Programmation pour Internet II - Meteor.js" donné par Isaac Pante et Loris Rimaz.
+Cette application a été réalisée dans le cadre du cours "Programmation pour Internet II - Meteor.js" donné par Isaac Pante et Loris Rimaz à l'Université de Lausanne (UNIL) durant le semestre de printemps 2019.
 
 # Medintake
 Medintake permet d'accéder aux informations de ses médicaments, telles que leur notice d'emballage ou leur composition, en scannant le code barre de l'emballage ou en le recherchant dans la base de données de médicaments proposée par [compendium.ch](https://www.compendium.ch). L'application propose d'aider à la gestion de sa pharmacie en mettant à disposition les informations importantes sur chaque médicament, en permettant de les classer dans différentes catégories, et en proposant de fournir des notifications de rappel pour la prise de traitements.
@@ -38,7 +38,7 @@ Medintake utilise 5 collections MongoDB:
 * Pharmacies et Contacts: contiennent les coordonnées de pharmacies et de personnes/institutions entrées par l'utilisateur.
 
 # Technologie
-Medintake utilise le framework Meteor.js 1.8.1 avec Cordova pour le portage sur mobile (Android).
+Medintake utilise le framework Meteor.js 1.8.1 avec Cordova pour le portage sur mobile (Android). L'application est pensée et structurée dans l'optique d'une application locale (web view et embedded server).
 
 ## Librairies
 - Bootstrap (CSS)

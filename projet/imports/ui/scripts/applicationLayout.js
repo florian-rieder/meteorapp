@@ -5,12 +5,11 @@ import '../templates/searchPage.html';
 import '../scripts/footerBar.js';
 import '../templates/drugData.html';
 
-import { search, inspectDrugData } from '../../api/utilities.js';
+import { search, inspectDrugData, LoadingWheel } from '../../api/utilities.js';
 import { Drugs, Profile, Categories } from '../../api/collections.js';
 import { startScanner, stopScanner } from './quagga';
 import { catDeleteEnabled } from './drugCategories';
 import { deleteEnabled } from './drugsList';
-
 
 // routes definition using Iron:router
 
@@ -51,11 +50,25 @@ Router.route('/search/:searchquery', function () {
 	search(this.params.searchquery);
 
 	this.render('footerBar', { to: 'footer' });
+}, {
+	onStop: function () {
+		// hide loading spinner if shown
+		if(!LoadingWheel.isHidden()){
+			LoadingWheel.hide();
+		}
+	}
 });
 
 Router.route('/search', function () {
 	this.render('searchPage');
 	this.render('footerBar', { to: 'footer' });
+}, {
+	onStop: function () {
+		// hide loading spinner if shown
+		if(!LoadingWheel.isHidden()){
+			LoadingWheel.hide();
+		}
+	}
 });
 
 Router.route('/scan', function () {

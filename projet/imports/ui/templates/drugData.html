@@ -36,25 +36,33 @@
 						<div>
 							Fabricant{{#if hasFirm}}: {{firm}}{{else}} indisponible.{{/if}}
 						</div>
-						<div style='margin-top: 1em; position: relative;'>
+						<div style='margin-top: 2em; position: relative;'>
 							<h3>Mes boîtes</h3>
-							<button id='addBox' class='btn btn-sm btn-info' style='position: absolute; right: 0; top: 0;'>+</button>
+							<div style='position: absolute; right: 0; top: 0;'>
+								<button id='addBox' class='btn btn-sm btn-info'>+</button>
+								<button id='removeBoxes' class='btn btn-sm btn-info'>-</button>
+							</div>
 							<div class='container'>
-									{{#each exp}}
-									<div class='row'>
-										<div class='col-xs'>{{plusOne @index}}</div>
-										<div class='col'>
+								{{#each exp}}
+								<div class='row' style='margin: 1em 0 1em 0'>
+									<div class='col-xs'>{{plusOne @index}}</div>
+									<div class='col'>
 											{{#if isExpired @index}}
-												<div>
-													<span style='color: rgb(165, 51, 51); font-weight: bold;'>Expiré</span> (<span style='font-weight: bold;'>{{getExp @index}}</span>)
-												</div>
+											<div>
+												<span style='color: rgb(165, 51, 51); font-weight: bold;'>Expiré</span> (<span style='font-weight: bold;'>{{getExp @index}}</span>)
+											</div>
 											{{else}}
-												<div>
-													Expire le <span style='font-weight: bold;'>{{getExp @index}}</span>.
-												</div>
+											<div>
+												Expire le <span style='font-weight: bold;'>{{getExp @index}}</span>.
+											</div>
 											{{/if}}
 										</div>
-									</div>
+										{{#if deleteEnabled}}
+										<div class='center-image' style='float: right'>
+											<img src='/images-svg/supp_bouton.svg' class='removeBox deleteButton' style='height: 1.5em; width: 1.5em' data-index='{{@index}}'>
+										</div>
+										{{/if}}
+								</div>
 								{{/each}}
 							</div>
 						</div>

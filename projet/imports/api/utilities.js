@@ -17,6 +17,10 @@ class LoadingWheelController {
 			spinner.classList.add('hidden');
 		}
 	}
+	isHidden() {
+		const spinner = document.getElementById('loadingWheel');
+		return spinner.classList.contains('hidden');
+	}
 }
 
 export class CategoryItem {
@@ -96,6 +100,7 @@ export const fireDrugAddDialog = async function (title) {
 					catSlct.classList.add('hidden');
 					catBtn.innerHTML = 'Annuler';
 				} else {
+					// hide text input and show select
 					catTxt.classList.add('hidden');
 					catSlct.classList.remove('hidden');
 					catBtn.innerHTML = '+';

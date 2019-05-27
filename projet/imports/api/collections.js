@@ -34,9 +34,9 @@ Meteor.methods({
 			Meteor.call('categories.removeExtKey', cat._id, id);
 		});
 	},
-	'drugs.update'(id, drug){
+	'drugs.update'(drug){
 		Drugs.update( 
-			{_id: id},
+			{_id: drug._id},
 			drug
 		);
 	},

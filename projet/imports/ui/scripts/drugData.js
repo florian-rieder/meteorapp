@@ -5,6 +5,8 @@ import { inspectDrugData, lastActivePage, fireDrugAddDialog, swalCustomClasses, 
 import Swal from 'sweetalert2';
 import { Categories, Drugs } from '../../api/collections';
 
+let expDeleteEnabled = new ReactiveVar(false);
+
 Template.drugData.helpers({
 	// used to determine if we should render an "add to pharmacy" button
 	isNotAlreadyInPharmacy() {
@@ -34,7 +36,11 @@ Template.drugData.helpers({
 	displayTitle() {
 		const prettyTitle = Template.instance().data.title;
 		const backupTitle = Template.instance().data.showcaseTitle;
+		// check if we have a "pretty" title. If not, show the "backup" title
 		return prettyTitle == undefined ? backupTitle : prettyTitle;
+	},
+	plusOne(val) {
+		return val + 1;
 	},
 	isExpired(index) {
 		const today = new Date();
@@ -44,8 +50,8 @@ Template.drugData.helpers({
 		let exp = Template.instance().data.exp[index];
 		return `${exp.getMonth()} / ${exp.getFullYear()}`;
 	},
-	plusOne(val) {
-		return val + 1;
+	deleteEnabled(){
+		return expDeleteEnabled.get();
 	}
 });
 
@@ -73,10 +79,12 @@ Template.drugData.events({
 
 				Meteor.call('drugs.insert', drugData, swalResult.value.categoryId);
 				Swal.fire({
+					toast: true,
 					type: 'success',
 					title: "C'est fait !",
-					buttonsStyling: false,
-					customClass: swalCustomClasses,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 1500
 				});
 			}
 		});
@@ -118,7 +126,7 @@ Template.drugData.events({
 		// get template data, because we can't when in .then(() => {...})
 		let drugData = Template.instance().data;
 
-		// HTML month input placeholder formatting (from fireAddDrugDialog)
+		// HTML month input placeholder formatting (from fireDrugAddDialog)
 		const today = new Date();
 		const year = today.getFullYear();
 		// we add 1 to the month because getMonth() seems to be 1 month late ¯\_(ツ)_/¯
@@ -147,8 +155,26 @@ Template.drugData.events({
 				// add expiration date to exp array in drug data
 				drugData.exp.push(swalResult.value);
 				// update in db
-				Meteor.call('drugs.update', drugData._id, drugData);
+				Meteor.call('drugs.update', drugData);
 			}
 		});
+	},
+	'click #removeBoxes'(e){
+		e.preventDefault();
+		if(expDeleteEnabled.get()){
+			expDeleteEnabled.set(false);
+		} else {
+			expDeleteEnabled.set(true);
+		}
+	},
+	'click .removeBox'(e){
+		e.preventDefault();
+		let drugData = Template.instance().data;
+		// get index of currently clicked item (solution from https://forums.meteor.com/t/blaze-template-event-how-to-get-index/23609)
+		let index = $(e.target).data("index");
+		// remove this box
+		drugData.exp.splice(index, 1);
+		// update drug in db
+		Meteor.call('drugs.update', drugData);
 	}
 });

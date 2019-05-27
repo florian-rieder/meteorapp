@@ -35,12 +35,12 @@ Meteor.startup(() => {
 		});
 	}
 	// check expirations on startup (or every month, but that would need a job scheduler, which we don't have time to implement)
-	checkExpirations();
+	// checkExpirations();
 	// then send notifications for expired drugs
 });
 
 function checkExpirations(){
-	/* const today = new Date();
+	const today = new Date();
 	let expiredDrugs = [];
 	Drugs.find().forEach(drug => {
 		drug.exp.forEach(exp => {
@@ -49,5 +49,5 @@ function checkExpirations(){
 			}
 		})
 	});
-	return expiredDrugs; */
+	return expiredDrugs;
 }

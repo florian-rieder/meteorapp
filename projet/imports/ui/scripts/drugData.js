@@ -36,13 +36,16 @@ Template.drugData.helpers({
 		const backupTitle = Template.instance().data.showcaseTitle;
 		return prettyTitle == undefined ? backupTitle : prettyTitle;
 	},
-	isExpired(){
+	isExpired(index) {
 		const today = new Date();
-		return Template.instance().data.exp.getTime() < today.getTime();
+		return Template.instance().data.exp[index].getTime() < today.getTime();
 	},
-	getExp(){
-		let exp = Template.instance().data.exp;
+	getExp(index) {
+		let exp = Template.instance().data.exp[index];
 		return `${exp.getMonth()} / ${exp.getFullYear()}`;
+	},
+	plusOne(val) {
+		return val + 1;
 	}
 });
 
@@ -65,7 +68,7 @@ Template.drugData.events({
 			if (swalResult.value) {
 				let drugData = inspectDrugData.get();
 				drugData.createdAt = new Date();
-				drugData.exp = swalResult.value.exp;
+				drugData.exp = [swalResult.value.exp];
 				drugData.treatmentGrid = createTreatmentGrid();
 
 				Meteor.call('drugs.insert', drugData, swalResult.value.categoryId);
@@ -78,11 +81,11 @@ Template.drugData.events({
 			}
 		});
 	},
-	'click #goToTreatment'(){
+	'click #goToTreatment'() {
 		Router.go(`/treatment/${this._id}`);
 		lastActivePage.set('/details');
 	},
-	'click #moveCategory'(){
+	'click #moveCategory'() {
 		Swal.fire({
 			title: 'Déplacer vers une autre catégorie',
 			html: (() => {
@@ -98,16 +101,54 @@ Template.drugData.events({
 			confirmButtonText: 'Confirmer',
 			buttonsStyling: false,
 			customClass: swalCustomClasses,
-			preConfirm(){
+			preConfirm() {
 				// get selected category id
 				const selectForm = document.querySelector('#swal-input_selectCategory');
 				return selectForm.options[selectForm.selectedIndex].value;
 			}
 		}).then(swalResult => {
-			if(swalResult.value){
+			if (swalResult.value) {
 				// move drug to new category
 				Meteor.call('drugs.moveCategory', this._id, swalResult.value);
 			}
 		})
+	},
+	'click #addBox'(e) {
+		e.preventDefault();
+		// get template data, because we can't when in .then(() => {...})
+		let drugData = Template.instance().data;
+
+		// HTML month input placeholder formatting (from fireAddDrugDialog)
+		const today = new Date();
+		const year = today.getFullYear();
+		// we add 1 to the month because getMonth() seems to be 1 month late ¯\_(ツ)_/¯
+		let month = (today.getMonth() + 1).toString();
+		// add zero padding to month so that it's always two characters long (to format it for the month input)
+		month = month.padStart(2, '0');
+
+		Swal.fire({
+			title: 'Ajouter une boîte',
+			html: (() => {
+				let HTMLString = `<div style='text-align: left;'>EXP:</div>`;
+				HTMLString += `<input type='month' id='swal-input_expirationMonth' class='form-control' value='${year}-${month}'>`;
+				return HTMLString;
+			})(),
+			showCancelButton: true,
+			cancelButtonText: 'Annuler',
+			confirmButtonText: 'Confirmer',
+			buttonsStyling: false,
+			customClass: swalCustomClasses,
+			preConfirm() {
+				const expirationDate = new Date(document.getElementById('swal-input_expirationMonth').value);
+				return expirationDate;
+			}
+		}).then(swalResult => {
+			if (swalResult.value) {
+				// add expiration date to exp array in drug data
+				drugData.exp.push(swalResult.value);
+				// update in db
+				Meteor.call('drugs.update', drugData._id, drugData);
+			}
+		});
 	}
 });

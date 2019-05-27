@@ -40,12 +40,14 @@ Meteor.startup(() => {
 });
 
 function checkExpirations(){
-	const today = new Date();
+	/* const today = new Date();
 	let expiredDrugs = [];
 	Drugs.find().forEach(drug => {
-		if(drug.exp.getTime() < today.getTime()){
-			expiredDrugs.push(drug);
-		}
+		drug.exp.forEach(exp => {
+			if(exp.getTime() < today.getTime()){
+				expiredDrugs.push(drug);
+			}
+		})
 	});
-	return expiredDrugs;
+	return expiredDrugs; */
 }

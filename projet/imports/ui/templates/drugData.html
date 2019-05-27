@@ -36,15 +36,28 @@
 						<div>
 							Fabricant{{#if hasFirm}}: {{firm}}{{else}} indisponible.{{/if}}
 						</div>
-						{{#if isExpired}}
-							<div style='color: rgb(165, 51, 51); font-weight: bold;'>
-								La date d'expiration de ce médicament est dépassée.
+						<div style='margin-top: 1em; position: relative;'>
+							<h3>Mes boîtes</h3>
+							<button id='addBox' class='btn btn-sm btn-info' style='position: absolute; right: 1em; top: 0;'>+</button>
+							<div class='container'>
+									{{#each exp}}
+									<div class='row'>
+										<div class='col-xs'>{{plusOne @index}}</div>
+										<div class='col'>
+											{{#if isExpired @index}}
+												<div>
+													<span style='color: rgb(165, 51, 51); font-weight: bold;'>Expiré</span> (<span style='font-weight: bold;'>{{getExp @index}}</span>)
+												</div>
+											{{else}}
+												<div>
+													Expire le <span style='font-weight: bold;'>{{getExp @index}}</span>.
+												</div>
+											{{/if}}
+										</div>
+									</div>
+								{{/each}}
 							</div>
-						{{else}}
-							<div>
-								Ce médicament expire le <span style='font-weight: bold;'>{{getExp}}</span>.
-							</div>
-						{{/if}}
+						</div>
 					</div>
 				</div>
 			</div>

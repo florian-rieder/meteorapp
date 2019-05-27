@@ -52,7 +52,7 @@ Template.result.events({
 					// we can simply copy it and not worry about scraping it again, gaining time
 					let drugData = inspectDrugData.get();
 					// add fields to the result object before adding it to db
-					drugData.exp = swalResult.value.exp;
+					drugData.exp = [swalResult.value.exp];
 					drugData.createdAt = new Date();
 					drugData.treatmentGrid = createTreatmentGrid();
 
@@ -75,7 +75,7 @@ Template.result.events({
 						LoadingWheel.hide();
 						if (result) {
 							// add fields to the result object before addind it to db
-							result.exp = swalResult.value.exp;
+							result.exp = [swalResult.value.exp];
 							result.createdAt = new Date();
 							result.treatmentGrid = createTreatmentGrid();
 

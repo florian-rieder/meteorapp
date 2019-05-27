@@ -36,6 +36,7 @@
 						<div>
 							Fabricant{{#if hasFirm}}: {{firm}}{{else}} indisponible.{{/if}}
 						</div>
+						{{#unless isNotAlreadyInPharmacy}}
 						<div style='margin-top: 2em; position: relative;'>
 							<h3>Mes boîtes</h3>
 							<div style='position: absolute; right: 0; top: 0;'>
@@ -66,6 +67,7 @@
 								{{/each}}
 							</div>
 						</div>
+						{{/unless}}
 					</div>
 				</div>
 			</div>

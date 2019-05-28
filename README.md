@@ -1,4 +1,4 @@
-Cette application a été réalisée dans le cadre du cours "Programmation pour Internet II - Meteor.js" donné par Isaac Pante et Loris Rimaz à l'Université de Lausanne (UNIL) durant le semestre de printemps 2019.
+Cette application a été réalisée dans le cadre du cours "Programmation pour Internet II - Meteor.js" donné par Isaac Pante et accompagné par Loris Rimaz, tuteur, à l'Université de Lausanne (UNIL) durant le semestre de printemps 2019.
 
 # Medintake
 Medintake permet d'accéder aux informations de ses médicaments, telles que leur notice d'emballage ou leur composition, en scannant le code barre de l'emballage ou en le recherchant dans la base de données de médicaments disponible sur [compendium.ch](https://www.compendium.ch). L'application propose d'aider à la gestion de sa pharmacie en mettant à disposition les informations importantes sur chaque médicament, en permettant de les classer dans différentes catégories, et en proposant de fournir des notifications de rappel pour la prise de traitements.

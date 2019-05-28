@@ -52,6 +52,10 @@ Template.drugData.helpers({
 	},
 	deleteEnabled(){
 		return expDeleteEnabled.get();
+	},
+	formatPrice(price){
+		// a price of 0.00 means compendium.ch doesn't have the price for that packaging
+		return price === "0.00" ? "Prix indisponible." : price + " CHF";
 	}
 });
 

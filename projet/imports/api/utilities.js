@@ -2,8 +2,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import Swal from 'sweetalert2';
 import { Categories } from './collections.js';
 
-// this is a class with a few methods that we can use as an """API""" to controll the
-// loading wheel image
+// this is a class with a few methods that we can use as an """API""" to control the spinner
 class LoadingWheelController {
 	show() {
 		const spinner = document.getElementById('loadingWheel');

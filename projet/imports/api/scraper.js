@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import puppeteer from 'puppeteer';
-import { prettifyDrugTitle } from './utilities';
+import { prettifyDrugTitle } from './utilities.js';
 
 // we wrap functions that use puppeteer inside Meteor.methods to be able to access
 // them from the client
@@ -266,7 +266,7 @@ async function scrapeDrug(compendiumURL) {
 				};
 			})
 			
-			// transform the nodeList into an HTML string
+			// transform the nodeList into an HTML string that we will be able to inject in drugData.html
 			// from https://stackoverflow.com/questions/21792722/convert-nodelist-back-to-html
 			const html = Array.prototype.reduce.call(paragraphs, function (html, node) {
 				return html + (node.outerHTML || node.nodeValue);
@@ -339,7 +339,7 @@ async function searchByString(searchString) {
 	let numberOfPages = await page.evaluate(() => {
 		let paginationButtons = Array.from(document.querySelectorAll('#ctl00_Tools_divPaginationBar > a'));
 		// if the length of the array is 0, that means we have one page (there are no pagination buttons), 
-		// else, we have as much pages as there are pagination buttons
+		// else, we have as many pages as there are pagination buttons
 		return paginationButtons.length == 0 ? 1 : paginationButtons.length;
 	});
 

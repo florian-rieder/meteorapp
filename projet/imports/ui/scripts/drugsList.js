@@ -31,6 +31,9 @@ Template.drugsList.events({
 			// user is not already deleting drugs
 			deleteEnabled.set(true);
 		}
+	},
+	'click #backButton'() {
+		Router.go('/');
 	}
 });
 

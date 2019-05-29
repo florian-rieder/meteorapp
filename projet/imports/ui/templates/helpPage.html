@@ -1,6 +1,6 @@
 <template name='helpPage'>
 	{{> helpBar}}
-	<div class='container-fluid'>
+	<div class='container-fluid' style='margin-top: 2em;'>
 		{{#if pageIs 'contacts'}}
 			{{> contactList}}
 		{{else}}
@@ -20,8 +20,8 @@
 		<div class='container-fluid d-flex justify-content-around align-middle'>
 			{{#each buttons}}
 				<a href="{{path}}">
-					<button class='btn btn-light d-flex justify-content-center'>				
-						<img src={{imgsrc}} alt={{name}} class='align-middle' style="height: 32px; width: 32px">				
+					<button class='btn btn-light d-flex justify-content-center row'>				
+						<img src={{imgsrc}} alt={{name}} class='align-middle' style="height: 32px; width: 32px">			
 					</button>
 				</a>
 			{{/each}}				

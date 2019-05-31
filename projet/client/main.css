@@ -367,6 +367,7 @@ div.drugData_firstInfo>div.container {
 	margin: 1em;
 	background-color: white;
 	transition-duration: 100ms;
+	overflow: hidden;
 }
 .category_remove{
 	float: right;

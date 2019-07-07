@@ -178,7 +178,7 @@ export const fireCategoryAddDialog = async function () {
 }
 // function to replace abreviations in drug titles with full length word
 export const prettifyDrugTitle = function (str) {
-	// table of abreviations (couples key/values where the key is the abreviation and the value(s) is the full length word
+	// table of abreviations (couples key/values where the key is the abreviation(s) and the value is the full length word
 	const replaceTable = {
 		// we use '/' to indicate that there are more than one
 		// abreviation for that word, we will use it later

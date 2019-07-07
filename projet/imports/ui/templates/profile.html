@@ -1,47 +1,55 @@
 <template name='profile'>
-	<h1 class='d-flex justify-content-center'>Votre Profil</h1>
-	<div class='text-center'>
-	{{#each profImage}}
-	{{> profIcon}}
-	{{/each}}
-	</div>
-	<div class='d-flex justify-content-center vertical-center'>
-		<div class='container'>
-				{{#each fields}}
-				<div class='row' id={{fieldId}}>
-					<div class='col'>
-						<p>{{fieldName}}</p>
-					</div>
-					<div class='col-8'>
-					{{#if hasProfileData}}
-						{{#if getDisplay}}
-						<input type="text" class='field_textInput form-control' placeholder={{fieldName}} name={{fieldName}}
-							value={{getProfileField @index}} style='background-color: #c3c7cfcb'>
-						{{else}}
-						<p class='profileElement form-control'>{{getProfileField @index}}</p>
-						{{/if}}
-					{{else}}
-					<input type="text" class='field_textInput form-control' placeholder={{fieldName}} name={{fieldName}}
-					id={{fieldId}} style='background-color: #c3c7cfcb'>
-					{{/if}}
-				</div>
-				</div>
+	<div class='container' style='margin-top: 1em; margin-bottom: 1em;'>
+		<h1 class='d-flex justify-content-center'>Votre Profil</h1>
+		<div class="item-container">
+			<div class='text-center' style='margin: 1em;'>
+				{{#each profImage}}
+				{{> profIcon}}
 				{{/each}}
+			</div>
+			<div class='d-flex justify-content-center vertical-center'>
+				<div class='container'>
+					{{#each fields}}
+					<div class='row' id={{fieldId}}>
+						<div class='col'>
+							<p>{{fieldName}}</p>
+						</div>
+						<div class='col-8'>
+							{{#if hasProfileData}}
+							{{#if getDisplay}}
+							<input type="text" class='field_textInput form-control' placeholder={{fieldName}} name={{fieldName}} value={{getProfileField @index}}
+							 style='background-color: #c3c7cfcb'>
+							{{else}}
+							<p class='profileElement form-control'>{{getProfileField @index}}</p>
+							{{/if}}
+							{{else}}
+							<input type="text" class='field_textInput form-control' placeholder={{fieldName}} name={{fieldName}} id={{fieldId}}
+							 style='background-color: #c3c7cfcb'>
+							{{/if}}
+						</div>
+					</div>
+					{{/each}}
+				</div>
+
+			</div>
+			<div class='d-flex justify-content-center'>
+				{{#if hasProfileData}}
+				{{#if getDisplay}}
+				<button id="confirmModify" class='btn btn-success'>Valider</button>
+				{{else}}
+				<button id="modifyButton" class='btn btn-primary'>Modifier</button>
+				{{/if}}
+				{{else}}
+				<button id="confirmButton" class='btn btn-success'>Valider</button>
+				{{/if}}
+			</div>
 		</div>
 
+		{{> treatmentRecap}}
 	</div>
-	<div class='d-flex justify-content-center'>
-		{{#if hasProfileData}}
-			{{#if getDisplay}}
-				<button id="confirmModify" class='btn btn-success'>Valider</button>
-			{{else}}
-				<button id="modifyButton" class='btn btn-primary'>Modifier</button>
-			{{/if}}
-		{{else}}
-			<button id="confirmButton" class='btn btn-success'>Valider</button>
-		{{/if}}
-	</div>
+
 </template>
+
 <template name='profIcon'>
 	<img src="{{imgsrc}}" alt="image profile">
 </template>

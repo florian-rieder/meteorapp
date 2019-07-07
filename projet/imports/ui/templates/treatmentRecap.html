@@ -1,0 +1,12 @@
+<template name='treatmentRecap'>
+	<div style='margin-top: 1em'>
+		<h1>Mes traitements</h1>
+		<div class='item-container'>
+			{{#each openTreatments}}
+			<p>{{title}}</p>
+			{{/each}}
+		</div>
+		{{synthesizedTreatmentGrid}}
+	</div>
+
+</template>

@@ -8,7 +8,7 @@
 body {
 	margin: 0px;
 	font-family: Helvetica, Arial, sans-serif !important;
-	background-color: rgba(236, 236, 236) !important;
+	background-color: rgb(233, 233, 233) !important;
 }
 
 * {
@@ -85,8 +85,6 @@ main {
 .searchResults_container {
 	height: calc(100vh - 110px - 70px);
 	overflow-y: auto;
-	border: 1px solid var(--searchBar-border-color);
-	background-color: white;
 }
 .searchResults_numberDisplay {
 	font-size: 12px;
@@ -113,7 +111,6 @@ main {
 	color: rgb(172, 172, 172);
 }
 .result_container {
-	border: 1px solid black;
 	margin: 0.5em;
 }
 
@@ -134,6 +131,12 @@ main {
 	margin-top: 0.5em;
 	width: 100%;
 	position: relative;
+	border-radius: 1em;
+	
+}
+.searchBar_container:focus-within{
+	box-shadow: 0 0 4px 3px rgba(84, 85, 85, 0.404);
+	
 }
 /* wrapper used to make a full width search bar (inspired from https://stackoverflow.com/questions/40208829/responsive-full-width-input-with-button) */
 .searchBar_searchSquare-wrapper{
@@ -151,10 +154,9 @@ main {
 	padding-left: 0.6em;
 	font-size: 20px;
 	border-style: none;
-	border: 1px solid var(--searchBar-border-color);
-	border-right: none;
 	border-top-left-radius: 1em;
 	border-bottom-left-radius: 1em;
+	outline: none;
 }
 .searchBar_searchIcon {
 	height: 1.5em;
@@ -169,8 +171,6 @@ main {
 	right: 0;
 	display: inline-block;
 
-	border: 1px solid var(--searchBar-border-color);
-	border-left: none;
 	border-top-right-radius: 1em;
 	border-bottom-right-radius: 1em;
 	background-color: rgb(207, 206, 206);
@@ -273,9 +273,6 @@ main {
 }
 
 .drug_container {
-	border: 1px solid var(--main-border-color);
-	background-color: white;
-	padding: 1em;
 	width: calc(100% - 2em);
 	display: inline-block;
 	transition-duration: 100ms;
@@ -362,10 +359,7 @@ div.drugData_firstInfo>div.container {
 
 
 .category_container{
-	border: 1px solid var(--main-border-color);
-	padding: 1em;
 	margin: 1em;
-	background-color: white;
 	transition-duration: 100ms;
 	overflow: hidden;
 }
@@ -482,4 +476,10 @@ thead td {
 	width: 1.5em; 
 	text-align: center;
 	display: inline-block;
+}
+
+.item-container{
+	border-radius: 3px;
+	background-color: white;
+	padding: 15px;
 }

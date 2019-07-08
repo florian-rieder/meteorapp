@@ -128,3 +128,13 @@ Router.route('/treatment/:_id', function () {
 	});
 	this.render('footerBar', { to: 'footer'});
 });
+
+AccountsTemplates.configure({
+	defaultLayout: 'applicationLayout',
+});
+
+AccountsTemplates.configureRoute('signIn', {
+	name: 'signin',
+	path: '/login',
+	redirect: '/',
+});

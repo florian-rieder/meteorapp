@@ -25,3 +25,4 @@ msavin:mongol
 accounts-ui
 accounts-password
 useraccounts:bootstrap
+useraccounts:iron-routing

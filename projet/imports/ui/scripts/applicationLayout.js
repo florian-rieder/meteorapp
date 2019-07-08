@@ -141,8 +141,13 @@ AccountsTemplates.addFields([
   },
   pwd,
 ]);
-AccountsTemplates.configureRoute('signIn', {
+/* AccountsTemplates.configureRoute('signIn', {
 	name: 'signin',
 	path: '/login',
 	redirect: '/',
+	
+}); */
+Router.route('/login', function () {
+	this.render('atForm');
+	this.render('footerBar', { to: 'footer'});
 });

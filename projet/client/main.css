@@ -46,6 +46,8 @@ footer {
 	background-color: var(--main-header-color);
 	z-index: 2;
 	padding: 0;
+	position : fixed;
+	bottom : 1px;
 }
 
 #body_headerLogo {
@@ -59,7 +61,7 @@ footer {
 }
 
 main {
-	height: calc(100vh - 110px);
+	height: calc(100vh - 125px);
 	overflow-y: auto;
 	z-index: 1;
 }

@@ -131,6 +131,7 @@ Router.route('/treatment/:_id', function () {
 
 AccountsTemplates.configure({
 	defaultLayout: 'applicationLayout',
+	lowercaseUsername: false,
 });
 
 AccountsTemplates.configureRoute('signIn', {

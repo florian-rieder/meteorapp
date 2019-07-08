@@ -25,8 +25,8 @@ h2 {
 	font-weight: bold;
 }
 
-header {
-	height: 50px;
+/* header {
+height: 50px;
 	padding: 0;
 	padding-left: 10px;
 	width: 100%;
@@ -35,9 +35,10 @@ header {
 	background-color: var(--main-header-color);
 	z-index: 2;
 	/* vertically center items contained in the header (logo) */
+	/*
 	display: flex;
 	align-items: center;
-}
+} */
 
 footer {
 	height: 60px;
@@ -144,11 +145,10 @@ main {
 	position: absolute;
 	left: 0;
 	right: 2.3em;
-	height: inherit;
+	height: 1.4em;
 }
 .searchBar_searchSquare {
 	margin: 0;
-	height: inherit;
 	width: 100%;
 	/* width: calc(100% - 1.5em); */
 	padding-left: 0.6em;
@@ -159,13 +159,13 @@ main {
 	outline: none;
 }
 .searchBar_searchIcon {
-	height: 1.5em;
-	width: 1.5em;
+	height: 1em;
+	width: 1em;
 }
 
 .searchBar_searchButton {
 	margin: 0;
-	height: 2em;
+	height: inherit;
 	width: 2.3em;
 	position: absolute;
 	right: 0;
@@ -173,7 +173,7 @@ main {
 
 	border-top-right-radius: 1em;
 	border-bottom-right-radius: 1em;
-	background-color: rgb(207, 206, 206);
+	background-color: rgba(240, 238, 238, 0.877);
 	/* center search icon */
 	display: flex;
 	justify-content: center;

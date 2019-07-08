@@ -129,11 +129,18 @@ Router.route('/treatment/:_id', function () {
 	this.render('footerBar', { to: 'footer'});
 });
 
-AccountsTemplates.configure({
-	defaultLayout: 'applicationLayout',
-	lowercaseUsername: false,
-});
-
+var pwd = AccountsTemplates.removeField('password');
+AccountsTemplates.removeField('email');
+AccountsTemplates.addFields([
+  {
+      _id: "username",
+      type: "text",
+      displayName: "username",
+      required: true,
+      minLength: 5,
+  },
+  pwd,
+]);
 AccountsTemplates.configureRoute('signIn', {
 	name: 'signin',
 	path: '/login',

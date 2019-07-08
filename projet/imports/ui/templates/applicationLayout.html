@@ -2,10 +2,10 @@
 
 
 	<body>
-		<header class='d-flex'>
-			<a href="/">
-				<div id='body_headerLogo' class='align-middle'>Medintake</div>
-			</a>
+		<header>
+			<nav style='background-color: var(--main-header-color)' class="navbar navbar-expand-lg navbar-light">
+				{{> searchBar}}
+			</nav>
 		</header>
 
 		<main>
@@ -22,7 +22,8 @@
 </template>
 
 <template name='404-NOT-FOUND'>
-	<div class='container d-flex justify-content-center align-items-center flex-column' style='height: 100%; text-align: center;'>
+	<div class='container d-flex justify-content-center align-items-center flex-column'
+		style='height: 100%; text-align: center;'>
 		<h1 style='font-size: 10em;'>404</h1>
 		<p style='color: grey; font-size: 1.5em;'>Cette page n'existe pas</p>
 		<a href="/" style='font-size: 1em;'>Vous pouvez revenir à la page d'accueil en cliquant ici.</a>

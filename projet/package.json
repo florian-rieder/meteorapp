@@ -13,7 +13,7 @@
     "bootstrap": "^4.3.1",
     "cordova-plugin-camera": "^2.4.1",
     "cordova-plugin-statusbar": "^2.3.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "meteor-node-stubs": "^0.4.1",
     "puppeteer": "^1.13.0",
     "quagga": "^0.12.1",

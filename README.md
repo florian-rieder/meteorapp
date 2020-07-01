@@ -1,3 +1,7 @@
+> Attention !
+> This application is no longer supported and is deprecated.
+> Due to architectural flaws and the complete update of compendium.ch, this app is no longer under development.
+
 Cette application a été réalisée dans le cadre du cours "Programmation pour Internet II - Meteor.js" donné par Isaac Pante et accompagné par Loris Rimaz, tuteur, à l'Université de Lausanne (UNIL) durant le semestre de printemps 2019.
 
 # Medintake

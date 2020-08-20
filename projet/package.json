@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.5",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "bootstrap": "^4.3.1",
     "cordova-plugin-camera": "^2.4.1",
     "cordova-plugin-statusbar": "^2.3.0",
